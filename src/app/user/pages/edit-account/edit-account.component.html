@@ -1,0 +1,19 @@
+<app-panel>
+    <app-input-text preText="Email" [(value)]="this.email" [isDisabled]="true"></app-input-text>
+    <app-input-text preText="{{'name' | translate}}" [(value)]="this.name"></app-input-text>
+    <app-input-text preText="Apellidos" [(value)]="this.lastName"></app-input-text>
+    <app-input-text preText="Fecha de nacimiento" [value]="this.birthDate | date:'yyyy-MM-dd' " (valueChange)="this.birthDate = $event" type="date"></app-input-text>
+
+    <label>
+        change
+        <select #langSelect (change)='changeLang(langSelect.value)'>
+            <option *ngFor="let lang of langs">
+                {{ lang }}
+            </option>
+        </select>
+    </label>
+
+    <div class="d-flex justify-content-end">
+        <app-button text="Enviar" (onClick)="this.updateProfile()"></app-button>
+    </div>
+</app-panel>

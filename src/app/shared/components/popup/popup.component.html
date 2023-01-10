@@ -1,0 +1,14 @@
+<div [class]="classes">
+  <div class='popup-container'>
+    <div class='popup-head'>
+      <h5 class='popup-title fw-b'>{{header}}</h5>
+      <div class='popup-close' (click)="onClose()">
+        X<i class="bi bi-x" style="font-size: '26px';"></i>
+      </div>
+    </div>
+    <div class='popup-content'>
+      <p *ngIf="this.description" class='popup-description'>{{description}}</p>
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>

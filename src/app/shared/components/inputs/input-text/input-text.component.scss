@@ -1,0 +1,63 @@
+@import "_colors";
+@import "_variables";
+@import "_breakpoints";
+
+.input_text {
+  width: 100%;
+  margin-bottom: 30px;
+  .pre_text {
+    display: inline-block;
+    margin-bottom: 5px;
+    color: $textColor;
+    font-weight: 600;
+  }
+  input {
+    display: block;
+    width: 100%;
+    padding: 15px 10px;
+    height: 50px;
+    font-size: 16px;
+    line-height: 1;
+    color: $textColor;
+    background-color: $primary-background;
+    background-clip: padding-box;
+    border-radius: $borderRadiusMedium;
+    box-sizing: border-box;
+    border: none;
+    .input_error {
+      border: 1px solid $red !important;    
+    }
+    .text_error {
+      color: $red !important;
+    }
+    .errors {
+      color: $notification-color;
+      font-size: 14px;
+      padding-left: 15px;
+      line-height: 1.5;
+    }
+    &::placeholder {
+      color: #999;
+    }
+    &:hover,
+    &:focus {
+      border-color: none;
+      outline: none;
+    }
+    &:disabled {
+      background-color: #f7f7f7;
+      cursor: default;
+    }
+  }
+}
+
+form .ng-invalid.ng-touched {
+  border: 1px solid red;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 220px);
+}

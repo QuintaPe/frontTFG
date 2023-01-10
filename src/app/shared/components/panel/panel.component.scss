@@ -1,0 +1,16 @@
+@import "_colors";
+
+.section{
+  height: calc(100vh - 60px);
+  background-color: $primary;
+  overflow: auto;
+  .card-wrapper {
+    margin: 30px;
+    padding: 50px;
+    margin-bottom: 25px;
+    box-shadow: 0px 3px 6px #00000029;
+    background-color: $secondary;
+    border-radius: 10px;
+  }
+}
+  

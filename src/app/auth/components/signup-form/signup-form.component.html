@@ -1,0 +1,199 @@
+<div *ngIf="!this.page" @enterState>
+  <form class="register-form" [formGroup]="registerForm" (ngSubmit)="next()" autocomplete="off">  
+    <p class="text-center h1 fw-bold ">Crea una cuenta</p>
+    <!-- Name -->
+    <div class="input-container {{!this.registerForm.controls['name'].valid && this.registerForm.controls['name'].touched ? 'invalid' : ''}}">
+      <div class="icon">
+        <i class="fas fa-user fa-lg fa-fw"></i>
+      </div>
+      <input
+        class="input {{this.registerForm.value['name'] ? 'input-dirty' : ''}}"
+        type='text'
+        id="name"
+        formControlName = 'name'
+        placeholder='Introduzca su nombre'
+        autocomplete="off"
+      />
+      <label 
+        class="label icon-label {{this.registerForm.value['name'] ? 'filled' : ''}}" 
+        for="name"
+      >
+        Nombre
+      </label>
+    </div>
+
+        <!-- LastName -->
+    <div class="input-container {{!this.registerForm.controls['lastName'].valid && this.registerForm.controls['lastName'].touched ? 'invalid' : ''}}">
+      <div class="icon">
+        <i class="far fa-user fa-lg fa-fw"></i>
+      </div>
+      <input
+        class="input {{this.registerForm.value['lastName'] ? 'input-dirty' : ''}}"
+        type='text'
+        id="lastName"
+        formControlName = 'lastName'
+        placeholder='Introduzca sus apellidos'
+        autocomplete="off"
+      />
+      <label 
+        class="label icon-label {{this.registerForm.value['lastName'] ? 'filled' : ''}}" 
+        for="lastName"
+      >
+        Apellidos
+      </label>
+    </div>
+
+      <!-- Birth Date -->
+    <div class="input-container {{!this.registerForm.controls['birthDate'].valid && this.registerForm.controls['birthDate'].touched ? 'invalid' : ''}}">
+      <div class="icon">
+        <i class="fas fa-calendar-alt fa-lg fa-fw"></i>
+      </div>
+      <input
+        class="input {{this.registerForm.value['birthDate'] ? 'input-dirty' : ''}}"
+        type='date'
+        id="birthDate"
+        formControlName = 'birthDate'
+        autocomplete="off"
+      />
+      <label 
+        class="label icon-label {{this.registerForm.value['birthDate'] ? 'filled' : ''}}" 
+        for="birthDate"
+      >
+        Fecha de nacimiento
+      </label>
+    </div>
+      
+
+      <!-- Phone Number -->
+    <div class="input-container {{!this.registerForm.controls['phone'].valid && this.registerForm.controls['phone'].touched ? 'invalid' : ''}}">
+      <div class="icon">
+        <i class="fas fa-mobile-alt fa-lg fa-fw"></i>
+      </div>
+      <input
+        class="input {{this.registerForm.value['phone'] ? 'input-dirty' : ''}}"
+        type='number'
+        id="phone"
+        placeholder='Introduzca su numero telefono'
+        formControlName = 'phone'
+        autocomplete="off"
+      />
+      <label 
+        class="label icon-label {{this.registerForm.value['phone'] ? 'filled' : ''}}" 
+        for="phone"
+      >
+        Telefono
+      </label>
+    </div>
+          
+    <!-- Next Button -->
+    <div class="d-flex flex-column justify-content-center align-items-center">
+      <p>¿Ya tienes una cuenta? <a href="/login">Inicia Sesión</a></p>
+      <app-button type="submit" text="Siguiente" iconRight="fas fa-arrow-right"></app-button>
+    </div>
+  </form>
+</div>
+
+<div *ngIf="this.page" @enterState>
+  <form class="register-form" [formGroup]="registerForm2" (ngSubmit)="signup()">
+    <p class="text-center h1 fw-bold ">Crea una cuenta</p>
+    <!-- User Name-->
+    <div class="input-container {{!this.registerForm2.controls['username'].valid && this.registerForm2.controls['username'].touched ? 'invalid' : ''}}">
+      <div class="icon">
+        <i class="fas fa-user fa-lg fa-fw"></i>
+      </div>
+      <input
+        class="input {{this.registerForm2.value['username'] ? 'input-dirty' : ''}}"
+        type='text'
+        id="username"
+        placeholder='Introduzca su nombre de usuario'
+        formControlName = 'username'
+        autocomplete="off"
+      />
+      <label 
+        class="label icon-label {{this.registerForm2.value['username'] ? 'filled' : ''}}" 
+        for="username"
+      >
+        Nombre de usuario
+      </label>
+    </div>
+
+    <!-- Email -->
+    <div class="input-container {{!this.registerForm2.controls['email'].valid && this.registerForm2.controls['email'].touched ? 'invalid' : ''}}">
+      <div class="icon">
+        <i class="fas fa-envelope fa-lg fa-fw"></i>
+      </div>
+      <input
+        class="input {{this.registerForm2.value['email'] ? 'input-dirty' : ''}}"
+        type='text'
+        id="email"
+        placeholder='Introduzca su email'
+        formControlName = 'email'
+        autocomplete="off"
+      />
+      <label 
+        class="label icon-label {{this.registerForm2.value['email'] ? 'filled' : ''}}" 
+        for="email"
+      >
+        Email
+      </label>
+    </div>
+
+    <!-- Password -->
+    <div class="input-container {{!this.registerForm2.controls['password'].valid && this.registerForm2.controls['password'].touched ? 'invalid' : ''}}">
+      <div class="icon">
+        <i class="fas fa-lock fa-lg fa-fw"></i>
+      </div>
+      <input
+        class="input {{this.registerForm2.value['password'] ? 'input-dirty' : ''}}"
+        type='password'
+        id="password"
+        placeholder='Introduzca su contraseña'
+        formControlName = 'password'
+        autocomplete="off"
+      />
+      <label 
+        class="label icon-label {{this.registerForm2.value['password'] ? 'filled' : ''}}" 
+        for="password"
+      >
+        Contraseña
+      </label>
+    </div>
+    
+
+    <!-- Confirm Password -->
+    <div class="input-container {{!this.registerForm2.controls['password2'].valid && this.registerForm2.controls['password2'].touched ? 'invalid' : ''}}">
+      <div class="icon">
+        <i class="fas fa-key fa-lg fa-fw"></i>
+      </div>
+      <input
+        class="input {{this.registerForm2.value['password2'] ? 'input-dirty' : ''}}"
+        type='password'
+        id="password2"
+        placeholder='Repita la contraseña'
+        formControlName = 'password2'
+        autocomplete="off"
+      />
+      <label 
+        class="label icon-label {{this.registerForm2.value['password2'] ? 'filled' : ''}}" 
+        for="password2"
+      >
+        Confirmar contraseña
+      </label>
+    </div>
+
+    <!-- Terms of Services -->
+    <div class="form-check d-flex justify-content-center">
+        <input class="form-check-input me-2" type="checkbox"  id="Terms"/>
+        <label class="form-check-label" for="Terms">
+            Acepto los <a href="#!">Terminos de servicio</a>
+        </label>
+    </div>
+
+    <!-- Register button -->
+    <div class="d-flex justify-content-center  align-items-center">
+        <app-button text="Atras" class='me-3' color='secondary' icon="fas fa-arrow-left" (onClick)="this.page=false"></app-button>
+        <app-button type="submit" text="Registrarse" iconRight="fas fa-user-plus"></app-button>    
+    </div>
+
+  </form>
+</div>

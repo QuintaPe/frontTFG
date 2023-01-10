@@ -1,0 +1,208 @@
+@import "_colors";
+@import "_variables";
+@import "_breakpoints";
+
+.btn.button-app {
+  min-width: 115px;
+  border-radius: $borderRadiusLight;
+  text-align: center;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  padding-left: 25px;
+  padding-right: 25px;
+  line-height: 1;
+  transition: all 0.5s;
+  outline: none;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  &,
+  & > span {
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.1px;
+  }
+
+  &:active,
+  &:focus,
+  &:visited {
+    outline: none;
+    box-shadow: $boxShadow;
+  }
+
+  &.btn-sm {
+    padding-top: 7px;
+    padding-bottom: 7px;
+  }
+
+  &.btn-primary,
+  &.btn-primary:disabled {
+    background: $primary-light;
+    border-color: $primary;
+    &:hover,
+    &:active,
+    &:visited,
+    &:focus {
+      background-color: $primary !important;
+      opacity: 0.9;
+    }
+    svg{
+      color: #fff !important;
+    }
+  }
+  &.btn-secondary,
+  &.btn-outline-primary {
+    color: $primary;
+    border-color: $primary;
+    background-color: white;
+    border-radius: 5px;
+    letter-spacing: 0.96px;
+    box-shadow: 0px 3px 6px #0000000f;
+    svg{
+      color: $primary;
+    }
+
+    &:hover{
+      border-color: $primary !important;
+      background-color: var(--primary-color-15) !important;
+      span{
+        color: $primary !important;
+      }
+    }
+    &:active {
+      background: white;
+    }
+    &.onBgColor{
+      &:hover{
+        background-color: white !important;
+        opacity: 0.9;
+      }
+    }
+  }
+  &.btn-transparent{
+    background-color: transparent;
+    &:hover{
+      background-color: var(--primary-color-15) !important;
+    }
+  }
+
+  &.btn-danger,
+  &.btn-danger svg{
+    color: #fff !important;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+  &.loading {
+    cursor: progress;
+  }
+  &[class*='-outline'] {
+    background-color: white;
+  }
+
+  &.btn-icon{
+    padding-left: 40px !important;
+    & > span.icon-left {
+      font-size: 20px;
+      position: absolute;
+      left: 10px;
+      top: 0;
+      bottom: 0;
+    }
+  }
+  &.btn-icon-right{
+    padding-right: 40px !important;
+    & > span.icon-right {
+      font-size: 20px;
+      position: absolute;
+      right: 10px;
+      top: 0;
+      bottom: 0;
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+  }
+  .btn-loader {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    right: 0;
+    height: 100%;
+    & > div {
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+    }
+  }
+}
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  & > .btn:not(:first-child) {
+    margin-left: 10px;
+  }
+}
+
+.buttons-column {
+  display: flex;
+  justify-content: stretch;
+  flex-direction: column;
+  align-items: stretch;
+  & > .btn:not(:first-child) {
+    margin-top: 15px;
+  }
+}
+
+
+
+@media (min-width: $breakpoint-sm){
+  .btn.button-app {
+    &.btnIcon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      min-width: 48px;
+      max-width: 48px;
+      height: 48px;
+      border-radius: 50% !important;
+      padding: 0 !important;
+      position: relative;
+      span {
+        display: none;
+        position: absolute;
+        right: 53px;
+        top: 0;
+        bottom: 0;
+        margin-top: auto;
+        margin-bottom: auto;
+        height: 24px;
+        box-shadow: $boxShadow;
+        padding: 5px;
+        color: $textColor;
+        text-transform: none !important;
+        line-height: 1;
+        white-space: nowrap;
+        z-index: 10;
+        background-color: green;
+      }
+      svg {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        margin: 0;
+        width: 24px;
+        height: auto;
+      }
+      &:hover{
+        span{
+          display: block !important;
+        }
+      }
+    }
+  }
+}

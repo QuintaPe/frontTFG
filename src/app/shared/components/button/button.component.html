@@ -1,0 +1,21 @@
+<button
+  [class]="classes"
+  [type]="validTypes.includes(type) ? type : 'button'"
+  [disabled]="disabled || loading"
+  (click)="emitEvent()"
+>
+  <span *ngIf="this.icon" class='d-flex align-items-center icon-left'>
+    <i [class]="icon"></i>
+  </span>
+  <span>{{text}}</span>
+  <span *ngIf="this.iconRight" class='d-flex align-items-center icon-right'>
+    <i [class]="iconRight"></i>
+  </span>
+  <!--
+    {loading && (
+      <div className='btn-loader'>
+        <LinearProgress />
+      </div>
+    )} 
+  -->
+</button>

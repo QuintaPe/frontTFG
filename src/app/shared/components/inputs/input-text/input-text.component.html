@@ -1,0 +1,18 @@
+<div class="input_text {{this.class}}">
+  <div class="pre_text {{this.error ? 'text_error' : ''}}">
+    <span class="ps-3">{{preText}}</span>
+    <span *ngIf='isRequired' class='is_required'>*</span>
+  </div>
+  <div class="icon">
+    <i [class]="this.icon"></i>
+  </div>
+  <input
+    class="input {{this.value ? 'input-dirty' : ''}} {{this.error ? 'input_error' : ''}}"
+    [type]='this.type'
+    [placeholder]='placeholder'
+    [(ngModel)]='value'
+    (keyup)='this.emitEvent()'
+    autocomplete="off"
+    [disabled]="this.isDisabled"
+  />
+</div>

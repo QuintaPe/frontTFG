@@ -1,0 +1,57 @@
+<form
+  class="login-form"
+  [formGroup]="loginForm"
+  (ngSubmit)="login()"
+  @enterState
+>
+  <p class="text-center h1 fw-bold">
+    {{ "LOGIN" | translate }}
+  </p>
+  <!-- Nombre de usuario-->
+  <div class="input-container {{!this.loginForm.controls['username'].valid && this.loginForm.controls['username'].touched ? 'invalid' : ''}}">
+    <div class="icon">
+      <i class="fas fa-user fa-lg fa-fw"></i>
+    </div>
+    <input
+      class="input {{this.loginForm.value['username'] ? 'input-dirty' : ''}}"
+      type='text'
+      id="username"
+      formControlName = 'username'
+      placeholder='Introduzca su nombre de usuario'
+      autocomplete="off"
+    />
+    <label 
+      class="label icon-label {{this.loginForm.value['username'] ? 'filled' : ''}}" 
+      for="username"
+    >
+      Nombre de usuario
+    </label>
+  </div>
+
+  <!-- Contraseña -->
+  <div class="input-container {{!this.loginForm.controls['password'].valid && this.loginForm.controls['password'].touched ? 'invalid' : ''}}">
+    <div class="icon">
+      <i class="fas fa-lock fa-lg fa-fw"></i>
+    </div>
+    <input
+      class="input {{this.loginForm.value['password'] ? 'input-dirty' : ''}}"
+      type='password'
+      id="password"
+      formControlName = 'password'
+      placeholder='Introduzca su contraseña'
+      autocomplete="off"
+    />
+    <label 
+      class="label icon-label {{this.loginForm.value['password'] ? 'filled' : ''}}" 
+      for="password"
+    >
+      Contraseña
+    </label>
+  </div>
+
+  <!-- Boton de inicio de sesion -->
+  <div class="d-flex flex-column justify-content-center  align-items-center">
+    <p>¿Aún no estas registrado? <a href="/signup">Registrate gratis!</a></p>
+    <app-button text='Iniciar Sesion!' icon="fas fa-user-plus" type="submit"></app-button>
+  </div>
+</form>
