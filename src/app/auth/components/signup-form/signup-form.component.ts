@@ -56,8 +56,6 @@ export class SignupFormComponent implements OnInit{
       ]),
     });
 
-    console.log(!this.registerForm.controls['phone'].valid && this.registerForm.controls['phone'].touched)
-
     this.registerForm2 = new FormGroup({
       username: new FormControl('', [Validators.required]),
       email: new FormControl('', [
@@ -74,8 +72,8 @@ export class SignupFormComponent implements OnInit{
       ...this.registerForm.value,
       ...this.registerForm2.value,
       rol: 0,
+      lang: 'es',
     };
-		console.log(user);
 
     this.authService.signup(user).subscribe({
       next: (resultado) => {
@@ -83,7 +81,6 @@ export class SignupFormComponent implements OnInit{
         else this.setErrors('El nombre de usuario ya esta en uso');
       },
       error: (error) => {
-        console.log(error);
         this.setErrors(`Error de registro. ${error}`);
       },
     });

@@ -9,8 +9,8 @@ import { AuthService } from "./auth/services/auth.service";
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'frontEnd';
-  langs: string[] = [];
+  title = 'ScoutCamp';
+  langs: string[] = ['es', 'en'];
 
   constructor(
     public router: Router,
@@ -18,11 +18,11 @@ export class AppComponent {
   ) {
     this.translate.setDefaultLang('es');
     this.translate.use('es');
-    this.translate.addLangs(['es', 'en']);
-    this.langs = this.translate.getLangs();
+    this.translate.addLangs(this.langs);
   }
 
   changeLang = (lang: string) => {
+    console.log(lang);
     this.translate.use(lang);
   }
 }

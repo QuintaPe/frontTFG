@@ -1,106 +1,64 @@
 
-<header class="header">
-    <nav class="contenedor menu-nav">
-        <a href="#">Inicio</a>
-        <a href="#">Contaco</a>
-        <a href="#">Acerca de</a>
-    </nav>
-    <div class="contenedor hero">
-        <div class="contenedor-textos">
-            <h1>Construimos el mejor sitio web para ti</h1>
-            <p class="copy">Lorem ipsum dolor sit amet, consectetur adipisicing.</p>
-        </div>
+  <header>
+    <div class="container">
+      <a href="#" class="logo">Campament Booking</a>
+      <nav>
+        <ul>
+          <li><a href="#available-campaments">Available Campaments</a></li>
+          <li><a href="#book-a-campament">Book a Campament</a></li>
+          <li><a href="#about-us">About Us</a></li>
+        </ul>
+      </nav>
     </div>
-    <div class="wave" style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.98 C150.00,150.00 349.20,-50.00 500.00,49.98 L500.00,150.00 L0.00,150.00 Z" style="stroke: none; fill: #fff;"></path></svg></div>
-</header>
-<main>
-    <section class="contenedor seccion1">
-        <h2 class="titulo-seccion">Sobre nosotros</h2>
-        <div class="contenedor-sobre-nosotros">
-            <img src="img/ilustracion1.svg" alt="" class="ilustracion">
-            <div class="relatos">
-                <div class="relato">
-                    <h3 class="n-relato">Nombre relato</h3>
-
-                    <p class="t-relato">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex dignissimos repudiandae rem dolore velit aliquid minima quidem nostrum cum officiis!</p>
-                </div>
-                <div class="relato">
-                    <h3 class="n-relato">Nombre relato</h3>
-
-                    <p class="t-relato">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ex dignissimos repudiandae rem dolore velit aliquid minima quidem nostrum cum officiis!</p>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="portafolio">
-        <div class="contenedor">
-            <h2 class="titulo-seccion">Portafolio</h2>
-            <div class="portafolio-contenedor">
-                <div class="imagen-contenedor">
-                    <img src="img/uno.jpg" alt="">
-                </div>
-                <div class="imagen-contenedor">
-                    <img src="img/dos.jpg" alt="">
-                </div>
-                <div class="imagen-contenedor">
-                    <img src="img/tres.jpg" alt="">
-                </div>
-                <div class="imagen-contenedor">
-                    <img src="img/cuatro.jpg" alt="">
-                </div>
-                <div class="imagen-contenedor">
-                    <img src="img/cinco.jpg" alt="">
-                </div>
-                <div class="imagen-contenedor">
-                    <img src="img/seis.jpg" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
-    <section class="contenedor">
-        <h2 class="titulo-seccion">Elige tu precio</h2>
-        <section class="table-pricing">
-            <div class="pricing">
-                <h3 class="name-pricing">Basic</h3>
-                <p class="price">$37</p>
-                <h2 class="benefice">Beneficio</h2>
-                <h2 class="benefice">Beneficio</h2>
-                <h2 class="benefice">Beneficio</h2>
-                <h2 class="benefice">Beneficio</h2>
-                <a href="#" class="cta">Buy now</a>
-            </div>
-            <div class="pricing active">
-                <h3 class="name-pricing">Ultimate</h3>
-                <p class="price">$97</p>
-                <h2 class="benefice">Beneficio</h2>
-                <h2 class="benefice">Beneficio</h2>
-                <h2 class="benefice">Beneficio</h2>
-                <h2 class="benefice">Beneficio</h2>
-                <a href="#" class="cta">Buy now</a>
-            </div>
-            <div class="pricing">
-                <h3 class="name-pricing">Premium</h3>
-                <p class="price">$137</p>
-                <h2 class="benefice">Beneficio</h2>
-                <h2 class="benefice">Beneficio</h2>
-                <h2 class="benefice">Beneficio</h2>
-                <h2 class="benefice">Beneficio</h2>
-                <a href="#" class="cta">Buy now</a>
-            </div>
-        </section>
-    </section>
-</main>
-<footer>
-    
-    <div class="contenedor">
-        <h2 class="titulo-seccion">Contactanos</h2>
-        <form action="" class="formulario">
-            <input type="text" name="" id="" placeholder="Nombre" class="input">
-            <input type="email" name="" id="" placeholder="Email" class="input">
-            <textarea name="" id="" cols="30" rows="10" placeholder="Enviar" class="input"></textarea>
-            <input type="submit" value="Enviar" class="input submit">
-        </form>
+  </header>
+  <section class="hero">
+    <div class="container">
+      <h1>Find Your Perfect Campament</h1>
+      <form action="/search-campaments" method="post">
+        <input type="text" placeholder="Search campaments">
+        <button type="submit" class="btn-search"><i class="fas fa-search"></i></button>
+      </form>
     </div>
-    
-    <div class="wave" style="height: 150px; overflow: hidden;" ><svg viewBox="0 0 500 150" preserveAspectRatio="none" style="height: 100%; width: 100%;"><path d="M0.00,49.98 C150.00,150.00 271.49,-50.00 500.00,49.98 L500.00,0.00 L0.00,0.00 Z" style="stroke: none; fill: #ffffff;"></path></svg></div>
-</footer>
+  </section>
+  <section id="available-campaments">
+    <div class="container">
+      <h2>Available Campaments</h2>
+      <div class="campaments-grid">
+        <div class="campament-card">
+            <h3>Campament 1</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna a faucibus malesuada.</p>
+            <a href="#" class="book-btn">Book Now</a>
+            </div>
+            <div class="campament-card">
+            <h3>Campament 2</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna a faucibus malesuada.</p>
+            <a href="#" class="book-btn">Book Now</a>
+            </div>
+            <div class="campament-card">
+            <h3>Campament 3</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed auctor, magna a faucibus malesuada.</p>
+            <a href="#" class="book-btn">Book Now</a>
+            </div>
+            </div>
+            </div>
+            </section>
+            <section id="book-a-campament">
+            <div class="container">
+            <h2>Book Your Campament</h2>
+            <form action="/book-campament" method="post">
+            <label for="campament-name">Campament Name</label>
+            <input type="text" id="campament-name" name="campament-name" required>
+            
+            <label for="check-in">Check-in</label>
+            <input type="date" id="check-in" name="check-in" required>
+            
+            <label for="check-out">Check-out</label>
+            <input type="date" id="check-out" name="check-out" required>
+            
+            <label for="guests">Number of guests</label>
+            <input type="number" id="guests" name="guests" min="1" required>
+            
+            <input type="submit" value="Book Now">
+            </form>
+            </div>
+            </section>

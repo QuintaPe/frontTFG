@@ -1,0 +1,111 @@
+@import "_colors";
+@import "_variables";
+@import "_breakpoints";
+
+.input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  background: white;
+  border: 2px solid $primary;
+  border-radius: 5px;
+  &.invalid{
+    border: 2px solid red;
+  }
+  .label {
+    position: absolute;
+    left: 10px;
+    top: 13px;
+    transition: all 0.2s;
+    padding: 0 2px;
+    z-index: 0;
+    color: $primary;
+    font-weight: bold;
+    cursor: text;
+  }
+  .icon{
+    display: flex;
+    margin-left: 10px;
+    align-items: center;
+  }
+  .input {
+    border: none;
+    border-radius: 5px;
+    padding: 0.8rem;
+    width: 100%;
+    height: 100%;
+    font-size: 18px;
+    outline: none;
+    transition: all 0.3s;
+    color: $textColor;
+    .input-options {
+      position: absolute;
+      top: 50px;
+      left: -2px;
+      background-color: white;
+      border-bottom-right-radius: 5px;
+      border-bottom-left-radius: 5px;
+      border: 2px solid $primary;
+      border-top: 2px dashed $primary;
+      width: calc(100% + 4px);
+      z-index: 1;
+      .input-options-option {
+        border: 2px solid transparent;
+        margin: 5px;
+        padding: 5px 10px;
+        cursor: pointer;
+        &.selected, &:hover {
+          border: 2px solid $primary;
+          border-radius: 5px;
+          background-color: $primary-15;
+        }
+      }
+    }
+  }
+
+  .label::before {
+    content: "";
+    height: 6px;
+    background: white;
+    position: absolute;
+    left: 0px;
+    top: 11px;
+    width: 100%;
+    z-index: -1;
+  }
+
+  .input:focus {
+    color: $textColor
+  }
+
+  .input:focus + .label,
+  .filled {
+    top: -13px;
+    font-size: 14px;
+  }
+
+  .input::placeholder {
+    font-size: 16px;
+    opacity: 0;
+    transition: all 0.3s;
+  }
+  .input:focus::placeholder {
+    opacity: 1;
+  }
+
+  &.ng-invalid.ng-touched {
+    border: 1px solid red;
+  }
+
+  &.disabled {
+    background: #DFDFDF;
+    .label::before {
+      background: #DFDFDF;
+    }
+    input {
+      background-color: transparent;
+    }
+  }
+}

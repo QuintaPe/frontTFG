@@ -32,6 +32,7 @@ import { AuthService } from '@auth/services/auth.service';
 export class LoginFormComponent {
   @Input() setErrors = (error: string) => {};
   public loginForm: FormGroup;
+  
 
   constructor(public authService: AuthService, public router: Router) {
     this.loginForm = new FormGroup({
@@ -46,17 +47,19 @@ export class LoginFormComponent {
     if (user.username && user.password) {
       this.authService.login(user.username, user.password).subscribe({
         next: (resultado) => {
-          if (resultado.type) {
+          if (resultado.success) {
             this.router.navigate(['']);
-            console.log('todo ok');
           } else {
-            this.setErrors(resultado.data);
+            this.setErrors(resultado.error);
           }
         },
         error: (error) => {
           this.setErrors(`Error de autenticación: ${error}`);
         },
       });
-    } else this.setErrors('Introduce todos los datos.');
+    } else {
+      this.setErrors('Introduce todos los datos.');
+      console.log(this.loginForm);
+    }
   }
 }

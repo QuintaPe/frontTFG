@@ -9,16 +9,14 @@
   cursor: pointer;
   position: relative;
   outline: none;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding: 8px 25px;
   line-height: 1;
   transition: all 0.5s;
   outline: none;
-  padding-top: 12px;
-  padding-bottom: 12px;
-  &,
   & > span {
+    color: #fff;
     font-size: 14px;
+    font-weight: 500;
     text-transform: uppercase;
     letter-spacing: 0.1px;
   }
@@ -37,7 +35,7 @@
 
   &.btn-primary,
   &.btn-primary:disabled {
-    background: $primary-light;
+    background: $primary-75;
     border-color: $primary;
     &:hover,
     &:active,
@@ -46,7 +44,7 @@
       background-color: $primary !important;
       opacity: 0.9;
     }
-    svg{
+    i{
       color: #fff !important;
     }
   }
@@ -58,7 +56,7 @@
     border-radius: 5px;
     letter-spacing: 0.96px;
     box-shadow: 0px 3px 6px #0000000f;
-    svg{
+    i, span {
       color: $primary;
     }
 
@@ -87,7 +85,7 @@
   }
 
   &.btn-danger,
-  &.btn-danger svg{
+  &.btn-danger i{
     color: #fff !important;
   }
 
@@ -190,7 +188,7 @@
         z-index: 10;
         background-color: green;
       }
-      svg {
+      i {
         position: relative !important;
         left: 0 !important;
         top: 0 !important;

@@ -1,3 +1,26 @@
 {
-    "LOGIN" : "Iniciar Sesión"
+  "user": {
+    "lastName": "Apellidos",
+    "birthDate": "Fecha de nacimiento",
+    "phone": "Telefono",
+    "lang": "Idioma",
+    "modifyProfile": "Modificar datos del perfil"
+  },
+  "login": {
+    "login": "Inicia sesion",
+    "signup": "Crea una cuenta",
+    "userName" : "Nombre de usuario",
+    "password": "Contraseña",
+    "confirmPassword": "Confirmar contraseña"
+  },
+  "langs": {
+    "es": "Español",
+    "en": "Ingles"
+  },
+  "common": {
+    "name": "Nombre",
+    "email": "Email",
+    "send": "Enviar",
+    "update": "Actualizar"
+  }
 }

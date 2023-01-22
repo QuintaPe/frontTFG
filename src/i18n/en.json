@@ -1,4 +1,26 @@
 {
-    "LOGIN" : "Login",
-    "name": "Name"
+  "user": {
+    "lastName": "Last name",
+    "birthDate": "Birth date",
+    "phone": "Phone",
+    "lang": "Language",
+    "modifyProfile": "Modify profile data"
+  },
+  "login": {
+    "login": "Login",
+    "signup": "Sign up",
+    "userName" : "User name",
+    "password": "Password",
+    "confirmPassword": "Confirm password"
+  },
+  "langs": {
+    "es": "Spanish",
+    "en": "English"
+  },
+  "common": {
+    "name": "Name",
+    "email": "Email",
+    "send": "Send",
+    "update": "Update"
+  }
 }

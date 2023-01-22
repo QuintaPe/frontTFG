@@ -13,6 +13,7 @@ import { PopupComponent } from './components/popup/popup.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { InputTextComponent } from './components/inputs/input-text/input-text.component';
+import { InputSelectComponent } from './components/inputs/input-select/input-select.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { InputTextComponent } from './components/inputs/input-text/input-text.co
     PanelComponent,
     PanelComponent,
     InputTextComponent,
+    InputSelectComponent,
   ],
   imports: [
     CommonModule,
@@ -42,6 +44,7 @@ import { InputTextComponent } from './components/inputs/input-text/input-text.co
     ButtonComponent,
     PanelComponent,
     InputTextComponent,
+    InputSelectComponent,
   ],
 })
 export class SharedModule {}

@@ -11,11 +11,13 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class EditAccountComponent implements OnInit {
   langs: string[] = [];
+  loading: Boolean = true;
   user: User = new User();
   email='';
   name='';
   lastName=''
   birthDate='';
+  lang=''
 
   constructor(
     public userService: UserService, 
@@ -26,33 +28,39 @@ export class EditAccountComponent implements OnInit {
   ngOnInit(): void {
     this.langs = this.translate.getLangs();
     const miId = this.authService.miId();
-    console.log(miId)
     if (miId) {
       this.userService.getUser(miId).subscribe({
         next: (user) => {
-          console.log(user)
           this.user = user
           this.email = user.email;
           this.name = user.name;
           this.lastName = user.lastName;
           this.birthDate = user.birthDate;
+          this.lang = user.lang;
+          this.loading = false;
         },
         error: (err) => console.log(err),
       });
     }
   }
 
-  changeLang = (lang: string) => {
-    this.translate.use(lang);
+  getLangs = () => {
+    return this.translate.getLangs().map(lang => {
+      let traduct = '';
+      this.translate
+        .get(`langs.${lang}`)
+        .subscribe(trad => { traduct = trad; })
+      return { id: lang, name: traduct };
+    })
   }
 
   updateProfile = () => {
-    const updatedUser = {...this.user, name: this.name, lastName: this.lastName, birthDate: this.birthDate}
+    const updatedUser = {...this.user, name: this.name, lastName: this.lastName, birthDate: this.birthDate, lang: this.lang}
     if (this.user._id){
-      console.log('act')
       this.userService.putUser(updatedUser).subscribe({
         next: (user) => {
-          console.log(user)
+          console.log(updatedUser)
+          this.translate.use(updatedUser.lang)
         },
         error: (err) => console.log(err),
       });

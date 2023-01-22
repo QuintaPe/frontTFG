@@ -1,18 +1,38 @@
-<div class="input_text {{this.class}}">
-  <div class="pre_text {{this.error ? 'text_error' : ''}}">
-    <span class="ps-3">{{preText}}</span>
-    <span *ngIf='isRequired' class='is_required'>*</span>
-  </div>
+<div class="input-container 
+  {{!this.control?.valid && this.control?.touched ? 'invalid' : ''}} 
+  {{this.control?.value || this.value  ? 'filled' : ''}}
+  {{this.isDisabled ? 'disabled' : '' }} 
+  {{this.class}}"
+>
   <div class="icon">
     <i [class]="this.icon"></i>
   </div>
-  <input
-    class="input {{this.value ? 'input-dirty' : ''}} {{this.error ? 'input_error' : ''}}"
+
+  <input *ngIf='this.control'
+    [id]="preText"
+    class="input"
     [type]='this.type'
-    [placeholder]='placeholder'
-    [(ngModel)]='value'
-    (keyup)='this.emitEvent()'
-    autocomplete="off"
+    [placeholder]='this.placeholder'
     [disabled]="this.isDisabled"
+    [formControl] ="this.control"
+    autocomplete="off"
   />
+
+  <input *ngIf='!this.control'
+    [id]="preText"
+    class="input"
+    [type]='this.type'
+    [placeholder]='this.placeholder'
+    [disabled]="this.isDisabled"
+    [(ngModel)]='value'
+    (ngModelChange)='this.emitEvent()'
+    autocomplete="off"
+  />
+  <label 
+    class="label {{ this.icon ? 'icon-label' : '' }} " 
+    [for]="preText"
+  >
+    {{preText}}
+    <span *ngIf='isRequired' class='is_required'>*</span>
+  </label>
 </div>
