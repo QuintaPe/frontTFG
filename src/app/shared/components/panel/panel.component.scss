@@ -3,14 +3,14 @@
 
 .section{
   min-height: calc(100vh - 60px);
-  background-color: $primary-50;
+  background-color: $primary-15;
   overflow: auto;
   .card-wrapper {
     margin: 25px auto;
     max-width: 85%;
     padding: 50px;
     box-shadow: 0px 3px 6px #00000029;
-    background-color: $secondary;
+    background-color: white;
     border-radius: 10px;
   }
 }

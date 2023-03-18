@@ -45,7 +45,6 @@ export const createTranslateLoader = (http: HttpClient) => {
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    MatDialogModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

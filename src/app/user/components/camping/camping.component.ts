@@ -3,8 +3,9 @@ import { Camping } from '@models/camping';
 import { TranslateService } from '@ngx-translate/core';
 import { CampingService } from '@app/user/services/camping.service';
 import { formatDate } from '@utils/functions';
-import { DialogComponent } from '@app/shared/components/modal/modal.component';
+import { DialogComponent } from '@app/shared/components/dialog/dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { DialogService } from '@app/shared/components/dialog/dialog.service';
 
 @Component({
   selector: 'app-camping',
@@ -37,19 +38,20 @@ export class CampingComponent implements OnInit {
   constructor(
     public campingService: CampingService,
     public translate: TranslateService,
-    private dialog: MatDialog
+    private dialogService: DialogService
   ) {}
 
   getCampings = (page:any, size:any, search:any, filters:any, sort:any) => {
     return this.campingService.getCampings({ page, size, search, filters, sort })
   }
 
-  openDialog() {
-    const dialogRef = this.dialog.open(DialogComponent);
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    });
+  async openDialog() {
+    const confirmed = await this.dialogService.open('Are you sure?', 'confirm');
+    if (confirmed) {
+      console.log('Ha aceptado!!');
+    } else {
+      console.log('Ha cancelado??');
+    }
   }
 
   ngOnInit(): void {

@@ -1,12 +1,12 @@
 <ng-container #container></ng-container>
 <app-panel class="create-camping">
     <div>
-        <h2 class="text-center mb-5">{{'user.modifyProfile' | translate | uppercase }}</h2>
+        <h2 class="text-center mb-5">{{'user.modifyProfile' | translate }}</h2>
         <angular-table 
             [columns]="columns"
             [pageSize]="10" 
             [fetch]="getCampings"
         ></angular-table>
     </div>
-    <button (click)="openConfirmModal()">Abrir modal</button>
+    <button (click)="openDialog()">Abrir modal</button>
 </app-panel>

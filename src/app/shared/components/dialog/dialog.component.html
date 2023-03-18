@@ -1,0 +1,8 @@
+<div class="dialog">
+  <div class="dialog-content">
+    <h1>{{ data.text }}</h1>
+    
+    <app-button [text]="'common.reject' | translate" (onClick)="close(false)"></app-button>
+    <app-button [text]="'common.accept' | translate" (onClick)="close(true)"></app-button>
+  </div>
+</div>

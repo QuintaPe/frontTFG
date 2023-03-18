@@ -1,0 +1,123 @@
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap');
+
+* {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+h1,.h1,
+h2,.h2,
+h3,.h3,
+h4,.h4,
+h5,.h5{
+    color: black;
+}
+h1,.h1,
+h2,.h2,
+h3,.h3,
+h4,.h4,
+h5,.h5
+p,.p{
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+h1,
+.h1{
+    font-size: 48px;
+    letter-spacing: -1.5px;
+    font-weight: bold;
+}
+
+h2,
+.h2{
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: -0.5px;
+}
+
+h3,
+.h3{
+    font-size: 24px;
+    font-weight: 400;
+    letter-spacing: 0px;
+}
+h4,
+.h4{
+    font-size: 20px;
+    font-weight: 400;
+}
+h5,
+.h5{
+    font-size: 18px;
+    font-weight: 400;
+}
+h6,
+.h6{
+    font-size: 16px;
+    font-weight: 400;
+}
+
+.link-effect{
+    color: var(--primary-color);
+    position: relative;
+    cursor: pointer;
+    &::before{
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 1;
+        width: 0;
+        height: 1px;
+        background-color: var(--primary-color);
+        transition: width 400ms;
+    }
+    &:hover{
+        opacity: 1;
+        &::before{
+            width: 100%;
+        }
+    }
+}
+.fw-b{
+    font-weight: 700;
+}
+.fw-sb{
+    font-weight: 600;
+}
+
+.fc-secondary{
+    color: #686868;
+}
+
+.fs-sm,
+.fs-small{
+    font-size: 14px;
+}
+.fs-xs,
+.fs-extra-small{
+    font-size: 12px;
+}
+
+.f-underline{
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--primary-color);
+    text-underline-offset: 3px;
+}
+
+.richTextHtml{
+    ul,
+    ol{
+        padding-left: 15px;
+        margin: 0 5px 1rem;
+        display: block;
+    }
+    ol{
+        list-style: decimal;
+    }
+    ul{
+        list-style: disc;
+    }
+}
