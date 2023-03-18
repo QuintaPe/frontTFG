@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AuthService } from '@auth/services/auth.service';
@@ -31,13 +31,13 @@ import { AuthService } from '@auth/services/auth.service';
 })
 export class LoginFormComponent {
   @Input() setErrors = (error: string) => {};
-  public loginForm: FormGroup;
+  public loginForm: UntypedFormGroup;
   
 
   constructor(public authService: AuthService, public router: Router) {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required]),
-      password: new FormControl('', [Validators.required]),
+    this.loginForm = new UntypedFormGroup({
+      email: new UntypedFormControl('', [Validators.required]),
+      password: new UntypedFormControl('', [Validators.required]),
     });
   }
 

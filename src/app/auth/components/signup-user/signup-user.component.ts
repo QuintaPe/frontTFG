@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 import { AuthService } from '@auth/services/auth.service';
@@ -33,8 +33,8 @@ import { User } from '@models/user';
 export class SignupUserComponent implements OnInit{
   @Input() setErrors = (error: string) => {}
   page!: boolean;
-  attributesForm!: FormGroup;
-  authForm!: FormGroup;
+  attributesForm!: UntypedFormGroup;
+  authForm!: UntypedFormGroup;
 
   mobNumberPattern = /^[679]{1}[0-9]{8}$/;
   emailPattern = /^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
@@ -47,24 +47,24 @@ export class SignupUserComponent implements OnInit{
   ngOnInit(): void {
     this.page = false;
 
-    this.attributesForm = new FormGroup({
-      firstname: new FormControl('', [Validators.required]),
-      lastname: new FormControl('', [Validators.required]),
-      birthDate: new FormControl('', [Validators.required]),
-      phone: new FormControl('', [
+    this.attributesForm = new UntypedFormGroup({
+      firstname: new UntypedFormControl('', [Validators.required]),
+      lastname: new UntypedFormControl('', [Validators.required]),
+      birthDate: new UntypedFormControl('', [Validators.required]),
+      phone: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern(this.mobNumberPattern),
       ]),
     });
 
-    this.authForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
-      email: new FormControl('', [
+    this.authForm = new UntypedFormGroup({
+      username: new UntypedFormControl('', [Validators.required]),
+      email: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern(this.emailPattern),
       ]),
-      password: new FormControl('', [Validators.required]),
-      password2: new FormControl('', [Validators.required]),
+      password: new UntypedFormControl('', [Validators.required]),
+      password2: new UntypedFormControl('', [Validators.required]),
     });
     console.log(this.router)
   }
