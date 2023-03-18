@@ -1,0 +1,13 @@
+@import "_colors";
+@import "_variables";
+@import "_breakpoints";
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: calc(100vh - 220px);
+  width: 80%;
+  position: relative;
+  left: 10%;
+}

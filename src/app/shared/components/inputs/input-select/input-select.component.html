@@ -1,28 +1,26 @@
 <div 
-  class="input-container 
+  class="input-container filled
   {{!this.control?.valid && this.control?.touched ? 'invalid' : ''}} 
   {{this.isDisabled ? 'disabled' : '' }} 
   {{this.class}}"
   (click)="this.changeShowOptions()"
 >
-  <div class="d-flex">
-    <div class="icon">
-      <i [class]="this.icon"></i>
-    </div>
-    <div class="input">
-      {{ getValueName }}
-      <div *ngIf='getShowOptions' class="input-options">
-        <div 
-          *ngFor="let option of options" 
-          class="input-options-option {{this.value === option.id ? 'selected' : ''}} {{console(option.id)}}" 
-          (click)="setValue(option.id)"
-        >
-          {{ option.name }}
-        </div>
+  <div class="icon">
+    <i [class]="this.icon"></i>
+  </div>
+  <div class="input">
+    {{ getValueName }}
+    <div *ngIf='getShowOptions' class="input-options">
+      <div 
+        *ngFor="let option of options" 
+        class="input-options-option {{this.value === option.id ? 'selected' : ''}}" 
+        (click)="setValue(option.id)"
+      >
+        {{ option.name }}
       </div>
     </div>
   </div>
-  <div class="icon">
+  <div class="arrow-options-icon">
     <i class="fa-solid {{ getShowOptions ? 'fa-arrow-up' : 'fa-arrow-down' }} me-3"></i>
   </div>
   <label 

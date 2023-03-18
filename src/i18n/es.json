@@ -6,10 +6,12 @@
     "lang": "Idioma",
     "modifyProfile": "Modificar datos del perfil"
   },
+  "manager": {
+
+  },
   "login": {
     "login": "Inicia sesion",
     "signup": "Crea una cuenta",
-    "userName" : "Nombre de usuario",
     "password": "Contraseña",
     "confirmPassword": "Confirmar contraseña"
   },
@@ -21,6 +23,11 @@
     "name": "Nombre",
     "email": "Email",
     "send": "Enviar",
-    "update": "Actualizar"
+    "update": "Actualizar",
+    "next": "Siguiente",
+    "back": "Atras",
+    "create": "Crear",
+    "edit": "Editar",
+    "delete": "Borrar"
   }
 }

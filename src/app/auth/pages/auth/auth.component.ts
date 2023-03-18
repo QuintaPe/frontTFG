@@ -19,4 +19,16 @@ export class AuthComponent {
       this.errors = '';
     }, 5000);
   };
+
+  get isLogin() {
+    return this.router.url === '/login';
+  }
+
+  get isUserSignup() {
+    return this.router.url === '/signup';
+  }
+
+  get isManagerSignup() {
+    return this.router.url === '/manager/signup';
+  }
 }

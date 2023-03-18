@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
-
-import { User } from "../models/user";
+import { ApiService } from "@app/shared/services/api.service";
+import { User } from "@models/user";
 
 @Injectable({
   providedIn: "root",
@@ -12,28 +11,28 @@ export class UserService {
   users: User[];
   readonly URL_API = "http://localhost:3000/api/users";
 
-  constructor(private http: HttpClient) {
+  constructor(private apiService: ApiService) {
     this.selectedUser = new User();
     this.users = []
   }
 
   postUser(user: User) {
-    return this.http.post(this.URL_API, user);
+    return this.apiService.fetch('POST', 'users', { ...user });
   }
 
   getUsers() {
-    return this.http.get<User[]>(this.URL_API);
+    return this.apiService.fetch('GET', 'users');
   }
 
   getUser(id: String) {
-    return this.http.get<User>(this.URL_API + `/${id}`);
+    return this.apiService.fetch('GET', `users/${id}`);
   }
 
   putUser(user: User) {
-    return this.http.put(this.URL_API + `/${user._id}`, user);
+    return this.apiService.fetch('PUT', `users/${user._id}`, { ...user });
   }
 
   deleteUser(_id: string) {
-    return this.http.delete(this.URL_API + `/${_id}`);
+    return this.apiService.fetch('DELETE', 'users');
   }
 }

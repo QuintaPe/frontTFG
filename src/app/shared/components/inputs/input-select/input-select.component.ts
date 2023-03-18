@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-input-select',
   templateUrl: './input-select.component.html',
-  styleUrls: ['./input-select.component.scss']
+  styleUrls: ['../inputs.component.scss']
 })
 
 export class InputSelectComponent implements OnInit {
@@ -47,9 +47,5 @@ export class InputSelectComponent implements OnInit {
 
   changeShowOptions = () => {
     this.showOptions = !this.showOptions;
-  }
-
-  console = (option: String) => {
-    console.log(this.value, option)
   }
 }

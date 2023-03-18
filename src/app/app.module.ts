@@ -16,9 +16,11 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { UserModule } from './user/user.module';
 import { UserRoutingModule } from './user/user-routing.module';
-import { SharedRoutingModule } from './shared/shared-routing.module';
 import { SharedModule } from './shared/shared.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { HomeRoutingModule } from './home/home-routing.module';
+import { HomeModule } from './home/home.module';
+import { MatDialogModule } from '@angular/material/dialog';
 
 export function tokenGetter() {
   return localStorage.getItem('access_token');
@@ -36,13 +38,14 @@ export const createTranslateLoader = (http: HttpClient) => {
     UserRoutingModule,
     BrowserModule,
     SharedModule,
-    SharedRoutingModule,
+    HomeModule,
+    HomeRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
     RouterModule,
-    // AppRoutingModule,
+    MatDialogModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

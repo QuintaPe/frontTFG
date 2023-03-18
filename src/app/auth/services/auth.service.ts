@@ -4,11 +4,15 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TranslateService } from '@ngx-translate/core';
-import { User } from '@app/user/models/user';
+import { User } from '@models/user';
+import { apiEnviroment } from 'src/environments/environment';
 
-@Injectable()
+const {API_BASE_URL, API_URL } = apiEnviroment
+
+@Injectable({
+  providedIn: "root",
+})
 export class AuthService {
-  readonly URL_API = 'http://localhost:3000';
   public alertError: String;
   public alert: boolean;
 
@@ -24,20 +28,21 @@ export class AuthService {
   //Registrarse
   public signup(user: Object): Observable<boolean> {
     return this.http
-      .post<{ type: boolean; data: string }>(this.URL_API + '/api/users/create-user', user)
-      .pipe(map(response => response.type));
+      .post<{ success: boolean }>(`${API_BASE_URL}/users`, user)
+      .pipe(map(response => response.success));
   }
 
   //Iniciar Sesion
-  login( username: string, password: string ): Observable<{ success: boolean; user: User; error:string; token: string }> {
+  login( email: string, password: string ): Observable<{ success: boolean; user: User; error:string; token: string }> {
     return this.http
       .post<{ success: boolean; user: User; error:string; token: string  }>(
-        this.URL_API + '/api/login', { username, password }
+        `${API_BASE_URL}/login`, { email, password }
       )
       .pipe(map((response) => {
         if (response.success) {
           localStorage.setItem('token', response.token);
-          this.translate.use(response.user.lang)
+          localStorage.setItem('lang', response.user.lang);
+          this.translate.use(response.user.lang);
         }
         return response;
       }));
@@ -46,6 +51,18 @@ export class AuthService {
   //Cerrar Sesion
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('lang');
+    this.translate.use(this.translate.getBrowserLang() || 'es')
+  }
+
+  get user() {
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      return null;
+    }
+
+    return this.jwtHelper.decodeToken(token).user;
   }
 
   get isUserAuth(): boolean {
@@ -60,13 +77,23 @@ export class AuthService {
     return !this.jwtHelper.isTokenExpired(token);
   }
 
+  get userToken(): string | null {
+    const token = localStorage.getItem('token');
+    //comprobarToken
+    if (!token || this.jwtHelper.isTokenExpired(token)) {
+      this.logout();
+      return null;
+    }
+
+    return token;
+  }
+
   // Funciones para el token
   comprobarToken(): Observable<boolean> {
     return this.http
       .get<{ tokenValido: boolean }>(
-        this.URL_API + '/api/comprobar-token?token=' + localStorage.getItem('token')
-      )
-      .pipe(
+        `${API_BASE_URL}/comprobar-token?token=${localStorage.getItem('token')}`
+      ).pipe(
         map((response) => {
           if (response.tokenValido === true) {
             console.log('Token válido.');
@@ -83,7 +110,7 @@ export class AuthService {
     const token = localStorage.getItem('token') ?? null
     if (token) {
       var valoresToken: any = this.jwtHelper.decodeToken(token);
-      return valoresToken.userId;
+      return valoresToken.user._id;
     }
     console.log('error de token');
   }

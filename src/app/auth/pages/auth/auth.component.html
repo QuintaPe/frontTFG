@@ -1,8 +1,9 @@
 <app-panel>
   <div class="row justify-content-center">
     <div class="col-12 col-md-7">
-      <app-signup-form *ngIf="this.router.url == '/signup'" [setErrors]='setErrors'></app-signup-form>
-      <app-login-form *ngIf="this.router.url == '/login'" [setErrors]='setErrors'></app-login-form>
+      <app-signup-user *ngIf="isUserSignup" [setErrors]='setErrors'></app-signup-user>
+      <app-signup-manager *ngIf="isManagerSignup" [setErrors]='setErrors'></app-signup-manager>
+      <app-login-form *ngIf="isLogin" [setErrors]='setErrors'></app-login-form>
     </div>
 
     <div class="col-12 col-md-5 d-flex justify-content-start align-items-center position-relative">
@@ -25,9 +26,9 @@
 
       <div class="img-container">
           <img
-            src='../../../assets/svg/fire.svg'
+            src='../../../assets/png/ScoutCamp-logo.png'
             class="img-fluid login-img"
-            alt="Campfire"
+            alt="ScoutCamp-logo"
           />
       </div>
     </div>

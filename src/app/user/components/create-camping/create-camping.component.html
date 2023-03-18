@@ -1,0 +1,33 @@
+<app-panel class="create-camping">
+    <div>
+        <h2 class="text-center mb-5">{{'user.modifyProfile' | translate | uppercase }}</h2>
+        <div class="row">
+            <div class="col-12" *ngFor="let question of pageQuestions" [ngSwitch]="question.type">
+                <app-input-text *ngSwitchCase="'text'"
+                    type="text"
+                    [preText]="question.name"
+                    [placeholder]='question.placeholder'
+                    [(value)]="camping[question.value]"
+                ></app-input-text>
+                <app-input-text *ngSwitchCase="'number'"
+                    type="number"
+                    [preText]="question.name"
+                    [placeholder]='question.placeholder'
+                    [(value)]="camping[question.value]"
+                ></app-input-text>
+            </div>
+        </div>
+        <div class="buttons">
+            <app-button 
+                *ngIf="page > 1"
+                [text]="'common.back' | translate" 
+                color="secondary"
+                (onClick)="pageBack()">
+            </app-button>
+            <app-button 
+                [text]="this.haveNext ? ('common.update' | translate) : ('common.next' | translate)" 
+                (onClick)="handleSubmit()">
+            </app-button>
+        </div>
+    </div>
+</app-panel>

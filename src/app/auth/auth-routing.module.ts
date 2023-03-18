@@ -8,6 +8,7 @@ import { AuthComponent } from './pages/auth/auth.component';
 const routes: Routes = [
   { path: 'login' , component: AuthComponent, canActivate: [NoAuthGuard]},
   { path: 'signup', component: AuthComponent, canActivate: [NoAuthGuard]},
+  { path: 'manager/signup', component: AuthComponent, canActivate: [NoAuthGuard]},
 ];
 
 @NgModule({

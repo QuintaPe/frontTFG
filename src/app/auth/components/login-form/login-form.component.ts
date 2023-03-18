@@ -36,30 +36,29 @@ export class LoginFormComponent {
 
   constructor(public authService: AuthService, public router: Router) {
     this.loginForm = new FormGroup({
-      username: new FormControl('', [Validators.required]),
+      email: new FormControl('', [Validators.required]),
       password: new FormControl('', [Validators.required]),
     });
   }
 
   //Login
-  public login() {
+  public login = () => {
     var user = this.loginForm.value;
-    if (user.username && user.password) {
-      this.authService.login(user.username, user.password).subscribe({
-        next: (resultado) => {
-          if (resultado.success) {
-            this.router.navigate(['']);
+    if (user.email && user.password) {
+      this.authService.login(user.email, user.password).subscribe({
+        next: result => {
+          if (result.success) {
+            this.router.navigate(['/']);
           } else {
-            this.setErrors(resultado.error);
+            this.setErrors(result.error);
           }
         },
-        error: (error) => {
-          this.setErrors(`Error de autenticación: ${error}`);
-        },
-      });
+        error: error => {
+          this.setErrors(`Error de autenticación: ${error.error.message}`);
+        }
+    });
     } else {
       this.setErrors('Introduce todos los datos.');
-      console.log(this.loginForm);
     }
   }
 }

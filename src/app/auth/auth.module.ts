@@ -1,20 +1,18 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-
 import { AuthComponent } from './pages/auth/auth.component';
-import { SignupFormComponent } from './components/signup-form/signup-form.component';
+import { SignupUserComponent } from './components/signup-user/signup-user.component';
+import { SignupManagerComponent } from './components/signup-manager/signup-manager.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { AuthService } from './services/auth.service';
-import { AuthGuard } from '@guards/auth.guard';
-import { NoAuthGuard } from '@guards/noauth.guard';
 import { SharedModule } from '@app/shared/shared.module';
+import { NoAuthGuard } from '@guards/noauth.guard';
 
 @NgModule({
   declarations: [
     AuthComponent,
-    SignupFormComponent,
+    SignupUserComponent,
+    SignupManagerComponent,
 		LoginFormComponent,
   ],
   imports: [
@@ -23,11 +21,7 @@ import { SharedModule } from '@app/shared/shared.module';
     TranslateModule,
     SharedModule
   ],
-  providers: [
-    AuthService, 
-    AuthGuard,
-    NoAuthGuard
-  ],
+  providers: [NoAuthGuard],
 })
 export class AuthModule { }
 

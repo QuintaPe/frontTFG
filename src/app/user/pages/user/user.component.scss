@@ -1,0 +1,41 @@
+@import "_colors";
+@import "_breakpoints";
+
+.user-wrapper  {
+    position: relative;
+    .menu-icon{
+        position: fixed;
+        top: 12px;
+        left: 20px;
+        z-index: 12;
+        i {
+            cursor: pointer;
+            padding: 5px;
+            color: $primary;
+            font-size: 25px;
+            border-radius: 5px;
+            border: 1px solid transparent;
+            &:hover {
+                border: 1px solid $primary;
+            }
+        }
+    }
+    .content-wrapper {
+        padding-left: 250px;
+        transition: padding 0.3s;
+        &.close-menu {
+            padding-left: 75px;
+        }
+    }
+}
+
+@media (max-width: $breakpoint-md) {
+    .user-wrapper  {
+        .content-wrapper {
+            padding-left: 0;
+            &.close-menu {
+                padding-left: 0px;
+            }
+        }
+    }
+  }

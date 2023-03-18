@@ -4,7 +4,7 @@ import { FormControl } from '@angular/forms';
 @Component({
   selector: 'app-input-text',
   templateUrl: './input-text.component.html',
-  styleUrls: ['./input-text.component.scss']
+  styleUrls: ['../inputs.component.scss']
 })
 
 export class InputTextComponent implements OnInit {
@@ -31,8 +31,6 @@ export class InputTextComponent implements OnInit {
   }
   
   emitEvent() {
-    console.log(this.value)
     this.valueChange.emit(this.value || '');
   }
-
 }

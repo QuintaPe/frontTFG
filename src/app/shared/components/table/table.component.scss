@@ -1,0 +1,14 @@
+.page-count {
+  display: inline-block;
+  width: 65px;
+  padding-left: 5px;
+  margin: 0 5px;
+}
+.col-show-row {
+  padding-right: 15px;
+  width: 100%;
+  @media (min-width: 768px) {
+    flex: 0 0 13%;
+    max-width: 13%;
+  }
+}

@@ -14,15 +14,15 @@ export class AppComponent {
 
   constructor(
     public router: Router,
-    public translate: TranslateService
+    public translate: TranslateService,
+    public authService: AuthService,
   ) {
     this.translate.setDefaultLang('es');
-    this.translate.use('es');
+    this.translate.use(localStorage.getItem('lang') || this.translate.getBrowserLang() || 'es');
     this.translate.addLangs(this.langs);
   }
 
   changeLang = (lang: string) => {
-    console.log(lang);
     this.translate.use(lang);
   }
 }
