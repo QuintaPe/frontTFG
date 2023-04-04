@@ -5,11 +5,11 @@
   (click)="emitEvent()"
 >
   <span *ngIf="this.icon" class='d-flex align-items-center icon-left'>
-    <i [class]="icon"></i>
+    <mat-icon>{{ icon }}</mat-icon>
   </span>
   <span>{{text}}</span>
   <span *ngIf="this.iconRight" class='d-flex align-items-center icon-right'>
-    <i [class]="iconRight"></i>
+    <mat-icon> {{ iconRight }}</mat-icon>
   </span>
   <!--
     {loading && (

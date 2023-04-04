@@ -1,0 +1,22 @@
+<div class="user-wrapper">
+  <div class="menu-icon">
+    <mat-icon (click)="this.toggleMenu()">menu</mat-icon>
+  </div>
+  <div class="left-menu {{showAside ? 'show' : ''}}">
+    <div class='left-menu-sections'>
+      <ul class='left-menu-nav-items'>
+        <li *ngFor="let route of routes">
+          <a class='nav-item' [routerLink]="['/', activeRole, route.path]" (click)="toggleMenu()">
+            <div class='left-menu-icon'>
+               <mat-icon>{{ route.icon }}</mat-icon>
+            </div>
+ 		        <p>{{ route.name }}</p>
+          </a>
+        </li>
+      </ul>      
+    </div>
+	</div>
+	<div class="content-wrapper {{!showAside ? 'close-menu' : ''}}">
+		<router-outlet></router-outlet>
+	</div>
+</div>

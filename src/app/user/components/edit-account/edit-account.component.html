@@ -1,6 +1,17 @@
 <app-panel class="update-profile">
     <div *ngIf="!this.loading">
         <h2 class="text-center">{{'user.modifyProfile' | translate | uppercase }}</h2>
+        <!-- <app-avatar
+            type="user"
+            [size]="100"
+            [src]="this.user.attributes?.avatar?._id || ''"
+        ></app-avatar> -->
+        <app-input-avatar
+            preText="Introduzca su avatar"
+            [isRequired]="true"
+            [isPublic]="true"
+            [(value)]="this.user.attributes.avatar"
+        ></app-input-avatar>
         <div class="row mt-4">
             <div class="col-12">
                 <app-input-text 
@@ -25,12 +36,15 @@
                 <app-input-text 
                     [preText]="'user.birthDate' | translate" 
                     [(value)]="this.user.attributes.birthDate" 
-                    type="date">
+                    type="date"
+                    placeholder="a"
+                >
                 </app-input-text>
             </div>
             <div class="col-12 col-md-6">
                 <app-input-select 
                     preText="{{'user.lang' | translate}}" 
+                    placeholder="a"
                     [(value)]="this.user.lang" 
                     [options]="this.getLangs()">
                 </app-input-select>

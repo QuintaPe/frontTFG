@@ -30,11 +30,10 @@ import { AuthService } from '@auth/services/auth.service';
   ],
 })
 export class LoginFormComponent {
-  @Input() setErrors = (error: string) => {};
   public loginForm: UntypedFormGroup;
   
 
-  constructor(public authService: AuthService, public router: Router) {
+  constructor(public authService: AuthService) {
     this.loginForm = new UntypedFormGroup({
       email: new UntypedFormControl('', [Validators.required]),
       password: new UntypedFormControl('', [Validators.required]),
@@ -45,20 +44,9 @@ export class LoginFormComponent {
   public login = () => {
     var user = this.loginForm.value;
     if (user.email && user.password) {
-      this.authService.login(user.email, user.password).subscribe({
-        next: result => {
-          if (result.success) {
-            this.router.navigate(['/']);
-          } else {
-            this.setErrors(result.error);
-          }
-        },
-        error: error => {
-          this.setErrors(`Error de autenticación: ${error.error.message}`);
-        }
-    });
+      this.authService.login(user.email, user.password);
     } else {
-      this.setErrors('Introduce todos los datos.');
+      this.authService.setErrors([{ error: 'empty_data', message: 'Introduce todos los datos'}]);
     }
   }
 }

@@ -1,31 +1,33 @@
 import { Injectable } from '@angular/core';
-import { AuthService } from '@app/auth/services/auth.service';
 import { apiEnviroment } from 'src/environments/environment';
 import { transformGetParams } from '@utils/functions';
 import axios from 'axios';
 
-const {API_BASE_URL, API_URL } = apiEnviroment;
+const {API_BASE_URL } = apiEnviroment;
 
 @Injectable({
   providedIn: "root",
 })
 export class ApiService {
-  constructor(
-    private authService: AuthService,
-  ) {}
+  constructor() {}
 
-  fetch(method:string, url:string, params:{[key: string]: any} = {}, isFormData:boolean = false) {
-    const token= this.authService.userToken;
+  fetch(method:string, url:string, params: any= {}, isFormData = false) {
+    const token = localStorage.getItem('token');
+
     const CONFIG: {
       method:string, 
       headers: {}, 
       withCredentials:boolean, 
-      body?:{[key: string]: any}
+      body?: any
       data?:{}
       url?:string
     } = {
       method,
-      headers: { Authorization: `Bearer ${token}` },
+      headers: { 
+        Authorization: `Bearer ${token}`,
+        'Content-Type': isFormData ? 'multipart/form-data' : 'application/json'
+
+      },
       withCredentials: true,
     };
   
@@ -40,22 +42,18 @@ export class ApiService {
         case 'POST':
         case 'PUT':
         default:
-          CONFIG.body = params;
-          // if (isFormData) {
-          //   const formData = new FormData();
-          //   Object.keys(params).forEach((key) => {
-          //     formData.append(key, typeof params[key] === 'object' ? JSON.stringify(params[key]) : params[key]);
-          //   });
-          //   CONFIG.data = formData;
-          // } else {
-            CONFIG.data = params;
-          // }
+          const sortedParams = Object.fromEntries(
+            Object.entries(params).sort(([, v1], [, v2]) => v1 instanceof File ? 1 : v2 instanceof File ? -1 : 0)
+          );
+          CONFIG.body = sortedParams;
+          CONFIG.data = sortedParams;
+
           break;
       }
     }
   
     CONFIG.url = URL;
-    console.log(CONFIG);
+
     return axios(CONFIG)
       .then(response => response.data)
       .catch((error) => {

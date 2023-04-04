@@ -31,7 +31,6 @@ import { User } from '@models/user';
   ],
 })
 export class SignupManagerComponent implements OnInit{
-  @Input() setErrors = (error: string) => {}
   page!: boolean;
   attributesForm!: UntypedFormGroup;
   authForm!: UntypedFormGroup;
@@ -66,7 +65,6 @@ export class SignupManagerComponent implements OnInit{
       password: new UntypedFormControl('', [Validators.required]),
       password2: new UntypedFormControl('', [Validators.required]),
     });
-    console.log(this.router)
   }
 
   public signup = async () => {
@@ -75,27 +73,7 @@ export class SignupManagerComponent implements OnInit{
       '', email, password, "manager", 'es', this.attributesForm.value
     );
 
-    try {
-      const result = await this.authService.signup(manager);
-      if (result) {
-        this.router.navigate(['']);
-      }
-    } catch (error) {
-      this.setErrors(`Error de registro. ${error}`);
-    }
-
-    this.authService.signup(manager).subscribe({
-      next: (result) => {
-        if (result) { 
-          this.router.navigate(['']); 
-        } else {
-          this.setErrors('El nombre de usuario ya esta en uso');
-        }
-      },
-      error: (error) => {
-        this.setErrors(`Error de registro. ${error}`);
-      },
-    });
+    await this.authService.signup(manager)
   }
 
   next() {
@@ -109,7 +87,7 @@ export class SignupManagerComponent implements OnInit{
           err = name;
         }
       }
-      this.setErrors(`El campo ${err} esta vacio o no es valido`);
+      this.authService.setErrors([{ error: 'empty_data', message: `El campo ${err} esta vacio o no es valido`}]);
     }
   }
 
@@ -118,7 +96,9 @@ export class SignupManagerComponent implements OnInit{
     else {
       const controls = this.authForm.controls;
       for (const name in controls) {
-        if (controls[name].invalid) this.authService.alertError = name;
+        if (controls[name].invalid) {
+          this.authService.setErrors([{ error: 'empty_data', message: name }]);
+        }
       }
     }
   }

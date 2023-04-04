@@ -1,27 +1,19 @@
 <div 
+  #select
   class="input-container filled
   {{!this.control?.valid && this.control?.touched ? 'invalid' : ''}} 
   {{this.isDisabled ? 'disabled' : '' }} 
   {{this.class}}"
-  (click)="this.changeShowOptions()"
+  (click)="this.showDropdown()"
 >
   <div class="icon">
-    <i [class]="this.icon"></i>
+    <mat-icon>{{ this.icon }}</mat-icon>
   </div>
   <div class="input">
-    {{ getValueName }}
-    <div *ngIf='getShowOptions' class="input-options">
-      <div 
-        *ngFor="let option of options" 
-        class="input-options-option {{this.value === option.id ? 'selected' : ''}}" 
-        (click)="setValue(option.id)"
-      >
-        {{ option.name }}
-      </div>
-    </div>
+    {{ selectedOption?.name || placeholder || '-' }}
   </div>
   <div class="arrow-options-icon">
-    <i class="fa-solid {{ getShowOptions ? 'fa-arrow-up' : 'fa-arrow-down' }} me-3"></i>
+    <mat-icon>arrow_downward</mat-icon>
   </div>
   <label 
     class="label {{this.control?.value || this.value  ? 'filled' : ''}}" 
@@ -30,4 +22,16 @@
     {{preText}}
     <span *ngIf='isRequired' class='is_required'>*</span>
   </label>
+
+  <ng-template cdk-portal #overlayTemplate="cdkPortal">
+    <div class="input-options">
+        <div 
+          *ngFor="let option of options; let i = index"
+          class="input-options-option {{this.value === option.id ? 'selected' : ''}}" 
+          (click)="selectOption(option, i)"
+        >
+          {{option.name}}
+      </div>
+    </div>
+  </ng-template>
 </div>

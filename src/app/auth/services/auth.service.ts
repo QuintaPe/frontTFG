@@ -1,51 +1,58 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TranslateService } from '@ngx-translate/core';
-import { User } from '@models/user';
-import { apiEnviroment } from 'src/environments/environment';
-
-const {API_BASE_URL, API_URL } = apiEnviroment
+import { ApiService } from '@app/shared/services/api.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
-  public alertError: String;
-  public alert: boolean;
+  private errors: { message: string, error: string }[] = [];
 
   constructor(
-    private http: HttpClient, 
+    private apiService: ApiService, 
     private jwtHelper: JwtHelperService,
     public translate: TranslateService,
-  ) {
-    this.alertError = '';
-    this.alert = false;
+    public router: Router,
+  ) {}
+
+  public setErrors(errors: { message: string, error: string }[]) {
+    this.errors = errors;
+    setTimeout(() => {
+      this.errors = [];
+    }, 5000);  
   }
+  
+    public getErrors() {
+      return this.errors;
+    }
 
   //Registrarse
-  public signup(user: Object): Observable<boolean> {
-    return this.http
-      .post<{ success: boolean }>(`${API_BASE_URL}/users`, user)
-      .pipe(map(response => response.success));
+  async signup(user: Object): Promise<any> {
+    try {
+      const response = await this.apiService.fetch('POST', 'signup', { ...user });
+      if (response.success) {
+        this.router.navigate(['']);
+      }
+    } catch (axiosError: any) {
+      this.errors = axiosError.response.data.errors;
+    }
   }
 
   //Iniciar Sesion
-  login( email: string, password: string ): Observable<{ success: boolean; user: User; error:string; token: string }> {
-    return this.http
-      .post<{ success: boolean; user: User; error:string; token: string  }>(
-        `${API_BASE_URL}/login`, { email, password }
-      )
-      .pipe(map((response) => {
-        if (response.success) {
+  async login( email: string, password: string ): Promise<any> {
+    try {
+      const response = await this.apiService.fetch('POST', 'login', { email, password });
+      if (response.success) {
           localStorage.setItem('token', response.token);
           localStorage.setItem('lang', response.user.lang);
           this.translate.use(response.user.lang);
-        }
-        return response;
-      }));
+          this.router.navigate(['']);
+      }
+    } catch (axiosError: any) {
+      this.errors = axiosError.response.data.errors;
+    }
   }
 
   //Cerrar Sesion
@@ -79,39 +86,11 @@ export class AuthService {
 
   get userToken(): string | null {
     const token = localStorage.getItem('token');
-    //comprobarToken
     if (!token || this.jwtHelper.isTokenExpired(token)) {
       this.logout();
       return null;
     }
 
     return token;
-  }
-
-  // Funciones para el token
-  comprobarToken(): Observable<boolean> {
-    return this.http
-      .get<{ tokenValido: boolean }>(
-        `${API_BASE_URL}/comprobar-token?token=${localStorage.getItem('token')}`
-      ).pipe(
-        map((response) => {
-          if (response.tokenValido === true) {
-            console.log('Token válido.');
-            return true;
-          }
-
-          console.log('Token inválido.');
-          return false;
-        })
-      );
-  }
-
-  miId() {
-    const token = localStorage.getItem('token') ?? null
-    if (token) {
-      var valoresToken: any = this.jwtHelper.decodeToken(token);
-      return valoresToken.user._id;
-    }
-    console.log('error de token');
   }
 }

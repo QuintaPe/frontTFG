@@ -1,0 +1,14 @@
+<div #menuBtn >
+    <mat-icon (click)="showDropdown()" style="cursor: pointer;">more_vert</mat-icon>
+    <ng-template cdk-portal #overlayTemplate="cdkPortal">
+        <div class="row-menu">
+            <div 
+                class="row-menu-item"
+                *ngFor="let button of buttons; let i = index"
+                (click)="handleClick(button)"
+            >
+                {{button.text}}
+            </div>
+        </div>
+    </ng-template>
+</div>

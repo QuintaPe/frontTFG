@@ -12,7 +12,7 @@
   <app-input-text 
     [preText]="'common.email' | translate"
     placeholder='Introduzca su nombre de usuario'
-    icon="fas fa-user fa-lg fa-fw"
+    icon="person"
     [control]="loginForm.controls['email']">
   </app-input-text>
 
@@ -22,13 +22,13 @@
     type='password'
     [preText]="'login.password' | translate"
     placeholder='Introduzca su contraseña'
-    icon="fas fa-lock fa-lg fa-fw"
+    icon="lock"
     [control]="loginForm.controls['password']">
   </app-input-text>
 
   <!-- Boton de inicio de sesion -->
   <div class="d-flex flex-column justify-content-center  align-items-center">
     <p>¿Aún no estas registrado? <a href="/signup">Registrate gratis!</a></p>
-    <app-button text='Iniciar Sesion!' icon="fas fa-user-plus" type="submit"></app-button>
+    <app-button text='Iniciar Sesion!' icon="person_add" type="submit"></app-button>
   </div>
 </form>

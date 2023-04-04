@@ -13,7 +13,6 @@
 
   .label {
     position: absolute;
-    height: 25px;
     left: 10px;
     top: 13px;
     transition: all 0.2s;
@@ -24,6 +23,15 @@
     cursor: text;
     &.icon-label {
       left: 40px;
+    }
+    &::before {
+      content: "";
+      height: 3px;
+      position: absolute;
+      left: 0px;
+      top: 10px;
+      width: 100%;
+      z-index: -1;
     }
   }
 
@@ -48,45 +56,12 @@
     font-size: 18px;
     outline: none;
     transition: all 0.3s;
-    background: $primary-15;
-    .input-options {
-      position: absolute;
-      top: 50px;
-      left: -2px;
-      background: $primary-15;
-      border-bottom-right-radius: 5px;
-      border-bottom-left-radius: 5px;
-      border: 2px solid $primary;
-      border-top: 2px dashed $primary;
-      width: calc(100% + 4px);
-      z-index: 1;
-      .input-options-option {
-        border: 2px solid transparent;
-        margin: 5px;
-        padding: 5px 10px;
-        cursor: pointer;
-        &.selected, &:hover {
-          border: 2px solid $primary;
-          border-radius: 5px;
-          background-color: $primary-15;
-        }
-      }
-    }
-    &:focus {
-      color: $textColor;
-    }
+    background: $primary-15;    
     &:focus + .label {
-      top: -14px;
+      top: -13px;
       font-size: 14px;
       &::before {
-        content: "";
-        height: 3px;
         background: white;
-        position: absolute;
-        left: 0px;
-        top: 11.5px;
-        width: 100%;
-        z-index: -1;
       }
     }
     &:focus::placeholder {
@@ -99,6 +74,14 @@
     }
   }
 
+  input[type="date"] {
+    color: transparent;
+
+    &:focus {
+      color: black;
+    }
+  }
+
   &.invalid{
     border: 2px solid red;
   }
@@ -108,6 +91,9 @@
     .label {
       top: -13px;
       font-size: 14px;
+      &::before {
+        background: white;
+      }
     }
     .input {
       color: $text-color;
@@ -115,12 +101,31 @@
   }
 
   &.disabled {
-    background: #DFDFDF;
-    .label::before {
-      background: #DFDFDF;
+    input, .icon {
+      background-color: #EFEAD8CC;
     }
-    input {
-      background-color: transparent;
+  }
+}
+
+.input-options {
+  position: relative;
+  top:-8px;
+  width: 100%;
+  background: white;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  border: 2px solid $primary;
+  border-top: 2px dashed $primary;
+  z-index: 1;
+  .input-options-option {
+    border: 2px solid transparent;
+    margin: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+    &.selected, &:hover {
+      border: 2px solid $primary;
+      border-radius: 5px;
+      background-color: $primary-15;
     }
   }
 }

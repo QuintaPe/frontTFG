@@ -31,7 +31,6 @@ import { User } from '@models/user';
   ],
 })
 export class SignupUserComponent implements OnInit{
-  @Input() setErrors = (error: string) => {}
   page!: boolean;
   attributesForm!: UntypedFormGroup;
   authForm!: UntypedFormGroup;
@@ -39,10 +38,7 @@ export class SignupUserComponent implements OnInit{
   mobNumberPattern = /^[679]{1}[0-9]{8}$/;
   emailPattern = /^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
 
-  constructor(
-    public authService: AuthService, 
-    public router: Router
-  ) {}
+  constructor(public authService: AuthService) {}
 
   ngOnInit(): void {
     this.page = false;
@@ -66,7 +62,6 @@ export class SignupUserComponent implements OnInit{
       password: new UntypedFormControl('', [Validators.required]),
       password2: new UntypedFormControl('', [Validators.required]),
     });
-    console.log(this.router)
   }
 
   public signup = async () => {
@@ -75,27 +70,7 @@ export class SignupUserComponent implements OnInit{
       '', email, password, "user", 'es', this.attributesForm.value
     );
 
-    try {
-      const result = await this.authService.signup(user);
-      if (result) {
-        this.router.navigate(['']);
-      }
-    } catch (error) {
-      this.setErrors(`Error de registro. ${error}`);
-    }
-
-    this.authService.signup(user).subscribe({
-      next: (result) => {
-        if (result) { 
-          this.router.navigate(['']); 
-        } else {
-          this.setErrors('El nombre de usuario ya esta en uso');
-        }
-      },
-      error: (error) => {
-        this.setErrors(`Error de registro. ${error}`);
-      },
-    });
+    await this.authService.signup(user);
   }
 
   next() {
@@ -109,7 +84,7 @@ export class SignupUserComponent implements OnInit{
           err = name;
         }
       }
-      this.setErrors(`El campo ${err} esta vacio o no es valido`);
+      this.authService.setErrors([{ error: 'empty_data', message: `El campo ${err} esta vacio o no es valido`}]);
     }
   }
 
@@ -117,8 +92,11 @@ export class SignupUserComponent implements OnInit{
     if (this.authForm.valid) this.signup();
     else {
       const controls = this.authForm.controls;
+      this.authService.setErrors([]);
       for (const name in controls) {
-        if (controls[name].invalid) this.authService.alertError = name;
+        if (controls[name].invalid) {
+          this.authService.setErrors([{ error: 'empty_data', message: name }]);
+        }
       }
     }
   }

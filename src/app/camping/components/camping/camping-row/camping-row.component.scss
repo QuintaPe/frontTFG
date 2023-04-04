@@ -1,0 +1,15 @@
+@import "_colors";
+@import "_variables";
+@import "_breakpoints";
+
+.camping-row {
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: $borderRadiusLight;
+    box-shadow: $boxShadow;
+    background-color: $primary-15;
+    cursor: pointer;
+    &:hover {
+        background-color: $secondary;
+    }
+}

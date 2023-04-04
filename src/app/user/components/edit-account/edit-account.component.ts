@@ -21,15 +21,13 @@ export class EditAccountComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const miId = this.authService.miId();
+    const miId = this.authService.user._id;
     if (miId) {
       this.userService.getUser(miId)
         .then((user) => {
-          console.log(user,'asdasdsad');
           this.user = user;
           this.loading = false;
         })
-        .catch((err) => console.log(err));
     }
   }
 

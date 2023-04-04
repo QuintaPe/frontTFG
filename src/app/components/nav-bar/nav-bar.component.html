@@ -1,0 +1,22 @@
+<!-- Navbar -->
+<nav class="nav-bar">
+    <ul class="left-buttons">
+      <li>
+        <a (click)="navigateTo('campings')">Inicio</a>
+      </li>
+      <li>
+        <a (click)="navigateTo('profile')">Editar perfil</a>
+      </li>
+    </ul>
+    <div class="left-buttons">
+      <div class="d-flex align-items-center" *ngIf="!authService.isUserAuth">
+        <app-button text='Iniciar Sesion' color="secondary" (onClick)="router.navigate(['/login'])"></app-button>
+        <app-button text='Registrate Gratis!' (onClick)="router.navigate(['/signup'])" class="ms-2"></app-button>
+      </div>
+      <div class="d-flex align-items-center" *ngIf="authService.isUserAuth">
+        <app-button text='Cerrar Sesión' color="secondary" (onClick)="this.logout()"></app-button>
+      </div>
+    </div>
+
+</nav>
+

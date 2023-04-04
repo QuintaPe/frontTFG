@@ -1,14 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-
-interface Column {
-  field: string,
-  name: string,
-  title?: string,
-  onClick?:Function,
-  sortable?: boolean,
-  sortableField?: string,
-  preRender?: Function,
-}
+import { Component, Input, OnInit, Injector, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Column } from './table.interface';
 
 @Component({
   selector: 'angular-table',
@@ -20,6 +11,8 @@ export class AngularTableComponent implements OnInit{
   @Input() columns: Column[] = [];
   @Input() fetch?: any;
   @Input() pageSize: number = 10;
+  @Input() mode: string = 'row';
+  @Input() rowComponent!: Type<any>;
   
   rows: { items: {[key: string]: any}[], total: number} = { items: [], total: 0};
   search: string = '';
@@ -28,6 +21,17 @@ export class AngularTableComponent implements OnInit{
   actualPage = 0;
   loading: boolean = false;
   showFilters: boolean = false;
+
+  constructor() {}
+  @ViewChild('componentsContainer', { read: ViewContainerRef }) 
+  componentsContainer!: ViewContainerRef
+
+  dataInjector(data: any) {
+    const providers = Object.keys(data).map(att => ({
+      provide: att, useValue: data[att]
+    }))
+    return Injector.create({ providers });
+  }
 
   fetchPage = async (page: number = this.actualPage) => {
     this.loading = true;
@@ -39,33 +43,48 @@ export class AngularTableComponent implements OnInit{
       //   onFetch(response);
       // }
     }
-  };
-
-  sortTable = async (column: Column) => {
-    const columnName = column.sortableField || column.field;
-    let sort = '+';
-    if (this.sortedColumn && this.sortedColumn.name === columnName) {
-      if (this.sortedColumn.sort === '') {
-        sort = '+';
-      } else if (this.sortedColumn.sort === '+') {
-        sort = '-';
-      } else {
-        sort = '';
+    if (this.mode === 'component') {
+      this.rows.items.forEach((row) => {
+        const auxItem = this.componentsContainer.createComponent(this.rowComponent)
+        Object.keys(row).forEach(att => {
+          if(auxItem.instance.hasOwnProperty(att))
+            auxItem.setInput(att, row[att]);
+          })
       }
+      )
     }
-    this.sortedColumn = { name: columnName, sort };
-    this.fetchPage();
   };
-
-  renderField = (row: any, column: Column) => {
-    if (column.preRender) {
-      return column.preRender(row[column.field], row)
-    } 
-    return row[column.field]
-  }
-
 
   ngOnInit(): void {
     this.fetchPage(0);
   }
+
+  sortTable = async (column: Column) => {
+    const columnName = column.sortableField || column.field;
+    if (columnName) {
+      let sort = '+';
+      if (this.sortedColumn && this.sortedColumn.name === columnName) {
+        if (this.sortedColumn.sort === '') {
+          sort = '+';
+        } else if (this.sortedColumn.sort === '+') {
+          sort = '-';
+        } else {
+          sort = '';
+        }
+      }
+      this.sortedColumn = { name: columnName, sort };
+      this.fetchPage();
+    }
+  };
+
+  renderField = (row: any, column: Column) => {
+      const columnField = column.field || '' 
+      if (column.preRender) {
+        return column.preRender(row[columnField], row)
+      } 
+      return row[columnField]
+  }
+
+
+  
 }

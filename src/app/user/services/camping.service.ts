@@ -19,7 +19,6 @@ export class CampingService {
   }
 
   async getCampings(params: any) {
-    console.log(params);
     return this.apiService.fetch('GET', 'campings', params)
   }
 

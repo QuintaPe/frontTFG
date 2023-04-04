@@ -1,0 +1,17 @@
+<div
+  [title]='this.title'
+  [style]="{ 'min-width': size + 'px', 'width': size + 'px', 'height': size + 'px' }"
+  [class]="'avatar ' + this.class" 
+  [ngClass]="{'default': !src}"
+>
+  <ng-container [ngSwitch]="type">
+    <ng-container *ngSwitchCase="'startup'">
+      <!-- <Building [size]="getSize()" class="avatar-svg"></Building> -->
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+      <!-- <Person [size]="getSize()" class="avatar-svg"></Person> -->
+    </ng-container>
+  </ng-container>
+  
+  <img *ngIf="src" [src]="FILES_BASE_URL + src" alt="avatar">   
+</div>
