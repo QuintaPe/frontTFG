@@ -6,31 +6,35 @@ import { HomeComponent } from './home/home.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
-  { 
-    path: '', 
+  {
+    path: 'auth',
     loadChildren: () =>
           import('./auth/auth.module').then((m) => m.AuthModule)
   },
   {
+    path: 'campings',
+    loadChildren: () =>
+      import('./camping/camping.module').then((m) => m.CampingModule),
+  },
+  {
     path: ':role',
-    component: LeftMenuComponent, // Add LeftMenuComponent as the component for the role path
+    component: LeftMenuComponent,
     canActivate: [(route:ActivatedRouteSnapshot) => inject(RoleGuard).canLoad(route)],
     children: [
       {
-        path: '',
-        pathMatch: 'full',
-        redirectTo: 'campings' // Redirect to campings by default
-      },
-      {
         path: 'campings',
         loadChildren: () =>
-          import('./camping/camping.module').then((m) => m.CampingModule),
+          import('./campingManagement/camping-management.module').then((m) => m.CampingManagementModule),
+          canActivateChild: [() => inject(RoleGuard).allowedRoles(['manager'])],
       },
       {
         path: 'profile',
         loadChildren: () =>
           import('./user/user.module').then((m) => m.UserModule),
+          canActivateChild: [() => inject(RoleGuard).allowedRoles(['user', 'manager', 'admin'])],
+
       },
+      { path: '**', redirectTo: 'profile' },
     ],
   },
   { path: '**', redirectTo: '' },

@@ -8,7 +8,6 @@ import { AuthService } from '@app/auth/services/auth.service';
   styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent {
-  private type: string = '';
   constructor(
     public router: Router,
     public route: ActivatedRoute,
@@ -19,19 +18,17 @@ export class AuthComponent {
       this.router.navigate(['/']);
       return;
     }
-    this.type = type;
-
   }
 
   get isLogin() {
-    return this.router.url === '/login';
+    return true;
   }
 
   get isUserSignup() {
-    return this.router.url === '/signup';
+    return this.router.url === 'auth/signup';
   }
 
   get isManagerSignup() {
-    return this.router.url === '/manager/signup';
+    return this.router.url === 'auth/manager/signup';
   }
 }

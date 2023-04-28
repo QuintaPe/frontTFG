@@ -58,8 +58,6 @@ export class InputSelectComponent implements OnChanges {
     } else if (event.key === 'ArrowDown' && this.selectedIndex < this.options.length - 1) {
       event.preventDefault();
       this.selectedIndex++;
-
-      console.log(this.selectedIndex)
       this.selectOption(this.options[this.selectedIndex]);
     } else if (event.key === 'Enter') {
       this.hide();

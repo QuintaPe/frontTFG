@@ -3,12 +3,15 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { TranslateService } from '@ngx-translate/core';
 import { ApiService } from '@app/shared/services/api.service';
 import { Router } from '@angular/router';
+import { User } from '@models/user';
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
+  public user: User | null = null;
   private errors: { message: string, error: string }[] = [];
+  public loading: boolean = true;
 
   constructor(
     private apiService: ApiService, 
@@ -47,6 +50,7 @@ export class AuthService {
       if (response.success) {
           localStorage.setItem('token', response.token);
           localStorage.setItem('lang', response.user.lang);
+          this.user = response.user;
           this.translate.use(response.user.lang);
           this.router.navigate(['']);
       }
@@ -57,31 +61,22 @@ export class AuthService {
 
   //Cerrar Sesion
   logout(): void {
+    this.user = null;
     localStorage.removeItem('token');
     localStorage.removeItem('lang');
     this.translate.use(this.translate.getBrowserLang() || 'es')
   }
 
-  get user() {
+  async setLoggedUser() {
+    this.loading = true;
     const token = localStorage.getItem('token');
-
-    if (!token) {
-      return null;
+    const decoded = token ? this.jwtHelper.decodeToken(token) : null;
+    try {
+      this.user = decoded ? await this.apiService.fetch('GET', `users/${decoded.user._id}`) : null;
+      this.loading = false;
+    } catch {
+      this.loading = false;
     }
-
-    return this.jwtHelper.decodeToken(token).user;
-  }
-
-  get isUserAuth(): boolean {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return false;
-    }
-    if (this.jwtHelper.isTokenExpired(token)) {
-      this.logout();
-    }
-
-    return !this.jwtHelper.isTokenExpired(token);
   }
 
   get userToken(): string | null {
@@ -90,7 +85,11 @@ export class AuthService {
       this.logout();
       return null;
     }
-
+    
     return token;
+  }
+
+  get isUserAuth(): boolean {
+    return !!this.user || !!this.userToken;
   }
 }

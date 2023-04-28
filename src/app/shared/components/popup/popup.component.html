@@ -1,14 +1,11 @@
-<div [class]="classes">
-  <div class='popup-container'>
-    <div class='popup-head'>
-      <h5 class='popup-title fw-b'>{{header}}</h5>
-      <div class='popup-close' (click)="onClose()">
-        X<i class="bi bi-x" style="font-size: '26px';"></i>
-      </div>
-    </div>
-    <div class='popup-content'>
-      <p *ngIf="this.description" class='popup-description'>{{description}}</p>
-      <ng-content></ng-content>
-    </div>
+<div class='popup-container'>
+  <div class='popup-head'>
+    <h5 class='popup-title fw-b'>{{data.headerText}}</h5>
+    <mat-icon class='popup-close' (click)="dialogRef.close()">
+      close
+    </mat-icon>
+  </div>
+  <div class='popup-content'>
+    <ng-container [ngTemplateOutlet]="data.template"></ng-container>
   </div>
 </div>

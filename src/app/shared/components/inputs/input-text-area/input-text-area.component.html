@@ -1,0 +1,35 @@
+<div class="input-container
+  {{value  ? 'filled' : ''}}
+  {{isDisabled ? 'disabled' : '' }}
+  {{class}}"
+>
+
+  <div *ngIf="loading" class="flex-fill">
+    <app-skeleton [height]="minHeight + 'px'"></app-skeleton>
+  </div>
+
+  <ng-container *ngIf="!loading">
+    <div *ngIf="this.icon" class="icon">
+      <mat-icon>{{ this.icon }}</mat-icon>
+    </div>
+
+    <textarea
+      [id]="preText"
+      class="input"
+      [style.min-height.px]="minHeight"
+      [placeholder]='placeholder'
+      [disabled]="isDisabled"
+      [(ngModel)]='value'
+      (ngModelChange)='emitEvent()'
+      autocomplete="off"
+      ></textarea>
+    </ng-container>
+
+    <label
+      class="label {{ icon ? 'icon-label' : '' }} "
+      [for]="preText"
+    >
+      {{preText}}
+      <span *ngIf='isRequired' class='is_required'>*</span>
+    </label>
+</div>

@@ -6,6 +6,16 @@
     "lang": "Language",
     "modifyProfile": "Modify profile data"
   },
+  "camping": {
+    "createCamping": "Create camping",
+    "amenities": "Amenities",
+    "rules": "Rules",
+    "nearestLocations": "Nearest locations",
+    "country": "Country",
+    "city": "City",
+    "street": "Street",
+    "zip": "Zip"
+  },
   "login": {
     "login": "Login",
     "signup": "Sign up",
@@ -19,6 +29,7 @@
   },
   "common": {
     "name": "Name",
+    "description": "Description",
     "email": "Email",
     "send": "Send",
     "update": "Update",

@@ -47,10 +47,10 @@ export class LeftMenuComponent implements OnInit {
     localStorage.setItem('showAside', this.showAside.toString());
   }
 
-  @HostListener('window:resize', ['$event'])
-  onResize() {
-    if (window.innerWidth < 768) {
-      this.toggleMenu();
-    }
-  }
+  // @HostListener('window:resize', ['$event'])
+  // onResize() {
+  //   if (window.innerWidth < 768) {
+  //     this.toggleMenu();
+  //   }
+  // }
 }

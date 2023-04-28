@@ -9,11 +9,10 @@ import { PopupComponent } from './components/popup/popup.component';
 import { DialogComponent } from './components/dialog/dialog.component';
 import { PanelComponent } from './components/panel/panel.component';
 import { InputTextComponent } from './components/inputs/input-text/input-text.component';
+import { InputTextAreaComponent } from './components/inputs/input-text-area/input-text-area.component';
 import { InputSelectComponent } from './components/inputs/input-select/input-select.component';
 import { RouterModule } from '@angular/router';
 import { AngularTableComponent } from './components/table/table.component';
-import { SpinnerComponent } from './components/table/spinner/spinner.component';
-import { SpinnerDirective } from './components/table/spinner/spinner.directive';
 import { MatDialogModule } from '@angular/material/dialog';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { PortalModule } from '@angular/cdk/portal';
@@ -23,7 +22,11 @@ import { RowMenuComponent } from './components/table/rowMenu/row-menu.component'
 import { FormatDatePipe } from './pipes/format-date.pipe';
 import { AvatarComponent } from './components/Avatar/avatar.component';
 import { InputAvatarComponent } from './components/inputs/input-avatar/input-avatar.component';
-
+import { LoaderComponent } from './components/loader/loader.component';
+import { InputFileZoneComponent } from './components/inputs/input-file-zone/input-file-zone.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { FileDragNDropDirective } from './components/inputs/input-file-zone/file-drag-drop.directive';
+import { SkeletonComponent } from './components/skeleton/skeleton.component';
 
 @NgModule({
   declarations: [
@@ -33,14 +36,17 @@ import { InputAvatarComponent } from './components/inputs/input-avatar/input-ava
     PanelComponent,
     PanelComponent,
     InputTextComponent,
+    InputTextAreaComponent,
     InputAvatarComponent,
     InputSelectComponent,
+    InputFileZoneComponent,
     AngularTableComponent, 
     RowMenuComponent,
-    SpinnerComponent, 
-    SpinnerDirective,
-    FormatDatePipe,
     AvatarComponent,
+    LoaderComponent,
+    FormatDatePipe,
+    FileDragNDropDirective,
+    SkeletonComponent,
   ],
   imports: [
     CommonModule,
@@ -53,22 +59,27 @@ import { InputAvatarComponent } from './components/inputs/input-avatar/input-ava
     PortalModule,
     A11yModule,
     MatIconModule,
+    DragDropModule,
   ],
   providers: [],
   exports: [ 
     CommonModule,
     ButtonComponent,
     PanelComponent,
+    PopupComponent,
     InputTextComponent,
+    InputTextAreaComponent,
     InputSelectComponent,
     InputAvatarComponent,
+    InputFileZoneComponent,
     DialogComponent,
     AngularTableComponent, 
     RowMenuComponent,
-    SpinnerComponent, 
-    SpinnerDirective,
     AvatarComponent,
+    LoaderComponent,
     FormatDatePipe,
+    FileDragNDropDirective,
+    SkeletonComponent,
   ],
 })
 export class SharedModule {}

@@ -2,63 +2,17 @@
 @import '_variables.scss';
 @import '_breakpoints.scss';
 
-.popup{
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 9999;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0,0,0,0.46);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow-y: auto;
-  flex-wrap: wrap;
-  padding: 20px 0;
-
-  &.popupSize-small{
-    .popup-container{
-      width: 350px;
-    }
-  }
-  &.popupSize-medium{
-    .popup-container{
-      width: 768px;
-    }
-  }
-  &.popupSize-large{
-    .popup-container{
-      width: 992px;
-    }    
-  }
-  &.popupSize-xlarge{
-    .popup-container{
-      width: 90vw;
-    }    
-  }
 
   .popup-container{
-    border-radius: $borderRadius;
-    max-width: calc(100% - 20px);
-
     .popup-head{
       display: flex;
       align-items: center;
       justify-content: space-between;
       padding: $spacing;
-      border-top-left-radius: $borderRadius;
-      border-top-right-radius: $borderRadius;
       background-color: $primary;
-      position: relative;
-      margin-bottom: 25px;
       .popup-title{
         color: white;
         margin: 0;
-      }
-      .popup-description{
-        min-height: 24px;
-        margin: 15px 0 0 0;
       }
       .popup-close{
         color:white;
@@ -66,42 +20,14 @@
       }
     }
     .popup-content{
-      padding: 0 $spacing $spacing $spacing;
-      .panel{
-        box-shadow: none;
-        background-color: transparent;
-        margin: 0;
-        .panel-heading,
-        .panel-body{
-          padding-left: 0;
-          padding-right: 0;
-        }
-        .panel-heading{
-          padding-top: 0;
-        }
-        .panel-body{
-          padding-bottom: 0;
-        }
-      }
+      padding: $spacing;
     }
   }
-}
-
-body.popup-open{
-  overflow-y: hidden;
-}
 
 @media (max-width: $breakpoint-sm){
-  .popup{
-    padding-left: 5px;
-    padding-right: 5px;
-    .popup-container{
-      .popup-head{
-        padding: 15px;
-      }
-      .popup-content{
-        padding: 0 15px 15px 15px;
-      }
+  .popup-container{
+    .popup-head, .popup-content{
+      padding: 15px;
     }
   }
 }

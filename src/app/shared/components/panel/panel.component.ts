@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-panel',
@@ -6,9 +7,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./panel.component.scss']
 })
 export class PanelComponent implements OnInit {
-  @Input() class = '';
+  @Input() title: string = '';
+  @Input() breadcrumb: any = null;
+  @Input() class: string = '';
   
-  constructor() {}
+  constructor(public router: Router) {}
   ngOnInit(): void {}
 
 }

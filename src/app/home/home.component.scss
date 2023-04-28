@@ -4,14 +4,14 @@
     margin: 0;
     padding: 0;
   }
-  
+
   body {
     font-family: 'Open Sans', sans-serif;
     font-size: 16px;
     line-height: 1.6;
     color: #333333;
   }
-  
+
   /* Header styles */
   header {
     background-color: #ffffff;
@@ -22,7 +22,7 @@
     right: 0;
     z-index: 999;
   }
-  
+
   .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -31,37 +31,37 @@
     align-items: center;
     justify-content: space-between;
   }
-  
+
   .logo {
     font-size: 1.5em;
     font-weight: 700;
     text-decoration: none;
     color: #000000;
   }
-  
+
   nav {
     text-align: right;
   }
-  
+
   nav ul {
     list-style: none;
     display: flex;
   }
-  
+
   nav li {
     margin-left: 1em;
   }
-  
+
   nav a {
     text-decoration: none;
     color: #777777;
     font-weight: 600;
   }
-  
+
   nav a:hover {
     color: #000000;
   }
-  
+
   /* Hero section styles */
   .hero {
     background-color: #f7f7f7;
@@ -71,14 +71,14 @@
     justify-content: center;
     text-align: center;
   }
-  
+
   .hero h1 {
     font-size: 3em;
     font-weight: 700;
     color: #333333;
     margin-bottom: 1em;
   }
-  
+
   .hero form {
     background-color: rgba(255, 255, 255, 0.9);
     padding: 1em;
@@ -87,7 +87,7 @@
     align-items: center;
     justify-content: center;
   }
-  
+
   .hero form input[type="text"] {
     font-size: 1em;
     padding: 0.5em;
@@ -96,7 +96,7 @@
     flex-grow: 1;
     margin-right: 0.5em;
   }
-  
+
   .hero form button[type="submit"] {
     font-size: 1em;
     padding: 0.5em 1em;
@@ -106,50 +106,50 @@
     border-radius: 0 5px 5px 0;
     cursor: pointer;
   }
-  
+
   .hero form button[type="submit"]:hover {
     background-color: #ffa600;
   }
-  
+
   /* Available campaments section styles */
   #available-campaments {
     background-color: #f7f7f7;
     padding: 4em 0;
   }
-  
+
   #available-campaments h2 {
     font-size: 2em;
     font-weight: 700;
     text-align: center;
     margin-bottom: 2em;
   }
-  
+
   .campaments-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 2em;
   }
-  
+
   .campament-card {
     background-color: #ffffff;
     padding: 2em;
     border-radius: 5px;
     text-align: center;
   }
-  
+
   .campament-card h3 {
     font-size: 1.5em;
     font-weight: 700;
     margin-bottom: 0.5em;
   }
-  
+
   .campament-card p {
     font-size: 1em;
     line-height: 1.6;
     color: #777777;
     margin-bottom: 1.5em;
   }
-  
+
   .campament-card .book-btn {
     font-size: 1em;
     padding: 0.5em 1em;
@@ -161,30 +161,30 @@
     text-decoration: none;
     display: inline-block;
   }
-  
+
   .campament-card .book-btn:hover {
     background-color: #ffa600;
   }
-  
+
   /* Book a campament section styles */
   #book-a-campament {
     background-color: #f7f7f7;
     padding: 4em 0;
   }
-  
+
   #book-a-campament h2 {
     font-size: 2em;
     font-weight: 700;
     text-align: center;
     margin-bottom: 2em;
   }
-  
+
   #book-a-campament form {
     max-width: 600px;
     margin: 0 auto;
     text-align: left;
   }
-  
+
   #book-a-campament label {
     font-size: 1em;
     font-weight: 600;
@@ -192,7 +192,7 @@
     display: block;
     margin-bottom: 0.5em;
   }
-  
+
   #book-a-campament input[type="text"], #book-a-campament input[type="date"], #book-a-campament input[type="number"] {
     font-size: 1em;
     padding: 0.5em;
@@ -201,7 +201,7 @@
     width: 100%;
     margin-bottom: 1.5em;
   }
-  
+
   #book-a-campament input[type="submit"] {
     font-size: 1em;
     padding: 0.5em 1em;
@@ -211,27 +211,26 @@
     border-radius: 5px;
     cursor: pointer;
   }
-  
+
   #book-a-campament input[type="submit"]:hover {
     background-color: #ffa600;
   }
-  
+
   /* About us section styles */
   #about-us {
     padding: 4em 0;
     text-align: center;
   }
-  
+
   #about-us h2 {
     font-size: 2em;
     font-weight: 700;
     margin-bottom: 2em;
   }
-  
+
   #about-us p {
     font-size: 1em;
     line-height: 1.6;
     color: #777777;
     margin-bottom: 1.5em;
   }
-  

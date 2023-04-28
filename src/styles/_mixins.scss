@@ -1,0 +1,13 @@
+//************************** All Mixins ***************************
+
+@mixin box {
+  border-radius: $borderRadius;
+  background-color: white;
+  box-shadow: $boxShadow;
+}
+
+@mixin textEllipsis {
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}

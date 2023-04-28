@@ -44,3 +44,7 @@ export function formatDate(dateString: string, format: string = 'd/m/Y'): string
       throw new Error(`Formato no válido: ${format}`);
   }
 }
+
+export function cloneObject(object: object) {
+  return JSON.parse(JSON.stringify(object))
+}

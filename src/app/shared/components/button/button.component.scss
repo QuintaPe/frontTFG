@@ -86,6 +86,7 @@
 
   &.btn-danger,
   &.btn-danger i{
+    background-color: $danger !important;
     color: #fff !important;
   }
 
@@ -134,14 +135,6 @@
       z-index: -1;
       opacity: 0.1;
     }
-  }
-}
-
-.buttons {
-  display: flex;
-  justify-content: flex-end;
-  & > .btn:not(:first-child) {
-    margin-left: 10px;
   }
 }
 

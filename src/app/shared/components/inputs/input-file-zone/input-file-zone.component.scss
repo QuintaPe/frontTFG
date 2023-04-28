@@ -1,0 +1,123 @@
+@import "_colors";
+@import "_variables";
+
+.input_filezone {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    input[type='file'] {
+      display: none;
+    }
+    .input_file_img {
+      border-radius: 50%;
+      width: 100px;
+      height: 100px;
+      margin-left: 10px;
+    }
+    .file-upload-label-wrapper {
+      width: 100%;
+      justify-content: center;
+      align-items: center;
+    }
+    .image-preview-label {
+      cursor: pointer;
+    }
+    .image-preview-label:hover {
+      opacity: 0.8;
+    }
+    .custom-file-upload {
+      cursor: pointer;
+      padding: 15px;
+      background-color: white;
+      border: 2px dashed $primary;
+      height: 100px;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      img {
+        margin-bottom: 10px;
+        width: 24px;
+        height: 24px;
+      }
+      &:hover {
+        background-color: $primary-15;
+      }
+    }
+    &.disabled .custom-file-upload {
+      background-color: $primary-15 !important;
+      cursor: default !important;
+    }
+    .input_filezone_images {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        margin-top: 40px;
+    }
+  }
+
+  .output-image {
+    position: relative;
+    .pre_text {
+      position: absolute;
+      font-size: 14px;
+      left: 10px;
+      top: -11px;
+      z-index: 1;
+      color: $primary;
+      font-weight: bold;
+      padding: 0 2px;
+      &::before {
+        content: "";
+        height: 3px;
+        position: absolute;
+        left: 0px;
+        top: 10px;
+        width: 100%;
+        z-index: -1;
+        background-color: white;
+      }
+    }
+    .file-upload {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      overflow: hidden;
+      border-radius: 5px;
+      background-color: $primary-15;
+      padding: 10px;
+      border: 2px solid $primary;
+      cursor: pointer;
+      img {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+      }
+      .default-img {
+        text-align: center;
+      }
+      .close-icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 20px;
+      }
+
+      input[type="file"] {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+      }
+    }
+  }

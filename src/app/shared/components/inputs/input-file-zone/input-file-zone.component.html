@@ -1,0 +1,43 @@
+<div class="input_filezone" ngClass="'disabled' : isDisabled">
+  <div class='pre_text'>
+
+  </div>
+  <label htmlFor='file-upload' class='custom-file-upload' fileDragDrop (filesChangeEmiter)="changeValue($event, true)">
+    <ng-container *ngIf="file">
+      <!-- {{ getIconFile(fileData.name) }} -->
+      {{ file.name }}
+    </ng-container>
+    <span *ngIf="!file">{{preText}}</span>
+    <span *ngIf="isRequired" class='is_required ps-1'>*</span>
+    <input
+      id='file-upload'
+      type='file'
+      [disabled]='isDisabled'
+      (change)='changeValue($event)'
+    />
+  </label>
+
+  <div class="input_filezone_images" cdkDropList (cdkDropListDropped)="onDropped($event)">
+    <div *ngFor="let file of value; let i = index" cdkDrag>
+      <div class='output-image'>
+        <div class='pre_text'>{{('common.image' | translate) + ' ' + (i + 1)}}</div>
+        <label class="file-upload" [style.height.px]="200" [style.width.px]="200">
+          <mat-icon *ngIf="file" class="close-icon" (click)="$event.preventDefault(); removeValue(file._id)">close</mat-icon>
+          <img [src]="FILES_BASE_URL + file._id" [alt]="file.name">
+          <mat-icon [style.fontSize.px]="170" class="default-img" *ngIf="!file">person_outline</mat-icon>
+        </label>
+      </div>
+    </div>
+
+    <div *ngFor="let _ of [].constructor(uploading); let i = index" cdkDrag>
+      <div class='output-image'>
+        <div class='pre_text'>{{('common.image' | translate) + ' ' + (value.length + i + 1)}}</div>
+        <label class="file-upload" [style.height.px]="200" [style.width.px]="200">
+          <div class="flex-fill h-100">
+            <app-skeleton height="100%"></app-skeleton>
+          </div>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

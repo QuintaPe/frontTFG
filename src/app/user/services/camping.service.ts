@@ -1,5 +1,4 @@
 import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
 import { Camping } from "@models/camping";
 import { ApiService } from "@app/shared/services/api.service";
 
@@ -10,7 +9,7 @@ import { ApiService } from "@app/shared/services/api.service";
 export class CampingService {
   selectedCamping: Camping;
   
-  constructor(private http: HttpClient, private apiService: ApiService) {
+  constructor(private apiService: ApiService) {
     this.selectedCamping = new Camping();
   }
 
@@ -19,18 +18,18 @@ export class CampingService {
   }
 
   async getCampings(params: any) {
-    return this.apiService.fetch('GET', 'campings', params)
+    return this.apiService.fetch('GET', 'campings', params);
   }
 
-  // getCamping(id: String) {
-  //   return this.http.get<Camping>(this.URL_API + `/${id}`);
-  // }
+  async getCamping(id: String) {
+    return this.apiService.fetch('GET', `campings/${id}`);
+  }
 
-  // putCamping(camping: Camping) {
-  //   return this.http.put(this.URL_API + `/${camping._id}`, camping);
-  // }
+  putCamping(camping: Camping) {
+    return  this.apiService.fetch('PUT', `campings/${camping._id}`, { ...camping });
+  }
 
-  // deleteCamping(_id: string) {
-  //   return this.http.delete(this.URL_API + `/${_id}`);
-  // }
+  deleteCamping(id: string) {
+    return this.apiService.fetch('DELETE', `campings/${id}`);
+  }
 }

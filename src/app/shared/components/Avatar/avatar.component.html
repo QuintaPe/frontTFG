@@ -4,12 +4,9 @@
   [class]="'avatar ' + this.class" 
   [ngClass]="{'default': !src}"
 >
-  <ng-container [ngSwitch]="type">
-    <ng-container *ngSwitchCase="'startup'">
-      <!-- <Building [size]="getSize()" class="avatar-svg"></Building> -->
-    </ng-container>
-    <ng-container *ngSwitchDefault>
-      <!-- <Person [size]="getSize()" class="avatar-svg"></Person> -->
+  <ng-container *ngIf="!src">
+    <ng-container *ngIf="type === 'user'">
+      <mat-icon>person_outline</mat-icon>  
     </ng-container>
   </ng-container>
   

@@ -2,19 +2,33 @@
 <nav class="nav-bar">
     <ul class="left-buttons">
       <li>
-        <a (click)="navigateTo('campings')">Inicio</a>
+        <a href="#">Inicio</a>
       </li>
       <li>
-        <a (click)="navigateTo('profile')">Editar perfil</a>
+        <a href="#">Editar perfil</a>
       </li>
     </ul>
     <div class="left-buttons">
-      <div class="d-flex align-items-center" *ngIf="!authService.isUserAuth">
+      <div class="d-flex align-items-center" *ngIf="!authService.user">
         <app-button text='Iniciar Sesion' color="secondary" (onClick)="router.navigate(['/login'])"></app-button>
         <app-button text='Registrate Gratis!' (onClick)="router.navigate(['/signup'])" class="ms-2"></app-button>
       </div>
-      <div class="d-flex align-items-center" *ngIf="authService.isUserAuth">
+      <!-- <div class="d-flex align-items-center" *ngIf="authService.isUserAuth">
         <app-button text='Cerrar Sesión' color="secondary" (onClick)="this.logout()"></app-button>
+      </div> -->
+      <div class="profile-dropdown" *ngIf="authService.user">
+        <button class="profile-button">
+          <app-avatar
+            type="user"
+            [size]="50"
+            [src]="authService.user.attributes.avatar?._id"
+          ></app-avatar>
+        </button>
+        <div class="dropdown-content">
+          <a [routerLink]="[authService.user.role, 'profile']">Perfil</a>
+          <a [routerLink]="[authService.user.role, 'campings']">Campings</a>
+          <a (click)="logout()">Cerrar sesion</a>
+        </div>
       </div>
     </div>
 

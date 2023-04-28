@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import { Router } from "@angular/router";
+import { APP_INITIALIZER, ApplicationInitStatus, Component, Inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from "./auth/services/auth.service";
 
@@ -13,7 +12,6 @@ export class AppComponent {
   langs: string[] = ['es', 'en'];
 
   constructor(
-    public router: Router,
     public translate: TranslateService,
     public authService: AuthService,
   ) {

@@ -1,0 +1,70 @@
+<app-panel
+    [breadcrumb]="getBreadcrumb()"
+    class="create-camping"
+>
+    <div [ngSwitch]="page">
+        <div *ngSwitchCase="0">
+            <app-input-text
+                [preText]="'common.name' | translate"
+                [(value)]="this.camping.name"
+                [loading]="loading"
+                class="mb-4"
+            ></app-input-text>
+            <app-input-text-area
+                [preText]="'common.description' | translate"
+                [(value)]="this.camping.description"
+                [loading]="loading"
+                class="mb-4"
+            ></app-input-text-area>
+            <app-input-text-area
+                [preText]="'camping.amenities' | translate"
+                [(value)]="this.camping.amenities"
+                [loading]="loading"
+                class="mb-4"
+            ></app-input-text-area>
+            <app-input-text-area
+                [preText]="'camping.rules' | translate"
+                [(value)]="this.camping.rules"
+                [loading]="loading"
+                class="mb-4"
+            ></app-input-text-area>
+            <app-input-text-area
+                [preText]="'camping.nearestLocations' | translate"
+                [(value)]="this.camping.nearestLocations"
+                [loading]="loading"
+                class="mb-4"
+            ></app-input-text-area>
+        </div>
+
+        <app-create-camping-location
+            *ngSwitchCase="1"
+            [camping]="camping"
+            (campingChange)="setCamping($event)"
+        />
+
+        <app-create-camping-units
+            *ngSwitchCase="2"
+            [camping]="camping"
+            (campingChange)="setCamping($event)"
+        />
+
+        <app-create-camping-photos
+            *ngSwitchCase="3"
+            [camping]="camping"
+            (campingChange)="setCamping($event)"
+        />
+    </div>
+
+    <div class="buttons mt-4">
+        <app-button
+            *ngIf="page > 0"
+            [text]="'common.back' | translate"
+            color="secondary"
+            (onClick)="pageBack()">
+        </app-button>
+        <app-button
+            [text]="page < 5 ? ('common.next' | translate) : ('common.update' | translate)"
+            (onClick)="handleSubmit()">
+        </app-button>
+    </div>
+</app-panel>

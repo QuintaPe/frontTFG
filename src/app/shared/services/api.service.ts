@@ -11,7 +11,7 @@ const {API_BASE_URL } = apiEnviroment;
 export class ApiService {
   constructor() {}
 
-  fetch(method:string, url:string, params: any= {}, isFormData = false) {
+  async fetch(method:string, url:string, params: any= {}, isFormData = false) {
     const token = localStorage.getItem('token');
 
     const CONFIG: {
@@ -31,7 +31,7 @@ export class ApiService {
       withCredentials: true,
     };
   
-    let URL = `${API_BASE_URL}/${url}`;
+    let URL = url.startsWith('https://') ? url : `${API_BASE_URL}/${url}`;
     if (params && typeof params === 'object') {
       switch (method) {
         case 'GET':
@@ -54,10 +54,11 @@ export class ApiService {
   
     CONFIG.url = URL;
 
+    // Esperar 2 segundos antes de resolver la promesa
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
     return axios(CONFIG)
       .then(response => response.data)
-      .catch((error) => {
-        throw error;
-      });
+      .catch((error) => { throw error });
   }
 }

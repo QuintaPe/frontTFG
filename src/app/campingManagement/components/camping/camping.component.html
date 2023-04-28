@@ -1,0 +1,14 @@
+<app-panel class="create-camping">
+    <div>
+        <h2 class="text-center mb-5">{{'user.modifyProfile' | translate }}</h2>
+        <angular-table
+            [columns]="columns"
+            [pageSize]="10"
+            [fetch]="getCampings"
+            mode="component"
+            [rowComponent]="campingRowType"
+        ></angular-table>
+    </div>
+    <button (click)="openDialog()">Abrir modal</button>
+    <a [routerLink]="['new']">nuevo</a>
+</app-panel>

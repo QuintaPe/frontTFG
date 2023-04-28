@@ -1,19 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { CampingComponent } from './components/camping/camping.component';
-import { CreateCampingComponent } from './components/create-camping/create-camping.component';
-
+import { CampingViewComponent } from './components/camping-view/camping-view.component';
 
 const routes: Routes = [
-  { 
-    path: '', 
-    children: [
-      { path: '', component: CampingComponent },
-      { path: 'new', component: CreateCampingComponent },
-      { path: ':id', component: CreateCampingComponent },
-    ],
-  },
+  { path: ':id', component: CampingViewComponent },
 ];
 
 @NgModule({

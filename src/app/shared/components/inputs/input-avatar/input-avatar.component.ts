@@ -39,9 +39,7 @@ export class InputAvatarComponent implements OnInit {
       const fileInfo = await this.documentService.uploadDocument(fileData, this.isPublic);
       this.file = fileInfo;
       this.valueChange.emit(fileInfo);
-    } catch (errors) {
-      console.log(errors);
-    }
+    } catch  {}
 
     this.uploading = false;
   };
@@ -51,10 +49,5 @@ export class InputAvatarComponent implements OnInit {
     this.file = null
     this.valueChange.emit(null);
   };
-
-  
-  emitEvent() {
-    this.valueChange.emit(this.value || '');
-  }
 }
           

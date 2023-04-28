@@ -11,8 +11,8 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class EditAccountComponent implements OnInit {
-  loading: Boolean = true;
-  user: User = new User();
+  loading: Boolean = false;
+  user!: User;
 
   constructor(
     public userService: UserService, 
@@ -21,14 +21,7 @@ export class EditAccountComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    const miId = this.authService.user._id;
-    if (miId) {
-      this.userService.getUser(miId)
-        .then((user) => {
-          this.user = user;
-          this.loading = false;
-        })
-    }
+    this.user = this.authService.user ? JSON.parse(JSON.stringify(this.authService.user)) :  new User();
   }
 
   getLangs = () => {
@@ -43,10 +36,13 @@ export class EditAccountComponent implements OnInit {
 
   updateProfile = () => {
     if (this.user._id){
+      this.loading = true;
       this.userService.putUser(this.user)
-        .then(() => {
+        .then((response) => {
+          this.authService.user = response.user;
           this.translate.use(this.user.lang);
           localStorage.setItem('lang', this.user.lang);
+          this.loading = false;
         })
         .catch((err) => console.log(err));
     }

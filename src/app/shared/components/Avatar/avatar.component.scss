@@ -3,41 +3,20 @@
 
 .avatar{
   border-radius: 35%;
-  aspect-ratio: 1;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
   overflow: hidden;
   box-shadow: $boxShadowLight;
-  &.default{
-    padding: 5px;
-    background-color: $primary;
-    svg {
-      color: white;
-    }
-  }
-  &.shadowNone{
-    box-shadow: none;
-  }
   img {    
     width: 100%;
-    padding: 0 !important;
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    bottom: 0;
-    margin: auto;
+    height: 100%;
+    object-fit: cover;
   }
   &.default{
-    img{
-      width: 75%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $primary-50;
+    .mat-icon {
+      font-size: 35px;
     }
   }
-}
-
-.loader-avatar{
-  border-radius: 35% !important;
 }

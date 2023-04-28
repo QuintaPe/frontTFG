@@ -4,6 +4,7 @@ $primary-30: #7a87784d;
 $primary-50: #7a877880;
 $primary-75: #7a8778bf;
 $secondary: #EFEAD8;
+$danger: #c3515e;
 
 $text-color: #000000DE;
 $textColor: #000000DE;
@@ -47,20 +48,3 @@ $purple: #b71b46;
 $green: #2ecc71;
 $colorGraphUp: #88E927;
 $colorGraphDown: #E70E31;
-
-/***************************Fonts Variables****************************/
-
-$light: 'AktivGrotesk-light', serif;
-$regular: 'AktivGrotesk-regular', serif;
-$medium: 'AktivGrotesk-medium', serif;
-$bold: 'AktivGrotesk-bold', serif;
-
-:root {
-  --primary-color: #{$primary};
-  --primary-light-color: #{$primary}15;
-  --primary-color-15: #{$primary}15;
-  --primary-color-25: #{$primary}25;
-  --primary-color-50: #{$primary}50;
-  --primary-color-75: #{$primary}75;
-  --success-color: #{$green};
-}

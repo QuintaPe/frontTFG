@@ -2,42 +2,64 @@
 @import "_variables";
 @import "_breakpoints";
 
-.file-upload {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.input_avatar {
   position: relative;
-  overflow: hidden;
-  border-radius: 5px;
-  background-color: #f1f1f1;
-  padding: 10px;
-  border: 2px solid $primary;
-  cursor: pointer;
-  img {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-  }
-  .default-img {
-    text-align: center;
-  }
-  .close-icon {
+  .pre_text {
     position: absolute;
-    top: 0;
-    right: 0;
-    width: 20px;
+    font-size: 14px;
+    left: 10px;
+    top: -11px;
+    z-index: 1;
+    color: $primary;
+    font-weight: bold;
+    padding: 0 2px;
+    &::before {
+      content: "";
+      height: 3px;
+      position: absolute;
+      left: 0px;
+      top: 10px;
+      width: 100%;
+      z-index: -1;
+      background-color: white;
+    }
   }
+  .file-upload {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    background-color: $primary-15;
+    padding: 10px;
+    border: 2px solid $primary;
+    cursor: pointer;
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+    }
+    .default-img {
+      text-align: center;
+    }
+    .close-icon {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 20px;
+    }
 
-  input[type="file"] {
-    position: absolute;
-    left: 0;
-    top: 0;
-    opacity: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-
+    input[type="file"] {
+      position: absolute;
+      left: 0;
+      top: 0;
+      opacity: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
   }
 }

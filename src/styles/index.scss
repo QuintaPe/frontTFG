@@ -1,5 +1,21 @@
-
-@import 'node_modules/bootstrap/scss/bootstrap';
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import './normalize.scss';
 @import './_fonts';
+@import './loader.scss';
+@import './_breakpoints.scss';
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "~bootstrap/dist/css/bootstrap.css";
+
+.buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+@media (max-width: $breakpoint-sm) {
+  .buttons {
+    flex-direction: column-reverse;
+    * {
+      width: 100%;
+    }
+  }
+}

@@ -1,5 +1,4 @@
-import { Component, EventEmitter, Input, OnChanges, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
   selector: 'app-input-text',
@@ -15,11 +14,12 @@ export class InputTextComponent implements OnInit {
   @Input() placeholder:string = '';
   @Input() isRequired:boolean = false;
   @Input() isDisabled:boolean = false;
-  @Input() value: string = '';
+  @Input() value: any = '';
   @Input() name: string = '';
   @Input() error: string = '';
   @Input() control: any = null;
-  @Output() valueChange = new EventEmitter<string>();
+  @Input() loading: boolean = false;
+  @Output() valueChange = new EventEmitter<any>();
 
 
   constructor() {}
@@ -29,7 +29,7 @@ export class InputTextComponent implements OnInit {
       this.value = this.value.split('T')[0];
     }
   }
-  
+
   emitEvent() {
     this.valueChange.emit(this.value || '');
   }

@@ -1,9 +1,8 @@
-<div className='input_avatar'>
-  <div className='pre_text'>{{preText}}</div>
-  
+<div class='input_avatar'>
+  <div class='pre_text'>{{preText}}</div>
   <label class="file-upload" [style.height.px]="size" [style.width.px]="size">
-    <mat-icon class="close-icon" (click)="$event.preventDefault(); removeValue()">close</mat-icon>
-    <img  *ngIf="file" [src]="FILES_BASE_URL + file.path" [alt]="file.name">
+    <mat-icon *ngIf="file" class="close-icon" (click)="$event.preventDefault(); removeValue()">close</mat-icon>
+    <img  *ngIf="file" [src]="FILES_BASE_URL + file._id" [alt]="file.name">
     <mat-icon [style.fontSize.px]="size - 30" class="default-img" *ngIf="!file">person_outline</mat-icon>  
     <input
       id='file-upload'
