@@ -4,16 +4,20 @@ import {
   HostListener, SimpleChanges, OnChanges
 } from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { CdkPortal } from '@angular/cdk/portal';
+import { CdkPortal, PortalModule } from '@angular/cdk/portal';
+import { NgIf, NgFor } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 interface Option {
   id: string; name: string;
 };
 
 @Component({
-  selector: 'app-input-select',
-  templateUrl: './input-select.component.html',
-  styleUrls: ['../inputs.component.scss'],
+    selector: 'app-input-select',
+    templateUrl: './input-select.component.html',
+    styleUrls: ['../inputs.component.scss'],
+    standalone: true,
+    imports: [MatIconModule, NgIf, PortalModule, NgFor]
 })
 export class InputSelectComponent implements OnChanges {
   @Input() class: string = '';

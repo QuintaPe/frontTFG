@@ -1,12 +1,56 @@
-import { enableProdMode } from '@angular/core';
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { enableProdMode, APP_INITIALIZER, importProvidersFrom } from '@angular/core';
+import { withInterceptorsFromDi, provideHttpClient, HttpClient } from '@angular/common/http';
+import { bootstrapApplication } from '@angular/platform-browser';
+import { provideAnimations } from '@angular/platform-browser/animations';
+import environment from './environments/environment';
 
-import { AppModule } from './app/app.module';
-import { environment } from './environments/environment';
+// Modules
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { JwtModule } from '@auth0/angular-jwt';
+
+// App
+import { AppComponent } from './app/app.component';
+import { AppRoutingModule } from './app/app-routing.module';
+import { AuthService } from './app/auth/services/auth.service';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic().bootstrapModule(AppModule)
-  .catch(err => console.error(err));
+const initApp = (authService: AuthService) => {
+  return () => authService.isUserAuth
+    ? authService.setLoggedUser()
+    : Promise.resolve();
+}
+
+bootstrapApplication(AppComponent, {
+  providers: [
+    importProvidersFrom(
+      AppRoutingModule,
+      JwtModule.forRoot({
+        config: {
+          tokenGetter: () => localStorage.getItem('access_token'),
+          allowedDomains: ['localhost:4200'],
+          disallowedRoutes: [''],
+        },
+      }),
+
+      TranslateModule.forRoot({
+        loader: {
+          provide: TranslateLoader,
+          useFactory: (http: HttpClient) => new TranslateHttpLoader(http, './i18n/', '.json'),
+          deps: [HttpClient],
+        },
+      }),
+    ),
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initApp,
+      multi: true,
+      deps: [AuthService],
+    },
+    provideAnimations(),
+    provideHttpClient(withInterceptorsFromDi()),
+  ],
+}).catch((err) => console.error(err));

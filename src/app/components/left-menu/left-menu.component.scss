@@ -5,27 +5,27 @@
 .user-wrapper  {
     position: relative;
     .menu-icon{
-        position: fixed;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        top: 0px;
-        left: 0px;
-        width: 75px;
-        height: 60px;
-        z-index: 12;
-        mat-icon {      
-            cursor: pointer;
-            padding: 5px;
-            color: $primary;
-            font-size: 35px;
-            border-radius: 5px;
-            border: 1px solid transparent;
-            font-weight: bold;
-            &:hover {
-                border: 1px solid $primary;
-            }
+      position: fixed;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 0px;
+      left: 0px;
+      width: 75px;
+      height: 60px;
+      z-index: 12;
+      mat-icon {
+        cursor: pointer;
+        padding: 5px;
+        color: $primary;
+        font-size: 35px;
+        border-radius: 5px;
+        border: 1px solid transparent;
+        font-weight: bold;
+        &:hover {
+            border: 1px solid $primary;
         }
+      }
     }
     .content-wrapper {
         padding-left: 250px;
@@ -88,7 +88,7 @@
               font-size: 35px;
             }
           }
-  
+
           .nav-item-submenu-icon{
             width: 18px;
             height: 18px;
@@ -193,7 +193,7 @@
       }
     }
   }
-  
+
   @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg){
     body:not(.touchscreen){
       .left-menu {
@@ -234,7 +234,7 @@
       }
     }
   }
-  
+
   @media (max-width: $breakpoint-md) {
     .user-wrapper  {
       .content-wrapper {
@@ -255,10 +255,9 @@
       }
     }
   }
-  
+
   @media (max-width: $breakpoint-sm) {
     .left-menu {
       width: 75vw;
     }
   }
-  

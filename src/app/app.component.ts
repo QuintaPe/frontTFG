@@ -1,20 +1,22 @@
-import { APP_INITIALIZER, ApplicationInitStatus, Component, Inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from "./auth/services/auth.service";
+import { RouterOutlet } from '@angular/router';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+    selector: 'app-root',
+    templateUrl: './app.component.html',
+    styleUrls: ['./app.component.scss'],
+    standalone: true,
+    imports: [NavBarComponent, RouterOutlet]
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'ScoutCamp';
   langs: string[] = ['es', 'en'];
 
-  constructor(
-    public translate: TranslateService,
-    public authService: AuthService,
-  ) {
+  translate = inject(TranslateService);
+
+  ngOnInit(): void {
     this.translate.setDefaultLang('es');
     this.translate.use(localStorage.getItem('lang') || this.translate.getBrowserLang() || 'es');
     this.translate.addLangs(this.langs);

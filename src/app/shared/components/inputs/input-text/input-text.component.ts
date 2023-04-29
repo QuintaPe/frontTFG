@@ -1,9 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatIconModule } from '@angular/material/icon';
+import { SkeletonComponent } from '../../skeleton/skeleton.component';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-input-text',
-  templateUrl: './input-text.component.html',
-  styleUrls: ['../inputs.component.scss']
+    selector: 'app-input-text',
+    templateUrl: './input-text.component.html',
+    styleUrls: ['../inputs.component.scss'],
+    standalone: true,
+    imports: [NgIf, SkeletonComponent, MatIconModule, ReactiveFormsModule, FormsModule]
 })
 
 export class InputTextComponent implements OnInit {

@@ -1,9 +1,12 @@
 import { Component, Input } from '@angular/core';
+import { NgClass } from '@angular/common';
 
 @Component({
-  selector: 'app-skeleton',
-  templateUrl: './skeleton.component.html',
-  styleUrls: ['./skeleton.component.scss']
+    selector: 'app-skeleton',
+    templateUrl: './skeleton.component.html',
+    styleUrls: ['./skeleton.component.scss'],
+    standalone: true,
+    imports: [NgClass]
 })
 export class SkeletonComponent {
   @Input() class: String = '';

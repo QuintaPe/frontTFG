@@ -1,12 +1,16 @@
 import { Component, ViewChild, ElementRef, Input } from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
-import { CdkPortal } from '@angular/cdk/portal';
+import { CdkPortal, PortalModule } from '@angular/cdk/portal';
 import { Button } from '../table.interface';
+import { NgFor } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-table-row-menu',
-  templateUrl: './row-menu.component.html',
-  styleUrls: ['./row-menu.component.scss']
+    selector: 'app-table-row-menu',
+    templateUrl: './row-menu.component.html',
+    styleUrls: ['./row-menu.component.scss'],
+    standalone: true,
+    imports: [MatIconModule, PortalModule, NgFor]
 })
 export class RowMenuComponent {
   @Input() buttons?: Button[] = [];

@@ -1,5 +1,7 @@
-import { Component, OnInit, Input, Output, EventEmitter, HostListener } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { NgFor } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
 
 interface Route {
   name: string,
@@ -8,16 +10,19 @@ interface Route {
 }
 
 @Component({
-  selector: 'app-left-menu',
-  templateUrl: './left-menu.component.html',
-  styleUrls: ['./left-menu.component.scss']
+    selector: 'app-left-menu',
+    templateUrl: './left-menu.component.html',
+    styleUrls: ['./left-menu.component.scss'],
+    standalone: true,
+    imports: [MatIconModule, NgFor, RouterLink, RouterOutlet]
 })
+
 export class LeftMenuComponent implements OnInit {
   routes: Route[] = [];
   activeRole:string = ''
   showAside!:boolean;
 
-  constructor(private route: ActivatedRoute) { }
+  route = inject(ActivatedRoute);
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
@@ -46,11 +51,4 @@ export class LeftMenuComponent implements OnInit {
     this.showAside = !this.showAside;
     localStorage.setItem('showAside', this.showAside.toString());
   }
-
-  // @HostListener('window:resize', ['$event'])
-  // onResize() {
-  //   if (window.innerWidth < 768) {
-  //     this.toggleMenu();
-  //   }
-  // }
 }

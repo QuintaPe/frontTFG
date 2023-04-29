@@ -1,10 +1,14 @@
 import { Component, Input, OnInit, Injector, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { Column } from './table.interface';
+import { RowMenuComponent } from './rowMenu/row-menu.component';
+import { NgIf, NgFor, NgStyle } from '@angular/common';
 
 @Component({
-  selector: 'angular-table',
-  templateUrl: './table.component.html',
-  styleUrls: ['./table.component.scss']
+    selector: 'angular-table',
+    templateUrl: './table.component.html',
+    styleUrls: ['./table.component.scss'],
+    standalone: true,
+    imports: [NgIf, NgFor, NgStyle, RowMenuComponent]
 })
 
 export class AngularTableComponent implements OnInit{

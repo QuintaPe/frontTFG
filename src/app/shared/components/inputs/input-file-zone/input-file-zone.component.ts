@@ -1,13 +1,19 @@
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DocumentService } from '@app/shared/services/document.service';
-import { TranslateService } from '@ngx-translate/core';
-import { apiEnviroment } from 'src/environments/environment';
+import { TranslateService, TranslateModule } from '@ngx-translate/core';
+import enviroment from 'src/environments/environment';
+import { SkeletonComponent } from '../../skeleton/skeleton.component';
+import { MatIconModule } from '@angular/material/icon';
+import { FileDragNDropDirective } from './file-drag-drop.directive';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-input-file-zone',
-  templateUrl: './input-file-zone.component.html',
-  styleUrls: ['./input-file-zone.component.scss']
+    selector: 'app-input-file-zone',
+    templateUrl: './input-file-zone.component.html',
+    styleUrls: ['./input-file-zone.component.scss'],
+    standalone: true,
+    imports: [NgClass, FileDragNDropDirective, NgIf, CdkDropList, NgFor, CdkDrag, MatIconModule, SkeletonComponent, TranslateModule]
 })
 
 export class InputFileZoneComponent{
@@ -22,7 +28,7 @@ export class InputFileZoneComponent{
 
   uploading = 0;
   file: any = null
-  FILES_BASE_URL = apiEnviroment.FILES_BASE_URL
+  FILES_BASE_URL = enviroment.api.FILES_BASE_URL
 
   constructor(
     public documentService: DocumentService,

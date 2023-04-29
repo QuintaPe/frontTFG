@@ -1,11 +1,15 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DocumentService } from '@app/shared/services/document.service';
-import { apiEnviroment } from 'src/environments/environment';
+import enviroment from 'src/environments/environment';
+import { MatIconModule } from '@angular/material/icon';
+import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-input-avatar',
-  templateUrl: './input-avatar.component.html',
-  styleUrls: ['./input-avatar.component.scss']
+    selector: 'app-input-avatar',
+    templateUrl: './input-avatar.component.html',
+    styleUrls: ['./input-avatar.component.scss'],
+    standalone: true,
+    imports: [NgIf, MatIconModule]
 })
 
 export class InputAvatarComponent implements OnInit {
@@ -21,7 +25,7 @@ export class InputAvatarComponent implements OnInit {
 
   uploading = false;
   file: any = null
-  FILES_BASE_URL = apiEnviroment.FILES_BASE_URL
+  FILES_BASE_URL = enviroment.api.FILES_BASE_URL
 
   constructor(public documentService: DocumentService) {}
 
@@ -50,4 +54,3 @@ export class InputAvatarComponent implements OnInit {
     this.valueChange.emit(null);
   };
 }
-          

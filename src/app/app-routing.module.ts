@@ -1,6 +1,6 @@
-import { inject, NgModule } from '@angular/core';
-import { Routes, RouterModule, ActivatedRouteSnapshot } from '@angular/router';
-import { RoleGuard } from '@guards/role.guard';
+import { NgModule } from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
+import { canLoad, allowedRoles } from '@guards/role.guard';
 import { LeftMenuComponent } from './components/left-menu/left-menu.component';
 import { HomeComponent } from './home/home.component';
 
@@ -19,19 +19,19 @@ const routes: Routes = [
   {
     path: ':role',
     component: LeftMenuComponent,
-    canActivate: [(route:ActivatedRouteSnapshot) => inject(RoleGuard).canLoad(route)],
+    canActivate: [canLoad],
     children: [
       {
         path: 'campings',
         loadChildren: () =>
           import('./campingManagement/camping-management.module').then((m) => m.CampingManagementModule),
-          canActivateChild: [() => inject(RoleGuard).allowedRoles(['manager'])],
+          canActivateChild: [() => allowedRoles(['manager'])],
       },
       {
         path: 'profile',
         loadChildren: () =>
           import('./user/user.module').then((m) => m.UserModule),
-          canActivateChild: [() => inject(RoleGuard).allowedRoles(['user', 'manager', 'admin'])],
+          canActivateChild: [() => allowedRoles(['user', 'manager', 'admin'])],
 
       },
       { path: '**', redirectTo: 'profile' },

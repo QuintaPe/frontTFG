@@ -1,7 +1,8 @@
 import { Directive, HostListener, HostBinding, Output, EventEmitter, Input } from '@angular/core';
 
 @Directive({
-  selector: '[fileDragDrop]'
+    selector: '[fileDragDrop]',
+    standalone: true
 })
 
 export class FileDragNDropDirective {

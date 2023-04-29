@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CampingService } from '@app/user/services/camping.service';
 import { Camping } from '@models/camping';
-import { apiEnviroment } from 'src/environments/environment';
 import {MapInfoWindow, MapMarker} from '@angular/google-maps';
+import enviroment from 'src/environments/environment';
 
 
 @Component({
@@ -30,7 +30,7 @@ export class CampingViewComponent implements OnInit {
   };
   markerOptions: google.maps.MarkerOptions = {draggable: false};
   markerPosition: google.maps.LatLngLiteral = {lat: 36.7846086, lng: -4.1046066};
-  
+
   async ngOnInit(): Promise<void> {
     const id = this.activatedroute.snapshot.paramMap.get("id") ?? '';
     this.camping = await this.campingService.getCamping(id);
@@ -41,7 +41,7 @@ export class CampingViewComponent implements OnInit {
 
   getImageUrl = () => {
     return this.camping?.images[0]
-      ? apiEnviroment.FILES_BASE_URL + this.camping.images[0]?._id
+      ? enviroment.api.FILES_BASE_URL + this.camping.images[0]?._id
       : null
   }
 

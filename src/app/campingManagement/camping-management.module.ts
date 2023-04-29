@@ -1,10 +1,14 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { GoogleMapsModule } from '@angular/google-maps';
+import { MatDialogModule } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
-import { SharedModule } from '@app/shared/shared.module';
-import { RouterModule } from '@angular/router';
 
+import { FormatDatePipe } from '@app/shared/pipes/format-date.pipe';
+import { DialogService } from '@app/shared/components/dialog/dialog.service';
+
+// Components
 import { CampingComponent } from './components/camping/camping.component';
 import { CreateCampingComponent } from './components/create-camping/create-camping.component';
 import { CampingRowComponent } from './components/camping/camping-row/camping-row.component';
@@ -13,6 +17,15 @@ import { CampingViewComponent } from './components/camping-view/camping-view.com
 import { CreateCampingLocationComponent } from './components/create-camping/create-camping-location/create-camping-location.component';
 import { CreateCampingUnitsComponent } from './components/create-camping/create-camping-units/create-camping-units.component';
 import { CreateCampingPhotosComponent } from './components/create-camping/create-camping-photos/create-camping-photos.component';
+
+import { PanelComponent } from '@app/shared/components/panel/panel.component';
+import { AngularTableComponent } from '@app/shared/components/table/table.component';
+import { InputTextComponent } from '@app/shared/components/inputs/input-text/input-text.component';
+import { InputFileZoneComponent } from '@app/shared/components/inputs/input-file-zone/input-file-zone.component';
+import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { InputSelectComponent } from '@app/shared/components/inputs/input-select/input-select.component';
+import { InputTextAreaComponent } from '@app/shared/components/inputs/input-text-area/input-text-area.component';
+
 
 @NgModule({
   declarations: [
@@ -25,13 +38,24 @@ import { CreateCampingPhotosComponent } from './components/create-camping/create
     CampingViewComponent,
   ],
   imports: [
-    RouterModule,
     CampingManagementRoutingModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     FormsModule,
     TranslateModule,
-    SharedModule,
     GoogleMapsModule,
+    MatDialogModule,
+    CommonModule,
+
+    FormatDatePipe,
+    PanelComponent,
+    AngularTableComponent,
+    InputTextComponent,
+    InputTextAreaComponent,
+    InputFileZoneComponent,
+    InputSelectComponent,
+    ButtonComponent,
   ],
+  providers: [DialogService]
 })
+
 export class CampingManagementModule { }

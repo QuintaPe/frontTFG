@@ -4,9 +4,11 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SignupUserComponent } from './components/signup-user/signup-user.component';
 import { SignupManagerComponent } from './components/signup-manager/signup-manager.component';
 import { LoginFormComponent } from './components/login-form/login-form.component';
-import { SharedModule } from '@app/shared/shared.module';
 import { AuthComponent } from './components/auth.component';
 import { AuthRoutingModule } from './auth-routing.module';
+import { PanelComponent } from '@app/shared/components/panel/panel.component';
+import { InputTextComponent } from '@app/shared/components/inputs/input-text/input-text.component';
+import { ButtonComponent } from '@app/shared/components/button/button.component';
 
 @NgModule({
   declarations: [
@@ -17,10 +19,13 @@ import { AuthRoutingModule } from './auth-routing.module';
   ],
   imports: [
     AuthRoutingModule,
-    ReactiveFormsModule, 
+    ReactiveFormsModule,
     FormsModule,
     TranslateModule,
-    SharedModule
+
+    PanelComponent,
+    InputTextComponent,
+    ButtonComponent,
   ],
 })
 export class AuthModule { }

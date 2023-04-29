@@ -1,14 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { DialogComponent } from './dialog.component';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class DialogService {
-
-  constructor(private dialog: MatDialog) { }
+  dialog = inject(MatDialog);
 
   async open(text: string, type: string): Promise<boolean> {
     let dialogRef;

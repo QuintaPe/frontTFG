@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
-import { apiEnviroment } from 'src/environments/environment';
 import { transformGetParams } from '@utils/functions';
+import enviroment from 'src/environments/environment';
 import axios from 'axios';
-
-const {API_BASE_URL } = apiEnviroment;
 
 @Injectable({
   providedIn: "root",
@@ -15,23 +13,23 @@ export class ApiService {
     const token = localStorage.getItem('token');
 
     const CONFIG: {
-      method:string, 
-      headers: {}, 
-      withCredentials:boolean, 
+      method:string,
+      headers: {},
+      withCredentials:boolean,
       body?: any
       data?:{}
       url?:string
     } = {
       method,
-      headers: { 
+      headers: {
         Authorization: `Bearer ${token}`,
         'Content-Type': isFormData ? 'multipart/form-data' : 'application/json'
 
       },
       withCredentials: true,
     };
-  
-    let URL = url.startsWith('https://') ? url : `${API_BASE_URL}/${url}`;
+
+    let URL = url.startsWith('https://') ? url : `${enviroment.api.API_BASE_URL}/${url}`;
     if (params && typeof params === 'object') {
       switch (method) {
         case 'GET':
@@ -51,7 +49,7 @@ export class ApiService {
           break;
       }
     }
-  
+
     CONFIG.url = URL;
 
     // Esperar 2 segundos antes de resolver la promesa
