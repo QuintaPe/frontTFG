@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TranslateService } from '@ngx-translate/core';
-import { ApiService } from '@app/shared/services/api.service';
+import { ApiService } from '@core/services/api.service';
 import { Router } from '@angular/router';
 import { User } from '@models/user';
 
@@ -14,7 +14,7 @@ export class AuthService {
   public loading: boolean = true;
 
   constructor(
-    private apiService: ApiService, 
+    private apiService: ApiService,
     private jwtHelper: JwtHelperService,
     public translate: TranslateService,
     public router: Router,
@@ -24,9 +24,9 @@ export class AuthService {
     this.errors = errors;
     setTimeout(() => {
       this.errors = [];
-    }, 5000);  
+    }, 5000);
   }
-  
+
     public getErrors() {
       return this.errors;
     }
@@ -85,7 +85,7 @@ export class AuthService {
       this.logout();
       return null;
     }
-    
+
     return token;
   }
 

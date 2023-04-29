@@ -1,8 +1,8 @@
 import { NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
-import { AvatarComponent } from '@app/shared/components/Avatar/avatar.component';
-import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { AvatarComponent } from '@shared/components/Avatar/avatar.component';
+import { ButtonComponent } from '@shared/components/button/button.component';
 import { AuthService } from '@auth/services/auth.service';
 
 @Component({

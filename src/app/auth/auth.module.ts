@@ -6,9 +6,9 @@ import { SignupManagerComponent } from './components/signup-manager/signup-manag
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { AuthComponent } from './components/auth.component';
 import { AuthRoutingModule } from './auth-routing.module';
-import { PanelComponent } from '@app/shared/components/panel/panel.component';
-import { InputTextComponent } from '@app/shared/components/inputs/input-text/input-text.component';
-import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { PanelComponent } from '@shared/components/panel/panel.component';
+import { InputTextComponent } from '@shared/components/inputs/input-text/input-text.component';
+import { ButtonComponent } from '@shared/components/button/button.component';
 
 @NgModule({
   declarations: [

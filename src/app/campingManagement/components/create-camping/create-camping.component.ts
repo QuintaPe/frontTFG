@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Camping } from '@models/camping';
 import { TranslateService } from '@ngx-translate/core';
-import { CampingService } from '@app/user/services/camping.service';
+import { CampingService } from '@app/camping/services/camping.service';
 import { CAMPINGS_MANAGEMENT_ROUTES } from '@app/campingManagement/routes';
 import { ActivatedRoute } from '@angular/router';
 import { ViewportScroller } from '@angular/common';

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DocumentService } from '@app/shared/services/document.service';
+import { DocumentService } from '@core/services/document.service';
 import enviroment from 'src/environments/environment';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';

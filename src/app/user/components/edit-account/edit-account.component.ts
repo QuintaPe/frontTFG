@@ -15,7 +15,7 @@ export class EditAccountComponent implements OnInit {
   user!: User;
 
   constructor(
-    public userService: UserService, 
+    public userService: UserService,
     public authService: AuthService,
     public translate: TranslateService,
   ) {}

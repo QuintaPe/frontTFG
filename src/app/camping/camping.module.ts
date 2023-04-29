@@ -9,8 +9,8 @@ import { OverlayModule } from '@angular/cdk/overlay';
 
 import { CampingRoutingModule } from './camping-routing.module';
 import { CampingViewComponent } from './components/camping-view/camping-view.component';
-import { LoaderComponent } from '@app/shared/components/loader/loader.component';
-import { DialogService } from '@app/shared/components/dialog/dialog.service';
+import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { DialogService } from '@shared/components/dialog/dialog.service';
 
 @NgModule({
   declarations: [

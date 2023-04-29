@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Camping } from "@models/camping";
-import { ApiService } from "@app/shared/services/api.service";
+import { ApiService } from "@core/services/api.service";
 
 @Injectable({
   providedIn: "root",
@@ -8,7 +8,7 @@ import { ApiService } from "@app/shared/services/api.service";
 
 export class CampingService {
   selectedCamping: Camping;
-  
+
   constructor(private apiService: ApiService) {
     this.selectedCamping = new Camping();
   }

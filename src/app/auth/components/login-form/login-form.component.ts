@@ -1,6 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AuthService } from '@auth/services/auth.service';
 
@@ -31,7 +30,7 @@ import { AuthService } from '@auth/services/auth.service';
 })
 export class LoginFormComponent {
   public loginForm: UntypedFormGroup;
-  
+
 
   constructor(public authService: AuthService) {
     this.loginForm = new UntypedFormGroup({

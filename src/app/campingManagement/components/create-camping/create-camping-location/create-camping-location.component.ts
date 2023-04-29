@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, ElementRef, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Camping } from '@models/camping';
 import { TranslateService } from '@ngx-translate/core';
-import { CampingService } from '@app/user/services/camping.service';
+import { CampingService } from '@app/camping/services/camping.service';
 import { GoogleMap } from '@angular/google-maps';
 
 @Component({
@@ -15,7 +15,7 @@ export class CreateCampingLocationComponent implements AfterViewInit {
   @Output() campingChange = new EventEmitter<Camping>();
   @ViewChild('mapSearchField') searchField !: ElementRef;
   @ViewChild(GoogleMap) map !: GoogleMap;
-  
+
   mapConfigurations= { disableDefaultUI: true };
 
   geocoder = new google.maps.Geocoder;
@@ -57,7 +57,7 @@ export class CreateCampingLocationComponent implements AfterViewInit {
 
     this.map.googleMap?.addListener('click', (event: any) => {
       this.addMarker(event.latLng);
-    });    
+    });
   }
 
   addMarker(latLng: google.maps.LatLng) {

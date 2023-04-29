@@ -1,8 +1,8 @@
 import { Component, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { CampingService } from '@app/user/services/camping.service';
+import { CampingService } from '@app/camping/services/camping.service';
 import { formatDate } from '@utils/functions';
-import { DialogService } from '@app/shared/components/dialog/dialog.service';
+import { DialogService } from '@shared/components/dialog/dialog.service';
 import { CampingRowComponent } from './camping-row/camping-row.component';
 
 @Component({
@@ -66,6 +66,6 @@ export class CampingComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+
   }
 }

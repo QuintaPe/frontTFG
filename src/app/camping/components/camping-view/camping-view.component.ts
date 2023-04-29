@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { CampingService } from '@app/user/services/camping.service';
+import { CampingService } from '@app/camping/services/camping.service';
 import { Camping } from '@models/camping';
 import {MapInfoWindow, MapMarker} from '@angular/google-maps';
 import enviroment from 'src/environments/environment';

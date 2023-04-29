@@ -1,10 +1,10 @@
 import { Component, Input, Output, EventEmitter, TemplateRef, ViewChild } from '@angular/core';
 import { Camping } from '@models/camping';
 import { TranslateService } from '@ngx-translate/core';
-import { CampingService } from '@app/user/services/camping.service';
+import { CampingService } from '@app/camping/services/camping.service';
 import { CampingUnit } from '@models/campingUnit';
 import { MatDialog } from '@angular/material/dialog';
-import { PopupComponent } from '@app/shared/components/popup/popup.component';
+import { PopupComponent } from '@shared/components/popup/popup.component';
 import { cloneObject } from '@utils/functions';
 
 @Component({

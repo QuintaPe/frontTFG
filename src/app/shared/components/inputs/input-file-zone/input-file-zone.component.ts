@@ -1,6 +1,6 @@
 import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { DocumentService } from '@app/shared/services/document.service';
+import { DocumentService } from '@core/services/document.service';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import enviroment from 'src/environments/environment';
 import { SkeletonComponent } from '../../skeleton/skeleton.component';

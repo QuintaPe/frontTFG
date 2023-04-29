@@ -1,12 +1,10 @@
 import { Routes } from '@angular/router';
 import { canLoad, allowedRoles } from '@guards/role.guard';
 
-import { HomeComponent } from './home/home.component';
-
 export const APP_ROUTES: Routes = [
   {
     path: '',
-    loadComponent: () => import('./home/home.component').then((m) => m.HomeComponent),
+    loadComponent: () => import('./core/components/home/home.component').then((m) => m.HomeComponent),
   },
   {
     path: 'auth',
@@ -18,7 +16,7 @@ export const APP_ROUTES: Routes = [
   },
   {
     path: ':role',
-    loadComponent: () => import('./components/left-menu/left-menu.component').then((m) => m.LeftMenuComponent),
+    loadComponent: () => import('./core/components/left-menu/left-menu.component').then((m) => m.LeftMenuComponent),
     canActivate: [canLoad],
     children: [
       {

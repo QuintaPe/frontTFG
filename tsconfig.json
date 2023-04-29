@@ -3,36 +3,17 @@
   "compilerOptions": {
     "baseUrl": "./",
     "paths": {
-      "@app/*": [
-        "src/app/*"
-      ],
-      "@assets/*": [
-        "src/assets/*"
-      ],
-      "@guards/*": [
-        "src/guards/*"
-      ],
-      "@models/*": [
-        "src/models/*"
-      ],
-      "@constants/*": [
-        "src/constants/*"
-      ],
-      "@utils/*": [
-        "src/utils/*"
-      ],
-      "@auth/*": [
-        "src/app/auth/*"
-      ],
-      "@user/*": [
-        "src/app/user/*"
-      ],
-      "@manager/*": [
-        "src/app/manager/*"
-      ],
-      "@shared/*": [
-        "src/app/shared/*"
-      ]
+      "@app/*":     [ "src/app/*" ],
+      "@assets/*":  [ "src/assets/*" ],
+      "@guards/*":  [ "src/app/core/guards/*" ],
+      "@models/*":  [ "src/app/core/models/*" ],
+      "@utils/*":   [ "src/utils/*" ],
+      "@shared/*":  [ "src/app/shared/*" ],
+      "@core/*":    [ "src/app/core/*" ],
+      "@auth/*":    [ "src/app/auth/*" ],
+      "@user/*":    [ "src/app/user/*" ],
+      "@camping/*": [ "src/app/camping/*" ],
+      "@campingManagement/*": [ "src/app/camping/*" ],
     },
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
@@ -50,10 +31,7 @@
     "target": "ES2022",
     "module": "ES2022",
     "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
+    "lib": [ "ES2022", "dom" ],
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
