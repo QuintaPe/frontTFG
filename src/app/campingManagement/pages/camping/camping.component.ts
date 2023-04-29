@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { CampingService } from '@app/camping/services/camping.service';
 import { formatDate } from '@utils/functions';
 import { DialogService } from '@shared/components/dialog/dialog.service';
-import { CampingRowComponent } from './camping-row/camping-row.component';
+import { CampingRowComponent } from './components/camping-row/camping-row.component';
 
 @Component({
   selector: 'app-camping',

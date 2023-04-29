@@ -10,7 +10,7 @@ import { cloneObject } from '@utils/functions';
 @Component({
   selector: 'app-create-camping-units',
   templateUrl: './create-camping-units.component.html',
-  styleUrls: ['../create-camping.component.scss']
+  styleUrls: ['../../create-camping.component.scss']
 })
 
 export class CreateCampingUnitsComponent {

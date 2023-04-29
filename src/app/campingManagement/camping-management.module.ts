@@ -9,14 +9,14 @@ import { FormatDatePipe } from '@shared/pipes/format-date.pipe';
 import { DialogService } from '@shared/components/dialog/dialog.service';
 
 // Components
-import { CampingComponent } from './components/camping/camping.component';
-import { CreateCampingComponent } from './components/create-camping/create-camping.component';
-import { CampingRowComponent } from './components/camping/camping-row/camping-row.component';
+import { CampingComponent } from './pages/camping/camping.component';
+import { CreateCampingComponent } from './pages/create-camping/create-camping.component';
+import { CampingRowComponent } from './pages/camping/components/camping-row/camping-row.component';
 import { CampingManagementRoutingModule } from './camping-management-routing.module';
-import { CampingViewComponent } from './components/camping-view/camping-view.component';
-import { CreateCampingLocationComponent } from './components/create-camping/create-camping-location/create-camping-location.component';
-import { CreateCampingUnitsComponent } from './components/create-camping/create-camping-units/create-camping-units.component';
-import { CreateCampingPhotosComponent } from './components/create-camping/create-camping-photos/create-camping-photos.component';
+import { CampingViewComponent } from './pages/camping-view/camping-view.component';
+import { CreateCampingLocationComponent } from './pages/create-camping/components/create-camping-location/create-camping-location.component';
+import { CreateCampingUnitsComponent } from './pages/create-camping/components/create-camping-units/create-camping-units.component';
+import { CreateCampingPhotosComponent } from './pages/create-camping/components/create-camping-photos/create-camping-photos.component';
 
 import { PanelComponent } from '@shared/components/panel/panel.component';
 import { AngularTableComponent } from '@shared/components/table/table.component';

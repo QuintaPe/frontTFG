@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CampingViewComponent } from './components/camping-view/camping-view.component';
 
-import { CampingComponent } from './components/camping/camping.component';
-import { CreateCampingComponent } from './components/create-camping/create-camping.component';
+import { CampingViewComponent } from './pages/camping-view/camping-view.component';
+import { CampingComponent } from './pages/camping/camping.component';
+import { CreateCampingComponent } from './pages/create-camping/create-camping.component';
+
 import { CAMPINGS_MANAGEMENT_ROUTES } from './routes';
 
 const routes: Routes = [
