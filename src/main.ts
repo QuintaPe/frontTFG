@@ -11,8 +11,9 @@ import { JwtModule } from '@auth0/angular-jwt';
 
 // App
 import { AppComponent } from './app/app.component';
-import { AppRoutingModule } from './app/app-routing.module';
+import { APP_ROUTES } from './app/app.routes';
 import { AuthService } from './app/auth/services/auth.service';
+import { provideRouter } from '@angular/router';
 
 if (environment.production) {
   enableProdMode();
@@ -27,7 +28,6 @@ const initApp = (authService: AuthService) => {
 bootstrapApplication(AppComponent, {
   providers: [
     importProvidersFrom(
-      AppRoutingModule,
       JwtModule.forRoot({
         config: {
           tokenGetter: () => localStorage.getItem('access_token'),
@@ -52,5 +52,6 @@ bootstrapApplication(AppComponent, {
     },
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
+    provideRouter(APP_ROUTES),
   ],
 }).catch((err) => console.error(err));

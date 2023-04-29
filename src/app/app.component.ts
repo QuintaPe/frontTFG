@@ -6,7 +6,7 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
+    // styleUrls: ['./app.component.scss'],
     standalone: true,
     imports: [NavBarComponent, RouterOutlet]
 })
@@ -14,7 +14,7 @@ export class AppComponent implements OnInit {
   title = 'ScoutCamp';
   langs: string[] = ['es', 'en'];
 
-  translate = inject(TranslateService);
+  private translate = inject(TranslateService);
 
   ngOnInit(): void {
     this.translate.setDefaultLang('es');
