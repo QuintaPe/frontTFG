@@ -1,1 +1,8 @@
-<p>camping-view works!</p>
+<app-panel [title]="'camping.bookings' | translate">
+  <app-table
+    [columns]="columns"
+    [fetch]="fetchCampingBookings"
+    [pageSize]="2"
+    [forceFetch]="tableFlagRefresh"
+  ></app-table>
+</app-panel>

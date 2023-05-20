@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { firstValueFrom } from 'rxjs';
 import { DialogComponent } from './dialog.component';
 
@@ -7,33 +7,27 @@ import { DialogComponent } from './dialog.component';
 export class DialogService {
   dialog = inject(MatDialog);
 
-  async open(text: string, type: string): Promise<boolean> {
-    let dialogRef;
-
-    switch (type) {
-      case 'confirm':
-        dialogRef = this.dialog.open(DialogComponent, {
-          data: { text, type },
-          panelClass: 'confirm-dialog'
-        });
-        break;
-      case 'confirmDanger':
-        dialogRef = this.dialog.open(DialogComponent, {
-          data: { text, type },
-          panelClass: 'confirm-danger-dialog'
-        });
-        break;
-      case 'alert':
-        dialogRef = this.dialog.open(DialogComponent, {
-          data: { text, type },
-          panelClass: 'alert-dialog'
-        });
-        break;
-      default:
-        throw new Error(`Invalid dialog type: ${type}`);
-    }
+  async openConfirm(text: string): Promise<boolean> {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: { text, type: 'confirm' },
+    });
 
     return await firstValueFrom(dialogRef.afterClosed());
   }
 
+  async openConfirmDanger(text: string): Promise<boolean> {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: { text, type: 'confirmDanger' },
+    });
+
+    return await firstValueFrom(dialogRef.afterClosed());
+  }
+
+  openLoading(): MatDialogRef<DialogComponent, any> {
+    const dialogRef = this.dialog.open(DialogComponent, {
+      data: { text: '', type: 'loading' },
+    });
+
+    return dialogRef;
+  }
 }

@@ -1,94 +1,121 @@
-import { Component, Input, OnInit, Injector, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { Column } from './table.interface';
+import { Component, Input, AfterViewInit, Type, ViewChild, ViewContainerRef,
+          inject, ChangeDetectorRef, SimpleChanges, OnChanges } from '@angular/core';
+// import { Column } from './table.interface';
+import { CommonModule } from '@angular/common';
+import { MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { tap } from 'rxjs';
 import { RowMenuComponent } from './rowMenu/row-menu.component';
-import { NgIf, NgFor, NgStyle } from '@angular/common';
+import { InputSelectComponent } from '../inputs/input-select/input-select.component';
+import { SkeletonComponent } from '../skeleton/skeleton.component';
 
 @Component({
-    selector: 'angular-table',
+    selector: 'app-table',
     templateUrl: './table.component.html',
     styleUrls: ['./table.component.scss'],
     standalone: true,
-    imports: [NgIf, NgFor, NgStyle, RowMenuComponent]
+    imports: [CommonModule, RowMenuComponent, SkeletonComponent, InputSelectComponent, MatPaginatorModule]
 })
 
-export class AngularTableComponent implements OnInit{
-  @Input() columns: Column[] = [];
+export class TableComponent implements AfterViewInit, OnChanges {
+  @Input() columns: any[] = [];
   @Input() fetch?: any;
   @Input() pageSize: number = 10;
   @Input() mode: string = 'row';
   @Input() rowComponent!: Type<any>;
-  
-  rows: { items: {[key: string]: any}[], total: number} = { items: [], total: 0};
+  @Input() forceFetch:number = 0;
+
   search: string = '';
   filtersValue: any = {};
   sortedColumn: {name: string, sort: string} = { name: '', sort: '' };
   actualPage = 0;
-  loading: boolean = false;
+  loading: boolean = true;
   showFilters: boolean = false;
+  rows: { items: {[key: string]: any}[], total: number} = { items: [], total: 0};
 
-  constructor() {}
-  @ViewChild('componentsContainer', { read: ViewContainerRef }) 
+  @ViewChild('componentsContainer', { read: ViewContainerRef })
   componentsContainer!: ViewContainerRef
 
-  dataInjector(data: any) {
-    const providers = Object.keys(data).map(att => ({
-      provide: att, useValue: data[att]
-    }))
-    return Injector.create({ providers });
+  @ViewChild('selectContainer', { read: ViewContainerRef })
+  selectContainer!: ViewContainerRef
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator
+
+  protected cdr = inject(ChangeDetectorRef);
+
+  fetchLoadingPage = () => {
+    this.loading = true;
+    if (this.mode === 'component') {
+      this.componentsContainer.clear();
+      [...Array(this.pageSize)].forEach((_,i) => {
+        const auxItem = this.componentsContainer.createComponent(this.rowComponent)
+        auxItem.setInput('_id', i);
+        auxItem.setInput('loading', true);
+      })
+    }
+    this.cdr.detectChanges();
   }
 
-  fetchPage = async (page: number = this.actualPage) => {
-    this.loading = true;
+  fetchPage = async () => {
     if (this.fetch) {
+      this.fetchLoadingPage();
       const sort = this.sortedColumn.sort ? `${this.sortedColumn.sort}${this.sortedColumn.name}` : ''
-      this.rows = await this.fetch(page, this.pageSize, this.search, this.filtersValue, sort);
+
+      this.rows = await this.fetch(this.paginator.pageIndex, this.paginator.pageSize, this.search, this.filtersValue, sort);
       this.loading = false;
-      // if (typeof onFetch === 'function') {
-      //   onFetch(response);
-      // }
-    }
-    if (this.mode === 'component') {
-      this.rows.items.forEach((row) => {
-        const auxItem = this.componentsContainer.createComponent(this.rowComponent)
-        Object.keys(row).forEach(att => {
-          if(auxItem.instance.hasOwnProperty(att))
-            auxItem.setInput(att, row[att]);
+
+      if (this.mode === 'component') {
+        this.componentsContainer.clear();
+        this.rows.items.forEach((row) => {
+          const auxItem = this.componentsContainer.createComponent(this.rowComponent)
+          Object.keys(row).forEach(att => {
+            if(auxItem.instance.hasOwnProperty(att)) {
+              auxItem.setInput(att, row[att]);
+            }
           })
+        })
       }
-      )
     }
   };
 
-  ngOnInit(): void {
-    this.fetchPage(0);
+  ngAfterViewInit(): void {
+    this.fetchPage();
+    this.paginator.page
+      .pipe(tap(() => this.fetchPage()))
+      .subscribe()
   }
 
-  sortTable = async (column: Column) => {
-    const columnName = column.sortableField || column.field;
-    if (columnName) {
-      let sort = '+';
-      if (this.sortedColumn && this.sortedColumn.name === columnName) {
-        if (this.sortedColumn.sort === '') {
-          sort = '+';
-        } else if (this.sortedColumn.sort === '+') {
-          sort = '-';
-        } else {
-          sort = '';
-        }
-      }
-      this.sortedColumn = { name: columnName, sort };
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['forceFetch']) {
       this.fetchPage();
     }
-  };
-
-  renderField = (row: any, column: Column) => {
-      const columnField = column.field || '' 
-      if (column.preRender) {
-        return column.preRender(row[columnField], row)
-      } 
-      return row[columnField]
   }
 
+  sortTable = async (column: any) => {
+    if (column.sortable) {
+      const columnName = column.sortableField || column.field;
+      if (columnName) {
+        let sort = '+';
+        if (this.sortedColumn && this.sortedColumn.name === columnName) {
+          if (this.sortedColumn.sort === '') {
+            sort = '+';
+          } else if (this.sortedColumn.sort === '+') {
+            sort = '-';
+          } else {
+            sort = '';
+          }
+        }
+        this.sortedColumn = { name: columnName, sort };
+        this.fetchPage();
+      }
+    }
+  };
 
-  
+  renderField = (row: any, column: any) => {
+      const columnField = column.field || ''
+      return column.preRender
+        ? column.preRender(row[columnField], row)
+        : row[columnField]
+  }
+
 }

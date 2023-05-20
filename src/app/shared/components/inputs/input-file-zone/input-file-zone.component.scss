@@ -44,19 +44,13 @@
         width: 24px;
         height: 24px;
       }
-      &:hover {
+      &:hover, &.loading {
         background-color: $primary-15;
       }
     }
     &.disabled .custom-file-upload {
       background-color: $primary-15 !important;
       cursor: default !important;
-    }
-    .input_filezone_images {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        margin-top: 40px;
     }
   }
 
@@ -93,6 +87,7 @@
       padding: 10px;
       border: 2px solid $primary;
       cursor: pointer;
+      margin-bottom: 20px;
       img {
         display: block;
         width: 100%;

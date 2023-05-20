@@ -3,8 +3,8 @@
     <h3 *ngIf="title" class="panel-title">{{ title }}</h3>
     <div *ngIf="breadcrumb" class="panel-breadcrumb">
       <div
-        *ngFor="let path of breadcrumb; let last = last" 
-        (click)="router.navigate([path.route])"
+        *ngFor="let path of breadcrumb; let last = last"
+        (click)="router.navigateByUrl(path.route)"
         class="d-flex align-items-center"
       >
         <h3 class="panel-title">{{ path.name }}</h3>

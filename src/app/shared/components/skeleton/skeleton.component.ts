@@ -12,7 +12,7 @@ export class SkeletonComponent {
   @Input() class: String = '';
   @Input() animation: String = 'wave';
   @Input() width: String | number = '100%';
-  @Input() height: String = '18px';
+  @Input() height: String = '15px';
   @Input() variant: String = 'rectangular';
 
   constructor() { }

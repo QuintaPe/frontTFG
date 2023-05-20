@@ -1,512 +1,106 @@
 <app-loader *ngIf="loading"></app-loader>
 
-<ng-container *ngIf="!loading">
-  <section 
+<ng-container *ngIf="!loading && camping?._id">
+  <section
     class="camping-header"
-    [style.background-image]="'linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(' + getImageUrl() + ')'"
+    [style.background-size]="'cover'"
+    [style.background-image]="'
+      linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), \
+      url(' + getImageUrl(camping?.images?.[0]) + ') \
+    '"
   >
     <div class="camping-header--wrapper">
         <h1 class="camping-header--name">{{ camping?.name }}</h1>
         <p class="camping-header--description" >{{ camping?.description }}</p>
-        <a
-            href="#booking"
-            target="_self"
-            class="camping-header--booking"
-        >
-        Reservar
-        </a>
+        <app-button [text]="'camping.book' | translate" (onClick)="scrollToElement(booking)"></app-button>
+
     </div>
   </section>
 
-  <google-map [options]="options">
-    <map-marker
-        #marker="mapMarker"
-        [position]="markerPosition"
-        [options]="markerOptions"
-        (mapClick)="openInfoWindow(marker)"
-    ></map-marker>
-    <map-info-window>{{ camping?.name }}</map-info-window>
-  </google-map>
-  
-  <section class="u-clearfix u-section-2" id="sec-cf32">
-    <div class="u-clearfix u-sheet u-sheet-1">
-      <div class="u-expanded-width u-list u-list-1">
-        <div class="u-repeater u-repeater-1">
-          <div
-            class="u-align-center u-container-align-center u-container-style u-list-item u-palette-2-base u-repeater-item u-shape-rectangle u-list-item-1"
-            data-animation-name="customAnimationIn"
-            data-animation-duration="1250"
-            data-animation-delay="500"
-          >
-            <div
-              class="u-container-layout u-similar-container u-valign-middle u-container-layout-1"
-            >
-              <span
-                class="u-align-center u-file-icon u-icon u-text-white u-icon-1"
-                ><img src="images/2325148-28c38e53.png" alt=""
-              /></span>
-              <h4
-                class="u-align-center u-custom-font u-text u-text-font u-text-1"
-              >
-                Trekking
-              </h4>
-            </div>
-          </div>
-          <div
-            class="u-align-center u-container-align-center u-container-style u-list-item u-palette-2-base u-repeater-item u-shape-rectangle u-list-item-2"
-            data-animation-name="customAnimationIn"
-            data-animation-duration="1250"
-            data-animation-delay="500"
-          >
-            <div
-              class="u-container-layout u-similar-container u-valign-middle u-container-layout-2"
-            >
-              <span
-                class="u-align-center u-file-icon u-icon u-text-white u-icon-2"
-                ><img src="images/7401471-4294aa1a.png" alt=""
-              /></span>
-              <h4
-                class="u-align-center u-custom-font u-text u-text-font u-text-2"
-              >
-                Camping
-              </h4>
-            </div>
-          </div>
-          <div
-            class="u-align-center u-container-align-center u-container-style u-list-item u-palette-2-base u-repeater-item u-shape-rectangle u-list-item-3"
-            data-animation-name="customAnimationIn"
-            data-animation-duration="1250"
-            data-animation-delay="500"
-          >
-            <div
-              class="u-container-layout u-similar-container u-valign-middle u-container-layout-3"
-            >
-              <span
-                class="u-align-center u-file-icon u-icon u-text-white u-icon-3"
-                ><img src="images/931077-6ca510ad.png" alt=""
-              /></span>
-              <h4
-                class="u-align-center u-custom-font u-text u-text-font u-text-3"
-              >
-                Beach Tents
-              </h4>
-            </div>
-          </div>
-          <div
-            class="u-align-center u-container-align-center u-container-style u-list-item u-palette-2-base u-repeater-item u-shape-rectangle u-list-item-4"
-            data-animation-name="customAnimationIn"
-            data-animation-duration="1250"
-            data-animation-delay="500"
-          >
-            <div
-              class="u-container-layout u-similar-container u-valign-middle u-container-layout-4"
-            >
-              <span
-                class="u-align-center u-file-icon u-icon u-text-white u-icon-4"
-                ><img src="images/2560416-11b1db70.png" alt=""
-              /></span>
-              <h4
-                class="u-align-center u-custom-font u-text u-text-font u-text-4"
-              >
-                News &amp; Events
-              </h4>
-            </div>
-          </div>
-        </div>
-      </div>
+  <section class="camping-index">
+    <div class="camping-index-item">
+      <div class="camping-index-name">Galeria</div>
+      <div class="d-flex justify-content-center"><mat-icon>photo</mat-icon></div>
+    </div>
+    <div class="camping-index-item">
+      <div class="camping-index-name">Ubicacion</div>
+      <div class="d-flex justify-content-center"><mat-icon>location_on</mat-icon></div>
+    </div>
+    <div class="camping-index-item">
+      <div class="camping-index-name">Ubicacion</div>
+      <div class="d-flex justify-content-center"><mat-icon>info</mat-icon></div>
+    </div>
+    <div class="camping-index-item">
+      <div class="camping-index-name">Ubicacion</div>
+      <div class="d-flex justify-content-center"><mat-icon>mail_outline</mat-icon></div>
     </div>
   </section>
-  <section
-    class="u-align-center u-clearfix u-container-align-center u-section-3"
-    id="sec-237f"
-  >
-    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-      <h2 class="u-align-center u-text u-text-default u-text-1">
-        Outdoor Recreation
-      </h2>
-      <p class="u-align-center u-text u-text-2">
-        Sample text. Click to select the text box. Click again or double click
-        to start editing the text.
-      </p>
-      <div
-        class="u-expanded-width u-gallery u-layout-grid u-lightbox u-show-text-on-hover u-gallery-1"
-      >
-        <div class="u-gallery-inner u-gallery-inner-1">
-          <div class="u-effect-fade u-effect-hover-zoom u-gallery-item">
-            <div
-              class="u-back-slide"
-              data-image-width="1380"
-              data-image-height="920"
-            >
-              <img
-                class="u-back-image u-expanded"
-                src="images/3.jpg"
-                alt="Sample Headline"
-              />
-            </div>
-            <div class="u-over-slide u-shading u-over-slide-1">
-              <h3 class="u-gallery-heading">Sample Headline</h3>
-              <p class="u-gallery-text">sample text</p>
-            </div>
-          </div>
-          <div class="u-effect-fade u-effect-hover-zoom u-gallery-item">
-            <div
-              class="u-back-slide"
-              data-image-width="1480"
-              data-image-height="833"
-            >
-              <img
-                class="u-back-image u-expanded"
-                src="images/37.jpg"
-                alt="Sample Headline"
-              />
-            </div>
-            <div class="u-over-slide u-shading u-over-slide-2">
-              <h3 class="u-gallery-heading">Sample Headline</h3>
-              <p class="u-gallery-text">sample text</p>
-            </div>
-          </div>
-          <div class="u-effect-fade u-effect-hover-zoom u-gallery-item">
-            <div
-              class="u-back-slide"
-              data-image-width="740"
-              data-image-height="833"
-            >
-              <img
-                class="u-back-image u-expanded"
-                src="images/fd.jpg"
-                alt="Sample Headline"
-              />
-            </div>
-            <div class="u-over-slide u-shading u-over-slide-3">
-              <h3 class="u-gallery-heading">Sample Headline</h3>
-              <p class="u-gallery-text">sample text</p>
-            </div>
-          </div>
-          <div class="u-effect-fade u-effect-hover-zoom u-gallery-item">
-            <div
-              class="u-back-slide"
-              data-image-width="800"
-              data-image-height="800"
-            >
-              <img
-                class="u-back-image u-expanded"
-                src="images/lifestyle-people-living-e.jpg"
-              />
-            </div>
-            <div class="u-over-slide u-shading u-over-slide-4">
-              <h3 class="u-gallery-heading"></h3>
-              <p class="u-gallery-text"></p>
-            </div>
-          </div>
-          <div class="u-effect-fade u-effect-hover-zoom u-gallery-item">
-            <div
-              class="u-back-slide"
-              data-image-width="1380"
-              data-image-height="920"
-            >
-              <img class="u-back-image u-expanded" src="images/t5.jpg" />
-            </div>
-            <div class="u-over-slide u-shading u-over-slide-5">
-              <h3 class="u-gallery-heading"></h3>
-              <p class="u-gallery-text"></p>
-            </div>
-          </div>
-          <div class="u-effect-fade u-effect-hover-zoom u-gallery-item">
-            <div
-              class="u-back-slide"
-              data-image-width="800"
-              data-image-height="1200"
-            >
-              <img class="u-back-image u-expanded" src="images/r6.jpg" />
-            </div>
-            <div class="u-over-slide u-shading u-over-slide-6">
-              <h3 class="u-gallery-heading"></h3>
-              <p class="u-gallery-text"></p>
-            </div>
-          </div>
+
+  <section class="camping-gallery">
+      <h2 class="text-center">Outdoor Recreation</h2>
+      <div class="row m-0">
+        <div *ngFor="let image of camping?.images" class="col-12 col-sm-6 col-md-4">
+          <img [src]="getImageUrl(image)" />
         </div>
       </div>
-      <p class="u-align-center u-text u-text-3">
-        Images from
-        <a
-          href="https://www.freepik.com/"
-          class="u-border-1 u-border-active-palette-3-base u-border-black u-border-hover-palette-3-base u-border-no-left u-border-no-right u-border-no-top u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-link u-button-style u-none u-radius-0 u-text-body-color u-top-left-radius-0 u-top-right-radius-0 u-btn-1"
-          target="_blank"
-          >Freepik</a
-        >
-      </p>
-      <a
-        href="https://nicepage.com/c/art-design-website-templates"
-        class="u-align-center u-border-2 u-border-palette-2-base u-btn u-btn-round u-button-style u-palette-2-base u-radius-50 u-btn-2"
-        >more photos</a
-      >
-    </div>
+      <div class="d-flex justify-content-center">
+        <app-button [text]="'camping.morePhotos' | translate" (onClick)="scrollToElement(booking)"></app-button>
+      </div>
   </section>
-  <section
-    class="u-align-center u-clearfix u-container-align-center u-palette-2-base u-section-4"
-    id="sec-185a"
-  >
+
+  <section class="camping-location">
     <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-      <h2
-        class="u-align-center u-text u-text-default u-text-1"
-        data-animation-name="customAnimationIn"
-        data-animation-duration="1500"
-        data-animation-delay="0"
-      >
-        Find your next getaway
-      </h2>
-      <p
-        class="u-align-center u-text u-text-2"
-        data-animation-name="customAnimationIn"
-        data-animation-duration="1500"
-        data-animation-delay="250"
-      >
+      <h2 class="text-center">Find your next getaway</h2>
+      <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
         tempor incididunt ut labore et dolore magna aliqua.
       </p>
-      <div class="u-expanded-width u-list u-list-1">
-        <div class="u-repeater u-repeater-1">
-          <div
-            class="u-align-center u-container-align-center u-container-style u-image u-list-item u-repeater-item u-shading u-shape-rectangle u-image-1"
-            data-animation-name="customAnimationIn"
-            data-animation-duration="1500"
-            data-animation-delay="500"
-            data-image-width="800"
-            data-image-height="533"
-          >
-            <div
-              class="u-container-layout u-similar-container u-valign-bottom u-container-layout-1"
-            >
-              <div
-                class="u-black u-container-align-center u-container-style u-expanded-width u-group u-opacity u-opacity-50 u-group-1"
-              >
-                <div
-                  class="u-container-layout u-valign-middle u-container-layout-2"
-                >
-                  <h4
-                    class="u-align-center u-text u-text-3"
-                    data-animation-name="customAnimationIn"
-                    data-animation-duration="1250"
-                    data-animation-delay="500"
-                  >
-                    Best RV camping
-                  </h4>
-                  <p
-                    class="u-align-center u-text u-text-4"
-                    data-animation-name="customAnimationIn"
-                    data-animation-duration="1250"
-                    data-animation-delay="500"
-                  >
-                    Sample text. Click to select the Text Element.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="u-align-center u-container-align-center u-container-style u-image u-list-item u-repeater-item u-shading u-shape-rectangle u-image-2"
-            data-animation-name="customAnimationIn"
-            data-animation-duration="1500"
-            data-animation-delay="500"
-            data-image-width="800"
-            data-image-height="533"
-          >
-            <div
-              class="u-container-layout u-similar-container u-valign-bottom u-container-layout-3"
-            >
-              <div
-                class="u-black u-container-style u-expanded-width u-group u-opacity u-opacity-50 u-group-2"
-              >
-                <div
-                  class="u-container-layout u-valign-middle u-container-layout-4"
-                >
-                  <h4
-                    class="u-align-center u-text u-text-5"
-                    data-animation-name="customAnimationIn"
-                    data-animation-duration="1250"
-                    data-animation-delay="500"
-                  >
-                    Lake camping
-                  </h4>
-                  <p
-                    class="u-align-center u-text u-text-6"
-                    data-animation-name="customAnimationIn"
-                    data-animation-duration="1250"
-                    data-animation-delay="500"
-                  >
-                    Sample text. Click to select the Text Element.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="u-align-center u-container-align-center u-container-style u-image u-list-item u-repeater-item u-shading u-shape-rectangle u-image-3"
-            data-animation-name="customAnimationIn"
-            data-animation-duration="1500"
-            data-animation-delay="500"
-            data-image-width="626"
-            data-image-height="533"
-          >
-            <div
-              class="u-container-layout u-similar-container u-valign-bottom u-container-layout-5"
-            >
-              <div
-                class="u-black u-container-align-center u-container-style u-expanded-width u-group u-opacity u-opacity-50 u-group-3"
-              >
-                <div
-                  class="u-container-layout u-valign-middle u-container-layout-6"
-                >
-                  <h4
-                    class="u-align-center u-text u-text-7"
-                    data-animation-name="customAnimationIn"
-                    data-animation-duration="1250"
-                    data-animation-delay="500"
-                  >
-                    Beach stays
-                  </h4>
-                  <p
-                    class="u-align-center u-text u-text-8"
-                    data-animation-name="customAnimationIn"
-                    data-animation-duration="1250"
-                    data-animation-delay="500"
-                  >
-                    Sample text. Click to select the Text Element.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="u-align-center u-container-align-center u-container-style u-image u-list-item u-repeater-item u-shading u-shape-rectangle u-image-4"
-            data-animation-name="customAnimationIn"
-            data-animation-duration="1500"
-            data-animation-delay="500"
-            data-image-width="740"
-            data-image-height="925"
-          >
-            <div
-              class="u-container-layout u-similar-container u-valign-bottom u-container-layout-7"
-            >
-              <div
-                class="u-black u-container-style u-expanded-width u-group u-opacity u-opacity-50 u-group-4"
-              >
-                <div
-                  class="u-container-layout u-valign-middle u-container-layout-8"
-                >
-                  <h4
-                    class="u-align-center u-text u-text-9"
-                    data-animation-name="customAnimationIn"
-                    data-animation-duration="1250"
-                    data-animation-delay="500"
-                  >
-                    Backyard Camping
-                  </h4>
-                  <p
-                    class="u-align-center u-text u-text-10"
-                    data-animation-name="customAnimationIn"
-                    data-animation-duration="1250"
-                    data-animation-delay="500"
-                  >
-                    Sample text. Click to select the Text Element.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="u-align-center u-container-align-center u-container-style u-image u-list-item u-repeater-item u-shading u-shape-rectangle u-image-5"
-            data-animation-name="customAnimationIn"
-            data-animation-duration="1500"
-            data-animation-delay="500"
-            data-image-width="740"
-            data-image-height="925"
-          >
-            <div
-              class="u-container-layout u-similar-container u-valign-bottom u-container-layout-9"
-            >
-              <div
-                class="u-black u-container-style u-expanded-width u-group u-opacity u-opacity-50 u-group-5"
-              >
-                <div
-                  class="u-container-layout u-valign-middle u-container-layout-10"
-                >
-                  <h4
-                    class="u-align-center u-text u-text-11"
-                    data-animation-name="customAnimationIn"
-                    data-animation-duration="1250"
-                    data-animation-delay="500"
-                  >
-                    car camping
-                  </h4>
-                  <p
-                    class="u-align-center u-text u-text-12"
-                    data-animation-name="customAnimationIn"
-                    data-animation-duration="1250"
-                    data-animation-delay="500"
-                  >
-                    Sample text. Click to select the Text Element.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div
-            class="u-align-center u-container-align-center u-container-style u-image u-list-item u-repeater-item u-shading u-shape-rectangle u-image-6"
-            data-animation-name="customAnimationIn"
-            data-animation-duration="1500"
-            data-animation-delay="500"
-            data-image-width="740"
-            data-image-height="925"
-          >
-            <div
-              class="u-container-layout u-similar-container u-valign-bottom u-container-layout-11"
-            >
-              <div
-                class="u-black u-container-style u-expanded-width u-group u-opacity u-opacity-50 u-group-6"
-              >
-                <div
-                  class="u-container-layout u-valign-middle u-container-layout-12"
-                >
-                  <h4
-                    class="u-align-center u-text u-text-13"
-                    data-animation-name="customAnimationIn"
-                    data-animation-duration="1250"
-                    data-animation-delay="500"
-                  >
-                    Wilderness Camping
-                  </h4>
-                  <p
-                    class="u-align-center u-text u-text-14"
-                    data-animation-name="customAnimationIn"
-                    data-animation-duration="1250"
-                    data-animation-delay="500"
-                  >
-                    Sample text. Click to select the Text Element.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <p
-        class="u-align-center u-text u-text-default u-text-15"
-        data-animation-name="customAnimationIn"
-        data-animation-duration="1250"
-        data-animation-delay="500"
-      >
-        Image from
-        <a
-          href="https://www.freepik.com"
-          class="u-border-1 u-border-active-palette-2-light-2 u-border-hover-palette-2-light-2 u-border-no-left u-border-no-right u-border-no-top u-border-white u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-link u-button-style u-none u-radius-0 u-text-body-alt-color u-top-left-radius-0 u-top-right-radius-0 u-btn-1"
-          target="_blank"
-          >Freepik</a
-        >
-      </p>
+      <google-map [options]="options" width="100%">
+        <map-marker
+            #marker="mapMarker"
+            [position]="markerPosition"
+            [options]="markerOptions"
+            (mapClick)="openInfoWindow(marker)"
+        ></map-marker>
+        <map-info-window>{{ camping?.name }}</map-info-window>
+      </google-map>
     </div>
   </section>
+
+  <section class="camping-booking">
+    <h2 class="text-center">{{ 'camping.lodgings' | translate }}</h2>
+    <div class="row m-0 mb-2">
+      <div class="col-12 col-md-5">
+        <app-input-text
+          [preText]="'camping.startDate' | translate"
+          [(value)]="startDate"
+          type="date"
+        ></app-input-text>
+      </div>
+      <div class="col-12 col-md-5">
+        <app-input-text
+          [preText]="'camping.startDate' | translate"
+          [(value)]="endDate"
+          type="date"
+        ></app-input-text>
+      </div>
+      <div class="col-12 col-md-2">
+        <app-button [text]="'camping.book' | translate" (onClick)="refreshTable()"></app-button>
+      </div>
+    </div>
+    <ng-container *ngIf="!loading">
+      <app-table
+        [columns]="lodgingsColumns"
+        [fetch]="getAvailableLodgings"
+        [forceFetch]="tableFlagRefresh"
+        [pageSize]="0"
+      ></app-table>
+    </ng-container>
+    <div>
+      <span></span>
+    </div>
+  </section>
+
   <section
     class="u-align-center u-clearfix u-container-align-center u-section-5"
     id="sec-d633"
@@ -681,7 +275,7 @@
               <div
                 class="u-container-layout u-valign-middle u-container-layout-2"
               >
-                <div class="u-form u-form-1">
+                <div class="u-form u-form-1" #booking>
                   <form
                     action="https://forms.nicepagesrv.com/v2/form/process"
                     class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form"

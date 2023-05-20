@@ -1,8 +1,16 @@
 <div class="dialog">
   <div class="dialog-content">
-    <h1>{{ data.text }}</h1>
-    
-    <app-button [text]="'common.reject' | translate" (onClick)="close(false)"></app-button>
-    <app-button [text]="'common.accept' | translate" (onClick)="close(true)"></app-button>
+    <ng-container *ngIf="data.type === 'confirm'">
+      <h4 class="fw-b">{{ data.text }}</h4>
+
+      <div class="buttons mt-3">
+        <app-button [text]="'common.cancel' | translate" (onClick)="close(false)" color="danger"></app-button>
+        <app-button [text]="'common.accept' | translate" (onClick)="close(true)"></app-button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="data.type === 'loading'">
+      <app-loader mode="dialog"></app-loader>
+    </ng-container>
   </div>
 </div>

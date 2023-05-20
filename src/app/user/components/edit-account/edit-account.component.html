@@ -1,58 +1,60 @@
-<app-panel class="update-profile">
-    <div *ngIf="!this.loading">
-        <h2 class="text-center">{{'user.modifyProfile' | translate | uppercase }}</h2>
-        <!-- <app-avatar
-            type="user"
-            [size]="100"
-            [src]="this.user.attributes?.avatar?._id || ''"
-        ></app-avatar> -->
-        <app-input-avatar
-            preText="Introduzca su avatar"
-            [isRequired]="true"
-            [isPublic]="true"
-            [(value)]="this.user.attributes.avatar"
-        ></app-input-avatar>
-        <div class="row mt-4">
-            <div class="col-12">
-                <app-input-text 
-                    [preText]="'common.email' | translate" 
-                    [(value)]="this.user.email" 
-                    [isDisabled]="true">
-                </app-input-text>
-            </div>
-            <div class="col-12 col-md-4">
-                <app-input-text 
-                    [preText]="'common.name' | translate" 
-                    [(value)]="this.user.attributes.firstname">
-                </app-input-text>
-            </div>
-            <div class="col-12 col-md-8">
-                <app-input-text 
-                    [preText]="'user.lastName' | translate" 
-                    [(value)]="this.user.attributes.lastname">
-                </app-input-text>
-            </div>
-            <div class="col-12 col-md-6">
-                <app-input-text 
-                    [preText]="'user.birthDate' | translate" 
-                    [(value)]="this.user.attributes.birthDate" 
-                    type="date"
-                    placeholder="a"
-                >
-                </app-input-text>
-            </div>
-            <div class="col-12 col-md-6">
-                <app-input-select 
-                    preText="{{'user.lang' | translate}}" 
-                    placeholder="a"
-                    [(value)]="this.user.lang" 
-                    [options]="this.getLangs()">
-                </app-input-select>
-            </div>
-        </div>
-        
-        <div class="d-flex justify-content-end">
-            <app-button [text]="'common.update' | translate" (onClick)="this.updateProfile()"></app-button>
-        </div>
+<app-panel class="update-profile" [title]="'user.modifyProfile' | translate">
+  <div class="d-flex justify-content-center">
+    <app-input-avatar
+      preText="Introduzca su avatar"
+      [isRequired]="true"
+      [isPublic]="true"
+      [(value)]="this.user.attributes.avatar"
+    ></app-input-avatar>
+  </div>
+  <div class="row mt-4">
+    <div class="col-12">
+      <app-input-text
+        [preText]="'common.email' | translate"
+        [(value)]="this.user.email"
+        [isDisabled]="true"
+        [loading]="loading"
+      ></app-input-text>
     </div>
+    <div class="col-12 col-md-4">
+      <app-input-text
+        [preText]="'common.name' | translate"
+        [(value)]="this.user.attributes.firstname"
+        [loading]="loading"
+      ></app-input-text>
+    </div>
+    <div class="col-12 col-md-8">
+      <app-input-text
+        [preText]="'user.lastName' | translate"
+        [(value)]="this.user.attributes.lastname"
+        [loading]="loading"
+      >
+      </app-input-text>
+    </div>
+    <div class="col-12 col-md-6">
+      <app-input-text
+        [preText]="'user.birthDate' | translate"
+        [(value)]="this.user.attributes.birthDate"
+        type="date"
+        [loading]="loading"
+      ></app-input-text>
+    </div>
+    <div class="col-12 col-md-6">
+      <app-input-select
+        [preText]="'user.lang' | translate"
+        [placeholder]="'user.lang' | translate"
+        [(value)]="this.user.lang"
+        [options]="this.getLangs()"
+      >
+      </app-input-select>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end">
+    <app-button
+      [text]="'common.update' | translate"
+      (onClick)="this.updateProfile()"
+      [loading]="loading"
+    ></app-button>
+  </div>
 </app-panel>

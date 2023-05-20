@@ -1,32 +1,38 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild, OnDestroy } from '@angular/core';
 import { Camping } from '@models/camping';
-import { TranslateService } from '@ngx-translate/core';
-import { CampingService } from '@app/camping/services/camping.service';
 import { GoogleMap } from '@angular/google-maps';
 
 @Component({
   selector: 'app-create-camping-location',
   templateUrl: './create-camping-location.component.html',
-  styleUrls: ['../create-camping.component.scss']
+  styleUrls: ['../../create-camping.component.scss']
 })
 
-export class CreateCampingLocationComponent implements AfterViewInit {
+export class CreateCampingLocationComponent implements AfterViewInit, OnDestroy {
   @Input() camping !: Camping;
-  @Output() campingChange = new EventEmitter<Camping>();
   @ViewChild('mapSearchField') searchField !: ElementRef;
   @ViewChild(GoogleMap) map !: GoogleMap;
 
   mapConfigurations= { disableDefaultUI: true };
 
   geocoder = new google.maps.Geocoder;
-  infowindow = new google.maps.InfoWindow;
-
-  constructor(
-    public campingService: CampingService,
-    public translate: TranslateService,
-  ) {}
+  center: google.maps.LatLngLiteral = { lat: 40.416775, lng: -3.703339 };
 
   ngAfterViewInit(): void {
+    if (this.camping.location.coords.coordinates[0]) {
+      this.center = {
+        lat: this.camping.location.coords.coordinates[0],
+        lng: this.camping.location.coords.coordinates[1],
+      };
+    } else {
+      navigator.geolocation.getCurrentPosition((position) => {
+        this.center = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+      });
+    }
+
     const searchBox = new google.maps.places.SearchBox(
       this.searchField.nativeElement,
     );
@@ -41,7 +47,6 @@ export class CreateCampingLocationComponent implements AfterViewInit {
         return;
       }
       const bounds = new google.maps.LatLngBounds();
-      console.log(bounds);
       places.forEach(place => {
         if(!place.geometry?.location) {
           return;
@@ -60,14 +65,17 @@ export class CreateCampingLocationComponent implements AfterViewInit {
     });
   }
 
+  ngOnDestroy() {
+    const pacContainers = document.querySelectorAll('.pac-container');
+    pacContainers.forEach(container => container.remove());
+  }
+
   addMarker(latLng: google.maps.LatLng) {
     this.geocoder.geocode({ 'location': latLng }, (results, status) => {
-      console.log(results);
       if (results && status === google.maps.GeocoderStatus.OK) {
         if (results[1]) {
           this.fillCampingLocation(results);
           this.camping.location.coords.coordinates = [latLng.lat(), latLng.lng()];
-          this.campingChange.emit(this.camping);
         } else {
           window.alert('No hay resultados');
         }

@@ -1,37 +1,56 @@
 {
   "user": {
+    "user": "Usuario",
     "lastName": "Apellidos",
     "birthDate": "Fecha de nacimiento",
-    "phone": "Telefono",
+    "phone": "Teléfono",
     "lang": "Idioma",
     "modifyProfile": "Modificar datos del perfil"
   },
   "camping": {
+    "camping": "Campamento",
     "campings": "Campamentos",
     "createCamping": "Crear campamento",
+    "lodging": "Alojamiento",
+    "lodgings": "Alojamientos",
+    "addLodging":  "Añadir alojamiento",
+    "editLodging":  "Editar alojamiento",
+    "book": "Reservar",
+    "booking": "Reserva",
+    "bookings": "Reservas",
+    "bungalow": "Bungalow",
+    "campsite": "Zona de acampada",
     "amenities": "Comodidades",
     "rules": "Reglas",
     "nearestLocations": "Ubicaciones cercanas",
-    "country": "Pais",
+    "country": "País",
     "city": "Ciudad",
     "locality": "Localidad",
     "street": "Calle",
     "number": "Numero",
     "postalCode": "Código postal",
-    "addUnit":  "Añadir unidad",
-    "editUnit":  "Editar unidad",
-    "bungalow": "Bungalow",
-    "campsite": "Zona de acampada",
-    "info": "Informacion",
+    "info": "Información",
     "location": "Localización",
+    "images": "Imágenes",
+    "addNameDescription": "Introduzca un nombre y una descripción para su campamento",
+    "addImages": "Añade al menos 3 imágenes de su campamento",
+    "addLocation": "Haga clic en el mapa para marcar la ubicación de su campamento",
+    "feePerNight": "Precio por noche",
+    "size": "Tamaño",
+    "capacity": "Capacidad",
+    "search": "Buscar",
     "units": "Unidades",
-    "images": "Imagenes"
+    "confirmDeleteBooking": "¿Esta seguro que desea elimina esta reserva?"
+
   },
   "login": {
-    "login": "Inicia sesion",
+    "login": "Inicia sesión",
     "signup": "Crea una cuenta",
     "password": "Contraseña",
     "confirmPassword": "Confirmar contraseña"
+  },
+  "input": {
+    "placeholderFileZone": "Arrastre los archivos o haga click en la zona marcada"
   },
   "langs": {
     "es": "Español",
@@ -48,9 +67,13 @@
     "back": "Atras",
     "other": "Otro",
     "create": "Crear",
+    "add": "Añadir",
     "edit": "Editar",
     "update": "Actualizar",
-    "delete": "Borrar"
+    "delete": "Borrar",
+    "accept": "Aceptar",
+    "cancel": "Cancelar",
+    "creationDate": "Fecha de creación"
   },
   "countries": {
     "AFG": "Afganistán",

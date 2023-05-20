@@ -1,11 +1,12 @@
 
 <input type="text" #mapSearchField class="d-none"/>
 
-<span class="location-preText">Location</span>
+<h6 class="fw-b">{{ 'camping.addLocation' | translate }}</h6>
 <google-map
     width="100%"
     [options] = "mapConfigurations"
     class="map-container"
+    [center]="center"
 >
     <map-marker *ngIf="this.camping?.location?.coords?.coordinates"
         [position]="getLatLang()"
@@ -17,14 +18,14 @@
 <div class="row mt-4">
     <div class="col-12 col-sm-9 mb-4">
         <app-input-text
-            [preText]="'camping.street' | translate" 
+            [preText]="'camping.street' | translate"
             [(value)]="this.camping.location.street"
             [isDisabled]="true"
         ></app-input-text>
     </div>
     <div class="col-12 col-sm-3 mb-4">
         <app-input-text
-            [preText]="'camping.number' | translate" 
+            [preText]="'camping.number' | translate"
             [(value)]="this.camping.location.streetNumber"
         ></app-input-text>
     </div>
@@ -32,14 +33,14 @@
 <div class="row">
     <div class="col-12 col-sm-6 mb-4">
         <app-input-text
-            [preText]="'camping.locality' | translate" 
+            [preText]="'camping.locality' | translate"
             [(value)]="this.camping.location.locality"
             [isDisabled]="true"
         ></app-input-text>
     </div>
     <div class="col-12 col-sm-6 mb-4">
         <app-input-text
-            [preText]="'camping.postalCode' | translate" 
+            [preText]="'camping.postalCode' | translate"
             [(value)]="this.camping.location.postalCode"
         ></app-input-text>
     </div>
@@ -47,17 +48,16 @@
 <div class="row">
     <div class="col-12 col-sm-6 mb-4">
         <app-input-text
-            [preText]="'camping.country' | translate" 
+            [preText]="'camping.country' | translate"
             [(value)]="this.camping.location.country"
             [isDisabled]="true"
         ></app-input-text>
     </div>
     <div class="col-12 col-sm-6 mb-4">
         <app-input-text
-            [preText]="'camping.city' | translate" 
+            [preText]="'camping.city' | translate"
             [(value)]="this.camping.location.city"
             [isDisabled]="true"
         ></app-input-text>
     </div>
 </div>
-        

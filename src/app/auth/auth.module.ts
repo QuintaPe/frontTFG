@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 import { SignupUserComponent } from './components/signup-user/signup-user.component';
@@ -19,6 +20,7 @@ import { ButtonComponent } from '@shared/components/button/button.component';
   ],
   imports: [
     AuthRoutingModule,
+    CommonModule,
     ReactiveFormsModule,
     FormsModule,
     TranslateModule,

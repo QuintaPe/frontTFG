@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { GoogleMapsModule } from '@angular/google-maps';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
-import { RouterModule } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { OverlayModule } from '@angular/cdk/overlay';
 
 import { CampingRoutingModule } from './camping-routing.module';
 import { CampingViewComponent } from './components/camping-view/camping-view.component';
 import { LoaderComponent } from '@shared/components/loader/loader.component';
-import { DialogService } from '@shared/components/dialog/dialog.service';
+import { ButtonComponent } from '@app/shared/components/button/button.component';
+import { InputTextComponent } from '@app/shared/components/inputs/input-text/input-text.component';
+import { TableComponent } from '@app/shared/components/table/table.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { DialogService } from '@shared/components/dialog/dialog.service';
   ],
   imports: [
     CampingRoutingModule,
+    CommonModule,
     ReactiveFormsModule,
     FormsModule,
     TranslateModule,
@@ -26,6 +29,9 @@ import { DialogService } from '@shared/components/dialog/dialog.service';
     GoogleMapsModule,
 
     LoaderComponent,
+    ButtonComponent,
+    InputTextComponent,
+    TableComponent,
   ],
 })
 

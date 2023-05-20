@@ -3,13 +3,41 @@
 @import "_breakpoints";
 
 .camping-row {
-    padding: 10px;
-    margin-bottom: 20px;
-    border-radius: $borderRadiusLight;
-    box-shadow: $boxShadow;
-    background-color: $primary-15;
-    cursor: pointer;
-    &:hover {
-        background-color: $secondary;
+  margin: 5px;
+  position: relative;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-radius: $borderRadiusLight;
+  box-shadow: $boxShadowLight;
+  background-color: $primary-15;
+  cursor: pointer;
+  &:hover {
+      background-color: $secondary;
+  }
+
+  .camping-row--name {
+    font-size: 16px;
+    font-weight: 700;
+    margin-bottom: 5px;
+  }
+
+  .camping-row--description {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+  }
+
+  .camping-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    mat-icon {
+      color: $svgColor;
+      &:hover {
+        color: $textColor;
+      }
     }
+  }
 }

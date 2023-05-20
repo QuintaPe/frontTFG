@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DocumentService } from '@core/services/document.service';
-import enviroment from 'src/environments/environment';
+import environment from 'src/environments/environment';
 import { MatIconModule } from '@angular/material/icon';
 import { NgIf } from '@angular/common';
 
@@ -25,7 +25,7 @@ export class InputAvatarComponent implements OnInit {
 
   uploading = false;
   file: any = null
-  FILES_BASE_URL = enviroment.api.FILES_BASE_URL
+  FILES_BASE_URL = environment.api.FILES_BASE_URL
 
   constructor(public documentService: DocumentService) {}
 

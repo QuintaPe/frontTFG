@@ -10,12 +10,9 @@
     </ul>
     <div class="left-buttons">
       <div class="d-flex align-items-center" *ngIf="!authService.user">
-        <app-button text='Iniciar Sesion' color="secondary" (onClick)="router.navigate(['/login'])"></app-button>
-        <app-button text='Registrate Gratis!' (onClick)="router.navigate(['/signup'])" class="ms-2"></app-button>
+        <app-button text='Iniciar Sesion' color="secondary" (onClick)="router.navigateByUrl(LOGIN_URL)"></app-button>
+        <app-button text='Registrate Gratis!' (onClick)="router.navigateByUrl(SIGNUP_URL)" class="ms-2"></app-button>
       </div>
-      <!-- <div class="d-flex align-items-center" *ngIf="authService.isUserAuth">
-        <app-button text='Cerrar Sesión' color="secondary" (onClick)="this.logout()"></app-button>
-      </div> -->
       <div class="profile-dropdown" *ngIf="authService.user">
         <button class="profile-button">
           <app-avatar

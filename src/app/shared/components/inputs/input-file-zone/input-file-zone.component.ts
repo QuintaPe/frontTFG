@@ -2,7 +2,7 @@ import { CdkDragDrop, moveItemInArray, CdkDropList, CdkDrag } from '@angular/cdk
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DocumentService } from '@core/services/document.service';
 import { TranslateService, TranslateModule } from '@ngx-translate/core';
-import enviroment from 'src/environments/environment';
+import environment from 'src/environments/environment';
 import { SkeletonComponent } from '../../skeleton/skeleton.component';
 import { MatIconModule } from '@angular/material/icon';
 import { FileDragNDropDirective } from './file-drag-drop.directive';
@@ -24,11 +24,12 @@ export class InputFileZoneComponent{
   @Input() isDisabled:boolean = false;
   @Input() isPublic: boolean = false;
   @Input() isMultiple: boolean = false;
+  @Input() isLoading: boolean = false;
   @Output() valueChange = new EventEmitter<any>();
 
   uploading = 0;
   file: any = null
-  FILES_BASE_URL = enviroment.api.FILES_BASE_URL
+  FILES_BASE_URL = environment.api.FILES_BASE_URL
 
   constructor(
     public documentService: DocumentService,

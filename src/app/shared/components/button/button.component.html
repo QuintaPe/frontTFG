@@ -11,11 +11,5 @@
   <span *ngIf="this.iconRight" class='d-flex align-items-center icon-right'>
     <mat-icon> {{ iconRight }}</mat-icon>
   </span>
-  <!--
-    {loading && (
-      <div className='btn-loader'>
-        <LinearProgress />
-      </div>
-    )} 
-  -->
+  <app-skeleton *ngIf="loading" class="btn-loader" height="100%"></app-skeleton>
 </button>

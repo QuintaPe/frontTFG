@@ -31,7 +31,7 @@ export class InputTextComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    if (this.type === "date") {
+    if (this.type === "date" && this.value) {
       this.value = this.value.split('T')[0];
     }
   }

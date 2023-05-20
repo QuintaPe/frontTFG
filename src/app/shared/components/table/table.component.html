@@ -1,49 +1,57 @@
-<div>
-<!-- <div [ngClass]="{'table-responsive': config.responsive}"> -->
-  <ng-container *ngIf="this.mode === 'component'">
-      <ng-container #componentsContainer></ng-container>
+<div class="table-responsive">
+  <ng-container *ngIf="mode === 'component'">
+    <ng-template #componentsContainer></ng-template>
   </ng-container>
 
-  <ng-container *ngIf="this.mode == 'row'">
+  <div *ngIf="mode === 'row'">
     <table class="table mb-2">
-      <thead class="thead-default">
+      <thead>
         <tr>
-          <th 
-            *ngFor="let column of columns" 
-            (click)="column.sortable && sortTable(column)"
-            [ngStyle]="column.width ? {'width': column.width+'px'} : {}"
-          >
-            {{column.name}}
+          <th *ngFor="let column of columns" (click)="sortTable(column)" [ngStyle]="column.width ? {'min-width': column.width + 'px'} : {}">
+            {{ column.name }}
           </th>
         </tr>
       </thead>
       <tbody table body>
-        <tr *ngFor="let row of rows.items; let i=index">
-          <td *ngFor="let column of columns">
-            <div *ngIf="column.type === 'menu'; else field">
-              <app-table-row-menu [buttons]="column.buttons">person_add</app-table-row-menu>
-            </div>
-            <ng-template #field>
-              {{renderField(row, column)}}
-            </ng-template>
-          </td>
-        </tr>
-        <tr *ngIf="rows.total === 0">
+        <ng-container *ngIf="!loading; else skeletonContainer">
+          <tr *ngFor="let row of rows.items; let i=index">
+            <td *ngFor="let column of columns">
+              <!-- <ng-container *ngIf="column.type === 'menu'; else field">
+                <app-table-row-menu [row]="row" [buttons]="column.buttons"></app-table-row-menu>
+              </ng-container>
+              <ng-template #field>
+                {{ renderField(row, column) }}
+              </ng-template> -->
+              <ng-container [ngSwitch]="column.type">
+                <app-table-row-menu *ngSwitchCase="'menu'" [row]="row" [buttons]="column.buttons" />
+                <ng-container *ngSwitchCase="'component'">
+                  <ng-container *ngComponentOutlet="column.component">
+                  </ng-container>
+                </ng-container>
+                <span *ngSwitchDefault>{{ renderField(row, column) }}</span>
+              </ng-container>
+            </td>
+          </tr>
+          <tr *ngIf="rows.total === 0">
             <td [attr.colspan]="columns.length">No data available in table</td>
-        </tr>
-      </tbody>    
+          </tr>
+        </ng-container>
+        <ng-template #skeletonContainer>
+          <tr *ngFor="let row of [].constructor(paginator?.pageSize || pageSize); let i=index">
+            <td *ngFor="let column of columns">
+              <app-skeleton />
+            </td>
+          </tr>
+        </ng-template>
+      </tbody>
     </table>
-  </ng-container>
-  <!-- <div class="row" *ngIf="config.paging && totalResults > 0">
-    <div class="col-md-12">
-      <div class="pull-right">
-        <app-pagination (pageChange)="onChangeTable($event, 'paging')" [pageSize]="tableData.rows"
-          [collectionSize]="totalResults" [(page)]="tableData.page" [boundaryLinks]="true" [maxSize]="5">
-        </app-pagination>
-      </div>
-      <div class="pull-left mt-2">
-        Showing {{start}} to {{(start + results.length) -1}} of {{totalResults}} entries
-      </div>
-    </div>
-  </div> -->
+  </div>
 </div>
+
+<mat-paginator
+  [length]="rows.total"
+  [pageIndex]="actualPage"
+  [pageSize]="pageSize"
+  [pageSizeOptions]="[10, 25, 100]"
+  [showFirstLastButtons]="true"
+></mat-paginator>

@@ -31,6 +31,14 @@
     width: 100vw;
     height: 100vh;
   }
+
+  &.dialog {
+    .loader {
+      width: 200px;
+      height: 200px;
+      transform: translateZ(0) scale(0.5);
+    }
+  }
 }
 
 .loader {

@@ -1,9 +1,11 @@
 @import '_colors.scss';
+@import '_variables.scss';
 
 .skeleton-box {
   display: block;
   position: relative;
   overflow: hidden;
+  border-radius: $borderRadiusLight;
   background-color: $primary-15;
   &.circular {
     border-radius: 50%;

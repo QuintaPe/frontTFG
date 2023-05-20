@@ -39,7 +39,7 @@ export class LeftMenuComponent implements OnInit {
         break;
       default:
         this.routes = [
-          { icon: 'work', name: 'Campings', path: 'campings' },
+          // { icon: 'work', name: 'Campings', path: 'campings' },
           { icon: 'person', name: 'Profile', path: 'profile' }
         ];
         break;
@@ -50,5 +50,12 @@ export class LeftMenuComponent implements OnInit {
   toggleMenu() {
     this.showAside = !this.showAside;
     localStorage.setItem('showAside', this.showAside.toString());
+  }
+
+  closeMenu() {
+    if (window.innerWidth < 765) {
+      this.showAside = false;
+      localStorage.setItem('showAside', 'false');
+    }
   }
 }

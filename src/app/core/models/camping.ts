@@ -1,4 +1,4 @@
-import { CampingUnit } from "./campingUnit";
+import { CampingLodging } from "./campingLodging";
 
 interface Location {
   [key: string]: any;
@@ -29,6 +29,7 @@ interface CheckTime {
 }
 
 interface ICampingOptions {
+  _id?: string;
   name?: string;
   description?: string;
   image?: string;
@@ -48,7 +49,7 @@ interface ICampingOptions {
   contactInformation?: ContactInformation;
   paymentMethods?: string[];
   owner?: string;
-  units?: CampingUnit[]
+  lodgings?: CampingLodging[]
 }
 
 export class Camping {
@@ -79,9 +80,10 @@ export class Camping {
   contactInformation: ContactInformation = { phone: '1', email: 'a' };
   paymentMethods: string[] = [];
   owner: string = '';
-  units: CampingUnit[] = [];
+  lodgings: CampingLodging[] = [];
 
   constructor(options: ICampingOptions = {}) {
+    this._id = options._id || this._id;
     this.name = options.name || this.name;
     this.description = options.description || this.description;
     this.location = options.location || this.location;
@@ -99,6 +101,6 @@ export class Camping {
     this.contactInformation = options.contactInformation || this.contactInformation;
     this.paymentMethods = options.paymentMethods || this.paymentMethods;
     this.owner = options.owner || this.owner;
-    this.units = options.units || this.units;
+    this.lodgings = options.lodgings || this.lodgings;
   }
 }

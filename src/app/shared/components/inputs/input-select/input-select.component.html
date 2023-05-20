@@ -1,12 +1,12 @@
-<div 
+<div
   #select
   class="input-container filled
-  {{!this.control?.valid && this.control?.touched ? 'invalid' : ''}} 
-  {{this.isDisabled ? 'disabled' : '' }} 
+  {{!this.control?.valid && this.control?.touched ? 'invalid' : ''}}
+  {{this.isDisabled ? 'disabled' : '' }}
   {{this.class}}"
   (click)="this.showDropdown()"
 >
-  <div class="icon">
+  <div class="icon" *ngIf="this.icon">
     <mat-icon>{{ this.icon }}</mat-icon>
   </div>
   <div class="input">
@@ -15,8 +15,8 @@
   <div class="arrow-options-icon">
     <mat-icon>arrow_downward</mat-icon>
   </div>
-  <label 
-    class="label {{this.control?.value || this.value  ? 'filled' : ''}}" 
+  <label
+    class="label {{this.control?.value || this.value  ? 'filled' : ''}}"
     for="password"
   >
     {{preText}}
@@ -25,9 +25,9 @@
 
   <ng-template cdk-portal #overlayTemplate="cdkPortal">
     <div class="input-options">
-        <div 
+        <div
           *ngFor="let option of options; let i = index"
-          class="input-options-option {{this.value === option.id ? 'selected' : ''}}" 
+          class="input-options-option {{this.value === option.id ? 'selected' : ''}}"
           (click)="selectOption(option, i)"
         >
           {{option.name}}

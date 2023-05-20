@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { transformGetParams } from '@utils/functions';
-import enviroment from 'src/environments/environment';
+import environment from 'src/environments/environment';
 import axios from 'axios';
 
 @Injectable({
@@ -29,7 +29,7 @@ export class ApiService {
       withCredentials: true,
     };
 
-    let URL = url.startsWith('https://') ? url : `${enviroment.api.API_BASE_URL}/${url}`;
+    let URL = url.startsWith('https://') ? url : `${environment.api.API_BASE_URL}/${url}`;
     if (params && typeof params === 'object') {
       switch (method) {
         case 'GET':

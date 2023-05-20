@@ -3,13 +3,15 @@ import { Component } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TranslateModule } from '@ngx-translate/core';
 import { ButtonComponent } from '../button/button.component';
+import { NgIf } from '@angular/common';
+import { LoaderComponent } from '../loader/loader.component';
 
 @Component({
     selector: 'app-dialog',
     templateUrl: 'dialog.component.html',
     styleUrls: ['dialog.component.scss'],
     standalone: true,
-    imports: [ButtonComponent, TranslateModule]
+    imports: [ButtonComponent, TranslateModule, NgIf, LoaderComponent]
 })
 
 export class DialogComponent {
@@ -21,7 +23,7 @@ export class DialogComponent {
   onConfirm = () => true;
   onReject = () => false;
 
-  close(res: boolean) {
+  close(res?: boolean) {
     this.dialogRef.close(res);
   }
 }

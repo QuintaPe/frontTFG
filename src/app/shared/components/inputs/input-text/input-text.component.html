@@ -1,15 +1,11 @@
-<div class="input-container 
-  {{!this.control?.valid && this.control?.touched ? 'invalid' : ''}} 
+<div class="input-container
+  {{!this.control?.valid && this.control?.touched ? 'invalid' : ''}}
   {{this.control?.value || this.value  ? 'filled' : ''}}
-  {{this.isDisabled ? 'disabled' : '' }} 
+  {{this.isDisabled ? 'disabled' : '' }}
   {{this.class}}"
 >
 
-<div *ngIf="loading" class="flex-fill">
-  <app-skeleton height="50px"></app-skeleton>
-</div>
-
-<ng-container *ngIf="!loading">
+<ng-container >
     <div class="icon">
       <mat-icon>{{ this.icon }}</mat-icon>
     </div>
@@ -21,7 +17,7 @@
       [formControl] ="this.control"
       autocomplete="off"
     />
-  
+
     <input *ngIf='!this.control'
       [id]="preText"
       class="input"
@@ -33,12 +29,14 @@
       autocomplete="off"
     />
   </ng-container>
-  
-  <label 
-    class="label {{ this.icon ? 'icon-label' : '' }} " 
+
+  <label
+    class="label {{ this.icon ? 'icon-label' : '' }} "
     [for]="preText"
   >
     {{preText}}
     <span *ngIf='isRequired' class='is_required'>*</span>
   </label>
+
+  <app-skeleton *ngIf="loading" class="input-loader" height="100%"></app-skeleton>
 </div>

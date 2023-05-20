@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, Input } from '@angular/core';
+import { Component, ViewChild, ElementRef, Input, inject, ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
 import { Button } from '../table.interface';
@@ -14,16 +14,19 @@ import { MatIconModule } from '@angular/material/icon';
 })
 export class RowMenuComponent {
   @Input() buttons?: Button[] = [];
+  @Input() row: any = null;
+  @Output() onClick = new EventEmitter<String>();
 
   @ViewChild('menuBtn') public menuBtn!: ElementRef;
   @ViewChild(CdkPortal) public contentTemplate!: CdkPortal;
   private overlayRef!: OverlayRef;
-  
+
   constructor(private overlay: Overlay) {}
+
 
   handleClick(btn: Button) {
     if (btn.onClick){
-      btn.onClick();
+      btn.onClick(this.row._id, this.row);
     }
     this.hide();
   }

@@ -3,12 +3,6 @@
   {{isDisabled ? 'disabled' : '' }}
   {{class}}"
 >
-
-  <div *ngIf="loading" class="flex-fill">
-    <app-skeleton [height]="minHeight + 'px'"></app-skeleton>
-  </div>
-
-  <ng-container *ngIf="!loading">
     <div *ngIf="this.icon" class="icon">
       <mat-icon>{{ this.icon }}</mat-icon>
     </div>
@@ -23,7 +17,6 @@
       (ngModelChange)='emitEvent()'
       autocomplete="off"
       ></textarea>
-    </ng-container>
 
     <label
       class="label {{ icon ? 'icon-label' : '' }} "
@@ -32,4 +25,6 @@
       {{preText}}
       <span *ngIf='isRequired' class='is_required'>*</span>
     </label>
+
+    <app-skeleton *ngIf="loading" class="input-loader" height="100%"></app-skeleton>
 </div>

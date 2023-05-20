@@ -11,7 +11,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class EditAccountComponent implements OnInit {
-  loading: Boolean = false;
+  loading: boolean = false;
   user!: User;
 
   constructor(
@@ -44,7 +44,9 @@ export class EditAccountComponent implements OnInit {
           localStorage.setItem('lang', this.user.lang);
           this.loading = false;
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          throw err;
+        });
     }
   }
 }

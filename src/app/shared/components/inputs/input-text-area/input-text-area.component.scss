@@ -50,7 +50,7 @@
     font-size: 15px;
     outline: none;
     transition: all 0.3s;
-    background: $primary-15;    
+    background: $primary-15;
     &:focus + .label {
       top: -13px;
       font-size: 14px;
@@ -89,5 +89,13 @@
     input, .icon {
       background-color: #EFEAD8CC;
     }
+  }
+
+  .input-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
   }
 }

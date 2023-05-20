@@ -2,26 +2,26 @@
   <div class='pre_text'>
 
   </div>
-  <label htmlFor='file-upload' class='custom-file-upload' fileDragDrop (filesChangeEmiter)="changeValue($event, true)">
+  <label htmlFor='file-upload' class='custom-file-upload' [ngClass]="{loading: isLoading}" fileDragDrop (filesChangeEmiter)="changeValue($event, true)">
     <ng-container *ngIf="file">
       <!-- {{ getIconFile(fileData.name) }} -->
       {{ file.name }}
     </ng-container>
-    <span *ngIf="!file">{{preText}}</span>
-    <span *ngIf="isRequired" class='is_required ps-1'>*</span>
+    <span *ngIf="!file">{{'input.placeholderFileZone' | translate}}</span>
     <input
       id='file-upload'
       type='file'
       [disabled]='isDisabled'
       (change)='changeValue($event)'
+      [disabled]="isLoading"
     />
   </label>
 
-  <div class="input_filezone_images" cdkDropList (cdkDropListDropped)="onDropped($event)">
-    <div *ngFor="let file of value; let i = index" cdkDrag>
+  <div class="row w-100 m-0 mt-4" cdkDropList (cdkDropListDropped)="onDropped($event)">
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3" *ngFor="let file of value; let i = index" cdkDrag>
       <div class='output-image'>
         <div class='pre_text'>{{('common.image' | translate) + ' ' + (i + 1)}}</div>
-        <label class="file-upload" [style.height.px]="200" [style.width.px]="200">
+        <label class="file-upload" [style.height.px]="200" [style.width.%]="100">
           <mat-icon *ngIf="file" class="close-icon" (click)="$event.preventDefault(); removeValue(file._id)">close</mat-icon>
           <img [src]="FILES_BASE_URL + file._id" [alt]="file.name">
           <mat-icon [style.fontSize.px]="170" class="default-img" *ngIf="!file">person_outline</mat-icon>
@@ -29,12 +29,12 @@
       </div>
     </div>
 
-    <div *ngFor="let _ of [].constructor(uploading); let i = index" cdkDrag>
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3" *ngFor="let _ of [].constructor(isLoading ? 3 : uploading); let i = index" cdkDrag>
       <div class='output-image'>
         <div class='pre_text'>{{('common.image' | translate) + ' ' + (value.length + i + 1)}}</div>
-        <label class="file-upload" [style.height.px]="200" [style.width.px]="200">
+        <label class="file-upload" [style.height.px]="200" [style.width.%]="100">
           <div class="flex-fill h-100">
-            <app-skeleton height="100%"></app-skeleton>
+            <app-skeleton height="100%" [width]="100"></app-skeleton>
           </div>
         </label>
       </div>

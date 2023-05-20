@@ -125,16 +125,10 @@
   }
   .btn-loader {
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     width: 100%;
-    right: 0;
     height: 100%;
-    & > div {
-      height: 100%;
-      z-index: -1;
-      opacity: 0.1;
-    }
   }
 }
 

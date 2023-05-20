@@ -4,6 +4,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AvatarComponent } from '@shared/components/Avatar/avatar.component';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { AuthService } from '@auth/services/auth.service';
+import { AUTH_ROUTES } from '@app/core/routes';
 
 @Component({
   selector: 'app-nav-bar',
@@ -14,14 +15,15 @@ import { AuthService } from '@auth/services/auth.service';
 })
 
 export class NavBarComponent {
-  showPopup = false
+  protected LOGIN_URL = AUTH_ROUTES.LOGIN.url;
+  protected SIGNUP_URL = AUTH_ROUTES.SIGNUP.url;
 
-  router = inject(Router);
-  authService = inject(AuthService);
+  protected router = inject(Router);
+  protected authService = inject(AuthService);
 
   logout = () => {
     this.authService.logout()
-    this.router.navigate(['/login']);
+    this.router.navigateByUrl(this.LOGIN_URL);
   }
 
 }
