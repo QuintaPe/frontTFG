@@ -17,6 +17,7 @@ export class CreateCampingLodgingsComponent {
   @Input() camping !: Camping;
   actualLodging!: CampingLodging
   page = 0;
+  tableRefreshFlag = 0;
 
   @ViewChild('popupTemplate')
   popupTemplate!: TemplateRef<any>;
@@ -36,7 +37,6 @@ export class CreateCampingLodgingsComponent {
       name: 'Notas',
       sort: 'asc',
       sortable: true,
-      // preRender: (date: string) => `formatDate(date)`,
     },
     {
       type: 'menu',
@@ -59,6 +59,7 @@ export class CreateCampingLodgingsComponent {
 
   openLodgingModal(id:string | null = null) {
     const lodging = id ? this.camping.lodgings.find(lodging => lodging._id === id) : null;
+    this.page = 0;
     this.actualLodging = lodging ? cloneObject(lodging) : new CampingLodging();
     this.dialog.open(PopupComponent, {
       data: {
@@ -90,6 +91,7 @@ export class CreateCampingLodgingsComponent {
   }
   handleRemoveUnit(id: string) {
     this.actualLodging.units = this.actualLodging.units.filter(unit => unit._id !== id);
+    this.tableRefreshFlag += 1;
   }
 
   handleGetUnits = () => ({ items: this.actualLodging.units, total: this.actualLodging.units.length });

@@ -12,6 +12,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 export class EditAccountComponent implements OnInit {
   loading: boolean = false;
+  langs: { id: string; name: string; }[] = [];
   user!: User;
 
   constructor(
@@ -21,16 +22,17 @@ export class EditAccountComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = this.authService.user ? JSON.parse(JSON.stringify(this.authService.user)) :  new User();
+    this.user = this.authService.user ? JSON.parse(JSON.stringify(this.authService.user)) : new User();
+    this.langs = this.getLangs();
   }
 
   getLangs = () => {
     return this.translate.getLangs().map(lang => {
-      let traduct = '';
+      let trad = '';
       this.translate
         .get(`langs.${lang}`)
-        .subscribe(trad => { traduct = trad; })
-      return { id: lang, name: traduct };
+        .subscribe(v => { trad = v; })
+      return { id: lang, name: trad };
     })
   }
 
@@ -43,6 +45,7 @@ export class EditAccountComponent implements OnInit {
           this.translate.use(this.user.lang);
           localStorage.setItem('lang', this.user.lang);
           this.loading = false;
+          this.langs = this.getLangs();
         })
         .catch((err) => {
           throw err;

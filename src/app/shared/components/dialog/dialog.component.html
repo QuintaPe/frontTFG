@@ -4,13 +4,20 @@
       <h4 class="fw-b">{{ data.text }}</h4>
 
       <div class="buttons mt-3">
-        <app-button [text]="'common.cancel' | translate" (onClick)="close(false)" color="danger"></app-button>
-        <app-button [text]="'common.accept' | translate" (onClick)="close(true)"></app-button>
+        <app-button
+          color="danger"
+          [text]="'common.cancel' | translate"
+          (onClick)="close(false)"
+        />
+        <app-button
+          [text]="'common.accept' | translate"
+          (onClick)="close(true)"
+        />
       </div>
     </ng-container>
 
     <ng-container *ngIf="data.type === 'loading'">
-      <app-loader mode="dialog"></app-loader>
+      <app-loader mode="dialog" />
     </ng-container>
   </div>
 </div>

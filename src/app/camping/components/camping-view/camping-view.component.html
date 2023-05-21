@@ -12,8 +12,7 @@
     <div class="camping-header--wrapper">
         <h1 class="camping-header--name">{{ camping?.name }}</h1>
         <p class="camping-header--description" >{{ camping?.description }}</p>
-        <app-button [text]="'camping.book' | translate" (onClick)="scrollToElement(booking)"></app-button>
-
+        <app-button [text]="'camping.book' | translate" (onClick)="scrollToElement(booking)" />
     </div>
   </section>
 
@@ -44,7 +43,7 @@
         </div>
       </div>
       <div class="d-flex justify-content-center">
-        <app-button [text]="'camping.morePhotos' | translate" (onClick)="scrollToElement(booking)"></app-button>
+        <app-button [text]="'camping.morePhotos' | translate" (onClick)="scrollToElement(booking)" />
       </div>
   </section>
 
@@ -57,11 +56,11 @@
       </p>
       <google-map [options]="options" width="100%">
         <map-marker
-            #marker="mapMarker"
-            [position]="markerPosition"
-            [options]="markerOptions"
-            (mapClick)="openInfoWindow(marker)"
-        ></map-marker>
+          #marker="mapMarker"
+          [position]="markerPosition"
+          [options]="markerOptions"
+          (mapClick)="openInfoWindow(marker)"
+        />
         <map-info-window>{{ camping?.name }}</map-info-window>
       </google-map>
     </div>
@@ -75,14 +74,14 @@
           [preText]="'camping.startDate' | translate"
           [(value)]="startDate"
           type="date"
-        ></app-input-text>
+        />
       </div>
       <div class="col-12 col-md-5">
         <app-input-text
           [preText]="'camping.startDate' | translate"
           [(value)]="endDate"
           type="date"
-        ></app-input-text>
+        />
       </div>
       <div class="col-12 col-md-2">
         <app-button [text]="'camping.book' | translate" (onClick)="refreshTable()"></app-button>
@@ -94,11 +93,8 @@
         [fetch]="getAvailableLodgings"
         [forceFetch]="tableFlagRefresh"
         [pageSize]="0"
-      ></app-table>
+      />
     </ng-container>
-    <div>
-      <span></span>
-    </div>
   </section>
 
   <section

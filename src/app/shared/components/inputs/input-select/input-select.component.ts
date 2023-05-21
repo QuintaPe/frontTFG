@@ -1,5 +1,5 @@
-import { 
-  Component, Input, Output, 
+import {
+  Component, Input, Output,
   ElementRef, EventEmitter, ViewChild,
   HostListener, SimpleChanges, OnChanges
 } from '@angular/core';
@@ -7,6 +7,7 @@ import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
 import { NgIf, NgFor } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { SkeletonComponent } from '../../skeleton/skeleton.component';
 
 interface Option {
   id: string; name: string;
@@ -17,7 +18,7 @@ interface Option {
     templateUrl: './input-select.component.html',
     styleUrls: ['../inputs.component.scss'],
     standalone: true,
-    imports: [MatIconModule, NgIf, PortalModule, NgFor]
+    imports: [NgIf, NgFor, PortalModule, SkeletonComponent, MatIconModule]
 })
 export class InputSelectComponent implements OnChanges {
   @Input() class: string = '';
@@ -26,6 +27,7 @@ export class InputSelectComponent implements OnChanges {
   @Input() placeholder: string = '';
   @Input() isRequired: boolean = false;
   @Input() isDisabled: boolean = false;
+  @Input() loading: boolean = false;
   @Input() value: string | null = '';
   @Input() name: string = '';
   @Input() error: string = '';
@@ -43,7 +45,7 @@ export class InputSelectComponent implements OnChanges {
 
   constructor(private overlay: Overlay) {}
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['options']?.previousValue?.length !== changes['options']?.currentValue?.length) {
+    if (changes['options']) {
       this.selectedIndex = this.options.findIndex((option: Option) => option.id === this.value);
       this.selectedOption = this.options[this.selectedIndex];
     }
@@ -53,7 +55,7 @@ export class InputSelectComponent implements OnChanges {
   onResize() {
     this.syncWidth();
   }
-  
+
   onKeyDown(event: KeyboardEvent) {
     if (event.key === 'ArrowUp' && this.selectedIndex > 0) {
       this.selectedIndex--;
@@ -74,7 +76,7 @@ export class InputSelectComponent implements OnChanges {
   }
 
   public selectOption(option: Option, index: number | null = null) {
-    if(index) {
+    if(index || index === 0) {
       this.selectedIndex = index;
       this.hide();
     }

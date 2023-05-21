@@ -1,42 +1,42 @@
-<div class="input-container
-  {{!this.control?.valid && this.control?.touched ? 'invalid' : ''}}
-  {{this.control?.value || this.value  ? 'filled' : ''}}
-  {{this.isDisabled ? 'disabled' : '' }}
-  {{this.class}}"
+<div
+  class="input-container
+  {{ !this.control?.valid && this.control?.touched ? 'invalid' : '' }}
+  {{ this.control?.value || this.value ? 'filled' : '' }}
+  {{ this.isDisabled ? 'disabled' : '' }}
+  {{ this.class }}"
 >
-
-<ng-container >
+  <ng-container>
     <div class="icon">
       <mat-icon>{{ this.icon }}</mat-icon>
     </div>
-    <input *ngIf='this.control'
-      [id]="preText"
+    <input *ngIf="this.control"
       class="input"
-      [type]='this.type'
-      [placeholder]='this.placeholder'
-      [formControl] ="this.control"
+      [id]="preText"
+      [type]="this.type"
+      [placeholder]="this.placeholder"
+      [formControl]="this.control"
       autocomplete="off"
     />
 
-    <input *ngIf='!this.control'
-      [id]="preText"
+    <input *ngIf="!this.control"
       class="input"
-      [type]='this.type'
-      [placeholder]='this.placeholder'
+      [id]="preText"
+      [type]="this.type"
+      [placeholder]="this.placeholder"
       [disabled]="this.isDisabled"
-      [(ngModel)]='value'
-      (ngModelChange)='this.emitEvent()'
+      [(ngModel)]="value"
+      (ngModelChange)="this.emitEvent()"
       autocomplete="off"
     />
   </ng-container>
 
-  <label
-    class="label {{ this.icon ? 'icon-label' : '' }} "
-    [for]="preText"
-  >
-    {{preText}}
-    <span *ngIf='isRequired' class='is_required'>*</span>
+  <label class="label {{ this.icon ? 'icon-label' : '' }} " [for]="preText">
+    {{ preText }}
+    <span *ngIf="isRequired" class="is_required">*</span>
   </label>
 
-  <app-skeleton *ngIf="loading" class="input-loader" height="100%"></app-skeleton>
+  <app-skeleton *ngIf="loading"
+    class="input-loader"
+    height="100%"
+  />
 </div>

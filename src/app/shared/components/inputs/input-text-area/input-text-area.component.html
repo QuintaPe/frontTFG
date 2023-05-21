@@ -1,30 +1,31 @@
-<div class="input-container
-  {{value  ? 'filled' : ''}}
-  {{isDisabled ? 'disabled' : '' }}
-  {{class}}"
+<div
+  class="input-container
+  {{ value ? 'filled' : '' }}
+  {{ isDisabled ? 'disabled' : '' }}
+  {{ class }}"
 >
-    <div *ngIf="this.icon" class="icon">
-      <mat-icon>{{ this.icon }}</mat-icon>
-    </div>
+  <div *ngIf="this.icon" class="icon">
+    <mat-icon>{{ this.icon }}</mat-icon>
+  </div>
 
-    <textarea
-      [id]="preText"
-      class="input"
-      [style.min-height.px]="minHeight"
-      [placeholder]='placeholder'
-      [disabled]="isDisabled"
-      [(ngModel)]='value'
-      (ngModelChange)='emitEvent()'
-      autocomplete="off"
-      ></textarea>
+  <textarea
+    [id]="preText"
+    class="input"
+    [style.min-height.px]="minHeight"
+    [placeholder]="placeholder"
+    [disabled]="isDisabled"
+    [(ngModel)]="value"
+    (ngModelChange)="emitEvent()"
+    autocomplete="off"
+  ></textarea>
 
-    <label
-      class="label {{ icon ? 'icon-label' : '' }} "
-      [for]="preText"
-    >
-      {{preText}}
-      <span *ngIf='isRequired' class='is_required'>*</span>
-    </label>
+  <label class="label {{ icon ? 'icon-label' : '' }} " [for]="preText">
+    {{ preText }}
+    <span *ngIf="isRequired" class="is_required">*</span>
+  </label>
 
-    <app-skeleton *ngIf="loading" class="input-loader" height="100%"></app-skeleton>
+  <app-skeleton *ngIf="loading"
+    class="input-loader"
+    height="100%"
+  />
 </div>

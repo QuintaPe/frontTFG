@@ -7,28 +7,27 @@
   <p class="text-center h1 fw-bold">
     {{ "login.login" | translate }}
   </p>
-  
+
   <!-- User Name -->
-  <app-input-text 
+  <app-input-text
     [preText]="'common.email' | translate"
     placeholder='Introduzca su nombre de usuario'
     icon="person"
-    [control]="loginForm.controls['email']">
-  </app-input-text>
-
+    [control]="loginForm.controls['email']"
+  />
 
   <!-- Contraseña -->
-  <app-input-text 
+  <app-input-text
     type='password'
     [preText]="'login.password' | translate"
     placeholder='Introduzca su contraseña'
     icon="lock"
-    [control]="loginForm.controls['password']">
-  </app-input-text>
+    [control]="loginForm.controls['password']"
+  />
 
-  <!-- Boton de inicio de sesion -->
+  <!-- Botón de inicio de sesión -->
   <div class="d-flex flex-column justify-content-center  align-items-center">
     <p>¿Aún no estas registrado? <a href="/signup">Registrate gratis!</a></p>
-    <app-button text='Iniciar Sesion!' icon="person_add" type="submit"></app-button>
+    <app-button text='Iniciar Sesion!' icon="person_add" type="submit" />
   </div>
 </form>

@@ -1,11 +1,16 @@
 <app-panel class="create-camping" [title]="'camping.campings' | translate">
-    <div class="buttons mb-4">
-      <app-button icon="add" [text]="'camping.createCamping' | translate" (onClick)="handleNewCamping()" color="secondary"></app-button>
-    </div>
-    <app-table
-        [pageSize]="10"
-        [fetch]="getCampings"
-        mode="component"
-        [rowComponent]="campingRowType"
-    ></app-table>
+  <div class="buttons mb-4">
+    <app-button
+      icon="add"
+      [text]="'camping.createCamping' | translate"
+      (onClick)="handleNewCamping()"
+      color="secondary"
+    />
+  </div>
+  <app-table
+    mode="component"
+    [rowComponent]="campingRowType"
+    [fetch]="getCampings"
+    [pageSize]="5"
+  />
 </app-panel>

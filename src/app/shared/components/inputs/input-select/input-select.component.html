@@ -1,37 +1,43 @@
 <div
   #select
   class="input-container filled
-  {{!this.control?.valid && this.control?.touched ? 'invalid' : ''}}
-  {{this.isDisabled ? 'disabled' : '' }}
-  {{this.class}}"
+  {{ !this.control?.valid && this.control?.touched ? 'invalid' : '' }}
+  {{ this.isDisabled ? 'disabled' : '' }}
+  {{ this.class }}"
   (click)="this.showDropdown()"
 >
   <div class="icon" *ngIf="this.icon">
     <mat-icon>{{ this.icon }}</mat-icon>
   </div>
   <div class="input">
-    {{ selectedOption?.name || placeholder || '-' }}
+    {{ selectedOption?.name || placeholder || "-" }}
   </div>
   <div class="arrow-options-icon">
     <mat-icon>arrow_downward</mat-icon>
   </div>
   <label
-    class="label {{this.control?.value || this.value  ? 'filled' : ''}}"
-    for="password"
+    class="label {{ this.control?.value || this.value ? 'filled' : '' }}"
   >
-    {{preText}}
-    <span *ngIf='isRequired' class='is_required'>*</span>
+    {{ preText }}
+    <span *ngIf="isRequired" class="is_required">*</span>
   </label>
 
   <ng-template cdk-portal #overlayTemplate="cdkPortal">
     <div class="input-options">
-        <div
-          *ngFor="let option of options; let i = index"
-          class="input-options-option {{this.value === option.id ? 'selected' : ''}}"
-          (click)="selectOption(option, i)"
-        >
-          {{option.name}}
+      <div
+        *ngFor="let option of options; let i = index"
+        class="input-options-option {{
+          this.value === option.id ? 'selected' : ''
+        }}"
+        (click)="selectOption(option, i)"
+      >
+        {{ option.name }}
       </div>
     </div>
   </ng-template>
+
+  <app-skeleton *ngIf="loading"
+    class="input-loader"
+    height="100%"
+  />
 </div>

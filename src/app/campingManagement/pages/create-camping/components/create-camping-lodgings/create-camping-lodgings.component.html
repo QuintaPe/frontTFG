@@ -1,113 +1,106 @@
 <ng-container>
-
   <div class="buttons mb-4">
     <app-button
       [text]="'camping.addLodging' | translate"
       (onClick)="openLodgingModal()"
-    ></app-button>
+    />
   </div>
 
-    <div class="row m-0">
-      <div
-        *ngFor="let lodging of this.camping.lodgings"
-        class="camping-lodging col-12 col-sm-6"
-        (click)="openLodgingModal(lodging._id)"
-      >
-        <h4 class="fw-b">{{lodging.name}}</h4>
-        <span class="fs-sm">{{lodging.type}}</span>
+  <div class="row m-0">
+    <div
+      *ngFor="let lodging of this.camping.lodgings"
+      class="camping-lodging col-12 col-sm-6"
+      (click)="openLodgingModal(lodging._id)"
+    >
+      <h4 class="fw-b">{{ lodging.name }}</h4>
+      <span class="fs-sm">{{ lodging.type }}</span>
+    </div>
+  </div>
+
+  <ng-template #popupTemplate>
+    <ng-container *ngIf="page == 0">
+      <div class="row">
+        <div class="col-12 col-md-4 mb-4">
+          <app-input-select
+            [preText]="'common.type' | translate"
+            [(value)]="this.actualLodging.type"
+            [options]="[
+              { id: 'bungalow', name: 'camping.bungalow' | translate },
+              { id: 'campsite', name: 'camping.campsite' | translate },
+              { id: 'other', name: 'common.other' | translate }
+            ]"
+          />
+        </div>
+        <div class="col-12 col-md-6 mb-4">
+          <app-input-text
+            [preText]="'common.name' | translate"
+            [(value)]="this.actualLodging.name"
+          />
+        </div>
       </div>
-  </div>
 
-    <ng-template #popupTemplate>
-      <ng-container *ngIf="page == 0">
-        <div class="row">
-          <div class="col-12 col-md-4 mb-4">
-            <app-input-select
-              [preText]="'common.type' | translate"
-              [(value)]="this.actualLodging.type"
-              [options]="[
-                { id: 'bungalow', name: 'camping.bungalow' | translate},
-                { id: 'campsite', name: 'camping.campsite' | translate},
-                { id: 'other', name: 'common.other' | translate} ]"
-              ></app-input-select>
-          </div>
-          <div class="col-12 col-md-6 mb-4">
-            <app-input-text
-              [preText]="'common.name' | translate"
-              [(value)]="this.actualLodging.name"
-            ></app-input-text>
-          </div>
-
+      <div class="row">
+        <div class="col-12 col-md-4 mb-4">
+          <app-input-text
+            [preText]="'camping.feePerNight' | translate"
+            [(value)]="this.actualLodging.feePerNight"
+          />
         </div>
-
-        <div class="row">
-          <div class="col-12 col-md-4 mb-4">
-            <app-input-text
-              [preText]="'camping.feePerNight' | translate"
-              [(value)]="this.actualLodging.feePerNight"
-            ></app-input-text>
-          </div>
-          <div class="col-12 col-md-4 mb-4">
-            <app-input-text
-              [preText]="'camping.size' | translate"
-              [(value)]="this.actualLodging.size"
-            ></app-input-text>
-          </div>
-          <div class="col-12 col-md-4 mb-4">
-            <app-input-text
-              [preText]="'camping.capacity' | translate"
-              [(value)]="this.actualLodging.capacity"
-            ></app-input-text>
-          </div>
+        <div class="col-12 col-md-4 mb-4">
+          <app-input-text
+            [preText]="'camping.size' | translate"
+            [(value)]="this.actualLodging.size"
+          />
         </div>
-      </ng-container>
-      <ng-container *ngIf="page == 1">
-        <div class="d-flex justify-content-between align-items-center">
-          <!-- <div class="col-12 col-md-2 mb-4"> -->
-            <app-input-text
-              type="number"
-              [preText]="'camping.number' | translate"
-              [value]="this.actualLodging.units.length"
-              [isDisabled]="true"
-            ></app-input-text>
-          <!-- </div> -->
-            <app-button
-              [text]="'common.add' | translate"
-              (onClick)="handleAddUnit()"
-              color="secondary"
-              icon="add"
-            ></app-button>
+        <div class="col-12 col-md-4 mb-4">
+          <app-input-text
+            [preText]="'camping.capacity' | translate"
+            [(value)]="this.actualLodging.capacity"
+          />
         </div>
-        <app-table
-          [columns]="columns"
-          [fetch]="handleGetUnits"
-        ></app-table>
-      </ng-container>
-
-
-      <div class="buttons mt-4">
+      </div>
+    </ng-container>
+    <ng-container *ngIf="page == 1">
+      <div class="d-flex justify-content-between align-items-center">
+        <app-input-text
+          type="number"
+          [preText]="'camping.number' | translate"
+          [value]="this.actualLodging.units.length"
+          [isDisabled]="true"
+        />
         <app-button
-          *ngIf="actualLodging._id"
-          [text]="'common.delete' | translate"
-          color="danger"
-          (onClick)="deleteCampingLodging()"
-        ></app-button>
-        <app-button
-          *ngIf="page == 1"
+          [text]="'common.add' | translate"
+          (onClick)="handleAddUnit()"
           color="secondary"
-          [text]="'common.back' | translate"
-          (onClick)="page = 0"
-        ></app-button>
-        <app-button
-          *ngIf="page == 0"
-          [text]="'common.next' | translate"
-          (onClick)="page = 1"
-        ></app-button>
-        <app-button
-          *ngIf="page == 1"
-          [text]="actualLodging._id ? ('camping.editLodging' | translate) : ('camping.addLodging' | translate)"
-          (onClick)="addCampingLodging()"
-        ></app-button>
+          icon="add"
+        />
       </div>
-    </ng-template>
+      <app-table [columns]="columns" [fetch]="handleGetUnits" [forceFetch]="tableRefreshFlag" />
+    </ng-container>
+
+    <div class="buttons mt-4">
+      <app-button
+        *ngIf="actualLodging._id"
+        [text]="'common.delete' | translate"
+        color="danger"
+        (onClick)="deleteCampingLodging()"
+      />
+      <app-button
+        *ngIf="page == 1"
+        color="secondary"
+        [text]="'common.back' | translate"
+        (onClick)="page = 0"
+      />
+      <app-button
+        *ngIf="page == 0"
+        [text]="'common.next' | translate"
+        (onClick)="page = 1"
+      />
+      <app-button
+        *ngIf="page == 1"
+        [text]="actualLodging._id ? ('camping.editLodging' | translate) : ('camping.addLodging' | translate)"
+        (onClick)="addCampingLodging()"
+      />
+    </div>
+  </ng-template>
 </ng-container>

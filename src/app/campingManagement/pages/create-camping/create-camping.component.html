@@ -7,13 +7,13 @@
         [(value)]="this.camping.name"
         [loading]="loading"
         class="mb-4"
-      ></app-input-text>
+      />
       <app-input-text-area
         [preText]="'common.description' | translate"
         [(value)]="this.camping.description"
         [loading]="loading"
         class="mb-5"
-      ></app-input-text-area>
+      />
       <h6 class="fw-b mb-3">{{ "camping.addImages" | translate }}</h6>
       <app-input-file-zone
         [preText]="'camping.addLodging' | translate"
@@ -21,7 +21,7 @@
         [isMultiple]="true"
         [isRequired]="true"
         [isLoading]="loading"
-      ></app-input-file-zone>
+      />
     </div>
 
     <app-create-camping-location *ngSwitchCase="1" [camping]="camping" />
@@ -34,34 +34,34 @@
         [(value)]="this.camping.amenities"
         [loading]="loading"
         class="mb-4"
-      ></app-input-text-area>
+      />
       <app-input-text-area
         [preText]="'camping.rules' | translate"
         [(value)]="this.camping.rules"
         [loading]="loading"
         class="mb-4"
-      ></app-input-text-area>
+      />
       <app-input-text-area
         [preText]="'camping.nearestLocations' | translate"
         [(value)]="this.camping.nearestLocations"
         [loading]="loading"
         class="mb-4"
-      ></app-input-text-area>
+      />
     </div>
   </div>
 
   <div class="buttons mt-4">
     <app-button
       *ngIf="page > 0"
-      [text]="'common.back' | translate"
       color="secondary"
-      (onClick)="pageBack()"
+      [text]="'common.back' | translate"
       [loading]="loading"
-    ></app-button>
+      (onClick)="pageBack()"
+    />
     <app-button
       [text]="page < 3 ? ('common.next' | translate) : ('common.update' | translate)"
-      (onClick)="handleSubmit()"
       [loading]="loading"
-    ></app-button>
+      (onClick)="handleSubmit()"
+    />
   </div>
 </app-panel>

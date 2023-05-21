@@ -5,7 +5,7 @@
       [isRequired]="true"
       [isPublic]="true"
       [(value)]="this.user.attributes.avatar"
-    ></app-input-avatar>
+    />
   </div>
   <div class="row mt-4">
     <div class="col-12">
@@ -14,22 +14,21 @@
         [(value)]="this.user.email"
         [isDisabled]="true"
         [loading]="loading"
-      ></app-input-text>
+      />
     </div>
     <div class="col-12 col-md-4">
       <app-input-text
         [preText]="'common.name' | translate"
         [(value)]="this.user.attributes.firstname"
         [loading]="loading"
-      ></app-input-text>
+      />
     </div>
     <div class="col-12 col-md-8">
       <app-input-text
         [preText]="'user.lastName' | translate"
         [(value)]="this.user.attributes.lastname"
         [loading]="loading"
-      >
-      </app-input-text>
+      />
     </div>
     <div class="col-12 col-md-6">
       <app-input-text
@@ -37,16 +36,16 @@
         [(value)]="this.user.attributes.birthDate"
         type="date"
         [loading]="loading"
-      ></app-input-text>
+      />
     </div>
     <div class="col-12 col-md-6">
       <app-input-select
         [preText]="'user.lang' | translate"
         [placeholder]="'user.lang' | translate"
         [(value)]="this.user.lang"
-        [options]="this.getLangs()"
-      >
-      </app-input-select>
+        [options]="this.langs"
+        [loading]="loading"
+      />
     </div>
   </div>
 
@@ -55,6 +54,6 @@
       [text]="'common.update' | translate"
       (onClick)="this.updateProfile()"
       [loading]="loading"
-    ></app-button>
+    />
   </div>
 </app-panel>
