@@ -40,8 +40,12 @@
     "capacity": "Capacidad",
     "search": "Buscar",
     "units": "Unidades",
-    "confirmDeleteBooking": "¿Esta seguro que desea elimina esta reserva?"
-
+    "confirmDeleteBooking": "¿Esta seguro que desea elimina esta reserva?",
+    "entryDate": "Fecha de entrada",
+    "exitDate": "Fecha de salida",
+    "totalNights": "Numero de noches",
+    "bookingData": "Datos de la reserva",
+    "managerData": "Datos del manager"
   },
   "login": {
     "login": "Inicia sesión",
@@ -73,7 +77,8 @@
     "delete": "Borrar",
     "accept": "Aceptar",
     "cancel": "Cancelar",
-    "creationDate": "Fecha de creación"
+    "creationDate": "Fecha de creación",
+    "total": "Total"
   },
   "countries": {
     "AFG": "Afganistán",

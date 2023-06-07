@@ -1,0 +1,90 @@
+<div class="camping-booking-view">
+  <div class="camping-info">
+    <app-avatar type="camping" [size]="100" [src]="camping?.images[0]?._id" [loading]="loading" />
+    <div class="ms-4" *ngIf="!loading">
+      <h4 class="fw-b">{{ camping.name }}</h4>
+      <div>
+        {{ camping.location.street }} {{ camping.location.streetNumber }},
+        {{ camping.location.locality }} {{ camping.location.postalCode }}
+      </div>
+      <div class="fc-secondary fs-sm">
+        {{ camping.location.city }}, {{ camping.location.community }}, {{ camping.location.country }}
+      </div>
+    </div>
+    <div class="ms-4" *ngIf="loading" style="flex: auto;">
+      <app-skeleton [width]="80" height="18px" class="mb-3"/>
+      <app-skeleton [width]="65" class="mb-2"/>
+      <app-skeleton [width]="50" height="13px"/>
+    </div>
+  </div>
+
+  <div class="booking-info">
+    <h4 class="fw-b">{{ "camping.bookingData" | translate }}</h4>
+    <div class="row booking-info--dates">
+      <div class="col-12 col-md-4">
+        <div>{{ "camping.entryDate" | translate }}</div>
+        <h6 *ngIf="!loading" class="fw-b">{{ formatDate(bookingData.entryDate) }}</h6>
+        <app-skeleton *ngIf="loading" width="90px" class="mx-auto mt-1"/>
+      </div>
+      <div class="col-12 col-md-4">
+        <div>{{ "camping.exitDate" | translate }}</div>
+        <h6 *ngIf="!loading" class="fw-b">{{ formatDate(bookingData.exitDate) }}</h6>
+        <app-skeleton *ngIf="loading" width="90px" class="mx-auto mt-1" />
+      </div>
+      <div class="col-12 col-md-4">
+        <div>{{ "camping.totalNights" | translate }}</div>
+        <h6 *ngIf="!loading" class="fw-b">{{ daysBetweenDates(bookingData.exitDate, bookingData.entryDate) }}</h6>
+        <app-skeleton *ngIf="loading" width="30px" class="mx-auto mt-1" />
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <h4 class="fw-b">{{ "camping.managerData" | translate }}</h4>
+    <div class="row mt-4">
+      <div class="col-12 col-md-8">
+        <app-input-text
+          [preText]="'common.email' | translate"
+          [(value)]="this.manager.email"
+          [loading]="loading"
+        />
+      </div>
+      <div class="col-12 col-md-4">
+        <app-input-text
+          type="number"
+          [preText]="'user.phone' | translate"
+          [(value)]="this.manager.phone"
+          [loading]="loading"
+        />
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12 col-md-4">
+        <app-input-text
+          [preText]="'common.name' | translate"
+          [(value)]="this.manager.firstname"
+          [loading]="loading"
+        />
+      </div>
+      <div class="col-12 col-md-8">
+        <app-input-text
+          [preText]="'user.lastName' | translate"
+          [(value)]="this.manager.lastname"
+          [loading]="loading"
+        />
+      </div>
+    </div>
+  </div>
+  <div class="payment-info">
+    <h4 class="fw-b">{{ "camping.managerData" | translate }}</h4>
+    <span class="fc-secondary">TODO</span> <!-- TODO -->
+  </div>
+
+  <div class="buttons">
+    <app-button
+      [text]="'camping.book' | translate"
+      (onClick)="createBooking()"
+      [loading]="loading || creatingBooking"
+    />
+  </div>
+</div>

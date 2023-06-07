@@ -1,0 +1,27 @@
+@import "_colors.scss";
+@import "_variables.scss";
+@import "_mixins";
+
+.camping-info,
+.booking-info,
+.user-info,
+.payment-info {
+  @include box;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+.camping-booking-view {
+  padding: 20px 50px;
+  min-height: calc(100vh);
+  .camping-info {
+    display: flex;
+    align-items: center;
+  }
+
+  .booking-info {
+    .booking-info--dates {
+      text-align: center;
+    }
+  }
+}

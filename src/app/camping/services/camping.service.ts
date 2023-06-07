@@ -41,6 +41,10 @@ export class CampingService {
     return this.apiService.fetch('DELETE', `campings/${id}`);
   }
 
+  async createCampingBooking(id: string, bookingData: Object) {
+    return this.apiService.fetch('POST', `campings/${id}/bookings` , bookingData);
+  }
+
   async getCampingBookings(id: string, page: number, size: number, search: string, filters: any, sort: string) {
     return this.apiService.fetch('GET', `campings/${id}/bookings` , {
       page, size, search, filters, sort,
@@ -51,4 +55,9 @@ export class CampingService {
     return this.apiService.fetch('DELETE', `campings/${id}/bookings/${booking}`)
   }
 
+  async getAvailableLodgings(id: string, entryDate: Date, exitDate: Date, page: number, size: number, search: string, filters: any, sort: string) {
+    return this.apiService.fetch('GET', `campings/${id}/lodgings/availables`, {
+      entryDate, exitDate, page, size, search, filters, sort
+    });
+  }
 }

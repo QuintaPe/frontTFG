@@ -1,0 +1,18 @@
+<section class="camping-location">
+  <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
+    <h2 class="text-center">Find your next getaway</h2>
+    <p>
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua.
+    </p>
+    <google-map [options]="options" width="100%">
+      <map-marker
+        #marker="mapMarker"
+        [position]="markerPosition"
+        [options]="markerOptions"
+        (mapClick)="openInfoWindow(marker)"
+      />
+      <map-info-window>{{ name }}</map-info-window>
+    </google-map>
+  </div>
+</section>

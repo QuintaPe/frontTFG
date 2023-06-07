@@ -14,6 +14,7 @@ export class CampingComponent {
   campingRowType: Type<any> = CampingRowComponent
   private campingService = inject(CampingService);
   private router = inject(Router);
+  protected componentInputs = ["_id", "name", "description", "createdAt", "loading"];
 
   handleNewCamping = () => {console.log(CAMPINGS_MANAGEMENT_ROUTES.NEW_CAMPING.url)
     this.router.navigateByUrl(CAMPINGS_MANAGEMENT_ROUTES.NEW_CAMPING.url)

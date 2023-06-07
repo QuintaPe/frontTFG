@@ -86,9 +86,9 @@ export class CreateCampingLodgingsComponent {
   }
 
   handleAddUnit() {
-
     this.actualLodging.units.push(new CampingUnit({ name: `Unidad ${this.actualLodging.units.length + 1 }`}));
   }
+
   handleRemoveUnit(id: string) {
     this.actualLodging.units = this.actualLodging.units.filter(unit => unit._id !== id);
     this.tableRefreshFlag += 1;

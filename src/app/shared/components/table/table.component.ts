@@ -1,7 +1,7 @@
 import {
   Component,
   Input,
-  AfterViewInit,
+  OnInit,
   Type,
   ViewChild,
   ViewContainerRef,
@@ -17,6 +17,7 @@ import { tap } from 'rxjs';
 import { RowMenuComponent } from './rowMenu/row-menu.component';
 import { InputSelectComponent } from '../inputs/input-select/input-select.component';
 import { SkeletonComponent } from '../skeleton/skeleton.component';
+import { DynamicIoModule } from 'ng-dynamic-component';
 
 @Component({
   selector: 'app-table',
@@ -29,15 +30,21 @@ import { SkeletonComponent } from '../skeleton/skeleton.component';
     SkeletonComponent,
     InputSelectComponent,
     MatPaginatorModule,
+    DynamicIoModule,
   ],
 })
-export class TableComponent implements AfterViewInit, OnChanges {
+export class TableComponent implements OnInit, OnChanges {
   @Input() columns: any[] = [];
   @Input() fetch?: any;
   @Input() pageSize: number = 10;
   @Input() mode: string = 'row';
   @Input() rowComponent!: Type<any>;
+  @Input() componentInputs!: string[];
   @Input() forceFetch: number = 0;
+  @Input() showPagination: boolean = true;
+
+  @ViewChild(MatPaginator)
+  paginator!: MatPaginator;
 
   search: string = '';
   filtersValue: any = {};
@@ -47,31 +54,11 @@ export class TableComponent implements AfterViewInit, OnChanges {
   showFilters: boolean = false;
   rows = signal({ items: [], total: 0 });
 
-  @ViewChild('componentsContainer', { read: ViewContainerRef })
-  componentsContainer!: ViewContainerRef;
-
-  @ViewChild(MatPaginator)
-  paginator!: MatPaginator;
-
   private cd = inject(ChangeDetectorRef);
-
-  fetchLoadingPage = () => {
-    this.loading = true;
-    if (this.mode === 'component') {
-      this.componentsContainer.clear();
-      [...Array(this.pageSize)].forEach((_, i) => {
-        const auxItem = this.componentsContainer.createComponent(
-          this.rowComponent
-        );
-        auxItem.setInput('_id', i);
-        auxItem.setInput('loading', true);
-      });
-    }
-  };
 
   fetchPage = async () => {
     if (this.fetch) {
-      this.fetchLoadingPage();
+      this.loading = true;
       const sort = this.sortedColumn.sort
         ? `${this.sortedColumn.sort}${this.sortedColumn.name}`
         : '';
@@ -86,26 +73,14 @@ export class TableComponent implements AfterViewInit, OnChanges {
         )
       );
       this.loading = false;
-
-      if (this.mode === 'component') {
-        this.componentsContainer.clear();
-        this.rows().items.forEach((row) => {
-          const auxItem = this.componentsContainer.createComponent(
-            this.rowComponent
-          );
-          Object.keys(row).forEach((att) => {
-            if (auxItem.instance.hasOwnProperty(att)) {
-              auxItem.setInput(att, row[att]);
-            }
-          });
-        });
-      }
     }
   };
 
-  ngAfterViewInit(): void {
+  ngOnInit(): void {
     this.fetchPage();
-    this.paginator.page.pipe(tap(() => this.fetchPage())).subscribe();
+    if (this.paginator) {
+      this.paginator.page.pipe(tap(() => this.fetchPage())).subscribe();
+    }
     this.cd.detectChanges();
   }
 
@@ -141,4 +116,12 @@ export class TableComponent implements AfterViewInit, OnChanges {
       ? column.preRender(row[columnField], row)
       : row[columnField];
   };
+
+  rowInputs(row: any) {
+    const auxInputs: {[key: string]: any} = {}
+    this.componentInputs.forEach(input => {
+      auxInputs[input] = row[input];
+    })
+    return auxInputs;
+  }
 }

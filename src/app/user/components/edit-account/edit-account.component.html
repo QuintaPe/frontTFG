@@ -30,7 +30,7 @@
         [loading]="loading"
       />
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-4">
       <app-input-text
         [preText]="'user.birthDate' | translate"
         [(value)]="this.user.attributes.birthDate"
@@ -38,7 +38,15 @@
         [loading]="loading"
       />
     </div>
-    <div class="col-12 col-md-6">
+    <div class="col-12 col-md-4">
+      <app-input-text
+        type="number"
+        [preText]="'user.phone' | translate"
+        [(value)]="this.user.attributes.phone"
+        [loading]="loading"
+      />
+    </div>
+    <div class="col-12 col-md-4">
       <app-input-select
         [preText]="'user.lang' | translate"
         [placeholder]="'user.lang' | translate"

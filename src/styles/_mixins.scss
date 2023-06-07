@@ -1,7 +1,7 @@
 //************************** All Mixins ***************************
 
 @mixin box {
-  border-radius: $borderRadius;
+  border-radius: $borderRadiusLight;
   background-color: white;
   box-shadow: $boxShadow;
 }

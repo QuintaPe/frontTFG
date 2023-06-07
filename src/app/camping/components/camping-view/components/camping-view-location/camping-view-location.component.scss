@@ -1,0 +1,11 @@
+@import '_colors.scss';
+
+.camping-location {
+  padding: 25px;
+  background-color: $primary;
+  color: white;
+  .map-container {
+    width: 100%;
+  }
+  margin-bottom: 70px;
+}

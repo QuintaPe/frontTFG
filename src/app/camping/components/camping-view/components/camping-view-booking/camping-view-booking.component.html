@@ -1,0 +1,56 @@
+<section class="camping-booking">
+  <h2 class="text-center">{{ "camping.lodgings" | translate }}</h2>
+  <div class="row m-0 mb-2">
+    <div class="col-12 col-md-5 mb-2">
+      <app-input-text
+        [preText]="'camping.entryDate' | translate"
+        [(value)]="entryDate"
+        type="date"
+      />
+    </div>
+    <div class="col-12 col-md-5 mb-2">
+      <app-input-text
+        [preText]="'camping.exitDate' | translate"
+        [(value)]="exitDate"
+        type="date"
+      />
+    </div>
+    <div class="col-12 col-md-2">
+      <app-button
+        class="w-100"
+        [text]="'camping.search' | translate"
+        (onClick)="refreshTable()"
+      ></app-button>
+    </div>
+  </div>
+  <app-table
+    [columns]="showOnlyAvailables ? availableColumns : lodgingsColumns"
+    [fetch]="getAvailableLodgings"
+    [forceFetch]="tableFlagRefresh"
+    [pageSize]="0"
+    [showPagination]="false"
+  />
+
+  <div *ngIf="!isEmptyObject(lodgingsToBook)" class="camping-booking--selected">
+    <h5 class="fw-b">Seleccionados</h5>
+    <ul>
+      <li *ngFor="let item of lodgingsToBook | keyvalue">
+        <span>
+          <span>- {{ lodgings[item.key].name }}</span>
+          <span> ({{ item.value }} * {{ lodgings[item.key].feePerNight }}€ * {{ selectedDays }} noches)</span>
+        </span>
+        <span>
+          {{ getTotalFee(item.key) }}
+        </span>
+      </li>
+    </ul>
+    <div class="fw-b text-end my-1">{{ 'common.total' | translate }} {{ getTotalFee() }}</div>
+    <div class="buttons">
+      <app-button
+        color="secondary"
+        [text]="'camping.book' | translate"
+        (onClick)="redirectBookingForm()"
+      />
+    </div>
+  </div>
+</section>

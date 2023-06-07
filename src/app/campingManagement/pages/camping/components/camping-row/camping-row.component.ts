@@ -1,4 +1,4 @@
-import { Input, Component, inject } from '@angular/core';
+import { Input, Component, inject, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { CAMPINGS_MANAGEMENT_ROUTES } from '@app/core/routes';
 import { CampingService } from '@app/camping/services/camping.service';
@@ -15,6 +15,7 @@ export class CampingRowComponent {
   @Input() description = '';
   @Input() createdAt = '';
   @Input() loading = false;
+  @Output() onChange = new EventEmitter();
 
   private dialogService = inject(DialogService);
   private campingService = inject(CampingService);
@@ -25,7 +26,10 @@ export class CampingRowComponent {
     const confirmed = await this.dialogService.openConfirm('Are you sure?');
     if (confirmed) {
       try {
+        const ref = this.dialogService.openLoading();
         await this.campingService.deleteCamping(this._id);
+        ref.close();
+        this.onChange.emit();
       } catch (err) {}
     }
   }

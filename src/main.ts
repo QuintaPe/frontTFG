@@ -15,6 +15,8 @@ import { APP_ROUTES } from './app/app.routes';
 import { AuthService } from './app/auth/services/auth.service';
 import { provideRouter } from '@angular/router';
 
+import { GALLERY_CONFIG } from 'ng-gallery';
+
 if (environment.production) {
   enableProdMode();
 }
@@ -49,6 +51,13 @@ bootstrapApplication(AppComponent, {
       useFactory: initApp,
       multi: true,
       deps: [AuthService],
+    },
+    {
+      provide: GALLERY_CONFIG,
+      useValue: {
+        dots: true,
+        imageSize: 'cover'
+      }
     },
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),

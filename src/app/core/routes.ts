@@ -8,6 +8,14 @@ export const CAMPINGS_MANAGEMENT_ROUTES = {
   setEditCamping: (id: string) => `manager/campings/${id}/edit`,
 }
 
+export const CAMPINGS_ROUTES = {
+  CAMPING: { path: ':id', url: 'campings/:id'},
+  BOOK_CAMPING: { path: ':id/booking', url: 'campings/:id/booking'},
+
+  setCamping: (id: string) => `campings/${id}`,
+  setBookCamping: (id: string) => `campings/${id}/booking`,
+}
+
 export const AUTH_ROUTES = {
   LOGIN: { path: 'login', url: 'auth/login' },
   SIGNUP: { path: 'signup', url: 'auth/signup' },

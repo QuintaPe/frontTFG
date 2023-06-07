@@ -35,67 +35,10 @@
     </div>
   </section>
 
-  <section class="camping-gallery">
-      <h2 class="text-center">Outdoor Recreation</h2>
-      <div class="row m-0">
-        <div *ngFor="let image of camping?.images" class="col-12 col-sm-6 col-md-4">
-          <img [src]="getImageUrl(image)" />
-        </div>
-      </div>
-      <div class="d-flex justify-content-center">
-        <app-button [text]="'camping.morePhotos' | translate" (onClick)="scrollToElement(booking)" />
-      </div>
-  </section>
+  <app-camping-view-gallery [images]="camping?.images || []" />
+  <app-camping-view-location [name]="camping?.name" [coords]="camping?.location?.coords" />
+  <app-camping-view-booking [camping]="camping?._id || ''"/>
 
-  <section class="camping-location">
-    <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-      <h2 class="text-center">Find your next getaway</h2>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <google-map [options]="options" width="100%">
-        <map-marker
-          #marker="mapMarker"
-          [position]="markerPosition"
-          [options]="markerOptions"
-          (mapClick)="openInfoWindow(marker)"
-        />
-        <map-info-window>{{ camping?.name }}</map-info-window>
-      </google-map>
-    </div>
-  </section>
-
-  <section class="camping-booking">
-    <h2 class="text-center">{{ 'camping.lodgings' | translate }}</h2>
-    <div class="row m-0 mb-2">
-      <div class="col-12 col-md-5">
-        <app-input-text
-          [preText]="'camping.startDate' | translate"
-          [(value)]="startDate"
-          type="date"
-        />
-      </div>
-      <div class="col-12 col-md-5">
-        <app-input-text
-          [preText]="'camping.startDate' | translate"
-          [(value)]="endDate"
-          type="date"
-        />
-      </div>
-      <div class="col-12 col-md-2">
-        <app-button [text]="'camping.book' | translate" (onClick)="refreshTable()"></app-button>
-      </div>
-    </div>
-    <ng-container *ngIf="!loading">
-      <app-table
-        [columns]="lodgingsColumns"
-        [fetch]="getAvailableLodgings"
-        [forceFetch]="tableFlagRefresh"
-        [pageSize]="0"
-      />
-    </ng-container>
-  </section>
 
   <section
     class="u-align-center u-clearfix u-container-align-center u-section-5"

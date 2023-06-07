@@ -1,10 +1,23 @@
 <div class="table-responsive">
   <ng-container *ngIf="mode === 'component'">
-    <ng-template #componentsContainer></ng-template>
+    <div *ngIf="!loading">
+      <ng-template *ngFor="let row of rows().items; let i = index"
+        [ngComponentOutlet]="rowComponent"
+        [ndcDynamicInputs]="rowInputs(row)"
+        [ndcDynamicOutputs]="{ onChange: this.fetchPage }"
+      />
+    </div>
+
+    <div *ngIf="loading">
+      <ng-template *ngFor="let row of [].constructor(paginator?.pageSize || pageSize); let i = index"
+        [ngComponentOutlet]="rowComponent"
+        [ndcDynamicInputs]="{ _id: i, loading: true }"
+      />
+    </div>
   </ng-container>
 
   <div *ngIf="mode === 'row'">
-    <table class="table mb-2">
+    <table class="table mb-0">
       <thead>
         <tr>
           <th
@@ -26,13 +39,11 @@
                   [buttons]="column.buttons"
                 />
                 <ng-container *ngSwitchCase="'component'">
-                  <ng-container
-                    *ngComponentOutlet="
-                      column.component;
-                      inputs: column.componentProps(row)
-                    "
-                  >
-                  </ng-container>
+                  <ng-template
+                    [ngComponentOutlet]="column.component"
+                    [ndcDynamicInputs]="column.componentInputs(row)"
+                    [ndcDynamicOutputs]="column.componentOutputs(row)"
+                  />
                 </ng-container>
                 <span *ngSwitchDefault>{{ renderField(row, column) }}</span>
               </ng-container>
@@ -45,7 +56,7 @@
         <ng-template #skeletonContainer>
           <tr
             *ngFor="
-              let row of [].constructor(paginator?.pageSize || pageSize);
+              let row of [].constructor(paginator?.pageSize || pageSize || 5);
               let i = index
             "
           >
@@ -59,7 +70,7 @@
   </div>
 </div>
 
-<mat-paginator
+<mat-paginator *ngIf="showPagination && !loading"
   [length]="rows().total"
   [pageIndex]="actualPage"
   [pageSize]="pageSize"

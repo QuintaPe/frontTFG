@@ -1,0 +1,12 @@
+@import '_colors.scss';
+
+.camping-gallery {
+  margin-bottom: 70px;
+  img {
+    position: relative !important;
+    background-color: $primary-15;
+    height: 225px;
+    width: 100%;
+    object-fit: cover;
+  }
+}

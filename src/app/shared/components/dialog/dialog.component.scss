@@ -1,6 +1,16 @@
+@import "_breakpoints";
+
 .dialog {
+  width: 80vw;
   .dialog-content {
     padding: 20px;
+
+  }
+}
+
+@media (min-width: $breakpoint-md) {
+  .dialog {
+    width: 400px;
   }
 }
 

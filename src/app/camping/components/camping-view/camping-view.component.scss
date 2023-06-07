@@ -51,30 +51,6 @@
   }
 }
 
-.camping-gallery {
-  margin-bottom: 70px;
-  img {
-    height: 225px;
-    width: 100%;
-    object-fit: cover;
-    margin-bottom: 20px;
-  }
-}
-
-.camping-location {
-  padding: 25px;
-  background-color: $primary;
-  color: white;
-  .map-container {
-    width: 100%;
-  }
-  margin-bottom: 70px;
-}
-
-.camping-booking {
-  padding: 0 30px;
-}
-
 .fr-clearfix::after {
     clear: both;
     display: block;

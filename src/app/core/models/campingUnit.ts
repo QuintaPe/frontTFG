@@ -7,7 +7,7 @@ interface ICampingUnitOptions {
 
 export class CampingUnit {
   _id: string = `new-${Date.now()}`;
-  name: string = '';
+  name: string = 'Unidad 1';
   notes: string = '';
   disabled: boolean = false;
 

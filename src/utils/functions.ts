@@ -48,3 +48,35 @@ export function formatDate(dateString: string, format: string = 'd/m/Y'): string
 export function cloneObject(object: object) {
   return JSON.parse(JSON.stringify(object))
 }
+
+export const convertArrayToObject = (array: any, key: string = "_id") => {
+  const initialValue = {};
+  return array.reduce((obj: any, item: any) => {
+    return {
+      ...obj,
+      [item[key]]: item,
+    };
+  }, initialValue);
+};
+
+export function isEmptyObject(obj: Object) {
+  return (obj && (Object.keys(obj).length === 0));
+}
+
+export function daysBetweenDates(auxExitDate: Date, auxEntryDate: Date): number {
+  const exitDate = new Date(auxExitDate);
+  const entryDate = new Date(auxEntryDate);
+
+  const diff = exitDate.getTime() - entryDate.getTime();
+  return Math.floor(diff / 86400000);
+}
+
+export function formatNumber(x: number | string, opts: any = {}) {
+  const formatNumber = Number(x).toLocaleString('es-ES', {
+    minimumFractionDigits: opts.decimals || 2,
+    maximumFractionDigits: opts.decimals || 2,
+  });
+
+  return formatNumber + (opts.currency || '');
+}
+

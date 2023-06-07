@@ -28,6 +28,4 @@ export class SkeletonComponent {
       ? `${this.height}%`
       : this.height
   }
-
-
 }

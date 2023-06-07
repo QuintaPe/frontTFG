@@ -2,13 +2,16 @@
   [title]='this.title'
   [style]="{ 'min-width': size + 'px', 'width': size + 'px', 'height': size + 'px' }"
   [class]="'avatar ' + this.class"
-  [ngClass]="{'default': !src}"
+  [ngClass]="{'default': !src && !loading}"
 >
-  <ng-container *ngIf="!src">
-    <ng-container *ngIf="type === 'user'">
-      <mat-icon>person_outline</mat-icon>
+  <ng-container *ngIf="!loading">
+    <ng-container *ngIf="!src">
+      <ng-container *ngIf="type === 'user'">
+        <mat-icon>person_outline</mat-icon>
+      </ng-container>
     </ng-container>
-  </ng-container>
 
-  <img *ngIf="src" [src]="FILES_BASE_URL + src" alt="avatar" />
+    <img *ngIf="src" [src]="FILES_BASE_URL + src" alt="avatar" />
+  </ng-container>
+  <app-skeleton height="100%" [width]="100" *ngIf="loading"/>
 </div>

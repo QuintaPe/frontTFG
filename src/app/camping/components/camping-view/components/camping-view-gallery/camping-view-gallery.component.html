@@ -1,0 +1,22 @@
+<section class="camping-gallery">
+  <h2 class="text-center">Outdoor Recreation</h2>
+  <div class="row m-0">
+    <div *ngFor="let image of firstImages" class="col-12 col-sm-6 col-md-4 mb-3">
+      <img [ngSrc]="image" fill />
+    </div>
+  </div>
+  <div class="d-flex justify-content-center">
+    <app-button
+      [text]="'camping.morePhotos' | translate"
+      (onClick)="openGalleryPopup()"
+    />
+  </div>
+</section>
+
+<ng-template #galleryTemplate>
+  <gallery #campingGallery
+    [items]="campingImages"
+    thumbPosition="left"
+    loadingStrategy="lazy"
+  />
+</ng-template>

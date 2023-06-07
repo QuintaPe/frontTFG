@@ -3,6 +3,7 @@ import { AuthService } from '@app/auth/services/auth.service';
 import { User } from '@models/user';
 import { UserService } from '@app/user/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { cloneObject } from '@utils/functions';
 
 @Component({
   selector: 'app-edit-account',
@@ -22,7 +23,7 @@ export class EditAccountComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.user = this.authService.user ? JSON.parse(JSON.stringify(this.authService.user)) : new User();
+    this.user = cloneObject(this.authService.user);
     this.langs = this.getLangs();
   }
 
