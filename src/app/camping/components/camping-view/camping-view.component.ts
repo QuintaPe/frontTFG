@@ -2,6 +2,7 @@ import {
   Component,
   OnInit,
   inject,
+  ViewEncapsulation,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CampingService } from '@app/camping/services/camping.service';
@@ -13,6 +14,7 @@ import environment from 'src/environments/environment';
   selector: 'app-camping-view',
   templateUrl: './camping-view.component.html',
   styleUrls: ['./camping-view.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class CampingViewComponent implements OnInit {
   camping: Camping | null = null;

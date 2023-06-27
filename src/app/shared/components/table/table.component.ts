@@ -1,10 +1,10 @@
 import {
   Component,
   Input,
+  AfterViewInit,
   OnInit,
   Type,
   ViewChild,
-  ViewContainerRef,
   inject,
   ChangeDetectorRef,
   SimpleChanges,
@@ -18,6 +18,7 @@ import { RowMenuComponent } from './rowMenu/row-menu.component';
 import { InputSelectComponent } from '../inputs/input-select/input-select.component';
 import { SkeletonComponent } from '../skeleton/skeleton.component';
 import { DynamicIoModule } from 'ng-dynamic-component';
+import { AvatarComponent } from '../Avatar/avatar.component';
 
 @Component({
   selector: 'app-table',
@@ -28,12 +29,13 @@ import { DynamicIoModule } from 'ng-dynamic-component';
     CommonModule,
     RowMenuComponent,
     SkeletonComponent,
+    AvatarComponent,
     InputSelectComponent,
     MatPaginatorModule,
     DynamicIoModule,
   ],
 })
-export class TableComponent implements OnInit, OnChanges {
+export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() columns: any[] = [];
   @Input() fetch?: any;
   @Input() pageSize: number = 10;
@@ -78,10 +80,10 @@ export class TableComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.fetchPage();
-    if (this.paginator) {
-      this.paginator.page.pipe(tap(() => this.fetchPage())).subscribe();
-    }
-    this.cd.detectChanges();
+  }
+
+  ngAfterViewInit(): void {
+    this.paginator.page.pipe(tap(() => this.fetchPage())).subscribe();
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -123,5 +125,13 @@ export class TableComponent implements OnInit, OnChanges {
       auxInputs[input] = row[input];
     })
     return auxInputs;
+  }
+
+  scrollHorizontally(event: WheelEvent) {
+    const container = event.currentTarget as HTMLElement;
+    const delta = event.deltaY;
+    const scrollAmount = 30;
+    container.scrollLeft += (delta > 0 ? scrollAmount : -scrollAmount);
+    event.preventDefault();
   }
 }

@@ -1,5 +1,5 @@
 import { Routes } from '@angular/router';
-import { canLoad, allowedRoles } from '@guards/role.guard';
+import { allowedRole } from '@guards/role.guard';
 
 export const APP_ROUTES: Routes = [
   {
@@ -15,25 +15,19 @@ export const APP_ROUTES: Routes = [
     loadChildren: () => import('./camping/camping.module').then((m) => m.CampingModule),
   },
   {
-    path: ':role',
-    loadComponent: () => import('./core/components/left-menu/left-menu.component').then((m) => m.LeftMenuComponent),
-    canActivate: [canLoad],
-    children: [
-      {
-        path: 'campings',
-        loadChildren: () => import('./campingManagement/camping-management.module').then((m) => m.CampingManagementModule),
-        canActivateChild: [() => allowedRoles(['manager'])],
-      },
-      {
-        path: 'profile',
-        loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
-        canActivateChild: [() => allowedRoles(['user', 'manager', 'admin'])],
-      },
-      {
-        path: '**',
-        redirectTo: 'profile',
-      },
-    ],
+    path: 'user',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+    canActivate: [() => allowedRole('user')]
+  },
+  {
+    path: 'manager',
+    loadChildren: () => import('./manager/manager.module').then((m) => m.ManagerModule),
+    canActivate: [() => allowedRole('manager')]
+  },
+  {
+    path: 'admin',
+    loadChildren: () => import('./admin/admin.module').then((m) => m.AdminModule),
+    canActivate: [() => allowedRole('admin')]
   },
   {
     path: '**',

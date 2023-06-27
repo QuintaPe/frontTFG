@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { SkeletonComponent } from '../../skeleton/skeleton.component';
@@ -12,7 +12,7 @@ import { NgIf } from '@angular/common';
     imports: [NgIf, SkeletonComponent, MatIconModule, ReactiveFormsModule, FormsModule]
 })
 
-export class InputTextComponent implements OnInit {
+export class InputTextComponent implements OnChanges {
   @Input() type:string = 'text';
   @Input() class:string = '';
   @Input() icon:string = '';
@@ -30,8 +30,8 @@ export class InputTextComponent implements OnInit {
 
   constructor() {}
 
-  ngOnInit(): void {
-    if (this.type === "date" && this.value) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.type === "date" && changes['value'] && this.value) {
       this.value = this.value.split('T')[0];
     }
   }

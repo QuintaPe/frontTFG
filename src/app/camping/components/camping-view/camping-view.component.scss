@@ -1,5 +1,7 @@
 @import '_colors.scss';
 
+.camping-view {
+  padding: 0 !important;
 .camping-header {
     text-align: center;
     min-height: calc(100vh - 60px);
@@ -42959,7 +42961,7 @@
     letter-spacing: 1px;
     padding: 10px 31px 10px 29px;
   }
-
+}
   @media (max-width: 1199px) {
     .u-section-6 .u-sheet-1 {
       min-height: 506px;
@@ -43005,6 +43007,7 @@
     }
   }
 
+
   @media (max-width: 767px) {
     .u-section-6 .u-sheet-1 {
       min-height: 137px;
@@ -43025,3 +43028,4 @@
       margin-right: 0;
     }
   }
+

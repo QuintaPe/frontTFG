@@ -1,4 +1,4 @@
-<div class="table-responsive">
+<div class="table-responsive" (wheel)="scrollHorizontally($event)">
   <ng-container *ngIf="mode === 'component'">
     <div *ngIf="!loading">
       <ng-template *ngFor="let row of rows().items; let i = index"
@@ -17,13 +17,13 @@
   </ng-container>
 
   <div *ngIf="mode === 'row'">
-    <table class="table mb-0">
+    <table class="table mb-0" (wheel)="scrollHorizontally($event)">
       <thead>
         <tr>
           <th
             *ngFor="let column of columns"
             (click)="sortTable(column)"
-            [ngStyle]="column.width ? { 'min-width': column.width + 'px' } : {}"
+            [ngStyle]="column.width ? { 'width': column.width + 'px' } : {}"
           >
             {{ column.name }}
           </th>
@@ -33,20 +33,24 @@
         <ng-container *ngIf="!loading; else skeletonContainer">
           <tr *ngFor="let row of rows().items; let i = index">
             <td *ngFor="let column of columns">
-              <ng-container [ngSwitch]="column.type">
-                <app-table-row-menu *ngSwitchCase="'menu'"
-                  [row]="row"
-                  [buttons]="column.buttons"
-                />
-                <ng-container *ngSwitchCase="'component'">
-                  <ng-template
-                    [ngComponentOutlet]="column.component"
-                    [ndcDynamicInputs]="column.componentInputs(row)"
-                    [ndcDynamicOutputs]="column.componentOutputs(row)"
+              <div class="d-flex align-items-center">
+                <ng-container [ngSwitch]="column.type">
+                  <app-table-row-menu *ngSwitchCase="'menu'"
+                    [row]="row"
+                    [buttons]="column.buttons"
                   />
+                  <ng-container *ngSwitchCase="'component'">
+                    <ng-template
+                      [ngComponentOutlet]="column.component"
+                      [ndcDynamicInputs]="column.componentInputs(row)"
+                      [ndcDynamicOutputs]="column.componentOutputs(row)"
+                    />
+                  </ng-container>
+                  <div *ngSwitchCase="'html'" [innerHTML]="renderField(row, column)"></div>
+                  <app-avatar *ngSwitchCase="'avatar'" type="camping" [size]="45" [src]="renderField(row, column)" />
+                  <span *ngSwitchDefault>{{ renderField(row, column) }}</span>
                 </ng-container>
-                <span *ngSwitchDefault>{{ renderField(row, column) }}</span>
-              </ng-container>
+              </div>
             </td>
           </tr>
           <tr *ngIf="rows().total === 0">
@@ -70,10 +74,10 @@
   </div>
 </div>
 
-<mat-paginator *ngIf="showPagination && !loading"
+<mat-paginator *ngIf="showPagination"
   [length]="rows().total"
   [pageIndex]="actualPage"
   [pageSize]="pageSize"
-  [pageSizeOptions]="[10, 25, 100]"
+  [pageSizeOptions]="[5, 10, 25, 100]"
   [showFirstLastButtons]="true"
 />

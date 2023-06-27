@@ -1,0 +1,30 @@
+<div class="camping-searcher">
+  <app-input-cities
+    class="camping-searcher--cities"
+    [preText]="'camping.location' | translate"
+    [placeholder]="'camping.location' | translate"
+    [(value)]="this.place.location"
+    [loading]="loading"
+    (cityChange)="place = $event"
+  />
+  <div class="camping-searcher--dates">
+    <app-input-date-range
+      [value]="date"
+      (valueChange)="date = $event"
+    />
+  </div>
+  <app-input-text
+    type="number"
+    icon="person_outline"
+    class="camping-searcher--people"
+    placeholder="Capacity"
+    [(value)]="this.people"
+    [loading]="loading"
+  />
+  <app-button
+    class="camping-searcher--searchBtn"
+    [text]="'camping.search' | translate"
+    icon="search"
+    (onClick)="emitValues()"
+  />
+</div>

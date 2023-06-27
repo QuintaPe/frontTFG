@@ -1,0 +1,32 @@
+.camping-searcher {
+  display: flex;
+  flex-wrap: wrap;
+  .camping-searcher--cities {
+    flex: 0 0 auto;
+    width: 100%;
+    border-bottom: 0 !important;
+    border-bottom-left-radius: 0 !important;
+    border-bottom-right-radius: 0 !important;
+  }
+  .camping-searcher--dates {
+    flex: 0 0 auto;
+    width: 50%;
+    border-right: 0;
+    .input-container {
+      border-top-left-radius: 0 !important;
+      border-top-right-radius: 0 !important;
+      border-bottom-right-radius: 0 !important;
+    }
+  }
+  .camping-searcher--people {
+    border-radius: 0 !important;
+    border-left: 0 !important;
+    flex: 1;
+  }
+  .camping-searcher--searchBtn button {
+    border-radius: 0 !important;
+    border-left: 0 !important;
+    border-bottom-right-radius: 5px !important;
+    height: 100%;
+  }
+}

@@ -1,0 +1,36 @@
+<div
+  class="
+    {{ this.value ? 'filled' : '' }}
+    {{ this.isDisabled ? 'disabled' : '' }}
+    {{ this.preText ? 'pretext' : '' }}
+    {{ this.class }}
+    input-container
+  "
+>
+  <ng-container>
+    <div class="icon">
+      <mat-icon>{{ this.icon }}</mat-icon>
+    </div>
+
+    <input
+      id="input-cities"
+      class="input"
+      [id]="preText"
+      [placeholder]="this.placeholder"
+      [disabled]="this.isDisabled"
+      [(ngModel)]="value"
+      (ngModelChange)="this.emitEvent()"
+      autocomplete="off"
+    />
+  </ng-container>
+
+  <label class="label {{ this.icon ? 'icon-label' : '' }} " [for]="preText">
+    {{ preText }}
+    <span *ngIf="isRequired" class="is_required">*</span>
+  </label>
+
+  <app-skeleton *ngIf="loading"
+    class="input-loader"
+    height="100%"
+  />
+</div>

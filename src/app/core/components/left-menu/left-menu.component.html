@@ -8,7 +8,7 @@
         <li *ngFor="let route of routes">
           <a
             class="nav-item"
-            [routerLink]="['/', activeRole, route.path]"
+            [routerLink]="['/', authService.user.role, route.path]"
             (click)="closeMenu()"
           >
             <div class="left-menu-icon">

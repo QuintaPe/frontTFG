@@ -3,6 +3,7 @@
   {{ !this.control?.valid && this.control?.touched ? 'invalid' : '' }}
   {{ this.control?.value || this.value ? 'filled' : '' }}
   {{ this.isDisabled ? 'disabled' : '' }}
+  {{ this.preText ? 'pretext' : ''}}
   {{ this.class }}"
 >
   <ng-container>
@@ -30,7 +31,7 @@
     />
   </ng-container>
 
-  <label class="label {{ this.icon ? 'icon-label' : '' }} " [for]="preText">
+  <label *ngIf="preText" class="label {{ this.icon ? 'icon-label' : '' }} " [for]="preText">
     {{ preText }}
     <span *ngIf="isRequired" class="is_required">*</span>
   </label>

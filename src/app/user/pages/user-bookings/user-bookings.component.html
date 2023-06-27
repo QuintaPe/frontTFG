@@ -1,0 +1,8 @@
+<app-panel [title]="'user.myBookings' | translate">
+  <app-table
+    [columns]="columns"
+    [fetch]="getUserBookings"
+    [pageSize]="0"
+    [showPagination]="false"
+  />
+</app-panel>

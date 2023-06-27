@@ -6,7 +6,7 @@
  */
 export function transformGetParams(params: Record<string, any>): string {
   const queryString = Object.keys(params)
-    .map((key) => `${key}=${encodeURIComponent(JSON.stringify(params[key]).replace(/"/g, ""))}`)
+    .map((key) => `${key}=${encodeURIComponent(JSON.stringify(params[key]))}`)
     .join('&');
 
   return queryString ? `?${queryString}` : '';

@@ -3,10 +3,7 @@
 @import "_breakpoints";
 
 .login-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: calc(100vh - 220px);
+  height: 100%;
   width: 80%;
   position: relative;
   left: 10%;

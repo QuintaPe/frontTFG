@@ -1,11 +1,19 @@
-export const CAMPINGS_MANAGEMENT_ROUTES = {
-  CAMPINGS: { path: '', url: 'manager/campings'},
-  NEW_CAMPING: { path: 'new', url: 'manager/campings/new'},
-  VIEW_CAMPING: { path: ':id', url: 'manager/campings/:id'},
-  EDIT_CAMPING: { path: ':id/edit', url: 'manager/campings/:id/edit'},
+export const MANAGER_ROUTES = {
+  CAMPINGS: { path: 'campings', url: 'manager/campings'},
+  NEW_CAMPING: { path: 'campings/new', url: 'manager/campings/new'},
+  VIEW_CAMPING: { path: 'campings/:id', url: 'manager/campings/:id'},
+  EDIT_CAMPING: { path: 'campings/:id/edit', url: 'manager/campings/:id/edit'},
+  PROFILE: { path: 'profile', url: 'user/profile' },
 
   setViewCamping: (id: string) => `manager/campings/${id}`,
   setEditCamping: (id: string) => `manager/campings/${id}/edit`,
+}
+
+export const ADMIN_ROUTES = {
+  CAMPINGS: { path: 'campings', url: 'admin/campings'},
+  BOOKINGS: { path: 'bookings', url: 'admin/bookings'},
+  USERS: { path: 'users', url: 'admin/users'},
+  PROFILE: { path: 'profile', url: 'user/profile' },
 }
 
 export const CAMPINGS_ROUTES = {
@@ -21,3 +29,9 @@ export const AUTH_ROUTES = {
   SIGNUP: { path: 'signup', url: 'auth/signup' },
   SIGNUP_MANAGER: { path: 'manager/signup', url: 'auth/manager/signup' },
 }
+
+export const USER_ROUTES = {
+  PROFILE: { path: 'profile', url: 'user/profile' },
+  BOOKINGS: { path: 'bookings', url: 'user/bookings' },
+}
+

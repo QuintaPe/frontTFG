@@ -22,6 +22,8 @@ import { CampingViewBookingComponent } from './components/camping-view/component
 import { AvatarComponent } from '@app/shared/components/Avatar/avatar.component';
 import { CampingBookingComponent } from './components/camping-booking/camping-booking.component';
 import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.component';
+import { PanelComponent } from '@app/shared/components/panel/panel.component';
+import { CampingsListComponent } from './components/campings-list/campings-list.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.comp
     CampingViewBookingComponent,
 
     CampingBookingComponent,
+    CampingsListComponent,
   ],
   imports: [
     CampingRoutingModule,
@@ -51,6 +54,7 @@ import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.comp
     TableComponent,
     AvatarComponent,
     SkeletonComponent,
+    PanelComponent,
   ],
 })
 

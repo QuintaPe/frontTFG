@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TranslateService } from '@ngx-translate/core';
-import { ApiService } from '@core/services/api.service';
 import { Router } from '@angular/router';
 import { User } from '@models/user';
+import { fetch } from '@utils/api';
 
 @Injectable({
   providedIn: "root",
@@ -14,7 +14,6 @@ export class AuthService {
   public loading: boolean = true;
 
   constructor(
-    private apiService: ApiService,
     private jwtHelper: JwtHelperService,
     public translate: TranslateService,
     public router: Router,
@@ -34,10 +33,9 @@ export class AuthService {
   //Registrarse
   async signup(user: Object): Promise<any> {
     try {
-      const response = await this.apiService.fetch('POST', 'signup', { ...user });
-      if (response.success) {
-        this.router.navigate(['']);
-      }
+      const response = await fetch('POST', 'signup', { ...user });
+      this.router.navigate(['']);
+
     } catch (axiosError: any) {
       this.errors = axiosError.response.data.errors;
     }
@@ -46,16 +44,14 @@ export class AuthService {
   //Iniciar Sesion
   async login( email: string, password: string ): Promise<any> {
     try {
-      const response = await this.apiService.fetch('POST', 'login', { email, password });
-      if (response.success) {
-          localStorage.setItem('token', response.token);
-          localStorage.setItem('lang', response.user.lang);
-          this.user = response.user;
-          this.translate.use(response.user.lang);
-          this.router.navigate(['']);
-      }
-    } catch (axiosError: any) {
-      this.errors = axiosError.response.data.errors;
+      const response = await fetch('POST', 'login', { email, password });
+      localStorage.setItem('token', response.token);
+      localStorage.setItem('lang', response.user.lang);
+      this.user = response.user;
+      this.translate.use(response.user.lang);
+      this.router.navigate(['']);
+    } catch (error: any) {
+      this.errors = error;
     }
   }
 
@@ -64,7 +60,8 @@ export class AuthService {
     this.user = null;
     localStorage.removeItem('token');
     localStorage.removeItem('lang');
-    this.translate.use(this.translate.getBrowserLang() || 'es')
+    this.translate.use(this.translate.getBrowserLang() || 'es');
+    this.router.navigateByUrl('auth/login');
   }
 
   async setLoggedUser() {
@@ -72,7 +69,7 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const decoded = token ? this.jwtHelper.decodeToken(token) : null;
     try {
-      this.user = decoded ? await this.apiService.fetch('GET', `users/${decoded.user._id}`) : null;
+      this.user = decoded ? await fetch('GET', `users/${decoded.user._id}`) : null;
       this.loading = false;
     } catch {
       this.loading = false;

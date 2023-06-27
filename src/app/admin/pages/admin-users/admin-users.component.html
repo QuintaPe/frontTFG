@@ -1,0 +1,12 @@
+<app-panel class="create-camping" [title]="'common.users' | translate">
+  <app-table
+    [columns]="columns"
+    [fetch]="getUsers"
+    [pageSize]="5"
+    [forceFetch]="tableFlagRefresh"
+  />
+</app-panel>
+
+<ng-template #editUserTemplate>
+  <app-profile [user]="editUser" (userEdited)="onUserEdited()" />
+</ng-template>

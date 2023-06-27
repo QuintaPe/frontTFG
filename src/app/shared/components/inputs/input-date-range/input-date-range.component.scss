@@ -1,0 +1,63 @@
+@import "_colors";
+@import "_variables";
+@import "_breakpoints";
+
+.input-container {
+  position: relative;
+  width: 100%;
+  display: flex;
+  border: 2px solid $primary;
+  border-radius: 5px;
+  background: $primary-15;
+  height: 45px;
+
+
+  mat-label {
+    position: absolute;
+    left: 10px;
+    top: -13px;
+    font-size: 14px;
+    transition: all 0.2s;
+    padding: 0 2px;
+    z-index: 1;
+    color: $primary;
+    font-weight: bold;
+    cursor: text;
+    &::before {
+      content: "";
+      height: 3px;
+      position: absolute;
+      left: 0px;
+      top: 10px;
+      width: 100%;
+      z-index: -1;
+      background: white;
+    }
+  }
+
+  mat-datepicker-toggle button {
+    padding: 7px;
+  }
+
+  mat-date-range-input {
+    padding: 10px;
+    width: 100%;
+    font-size: 18px;
+  }
+
+  .mat-mdc-icon-button.mat-mdc-button-base {
+    padding: 7px;
+  }
+
+  .mat-date-range-input-separator-hidden {
+    opacity: initial;
+  }
+}
+
+.input-loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+}

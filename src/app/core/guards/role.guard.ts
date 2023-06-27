@@ -13,7 +13,7 @@ export const canLoad = (route:ActivatedRouteSnapshot): boolean => {
   return userRole === role;
 }
 
-export const allowedRoles = (roles: string[]): boolean => {
+export const allowedRole = (role: string): boolean => {
   const authService = inject(AuthService);
-  return !!authService?.user?.role && roles.includes(authService.user.role);
+  return role  === authService.user.role;
 }

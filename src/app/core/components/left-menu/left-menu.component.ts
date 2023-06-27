@@ -1,7 +1,9 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, RouterLink, RouterOutlet } from '@angular/router';
+import { RouterLink, RouterOutlet } from '@angular/router';
 import { NgFor } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
+import { AuthService } from '@app/auth/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 interface Route {
   name: string,
@@ -19,32 +21,34 @@ interface Route {
 
 export class LeftMenuComponent implements OnInit {
   routes: Route[] = [];
-  activeRole:string = ''
   showAside!:boolean;
 
-  route = inject(ActivatedRoute);
+  authService = inject(AuthService);
+  translate = inject(TranslateService);
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.activeRole = params['role'];
-      switch (params['role']) {
-        case 'manager':
-          this.routes = [
-            { icon: 'work', name: 'Campings', path: 'campings' },
-            { icon: 'person', name: 'Profile', path: 'profile' }
-          ];
-          break;
+    this.routes = this.getRoutes(this.authService.user.role);
+  }
+
+  getRoutes = (role: string) => {
+    switch (role) {
       case 'admin':
-        this.routes = [];
-        break;
-      default:
-        this.routes = [
-          // { icon: 'work', name: 'Campings', path: 'campings' },
-          { icon: 'person', name: 'Profile', path: 'profile' }
+        return [
+          { icon: 'work', name: this.translate.instant('camping.campings'), path: 'campings' },
+          { icon: 'local_offer', name: this.translate.instant('common.bookings'), path: 'bookings' },
+          { icon: 'person', name: this.translate.instant('common.users'), path: 'users' }
         ];
-        break;
-      }
-    });
+      case 'manager':
+        return [
+          { icon: 'work', name: this.translate.instant('user.myCampings'), path: 'campings' },
+          { icon: 'person', name: this.translate.instant('user.profile'), path: 'profile' },
+        ];
+    default:
+      return [
+        { icon: 'local_offer', name: this.translate.instant('user.myBookings'), path: 'bookings' },
+        { icon: 'person', name: this.translate.instant('user.profile'), path: 'profile' }
+      ];
+    }
   }
 
   toggleMenu() {

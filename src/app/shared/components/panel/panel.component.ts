@@ -14,7 +14,8 @@ export class PanelComponent implements OnInit {
   @Input() title: string = '';
   @Input() breadcrumb: any = null;
   @Input() class: string = '';
-  
+  @Input() fullHeight: boolean = false;
+
   constructor(public router: Router) {}
   ngOnInit(): void {}
 

@@ -1,16 +1,25 @@
 {
   "user": {
-    "user": "Usuario",
     "lastName": "Apellidos",
     "birthDate": "Fecha de nacimiento",
     "phone": "Teléfono",
     "lang": "Idioma",
-    "modifyProfile": "Modificar datos del perfil"
+    "profile": "Perfil",
+    "modifyProfile": "Modificar datos del perfil",
+    "myBookings": "Mis reservas",
+    "myCampings": "Mis campamentos",
+    "role": "Rol",
+    "roles" :{
+      "user": "Usuario",
+      "manager": "Manager",
+      "admin": "Admin"
+    }
   },
   "camping": {
     "camping": "Campamento",
     "campings": "Campamentos",
     "createCamping": "Crear campamento",
+    "deleteQuestion": "¿Esta seguro que desea eliminar este campamento?",
     "lodging": "Alojamiento",
     "lodgings": "Alojamientos",
     "addLodging":  "Añadir alojamiento",
@@ -78,7 +87,9 @@
     "accept": "Aceptar",
     "cancel": "Cancelar",
     "creationDate": "Fecha de creación",
-    "total": "Total"
+    "total": "Total",
+    "bookings": "Reservas",
+    "users": "Usuarios"
   },
   "countries": {
     "AFG": "Afganistán",

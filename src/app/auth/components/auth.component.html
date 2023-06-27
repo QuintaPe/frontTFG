@@ -1,5 +1,5 @@
-<app-panel>
-  <div class="row justify-content-center">
+<app-panel [fullHeight]="true" class="d-flex align-items-center">
+  <div class="row h-100 justify-content-center align-items-center">
     <div class="col-12 col-md-7">
       <app-signup-user *ngIf="isUserSignup" />
       <app-signup-manager *ngIf="isManagerSignup" />
@@ -24,13 +24,11 @@
         </button>
       </div>
 
-      <div class="img-container">
-          <img
-            src='../../../assets/png/ScoutCamp-logo.png'
-            class="img-fluid login-img"
-            alt="ScoutCamp-logo"
-          />
-      </div>
+      <img
+        src='../../../assets/png/ScoutCamp-logo.png'
+        class="img-fluid login-img"
+        alt="ScoutCamp-logo"
+      />
     </div>
   </div>
 </app-panel>

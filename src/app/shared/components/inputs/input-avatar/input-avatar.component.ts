@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { DocumentService } from '@core/services/document.service';
 import environment from 'src/environments/environment';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,7 +12,7 @@ import { NgIf } from '@angular/common';
     imports: [NgIf, MatIconModule]
 })
 
-export class InputAvatarComponent implements OnInit {
+export class InputAvatarComponent implements OnChanges {
   @Input() class:string = '';
   @Input() type:string = 'user';
   @Input() preText:string = '';
@@ -29,8 +29,8 @@ export class InputAvatarComponent implements OnInit {
 
   constructor(public documentService: DocumentService) {}
 
-  ngOnInit(): void {
-    if (!this.file && this.value) {
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['value'] && this.value && !this.file) {
       this.file = this.value;
     }
   }
