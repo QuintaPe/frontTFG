@@ -41,6 +41,7 @@ export class InputCitiesComponent implements OnInit {
         location: place.formatted_address,
         lat: place?.geometry?.location.lat(),
         lng: place?.geometry?.location.lng(),
+        type: place?.types[0],
       });
     })
   }
@@ -51,6 +52,7 @@ export class InputCitiesComponent implements OnInit {
       location: '',
       lat: null,
       lng: null,
+      type: null,
     });
   }
 

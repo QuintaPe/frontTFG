@@ -1,0 +1,51 @@
+@import "_colors";
+@import "_variables";
+@import "_breakpoints";
+
+.camping-row {
+  display: flex;
+  gap: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid $primary-50;
+  border-radius: $borderRadiusLight;
+  overflow: hidden;
+  cursor: pointer;
+  &:hover {
+    background-color: $primary-15;
+  }
+
+  .camping-row--img {
+    flex:  0 0 180px;
+    position: relative;
+      .favorite-icon {
+        position: absolute;
+        top: 3px;
+        right: 3px;
+        color: white;
+      }
+
+    img {
+      border-radius: 1px;
+      height: 140px;
+      object-fit: cover;
+    }
+  }
+
+  .camping-row--data {
+    .camping-row--name {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .camping-row--description {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+  }
+
+}

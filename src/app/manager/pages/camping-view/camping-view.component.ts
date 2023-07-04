@@ -1,5 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input, OnInit, inject } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { formatDate } from '@utils/functions';
 import { CampingService } from '@app/camping/services/camping.service';
@@ -10,11 +9,10 @@ import { DialogService } from '@app/shared/components/dialog/dialog.service';
   templateUrl: './camping-view.component.html',
   styleUrls: ['./camping-view.component.scss']
 })
-export class CampingViewComponent implements OnInit {
-  id!: string;
+export class CampingViewComponent {
+  @Input() id: string = '';
   tableFlagRefresh: number = 0;
 
-  private activatedRoute = inject(ActivatedRoute);
   private campingService = inject(CampingService);
   private translate = inject(TranslateService);
   private dialogService = inject(DialogService);
@@ -30,7 +28,7 @@ export class CampingViewComponent implements OnInit {
     },
     {
       field: 'units',
-      name: this.translate.instant('camping.units'),
+      name: this.translate.instant('campsite.units'),
       sort: 'asc',
       sortable: true,
       preRender: (units: string) => units.length,
@@ -62,16 +60,12 @@ export class CampingViewComponent implements OnInit {
     }
   ];
 
-  async ngOnInit(): Promise<void> {
-    this.id = this.activatedRoute.snapshot.paramMap.get("id") ?? '';
-  }
-
   fetchCampingBookings = async (page: number, size: number, search: string, filters: any, sort: string) => {
     return this.campingService.getCampingBookings(this.id, page, size, search, filters, sort)
   }
 
   async handleDeleteBooking(booking: string) {
-    const confirmed = await this.dialogService.openConfirm(this.translate.instant('camping.confirmDeleteBooking'));
+    const confirmed = await this.dialogService.openConfirm(this.translate.instant('campsite.confirmDeleteBooking'));
     if (confirmed) {
       const ref = this.dialogService.openLoading();
       try {

@@ -38,13 +38,13 @@ export class CampingViewBookingComponent {
   lodgingsColumns: any = [
     {
       field: 'name',
-      name: this.translate.instant('camping.lodging'),
+      name: this.translate.instant('campsite.lodging'),
       sort: 'asc',
       sortable: true,
     },
     {
       field: 'capacity',
-      name: this.translate.instant('camping.capacity'),
+      name: this.translate.instant('campsite.capacity'),
       sort: 'asc',
       sortable: true,
       preRender: (cap: string) => cap,

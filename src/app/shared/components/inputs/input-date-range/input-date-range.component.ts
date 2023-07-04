@@ -10,6 +10,7 @@ import { AuthService } from '@app/auth/services/auth.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
 import * as moment from 'moment';
 import 'moment/locale/es';
+import { CommonModule } from '@angular/common';
 
 const MY_FORMAT = {
   display: {
@@ -31,6 +32,7 @@ const MY_FORMAT = {
     MatDatepickerModule,
     MatFormFieldModule,
     MatMomentDateModule,
+    CommonModule,
   ],
   encapsulation: ViewEncapsulation.None,
   providers: [
@@ -71,10 +73,6 @@ export class InputDateRangeComponent {
     }
 
     this.dateRange.valueChanges.subscribe((value) => {
-      console.log(
-        value?.start?.format('YYYY-MM-DD'),
-        value?.end?.format('YYYY-MM-DD')
-      );
       this.valueChange.emit({
         start: value?.start?.format('YYYY-MM-DD') || null,
         end: value?.end?.format('YYYY-MM-DD') || null,

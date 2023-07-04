@@ -13,6 +13,7 @@
     width: 50%;
     border-right: 0;
     .input-container {
+      height: 45px;
       border-top-left-radius: 0 !important;
       border-top-right-radius: 0 !important;
       border-bottom-right-radius: 0 !important;
@@ -22,6 +23,7 @@
     border-radius: 0 !important;
     border-left: 0 !important;
     flex: 1;
+    height: 45px;
   }
   .camping-searcher--searchBtn button {
     border-radius: 0 !important;

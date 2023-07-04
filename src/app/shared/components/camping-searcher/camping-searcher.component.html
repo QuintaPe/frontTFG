@@ -1,16 +1,16 @@
 <div class="camping-searcher">
   <app-input-cities
     class="camping-searcher--cities"
-    [preText]="'camping.location' | translate"
-    [placeholder]="'camping.location' | translate"
-    [(value)]="this.place.location"
+    [preText]="'campsite.location' | translate"
+    [placeholder]="'campsite.location' | translate"
+    [(value)]="this.location"
     [loading]="loading"
-    (cityChange)="place = $event"
+    (cityChange)="handleCityChange($event)"
   />
   <div class="camping-searcher--dates">
     <app-input-date-range
-      [value]="date"
-      (valueChange)="date = $event"
+      [value]="{ start: this.startDate, end: this.endDate}"
+      (valueChange)="handleDateChange($event)"
     />
   </div>
   <app-input-text
@@ -18,12 +18,12 @@
     icon="person_outline"
     class="camping-searcher--people"
     placeholder="Capacity"
-    [(value)]="this.people"
+    [(value)]="this.capacity"
     [loading]="loading"
   />
   <app-button
     class="camping-searcher--searchBtn"
-    [text]="'camping.search' | translate"
+    [text]="'campsite.search' | translate"
     icon="search"
     (onClick)="emitValues()"
   />

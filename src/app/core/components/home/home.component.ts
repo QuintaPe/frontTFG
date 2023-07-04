@@ -1,5 +1,6 @@
-import { Component, OnInit, inject, ViewEncapsulation } from '@angular/core';
-import { CampingService } from '@app/camping/services/camping.service';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
+import { CAMPINGS_ROUTES } from '@app/core/routes';
 import { CampingSearcherComponent } from '@app/shared/components/camping-searcher/camping-searcher.component';
 import { PanelComponent } from '@app/shared/components/panel/panel.component';
 import { TranslateModule } from '@ngx-translate/core';
@@ -9,22 +10,22 @@ import { TranslateModule } from '@ngx-translate/core';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   standalone: true,
-  imports: [
-    PanelComponent,
-    CampingSearcherComponent,
-    TranslateModule,
-  ],
+  imports: [PanelComponent, CampingSearcherComponent, TranslateModule],
   encapsulation: ViewEncapsulation.None,
 })
-export class HomeComponent implements OnInit {
-  private campingService = inject(CampingService);
-  constructor() {}
+export class HomeComponent {
+  private router = inject(Router);
 
-  ngOnInit(): void {}
+  async navigateCampingList(v: any) {
+    const params = [
+      `lat=${v.lat || ''}`,
+      `lng=${v.lng || ''}`,
+      `type=${v.type || ''}`,
+      `startDate=${v.startDate || ''}`,
+      `endDate=${v.endDate || ''}`,
+      `capacity=${v.capacity || ''}`,
+    ].filter((elem) => !elem.endsWith("="));
 
-  async a(v:any) {
-    console.log(v);
-    const campings = await this.campingService.getAvailableCampings(v.place, v.date, v.people, {});
-    console.log(campings);
+    return this.router.navigateByUrl(CAMPINGS_ROUTES.CAMPINGS.url + (params.length ? `?${params.join('&')}` : ''))
   }
 }

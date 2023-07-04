@@ -88,7 +88,7 @@ export class AdminUsersComponent {
     this.editUser = user;
     this.dialogRef = this.dialog.open(PopupComponent, {
       data: {
-        headerText: this.translate.instant('camping.addLodging'),
+        headerText: this.translate.instant('campsite.addLodging'),
         template: this.editUserTemplate
       },
       width: '80vw',

@@ -29,8 +29,12 @@ export class CampingService {
     return fetch('GET', 'campings', { opts });
   }
 
-  async getAvailableCampings(location: any, dates: any, capacity: number, opts: any) {
-    return fetch('GET', 'campings/availables', { location, dates, capacity, opts });
+  async getAvailableCampings(lat: number, lng: number, entryDate: string, exitDate:string, capacity: number, opts: any) {
+    return fetch('GET', 'campings/availables', { lat, lng, entryDate, exitDate, capacity, opts });
+  }
+
+  async getFavoriteCampings(opts: any) {
+    return fetch('GET', 'campings/favorites', { opts });
   }
 
   async getFullCamping(id: String) {
@@ -43,6 +47,11 @@ export class CampingService {
 
   async deleteCamping(id: string) {
     return fetch('DELETE', `campings/${id}`);
+  }
+
+  async createCampingRelation(id: string, data: any) {
+    const { favorite = null, rating = null } = data
+    return fetch('POST', `campings/${id}/relation`, { favorite, rating });
   }
 
   async createCampingBooking(id: string, bookingData: Object) {

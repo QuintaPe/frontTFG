@@ -1,0 +1,23 @@
+<div class="camping-row" [routerLink]="_id" *ngIf="!loading">
+  <div *ngIf="image" class="camping-row--img">
+    <mat-icon
+      class="favorite-icon"
+      [ngStyle]="{ 'color': relation?.favorite ? 'red' : 'white' }"
+      (click)="toggleFavorite($event)">favorite</mat-icon>
+    <img [src]="image" />
+  </div>
+  <div class="camping-row--data">
+    <div class="camping-row--name">{{ name }}</div>
+    <div class="camping-row--description">{{ description }}</div>
+  </div>
+</div>
+
+<div class="camping-row" *ngIf="loading">
+  <div class="camping-row--img">
+    <app-skeleton width="180px" height="140px" />
+  </div>
+  <div class="camping-row--data">
+    <app-skeleton class="mb-2" width="180px" />
+    <app-skeleton class="mb-2" width="180px" />
+  </div>
+</div>

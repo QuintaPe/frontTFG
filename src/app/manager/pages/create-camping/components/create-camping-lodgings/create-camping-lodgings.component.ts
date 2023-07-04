@@ -63,7 +63,7 @@ export class CreateCampingLodgingsComponent {
     this.actualLodging = lodging ? cloneObject(lodging) : new CampingLodging();
     this.dialog.open(PopupComponent, {
       data: {
-        headerText: this.translate.instant('camping.addLodging'),
+        headerText: this.translate.instant('campsite.addLodging'),
         template: this.popupTemplate
       },
       width: '80vw',
@@ -75,6 +75,7 @@ export class CreateCampingLodgingsComponent {
     if (lodgingIndex > -1) {
       this.camping.lodgings[lodgingIndex] = this.actualLodging;
     } else {
+      this.actualLodging._id = `new.${Math.random()}`;
       this.camping.lodgings.push(this.actualLodging);
     }
     this.dialog.closeAll();

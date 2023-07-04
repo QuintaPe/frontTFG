@@ -24,6 +24,10 @@ import { CampingBookingComponent } from './components/camping-booking/camping-bo
 import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.component';
 import { PanelComponent } from '@app/shared/components/panel/panel.component';
 import { CampingsListComponent } from './components/campings-list/campings-list.component';
+import { CampingSearcherComponent } from '@app/shared/components/camping-searcher/camping-searcher.component';
+import { DialogService } from '@app/shared/components/dialog/dialog.service';
+import { CampingRowComponent } from './components/campings-list/components/camping-row/camping-row.component';
+import { CampingsFavoritesComponent } from './components/camping-favorites/campings-favorites.component';
 
 @NgModule({
   declarations: [
@@ -31,9 +35,11 @@ import { CampingsListComponent } from './components/campings-list/campings-list.
     CampingViewGalleyComponent,
     CampingViewLocationComponent,
     CampingViewBookingComponent,
+    CampingRowComponent,
 
     CampingBookingComponent,
     CampingsListComponent,
+    CampingsFavoritesComponent,
   ],
   imports: [
     CampingRoutingModule,
@@ -55,7 +61,11 @@ import { CampingsListComponent } from './components/campings-list/campings-list.
     AvatarComponent,
     SkeletonComponent,
     PanelComponent,
+    CampingSearcherComponent
   ],
+  providers: [
+    DialogService,
+  ]
 })
 
 export class CampingModule { }

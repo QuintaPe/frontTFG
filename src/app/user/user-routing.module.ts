@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditAccountComponent } from './pages/edit-account/edit-account.component';
 import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
+import { CampingsFavoritesComponent } from '@app/camping/components/camping-favorites/campings-favorites.component';
 
 
 const routes: Routes = [
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'bookings',
         component: UserBookingsComponent,
+      },
+      {
+        path: 'favorites',
+        component: CampingsFavoritesComponent,
       },
       {
         path: '**',

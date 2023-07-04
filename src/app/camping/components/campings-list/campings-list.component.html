@@ -1,3 +1,22 @@
-<app-panel class='camping-view'>
+<app-panel [title]="'campsite.availableCampsitesList' | translate">
+  <app-camping-searcher
+    [lat]="lat"
+    [lng]="lng"
+    [type]="type"
+    [startDate]="startDate"
+    [endDate]="endDate"
+    [capacity]="capacity"
+    (onInit)="location = $event"
+    (onSearch)="updateSearchParams($event)"
+  />
 
+  <h5 class="mt-4 mb-2">{{ 'campsite.showingCampsitesNear' | translate}} {{ location }}</h5>
+  <app-table
+    mode="component"
+    [rowComponent]="campingRowType"
+    [componentInputs]="componentInputs"
+    [fetch]="getCampingList"
+    [forceFetch]="forceFetch"
+    [pageSize]="5"
+  />
 </app-panel>

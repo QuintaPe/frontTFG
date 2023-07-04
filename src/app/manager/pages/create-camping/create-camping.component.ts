@@ -1,5 +1,5 @@
-import { inject, Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { inject, Input, Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ViewportScroller } from '@angular/common';
 import { Camping } from '@models/camping';
 import { MANAGER_ROUTES } from '@app/core/routes';
@@ -13,22 +13,21 @@ import { CampingService } from '@app/camping/services/camping.service';
 })
 
 export class CreateCampingComponent implements OnInit {
+  @Input() id: string = ''
   protected camping: Camping = new Camping();
   protected page = 0;
   protected loading = false;
 
   private campingService = inject(CampingService);
-  private route = inject(ActivatedRoute);
   private router = inject(Router);
   private viewport = inject(ViewportScroller);
   protected translate = inject(TranslateService);
 
   ngOnInit(): void {
-    const id = this.route.snapshot.paramMap.get('id');
-    if (id) {
+    if (this.id) {
       (async () => {
         this.loading = true;
-        this.camping = await this.campingService.getFullCamping(id);
+        this.camping = await this.campingService.getFullCamping(this.id);
         this.loading = false;
       })();
     }
@@ -44,9 +43,9 @@ export class CreateCampingComponent implements OnInit {
     }
   }
   breadcrumb = [
-    { name: this.translate.instant('camping.campings'), route: MANAGER_ROUTES.CAMPINGS.url },
-    { name: this.translate.instant('camping.createCamping') },
-    { name: this.translate.instant(`camping.${this.getPageName()}`) },
+    { name: this.translate.instant('campsite.campsites'), route: MANAGER_ROUTES.CAMPINGS.url },
+    { name: this.translate.instant('campsite.createCampsite') },
+    { name: this.translate.instant(`campsite.${this.getPageName()}`) },
   ];
 
   pageBack() {
@@ -59,13 +58,14 @@ export class CreateCampingComponent implements OnInit {
     if (this.page > 2) {
       this.loading = true;
       try {
-        if (this.route.snapshot.paramMap.get('id')) {
+        if (this.id) {
           await this.campingService.putCamping(this.camping);
         } else {
           await this.campingService.postCamping(this.camping);
         }
         this.router.navigateByUrl(MANAGER_ROUTES.CAMPINGS.url);
       } catch (err) {
+        this.loading = false
         throw err;
       }
     } else {

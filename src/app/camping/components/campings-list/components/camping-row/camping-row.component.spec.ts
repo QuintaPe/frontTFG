@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CampingsListComponent } from './campings-list.component';
+import { CampingRowComponent } from './camping-row.component';
 
-describe('CampingsListComponent', () => {
-  let component: CampingsListComponent;
-  let fixture: ComponentFixture<CampingsListComponent>;
+describe('CampingRowComponent', () => {
+  let component: CampingRowComponent;
+  let fixture: ComponentFixture<CampingRowComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CampingsListComponent ]
+      declarations: [ CampingRowComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CampingsListComponent);
+    fixture = TestBed.createComponent(CampingRowComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

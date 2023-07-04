@@ -39,7 +39,6 @@ export class ProfileComponent {
 
   getLangs = () => {
     return this.translate.getLangs().map(lang => {
-      console.log(lang);
       return { id: lang, name: this.translate.instant(`langs.${lang}`) };
     })
   }

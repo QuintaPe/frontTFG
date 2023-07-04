@@ -17,6 +17,7 @@ export const ADMIN_ROUTES = {
 }
 
 export const CAMPINGS_ROUTES = {
+  CAMPINGS: { path: '', url: 'campings'},
   CAMPING: { path: ':id', url: 'campings/:id'},
   BOOK_CAMPING: { path: ':id/booking', url: 'campings/:id/booking'},
 
@@ -33,5 +34,7 @@ export const AUTH_ROUTES = {
 export const USER_ROUTES = {
   PROFILE: { path: 'profile', url: 'user/profile' },
   BOOKINGS: { path: 'bookings', url: 'user/bookings' },
+  FAVORITE_CAMPINGS: { path: 'favorites', url: 'user/favorites'},
+
 }
 

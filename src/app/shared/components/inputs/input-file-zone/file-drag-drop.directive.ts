@@ -10,7 +10,7 @@ export class FileDragNDropDirective {
   @Output() private filesChangeEmiter : EventEmitter<File> = new EventEmitter();
   //@Output() private filesInvalidEmiter : EventEmitter<File[]> = new EventEmitter();
   @HostBinding('style') private style?: string
-  
+
   constructor() { }
 
   @HostListener('dragover', ['$event']) public onDragOver(evt: any){
@@ -31,7 +31,6 @@ export class FileDragNDropDirective {
     this.style = ''
     let files = evt.dataTransfer.files;
     let valid_files : Array<File> = files;
-    console.log(valid_files);
     this.filesChangeEmiter.emit(valid_files[0]);
   }
 }

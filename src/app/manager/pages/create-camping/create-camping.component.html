@@ -16,7 +16,7 @@
       />
       <h6 class="fw-b mb-3">{{ "camping.addImages" | translate }}</h6>
       <app-input-file-zone
-        [preText]="'camping.addLodging' | translate"
+        [preText]="'campsite.addLodging' | translate"
         [(value)]="camping.images"
         [isMultiple]="true"
         [isRequired]="true"
@@ -30,19 +30,19 @@
 
     <div *ngSwitchCase="3">
       <app-input-text-area
-        [preText]="'camping.amenities' | translate"
+        [preText]="'campsite.amenities' | translate"
         [(value)]="this.camping.amenities"
         [loading]="loading"
         class="mb-4"
       />
       <app-input-text-area
-        [preText]="'camping.rules' | translate"
+        [preText]="'campsite.rules' | translate"
         [(value)]="this.camping.rules"
         [loading]="loading"
         class="mb-4"
       />
       <app-input-text-area
-        [preText]="'camping.nearestLocations' | translate"
+        [preText]="'campsite.nearestLocations' | translate"
         [(value)]="this.camping.nearestLocations"
         [loading]="loading"
         class="mb-4"

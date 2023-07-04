@@ -1,10 +1,11 @@
 import {
   Component,
+  Input,
   OnInit,
   inject,
 } from '@angular/core';
 import { Camping } from '@models/camping';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CampingService } from '@app/camping/services/camping.service';
 import { BookingService } from '@app/camping/services/booking.service';
 import { CAMPINGS_ROUTES } from '@app/core/routes';
@@ -17,6 +18,7 @@ import { AuthService } from '@app/auth/services/auth.service';
   styleUrls: ['./camping-booking.component.scss'],
 })
 export class CampingBookingComponent implements OnInit {
+  @Input() id: string = '';
   camping: Camping | null = null;
   bookingData: any = null;
   manager: any = {
@@ -28,7 +30,6 @@ export class CampingBookingComponent implements OnInit {
   loading: boolean = true;
   creatingBooking: boolean = false;
 
-  private activatedRoute = inject(ActivatedRoute);
   private campingService = inject(CampingService);
   private bookingService = inject(BookingService);
   private authService = inject(AuthService);
@@ -38,10 +39,9 @@ export class CampingBookingComponent implements OnInit {
   protected daysBetweenDates = daysBetweenDates;
 
   async ngOnInit(): Promise<void> {
-    const id: string = this.activatedRoute.snapshot.paramMap.get('id') ?? '';
     try {
-      this.camping = await this.campingService.getCamping(id);
-      this.bookingData = await this.bookingService.getBookingData(id);
+      this.camping = await this.campingService.getCamping(this.id);
+      this.bookingData = await this.bookingService.getBookingData(this.id);
       this.manager = {
         email: this.authService.user.email,
         firstname: this.authService.user.attributes.firstname,
@@ -50,7 +50,7 @@ export class CampingBookingComponent implements OnInit {
       }
       this.loading = false;
     } catch {
-      this.router.navigateByUrl(CAMPINGS_ROUTES.setCamping(id));
+      this.router.navigateByUrl(CAMPINGS_ROUTES.setCamping(this.id));
     }
   }
 

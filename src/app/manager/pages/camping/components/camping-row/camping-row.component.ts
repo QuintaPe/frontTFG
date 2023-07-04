@@ -25,7 +25,7 @@ export class CampingRowComponent {
 
   async handleDeleteCamping(event: Event) {
     event.stopPropagation();
-    const deleteLiteral = this.translate.instant('camping.deleteQuestion')
+    const deleteLiteral = this.translate.instant('campsite.deleteQuestion')
     const confirmed = await this.dialogService.openConfirm(deleteLiteral);
     if (confirmed) {
       try {

@@ -15,10 +15,12 @@
       "admin": "Admin"
     }
   },
-  "camping": {
-    "camping": "Campamento",
-    "campings": "Campamentos",
-    "createCamping": "Crear campamento",
+  "campsite": {
+    "campsite": "Campamento",
+    "campsites": "Campamentos",
+    "availableCampsitesList": "Lista de campamentos disponibles",
+    "createCampsite": "Crear campamento",
+    "showingCampsitesNear": "Mostrando campamentos cercanos a",
     "deleteQuestion": "¿Esta seguro que desea eliminar este campamento?",
     "lodging": "Alojamiento",
     "lodgings": "Alojamientos",
@@ -28,7 +30,7 @@
     "booking": "Reserva",
     "bookings": "Reservas",
     "bungalow": "Bungalow",
-    "campsite": "Zona de acampada",
+    "campingArea": "Zona de acampada",
     "amenities": "Comodidades",
     "rules": "Reglas",
     "nearestLocations": "Ubicaciones cercanas",

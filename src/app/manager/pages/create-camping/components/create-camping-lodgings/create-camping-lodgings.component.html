@@ -1,7 +1,7 @@
 <ng-container>
   <div class="buttons mb-4">
     <app-button
-      [text]="'camping.addLodging' | translate"
+      [text]="'campsite.addLodging' | translate"
       (onClick)="openLodgingModal()"
     />
   </div>
@@ -25,8 +25,8 @@
             [preText]="'common.type' | translate"
             [(value)]="this.actualLodging.type"
             [options]="[
-              { id: 'bungalow', name: 'camping.bungalow' | translate },
-              { id: 'campsite', name: 'camping.campsite' | translate },
+              { id: 'bungalow', name: 'campsite.bungalow' | translate },
+              { id: 'campsite', name: 'campsite.campingArea' | translate },
               { id: 'other', name: 'common.other' | translate }
             ]"
           />
@@ -42,20 +42,20 @@
       <div class="row">
         <div class="col-12 col-md-4 mb-4">
           <app-input-text
-            [preText]="'camping.feePerNight' | translate"
+            [preText]="'campsite.feePerNight' | translate"
             [(value)]="this.actualLodging.feePerNight"
           />
         </div>
         <div class="col-12 col-md-4 mb-4">
           <app-input-text
-            [preText]="'camping.size' | translate"
+            [preText]="'campsite.size' | translate"
             [(value)]="this.actualLodging.size"
           />
         </div>
         <div class="col-12 col-md-4 mb-4">
           <app-input-text
             type="number"
-            [preText]="'camping.capacity' | translate"
+            [preText]="'campsite.capacity' | translate"
             [(value)]="this.actualLodging.capacity"
           />
         </div>
@@ -65,7 +65,7 @@
       <div class="d-flex justify-content-between align-items-center">
         <app-input-text
           type="number"
-          [preText]="'camping.number' | translate"
+          [preText]="'campsite.number' | translate"
           [value]="this.actualLodging.units.length"
           [isDisabled]="true"
         />
@@ -99,7 +99,7 @@
       />
       <app-button
         *ngIf="page == 1"
-        [text]="actualLodging._id ? ('camping.editLodging' | translate) : ('camping.addLodging' | translate)"
+        [text]="actualLodging._id ? ('campsite.editLodging' | translate) : ('campsite.addLodging' | translate)"
         (onClick)="addCampingLodging()"
       />
     </div>

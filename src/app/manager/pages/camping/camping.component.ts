@@ -16,7 +16,7 @@ export class CampingComponent {
   private router = inject(Router);
   protected componentInputs = ["_id", "name", "description", "createdAt", "loading"];
 
-  handleNewCamping = () => {console.log(MANAGER_ROUTES.NEW_CAMPING.url)
+  handleNewCamping = () => {
     this.router.navigateByUrl(MANAGER_ROUTES.NEW_CAMPING.url)
   }
 

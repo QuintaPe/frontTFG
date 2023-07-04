@@ -13,7 +13,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AppComponent } from './app/app.component';
 import { APP_ROUTES } from './app/app.routes';
 import { AuthService } from './app/auth/services/auth.service';
-import { provideRouter } from '@angular/router';
+import { provideRouter, withComponentInputBinding } from '@angular/router';
 
 import { GALLERY_CONFIG } from 'ng-gallery';
 
@@ -61,6 +61,6 @@ bootstrapApplication(AppComponent, {
     },
     provideAnimations(),
     provideHttpClient(withInterceptorsFromDi()),
-    provideRouter(APP_ROUTES),
+    provideRouter(APP_ROUTES, withComponentInputBinding()),
   ],
 }).catch((err) => console.error(err));

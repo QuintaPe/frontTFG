@@ -2,6 +2,7 @@
 @import "_breakpoints";
 
 .panel{
+  width: 100%;
   min-height: calc(100vh - 60px);
   background-color: $primary-15;
   overflow: auto;

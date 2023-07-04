@@ -2,11 +2,11 @@
   <h1 class="text-center">Bienvenido a ScoutCamp!</h1>
   <div class="img-container">
     <img
-        src='../../../assets/png/ScoutCamp-logo.png'
-        style="img-fluid"
-        alt="ScoutCamp-logo"
-      />
+      src="../../../assets/png/ScoutCamp-logo.png"
+      class="img-fluid"
+      alt="ScoutCamp-logo"
+    />
   </div>
   <h3>Busca el mejor campamento scout al mejor precio</h3>
-  <app-camping-searcher (onSearch)="a($event)" />
+  <app-camping-searcher (onSearch)="navigateCampingList($event)" />
 </app-panel>

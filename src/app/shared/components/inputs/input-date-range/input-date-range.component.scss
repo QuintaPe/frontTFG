@@ -2,15 +2,14 @@
 @import "_variables";
 @import "_breakpoints";
 
-.input-container {
+.input-container-daterange {
   position: relative;
   width: 100%;
   display: flex;
   border: 2px solid $primary;
   border-radius: 5px;
   background: $primary-15;
-  height: 45px;
-
+  height: auto;
 
   mat-label {
     position: absolute;
@@ -43,6 +42,7 @@
     padding: 10px;
     width: 100%;
     font-size: 18px;
+    height: 47px;
   }
 
   .mat-mdc-icon-button.mat-mdc-button-base {
@@ -54,10 +54,3 @@
   }
 }
 
-.input-loader {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 100%;
-}

@@ -3,14 +3,14 @@
   <div class="row m-0 mb-2">
     <div class="col-12 col-md-5 mb-2">
       <app-input-text
-        [preText]="'camping.entryDate' | translate"
+        [preText]="'campsite.entryDate' | translate"
         [(value)]="entryDate"
         type="date"
       />
     </div>
     <div class="col-12 col-md-5 mb-2">
       <app-input-text
-        [preText]="'camping.exitDate' | translate"
+        [preText]="'campsite.exitDate' | translate"
         [(value)]="exitDate"
         type="date"
       />
@@ -18,7 +18,7 @@
     <div class="col-12 col-md-2">
       <app-button
         class="w-100"
-        [text]="'camping.search' | translate"
+        [text]="'campsite.search' | translate"
         (onClick)="refreshTable()"
       ></app-button>
     </div>
@@ -48,7 +48,7 @@
     <div class="buttons">
       <app-button
         color="secondary"
-        [text]="'camping.book' | translate"
+        [text]="'campsite.book' | translate"
         (onClick)="redirectBookingForm()"
       />
     </div>

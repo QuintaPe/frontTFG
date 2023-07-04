@@ -34,7 +34,7 @@ export class LeftMenuComponent implements OnInit {
     switch (role) {
       case 'admin':
         return [
-          { icon: 'work', name: this.translate.instant('camping.campings'), path: 'campings' },
+          { icon: 'work', name: this.translate.instant('campsite.campsites'), path: 'campings' },
           { icon: 'local_offer', name: this.translate.instant('common.bookings'), path: 'bookings' },
           { icon: 'person', name: this.translate.instant('common.users'), path: 'users' }
         ];

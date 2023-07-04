@@ -1,8 +1,8 @@
-<div class="input-container {{ this.class }}">
+<div class="input-container input-container-daterange {{ this.class }}">
   <mat-label *ngIf="preText">{{ preText }}</mat-label>
   <mat-date-range-input [rangePicker]="picker" [formGroup]="dateRange" (click)="openCalendar()">
-    <input matStartDate formControlName="start" [placeholder]="'camping.entryDate' | translate">
-    <input matEndDate formControlName="end" [placeholder]="'camping.exitDate' | translate">
+    <input matStartDate formControlName="start" [placeholder]="'campsite.entryDate' | translate">
+    <input matEndDate formControlName="end" [placeholder]="'campsite.exitDate' | translate">
   </mat-date-range-input>
   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
   <mat-date-range-picker #picker></mat-date-range-picker>
