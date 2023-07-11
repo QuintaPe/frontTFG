@@ -15,6 +15,7 @@
     mode="component"
     [rowComponent]="campingRowType"
     [componentInputs]="componentInputs"
+    [externalInputs]="{ entryDate: this.startDate, exitDate: this.endDate }"
     [fetch]="getCampingList"
     [forceFetch]="forceFetch"
     [pageSize]="5"

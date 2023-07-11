@@ -30,7 +30,8 @@ export class CampingsListComponent {
   forceFetch: number = 0;
   camping: Camping | null = null;
   campingRowType: Type<any> = CampingRowComponent;
-  protected componentInputs = ["_id", "name", "description", "images", "relation", "createdAt", "loading"];
+  protected componentInputs = ["_id", "name", "description", "images", "ratings", "relation",
+    "location", "distance", "createdAt", "loading", "totalCapacity", "availableCapacity"];
 
   private campingService = inject(CampingService);
   private _location = inject(Location);

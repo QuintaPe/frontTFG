@@ -5,8 +5,6 @@ import {
   OnInit,
   Type,
   ViewChild,
-  inject,
-  ChangeDetectorRef,
   SimpleChanges,
   OnChanges,
   signal,
@@ -42,6 +40,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() mode: string = 'row';
   @Input() rowComponent!: Type<any>;
   @Input() componentInputs!: string[];
+  @Input() externalInputs: any = {};
   @Input() forceFetch: number = 0;
   @Input() showPagination: boolean = true;
 
@@ -55,8 +54,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   loading: boolean = true;
   showFilters: boolean = false;
   rows = signal({ items: [], total: 0 });
-
-  private cd = inject(ChangeDetectorRef);
 
   fetchPage = async () => {
     if (this.fetch) {
@@ -87,7 +84,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges) {
-    if (changes['forceFetch']) {
+    if (changes['forceFetch'] && this.forceFetch > 0) {
       this.fetchPage();
     }
   }
@@ -123,6 +120,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
     const auxInputs: {[key: string]: any} = {}
     this.componentInputs.forEach(input => {
       auxInputs[input] = row[input];
+    })
+    Object.keys(this.externalInputs).forEach((key: string) => {
+      auxInputs[key] = this.externalInputs[key];
     })
     return auxInputs;
   }

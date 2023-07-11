@@ -1,4 +1,4 @@
-<div class="camping-row" [routerLink]="_id" *ngIf="!loading">
+<div class="camping-row" [routerLink]="_id" [queryParams]="{entryDate, exitDate}" *ngIf="!loading">
   <div *ngIf="image" class="camping-row--img">
     <mat-icon
       class="favorite-icon"
@@ -7,7 +7,25 @@
     <img [src]="image" />
   </div>
   <div class="camping-row--data">
-    <div class="camping-row--name">{{ name }}</div>
+    <div class="camping-row--header">
+      <div>
+        <div class="camping-row--name">{{ name }}</div>
+        <div class="camping-row--location">
+          <mat-icon>location_on</mat-icon>
+          <span>{{ location?.locality }}</span>
+          <span *ngIf="distance"> - {{ 'common.at' | translate }} {{ (+distance).toFixed(2) }} km</span>
+        </div>
+        <div class="camping-row--capacity">
+          <mat-icon>person</mat-icon>
+          <span *ngIf="availableCapacity">{{ availableCapacity }} /</span>
+          <span>{{ totalCapacity }}</span>
+        </div>
+      </div>
+      <div *ngIf="ratings.amount" class="camping-row--ratings">
+        <div class="text-center fs-lg fw-b">{{ ratings.averageRatings }} / 5</div>
+        <div class="fs-xs fc-secondary">{{ ratings.amount }} {{ 'campsite.reviews' | translate }}</div>
+      </div>
+    </div>
     <div class="camping-row--description">{{ description }}</div>
   </div>
 </div>

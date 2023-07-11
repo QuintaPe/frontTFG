@@ -15,7 +15,7 @@ export async function fetch(method:string, url:string, params: any= {}, isFormDa
   } = {
     method,
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: token ? `Bearer ${token}` : null,
       'Content-Type': isFormData ? 'multipart/form-data' : 'application/json'
 
     },
@@ -53,6 +53,7 @@ export async function fetch(method:string, url:string, params: any= {}, isFormDa
     .catch((axiosError) => {
       const error = axiosError.response.data
       if (error.name === 'TokenExpiredError') {
+        localStorage.removeItem('token');
         console.log(error);
         // authService.logout();
       }

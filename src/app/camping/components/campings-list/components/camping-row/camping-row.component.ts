@@ -12,9 +12,16 @@ export class CampingRowComponent implements OnInit{
   @Input() name = '';
   @Input() description = '';
   @Input() images: any = [];
+  @Input() location: any = {}
   @Input() createdAt = '';
-  @Input() loading = false;
+  @Input() distance = '';
+  @Input() ratings:any = null;
   @Input() relation:any = {};
+  @Input() entryDate:string = '';
+  @Input() exitDate:string = '';
+  @Input() totalCapacity:number = 0;
+  @Input() availableCapacity:number = 0;
+  @Input() loading = false;
   @Output() onChange = new EventEmitter();
 
   protected image = ''

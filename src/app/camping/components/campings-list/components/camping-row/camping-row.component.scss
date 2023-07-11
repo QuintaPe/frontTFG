@@ -33,10 +33,33 @@
   }
 
   .camping-row--data {
-    .camping-row--name {
-      font-size: 18px;
-      font-weight: 700;
-      margin-bottom: 5px;
+    width: 100%;
+    .camping-row--header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      .camping-row--name {
+        font-size: 18px;
+        font-weight: 700;
+      }
+      .camping-row--location,
+      .camping-row--capacity {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        color: $textColorLight;
+        span, .mat-icon {
+          font-size: 14px;
+        }
+      }
+      .camping-row--ratings {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 5px 10px;
+        border-radius: $borderRadiusLight;
+        background-color: $primary-50;
+      }
     }
 
     .camping-row--description {

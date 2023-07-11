@@ -79,7 +79,6 @@ export class AuthService {
   get userToken(): string | null {
     const token = localStorage.getItem('token');
     if (!token || this.jwtHelper.isTokenExpired(token)) {
-      this.logout();
       return null;
     }
 

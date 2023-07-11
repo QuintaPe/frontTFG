@@ -27,7 +27,9 @@ export class CampingsFavoritesComponent {
   forceFetch: number = 0;
   camping: Camping | null = null;
   campingRowType: Type<any> = CampingRowComponent;
-  protected componentInputs = ["_id", "name", "description", "images", "relation", "createdAt", "loading"];
+  // protected componentInputs = ["_id", "name", "description", "images", "relation", "createdAt", "loading"];
+  protected componentInputs = ["_id", "name", "description", "images", "ratings", "relation",
+  "location", "createdAt", "loading", "totalCapacity"];
 
   private campingService = inject(CampingService);
 

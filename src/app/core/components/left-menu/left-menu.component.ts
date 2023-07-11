@@ -46,6 +46,7 @@ export class LeftMenuComponent implements OnInit {
     default:
       return [
         { icon: 'local_offer', name: this.translate.instant('user.myBookings'), path: 'bookings' },
+        { icon: 'favorite', name: this.translate.instant('campsite.favorites'), path: 'favorites' },
         { icon: 'person', name: this.translate.instant('user.profile'), path: 'profile' }
       ];
     }
