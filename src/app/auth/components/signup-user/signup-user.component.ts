@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 import { AuthService } from '@auth/services/auth.service';
 import { User } from '@models/user';
@@ -30,14 +31,16 @@ import { User } from '@models/user';
   ],
 })
 export class SignupUserComponent implements OnInit{
+  protected loading = false;
   page!: boolean;
   attributesForm!: UntypedFormGroup;
   authForm!: UntypedFormGroup;
 
   mobNumberPattern = /^[679]{1}[0-9]{8}$/;
-  emailPattern = /^(([^<>()[]\\.,;:s@"]+(.[^<>()[]\\.,;:s@"]+)*)|(".+"))@(([[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}])|(([a-zA-Z-0-9]+.)+[a-zA-Z]{2,}))$/;
+  emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
-  constructor(public authService: AuthService) {}
+  protected authService = inject(AuthService);
+  private translate = inject(TranslateService);
 
   ngOnInit(): void {
     this.page = false;
@@ -53,13 +56,12 @@ export class SignupUserComponent implements OnInit{
     });
 
     this.authForm = new UntypedFormGroup({
-      username: new UntypedFormControl('', [Validators.required]),
       email: new UntypedFormControl('', [
         Validators.required,
         Validators.pattern(this.emailPattern),
       ]),
       password: new UntypedFormControl('', [Validators.required]),
-      password2: new UntypedFormControl('', [Validators.required]),
+      confirmPassword: new UntypedFormControl('', [Validators.required]),
     });
   }
 
@@ -69,32 +71,50 @@ export class SignupUserComponent implements OnInit{
       '', email, password, "user", 'es', this.attributesForm.value
     );
 
-    await this.authService.signup(user);
+    this.loading = true;
+    try {
+      await this.authService.signup(user);
+    } catch {
+      Object.values(this.authForm.controls).forEach(control => {
+        control.setErrors({ serverError: true });
+      });
+    }
+    this.loading = false;
   }
 
   next() {
-    var err = '';
+    Object.values(this.attributesForm.controls).forEach(control => {
+      control.markAsTouched();
+    });
+
+    var err = null;
     if (this.attributesForm.valid) {
       this.page = true;
     } else {
       const controls = this.attributesForm.controls;
       for (const name in controls) {
         if (controls[name].invalid) {
-          err = name;
+          err = { field: name, error: Object.keys(controls[name].errors)[0]};
         }
       }
-      this.authService.setErrors([{ error: 'empty_data', message: `El campo ${err} esta vacio o no es valido`}]);
+      this.authService.setError({ name: err.error, field: this.translate.instant('user.' + err.field) });
     }
   }
 
-  finish() {
-    if (this.authForm.valid) this.signup();
-    else {
+  async finish() {
+    Object.values(this.authForm.controls).forEach(control => {
+      control.markAsTouched();
+    });
+
+    if (this.authForm.valid) {
+      await this.signup();
+    } else {
       const controls = this.authForm.controls;
-      this.authService.setErrors([]);
+      this.authService.setError(null);
       for (const name in controls) {
         if (controls[name].invalid) {
-          this.authService.setErrors([{ error: 'empty_data', message: name }]);
+          const err = { field: name, error: Object.keys(controls[name].errors)[0]};
+          this.authService.setError({ name: err.error, field: this.translate.instant('auth.' + err.field) });
         }
       }
     }

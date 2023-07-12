@@ -1,4 +1,7 @@
-<app-panel [fullHeight]="true" class="d-flex align-items-center">
+<app-panel
+  [fullHeight]="true"
+  class="d-flex align-items-center position-relative"
+>
   <div class="row h-100 justify-content-center align-items-center">
     <div class="col-12 col-md-7">
       <app-signup-user *ngIf="isUserSignup" />
@@ -6,29 +9,22 @@
       <app-login-form *ngIf="isLogin" />
     </div>
 
-    <div class="col-12 col-md-5 d-flex justify-content-start align-items-center position-relative">
-      <div
-        class="alert alert-danger fade show position-absolute top-0 end-0"
-        role="alert"
-        *ngIf="this.authService.getErrors().length"
-      >
-        <strong>{{this.authService.getErrors()[0].message}}</strong>
-        <button
-          type="button"
-          class="close ml-4"
-          data-dismiss="alert"
-          aria-label="Close"
-          (click)="this.authService.setErrors([])"
-        >
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-
+    <div
+      class="col-12 col-md-5 d-flex justify-content-start align-items-center"
+    >
       <img
-        src='../../../assets/png/ScoutCamp-logo.png'
+        src="../../../assets/png/ScoutCamp-logo.png"
         class="img-fluid login-img"
         alt="ScoutCamp-logo"
       />
     </div>
+  </div>
+  <div
+    class="alert alert-danger fade show"
+    role="alert"
+    *ngIf="this.authService.getError()"
+  >
+    <strong [translate]="'auth.errors.' + authService.getError().name" [translateParams]="{ field: authService.getError().field }"></strong>
+    <mat-icon (click)="this.authService.setError(null)">X</mat-icon>
   </div>
 </app-panel>

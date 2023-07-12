@@ -5,7 +5,7 @@
   @enterState
 >
   <p class="text-center h1 fw-bold mb-5">
-    {{ "login.login" | translate }}
+    {{ "auth.login" | translate }}
   </p>
 
   <!-- User Name -->
@@ -21,7 +21,7 @@
   <app-input-text
     class="mb-5"
     type='password'
-    [preText]="'login.password' | translate"
+    [preText]="'auth.password' | translate"
     placeholder='Introduzca su contraseña'
     icon="lock"
     [control]="loginForm.controls['password']"
@@ -30,6 +30,6 @@
   <!-- Botón de inicio de sesión -->
   <div class="d-flex flex-column justify-content-center  align-items-center">
     <p>¿Aún no estas registrado? <a href="/signup">Registrate gratis!</a></p>
-    <app-button text='Iniciar Sesion!' icon="person_add" type="submit" />
+    <app-button text='Iniciar Sesion!' icon="person_add" type="submit" [loading]="loading" />
   </div>
 </form>

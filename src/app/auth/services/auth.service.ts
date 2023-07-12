@@ -5,13 +5,20 @@ import { Router } from '@angular/router';
 import { User } from '@models/user';
 import { fetch } from '@utils/api';
 
+interface AuthError {
+  name: string,
+  statusCode?: string
+  field?: string,
+}
+
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
   public user: User | null = null;
-  private errors: { message: string, error: string }[] = [];
+  private error: AuthError | null = null;
   public loading: boolean = true;
+  timeoutRef: any;
 
   constructor(
     private jwtHelper: JwtHelperService,
@@ -19,16 +26,17 @@ export class AuthService {
     public router: Router,
   ) {}
 
-  public setErrors(errors: { message: string, error: string }[]) {
-    this.errors = errors;
-    setTimeout(() => {
-      this.errors = [];
+  public setError(error: AuthError | null) {
+    clearTimeout(this.timeoutRef);
+    this.error = error;
+    this.timeoutRef = setTimeout(() => {
+      this.error = null;
     }, 5000);
   }
 
-    public getErrors() {
-      return this.errors;
-    }
+  public getError() {
+    return this.error;
+  }
 
   //Registrarse
   async signup(user: Object): Promise<any> {
@@ -36,12 +44,13 @@ export class AuthService {
       const response = await fetch('POST', 'signup', { ...user });
       this.router.navigate(['']);
 
-    } catch (axiosError: any) {
-      this.errors = axiosError.response.data.errors;
+    } catch (error: any) {
+      this.setError(error)
+      throw error;
     }
   }
 
-  //Iniciar Sesion
+  //Iniciar Sesión
   async login( email: string, password: string ): Promise<any> {
     try {
       const response = await fetch('POST', 'login', { email, password });
@@ -51,11 +60,13 @@ export class AuthService {
       this.translate.use(response.user.lang);
       this.router.navigate(['']);
     } catch (error: any) {
-      this.errors = error;
+      console.log(error);
+      this.setError(error)
+      throw error;
     }
   }
 
-  //Cerrar Sesion
+  //Cerrar Sesión
   logout(): void {
     this.user = null;
     localStorage.removeItem('token');

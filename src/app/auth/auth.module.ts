@@ -10,6 +10,7 @@ import { AuthRoutingModule } from './auth-routing.module';
 import { PanelComponent } from '@shared/components/panel/panel.component';
 import { InputTextComponent } from '@shared/components/inputs/input-text/input-text.component';
 import { ButtonComponent } from '@shared/components/button/button.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { ButtonComponent } from '@shared/components/button/button.component';
     ReactiveFormsModule,
     FormsModule,
     TranslateModule,
+    MatIconModule,
 
     PanelComponent,
     InputTextComponent,

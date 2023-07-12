@@ -1,6 +1,7 @@
 {
   "user": {
-    "lastName": "Apellidos",
+    "firstname": "Nombre",
+    "lastname": "Apellidos",
     "birthDate": "Fecha de nacimiento",
     "phone": "Teléfono",
     "lang": "Idioma",
@@ -60,11 +61,17 @@
     "managerData": "Datos del manager",
     "reviews": "Valoraciones"
   },
-  "login": {
+  "auth": {
     "login": "Inicia sesión",
     "signup": "Crea una cuenta",
+    "email": "Email",
     "password": "Contraseña",
-    "confirmPassword": "Confirmar contraseña"
+    "confirmPassword": "Confirmar contraseña",
+    "errors": {
+      "required": "El campo {{ field }} no puede estar vacío",
+      "pattern": "El campo {{ field }} no es valido",
+      "invalid_email": "Email o contraseña incorrecta"
+    }
   },
   "input": {
     "placeholderFileZone": "Arrastre los archivos o haga click en la zona marcada"

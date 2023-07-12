@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AuthService } from '@auth/services/auth.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-login-form',
@@ -30,22 +31,40 @@ import { AuthService } from '@auth/services/auth.service';
 })
 export class LoginFormComponent {
   public loginForm: UntypedFormGroup;
+  protected loading = false;
 
-
-  constructor(public authService: AuthService) {
+  constructor(public authService: AuthService, private translate: TranslateService) {
     this.loginForm = new UntypedFormGroup({
-      email: new UntypedFormControl('', [Validators.required]),
+      email: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
       password: new UntypedFormControl('', [Validators.required]),
     });
   }
 
   //Login
-  public login = () => {
+  public login = async () => {
+    Object.values(this.loginForm.controls).forEach(control => {
+      control.markAsTouched();
+      console.log(control);
+    });
+
     var user = this.loginForm.value;
-    if (user.email && user.password) {
-      this.authService.login(user.email, user.password);
+    if (this.loginForm.valid) {
+      this.loading = true;
+      try {
+        await this.authService.login(user.email, user.password);
+      } catch {
+        this.loginForm.get('email').setErrors({ serverError: true });
+        this.loginForm.get('password').setErrors({ serverError: true });
+      }
+      this.loading = false;
     } else {
-      this.authService.setErrors([{ error: 'empty_data', message: 'Introduce todos los datos'}]);
+      const controls = this.loginForm.controls;
+      for (const name in controls) {
+        if (controls[name].invalid) {
+          const err = { field: name, error: Object.keys(controls[name].errors)[0]};
+          this.authService.setError({ name: err.error, field: this.translate.instant('auth.' + err.field) });
+        }
+      }
     }
   }
 }

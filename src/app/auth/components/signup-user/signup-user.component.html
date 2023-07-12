@@ -1,82 +1,81 @@
 <div *ngIf="!this.page" @enterState>
-  <form class="register-form" [formGroup]="attributesForm" (ngSubmit)="next()" autocomplete="off">  
+  <form class="register-form" [formGroup]="attributesForm" (ngSubmit)="next()" autocomplete="off">
     <p class="text-center h1 fw-bold ">Crea una cuenta</p>
-    
+
     <!-- Name -->
-    <app-input-text 
+    <app-input-text
       [preText]="'common.name' | translate"
       placeholder='Introduzca su nombre'
       icon="person"
-      [control]="attributesForm.controls['firstname']">
-    </app-input-text>
+      [control]="attributesForm.controls['firstname']"
+    />
 
     <!-- LastName -->
-    <app-input-text 
-      [preText]="'user.lastName' | translate"
+    <app-input-text
+      [preText]="'user.lastname' | translate"
       placeholder='Introduzca sus apellidos'
       icon="person_outline"
-      [control]="attributesForm.controls['lastname']">
-    </app-input-text>
+      [control]="attributesForm.controls['lastname']"
+    />
 
     <!-- Birth Date -->
-    <app-input-text 
+    <app-input-text
       [preText]="'user.birthDate' | translate"
       type="date"
       icon="date_range"
-      [control]="attributesForm.controls['birthDate']">
-    </app-input-text>
-      
+      [control]="attributesForm.controls['birthDate']"
+    />
 
     <!-- Phone Number -->
-    <app-input-text 
+    <app-input-text
       [preText]="'user.phone' | translate"
-      placeholder='Introduzca su numero telefono'
+      placeholder='Introduzca su numero teléfono'
       icon="phone"
       [control]="attributesForm.controls['phone']"
       type="number"
-    ></app-input-text>
-          
+    />
+
     <!-- Next Button -->
     <div class="d-flex flex-column justify-content-center align-items-center">
       <p>¿Ya tienes una cuenta? <a href="/login">Inicia Sesión</a></p>
-      <app-button type="submit" text="Siguiente" iconRight="arrow_forward"></app-button>
+      <app-button type="submit" text="Siguiente" iconRight="arrow_forward" />
     </div>
   </form>
 </div>
 
 <div *ngIf="this.page" @enterState>
-  <form class="register-form" [formGroup]="authForm" (ngSubmit)="signup()">
+  <form class="register-form" [formGroup]="authForm" (ngSubmit)="finish()">
     <p class="text-center h1 fw-bold ">Crea una cuenta</p>
 
     <!-- Email -->
-    <app-input-text 
+    <app-input-text
       [preText]="'common.email' | translate"
       placeholder='Introduzca su email'
       icon="email"
-      [control]="authForm.controls['email']">
-    </app-input-text>
+      [control]="authForm.controls['email']"
+    />
 
     <!-- Password -->
-    <app-input-text 
-      [preText]="'login.password' | translate"
+    <app-input-text
+      [preText]="'auth.password' | translate"
       placeholder='Introduzca su contraseña'
       icon="lock"
       [control]="authForm.controls['password']"
       type="password"
-    ></app-input-text>
-    
+    />
+
 
     <!-- Confirm Password -->
-    <app-input-text 
-      [preText]="'login.confirmPassword' | translate"
+    <app-input-text
+      [preText]="'auth.confirmPassword' | translate"
       placeholder='Repita la contraseña'
       icon="key"
-      [control]="authForm.controls['password2']"
+      [control]="authForm.controls['confirmPassword']"
       type="password"
-    ></app-input-text>
+    />
     <!-- Terms of Services -->
     <div class="form-check d-flex justify-content-center">
-        <input class="form-check-input me-2" type="checkbox"  id="Terms"/>
+        <input class="form-check-input me-2" type="checkbox" id="Terms"/>
         <label class="form-check-label" for="Terms">
             Acepto los <a href="#!">Terminos de servicio</a>
         </label>
@@ -84,8 +83,8 @@
 
     <!-- Register button -->
     <div class="d-flex justify-content-center  align-items-center">
-        <app-button text="Atras" class='me-3' color='secondary' icon="arrow_back" (onClick)="this.page=false"></app-button>
-        <app-button type="submit" text="Registrarse" iconRight="person_add"></app-button>    
+        <app-button text="Atras" class='me-3' color='secondary' icon="arrow_back" (onClick)="this.page=false" />
+        <app-button type="submit" text="Registrarse" iconRight="person_add" [loading]="loading" />
     </div>
 
   </form>
