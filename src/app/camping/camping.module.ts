@@ -28,6 +28,7 @@ import { CampingSearcherComponent } from '@app/shared/components/camping-searche
 import { DialogService } from '@app/shared/components/dialog/dialog.service';
 import { CampingRowComponent } from './components/campings-list/components/camping-row/camping-row.component';
 import { CampingsFavoritesComponent } from './components/camping-favorites/campings-favorites.component';
+import { InputDateRangeComponent } from '@app/shared/components/inputs/input-date-range/input-date-range.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { CampingsFavoritesComponent } from './components/camping-favorites/campi
     AvatarComponent,
     SkeletonComponent,
     PanelComponent,
-    CampingSearcherComponent
+    CampingSearcherComponent,
+    InputDateRangeComponent,
   ],
   providers: [
     DialogService,

@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 import { AuthService } from '@auth/services/auth.service';
 import { User } from '@models/user';
+import { ErrorService } from '@app/core/services/errors.service';
 
 @Component({
   selector: 'app-signup-manager',
@@ -40,6 +41,7 @@ export class SignupManagerComponent implements OnInit{
   emailPattern = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
   protected authService = inject(AuthService);
+  protected errorService = inject(ErrorService);
   private translate = inject(TranslateService);
 
   ngOnInit(): void {
@@ -58,7 +60,7 @@ export class SignupManagerComponent implements OnInit{
     this.authForm = new UntypedFormGroup({
       email: new UntypedFormControl('', [
         Validators.required,
-        Validators.pattern(this.emailPattern),
+        Validators.pattern(/^[\w-\.+]+@([\w-]+\.)+[\w-]{2,4}$/),
       ]),
       password: new UntypedFormControl('', [Validators.required]),
       confirmPassword: new UntypedFormControl('', [Validators.required]),
@@ -97,12 +99,14 @@ export class SignupManagerComponent implements OnInit{
           err = { field: name, error: Object.keys(controls[name].errors)[0]};
         }
       }
-      this.authService.setError({ name: err.error, field: this.translate.instant('user.' + err.field) });
+      this.errorService.setError({ name: err.error, field: this.translate.instant('user.' + err.field) });
     }
   }
 
   async finish() {
     Object.values(this.authForm.controls).forEach(control => {
+      control.setErrors(null);
+      control.updateValueAndValidity();
       control.markAsTouched();
     });
 
@@ -110,11 +114,11 @@ export class SignupManagerComponent implements OnInit{
       await this.signup();
     } else {
       const controls = this.authForm.controls;
-      this.authService.setError(null);
+      this.errorService.setError(null);
       for (const name in controls) {
         if (controls[name].invalid) {
           const err = { field: name, error: Object.keys(controls[name].errors)[0]};
-          this.authService.setError({ name: err.error, field: this.translate.instant('auth.' + err.field) });
+          this.errorService.setError({ name: err.error, field: this.translate.instant('auth.' + err.field) });
         }
       }
     }

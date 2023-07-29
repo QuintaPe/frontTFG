@@ -1,7 +1,7 @@
 <app-panel [breadcrumb]="breadcrumb" class="create-camping">
   <div [ngSwitch]="page">
     <div *ngSwitchCase="0">
-      <h6 class="fw-b mb-4">{{ "camping.addNameDescription" | translate }}</h6>
+      <h6 class="fw-b mb-4">{{ "campsite.addNameDescription" | translate }}</h6>
       <app-input-text
         [preText]="'common.name' | translate"
         [(value)]="this.camping.name"
@@ -14,7 +14,7 @@
         [loading]="loading"
         class="mb-5"
       />
-      <h6 class="fw-b mb-3">{{ "camping.addImages" | translate }}</h6>
+      <h6 class="fw-b mb-3">{{ "campsite.addImages" | translate }}</h6>
       <app-input-file-zone
         [preText]="'campsite.addLodging' | translate"
         [(value)]="camping.images"
@@ -59,7 +59,9 @@
       (onClick)="pageBack()"
     />
     <app-button
-      [text]="page < 3 ? ('common.next' | translate) : ('common.update' | translate)"
+      [text]="page < 3
+        ? ('common.next' | translate)
+        : (id ? ('common.update' | translate) : ('common.create' | translate))"
       [loading]="loading"
       (onClick)="handleSubmit()"
     />

@@ -19,20 +19,20 @@
   </div>
 
   <div class="booking-info">
-    <h4 class="fw-b">{{ "camping.bookingData" | translate }}</h4>
+    <h4 class="fw-b">{{ "campsite.bookingData" | translate }}</h4>
     <div class="row booking-info--dates">
       <div class="col-12 col-md-4">
-        <div>{{ "camping.entryDate" | translate }}</div>
+        <div>{{ "campsite.entryDate" | translate }}</div>
         <h6 *ngIf="!loading" class="fw-b">{{ formatDate(bookingData.entryDate) }}</h6>
         <app-skeleton *ngIf="loading" width="90px" class="mx-auto mt-1"/>
       </div>
       <div class="col-12 col-md-4">
-        <div>{{ "camping.exitDate" | translate }}</div>
+        <div>{{ "campsite.exitDate" | translate }}</div>
         <h6 *ngIf="!loading" class="fw-b">{{ formatDate(bookingData.exitDate) }}</h6>
         <app-skeleton *ngIf="loading" width="90px" class="mx-auto mt-1" />
       </div>
       <div class="col-12 col-md-4">
-        <div>{{ "camping.totalNights" | translate }}</div>
+        <div>{{ "campsite.totalNights" | translate }}</div>
         <h6 *ngIf="!loading" class="fw-b">{{ daysBetweenDates(bookingData.exitDate, bookingData.entryDate) }}</h6>
         <app-skeleton *ngIf="loading" width="30px" class="mx-auto mt-1" />
       </div>
@@ -40,7 +40,7 @@
   </div>
 
   <div class="user-info">
-    <h4 class="fw-b">{{ "camping.managerData" | translate }}</h4>
+    <h4 class="fw-b">{{ "campsite.managerData" | translate }}</h4>
     <div class="row mt-4">
       <div class="col-12 col-md-8">
         <app-input-text
@@ -76,7 +76,7 @@
     </div>
   </div>
   <div class="payment-info">
-    <h4 class="fw-b">{{ "camping.managerData" | translate }}</h4>
+    <h4 class="fw-b">{{ "campsite.managerData" | translate }}</h4>
     <span class="fc-secondary">TODO</span> <!-- TODO -->
   </div>
 

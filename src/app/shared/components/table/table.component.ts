@@ -17,6 +17,7 @@ import { InputSelectComponent } from '../inputs/input-select/input-select.compon
 import { SkeletonComponent } from '../skeleton/skeleton.component';
 import { DynamicIoModule } from 'ng-dynamic-component';
 import { AvatarComponent } from '../Avatar/avatar.component';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-table',
@@ -31,6 +32,7 @@ import { AvatarComponent } from '../Avatar/avatar.component';
     InputSelectComponent,
     MatPaginatorModule,
     DynamicIoModule,
+    TranslateModule,
   ],
 })
 export class TableComponent implements OnInit, AfterViewInit, OnChanges {
@@ -53,7 +55,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   actualPage = 0;
   loading: boolean = true;
   showFilters: boolean = false;
-  rows = signal({ items: [], total: 0 });
+  rows = signal({ items: [], total: this.pageSize });
 
   fetchPage = async () => {
     if (this.fetch) {

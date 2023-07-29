@@ -1,16 +1,17 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '@app/auth/services/auth.service';
+import { ErrorService } from '@app/core/services/errors.service';
 import { AUTH_ROUTES } from '@app/core/routes';
 
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.scss'],
+  encapsulation: ViewEncapsulation.None,
 })
 export class AuthComponent {
   protected router = inject(Router);
-  protected authService = inject(AuthService);
+  protected errorService = inject(ErrorService);
 
   get isLogin() {
     return this.router.url === `/${AUTH_ROUTES.LOGIN.url}`;

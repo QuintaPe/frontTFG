@@ -1,10 +1,10 @@
 <app-panel class="home" [fullHeight]="true">
-  <h1>Bienvenido a ScoutCamp!</h1>
+  <h1>{{'common.title' | translate }}</h1>
   <h3>Busca el mejor campamento scout al mejor precio</h3>
   <app-camping-searcher (onSearch)="navigateCampingList($event)" />
   <div class="img-container">
     <img
-      src="../../../assets/png/ScoutCamp-logo.png"
+      src="assets/png/camping-lens.png"
       class="img-fluid"
       alt="ScoutCamp-logo"
     />

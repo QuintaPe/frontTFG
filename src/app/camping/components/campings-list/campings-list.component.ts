@@ -22,8 +22,8 @@ export class CampingsListComponent {
   @Input() lat: string = '';
   @Input() lng: string = '';
   @Input() type: string = '';
-  @Input() startDate: string = '';
-  @Input() endDate: string = '';
+  @Input() entryDate: string = '';
+  @Input() exitDate: string = '';
   @Input() capacity: string = '';
 
   location = ''
@@ -46,8 +46,8 @@ export class CampingsListComponent {
     this.lat = event.lat;
     this.lng = event.lng;
     this.type = event.type;
-    this.startDate = event.startDate;
-    this.endDate = event.endDate;
+    this.entryDate = event.entryDate;
+    this.exitDate = event.exitDate;
     this.capacity = event.capacity;
     this.forceFetch += 1;
 
@@ -55,8 +55,8 @@ export class CampingsListComponent {
       `lat=${event.lat || ''}`,
       `lng=${event.lng || ''}`,
       `type=${event.type || ''}`,
-      `startDate=${event.startDate || ''}`,
-      `endDate=${event.endDate || ''}`,
+      `entryDate=${event.entryDate || ''}`,
+      `exitDate=${event.exitDate || ''}`,
       `capacity=${event.capacity || ''}`,
     ].filter((elem) => !elem.endsWith("="));
 
@@ -65,7 +65,7 @@ export class CampingsListComponent {
 
   getCampingList = (page: number, size: number) => {
     return  this.campingService.getAvailableCampings(
-      +this.lat, +this.lng, this.startDate, this.endDate, +this.capacity,
+      +this.lat, +this.lng, this.entryDate, this.exitDate, +this.capacity,
       { page, size })
   }
 }

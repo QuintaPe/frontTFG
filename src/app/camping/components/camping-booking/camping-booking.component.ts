@@ -8,9 +8,11 @@ import { Camping } from '@models/camping';
 import { Router } from '@angular/router';
 import { CampingService } from '@app/camping/services/camping.service';
 import { BookingService } from '@app/camping/services/booking.service';
-import { CAMPINGS_ROUTES } from '@app/core/routes';
+import { CAMPINGS_ROUTES, USER_ROUTES } from '@app/core/routes';
 import { daysBetweenDates, formatDate } from '@utils/functions';
 import { AuthService } from '@app/auth/services/auth.service';
+import { DialogService } from '@app/shared/components/dialog/dialog.service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-camping-booking',
@@ -33,6 +35,8 @@ export class CampingBookingComponent implements OnInit {
   private campingService = inject(CampingService);
   private bookingService = inject(BookingService);
   private authService = inject(AuthService);
+  private dialogService = inject(DialogService);
+  private translate = inject(TranslateService);
   private router = inject(Router);
 
   protected formatDate = formatDate;
@@ -56,11 +60,17 @@ export class CampingBookingComponent implements OnInit {
 
   async createBooking() {
     this.creatingBooking = true;
-    await this.campingService.createCampingBooking(this.camping._id, {
-      ...this.bookingData,
-      manager: this.manager,
-      paymentMethod: "VISA"
-    })
+    try {
+      await this.campingService.createCampingBooking(this.camping._id, {
+        ...this.bookingData,
+        manager: this.manager,
+        paymentMethod: "VISA"
+      });
+      await this.dialogService.open('success', this.translate.instant('campsite.bookedSuccessfully'));
+      this.router.navigateByUrl(USER_ROUTES.BOOKINGS.url)
+    } catch {
+
+    }
     this.creatingBooking = false;
   }
 }

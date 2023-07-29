@@ -1,14 +1,14 @@
 <!-- Navbar -->
 <nav class="nav-bar">
-  <ul class="left-buttons">
-    <li>
-      <span (click)="router.navigateByUrl('/')">Inicio</span>
-    </li>
-    <li>
-      <a href="#">Editar perfil</a>
-    </li>
-  </ul>
   <div class="left-buttons">
+      <img
+        src="assets/svg/logo-text.svg"
+        alt="ScoutCamp-logo"
+        (click)="router.navigateByUrl('/')"
+      />
+  </div>
+  <div class="right-buttons">
+    <app-language-selector />
     <div class="d-flex align-items-center" *ngIf="!authService.user">
       <app-button
         text="Iniciar Sesión"
@@ -30,9 +30,20 @@
         />
       </button>
       <div class="dropdown-content">
-        <a [routerLink]="[authService.user.role, 'profile']">Perfil</a>
-        <a [routerLink]="[authService.user.role, 'campings']">Campings</a>
-        <a (click)="logout()">Cerrar sesión</a>
+        <a
+          *ngIf="authService.user.role === 'manager'"
+          [routerLink]="[authService.user.role, 'campings']"
+        >{{'user.myCampings' | translate }}</a>
+        <a
+          *ngIf="authService.user.role === 'user'"
+          [routerLink]="[authService.user.role, 'bookings']"
+        >{{'user.myBookings' | translate }}</a>
+        <a
+          *ngIf="authService.user.role === 'user'"
+          [routerLink]="[authService.user.role, 'favorites']"
+        >{{'campsite.favorites' | translate }}</a>
+        <a [routerLink]="[authService.user.role, 'profile']">{{'user.profile' | translate }}</a>
+        <a (click)="logout()">{{'auth.logout' | translate }}</a>
       </div>
     </div>
   </div>

@@ -8,7 +8,7 @@ import { NgIf, NgFor } from '@angular/common';
     templateUrl: './panel.component.html',
     styleUrls: ['./panel.component.scss'],
     standalone: true,
-    imports: [NgIf, NgFor, MatIconModule]
+    imports: [NgIf, NgFor, MatIconModule],
 })
 export class PanelComponent implements OnInit {
   @Input() title: string = '';

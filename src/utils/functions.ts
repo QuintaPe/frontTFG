@@ -20,8 +20,8 @@ export function transformGetParams(params: Record<string, any>): string {
  * @return {string} La fecha formateada en el formato especificado.
  */
 
-export function formatDate(dateString: string, format: string = 'd/m/Y'): string {
-  const date = new Date(dateString);
+export function formatDate(dateString: string | Date, format: string = 'd/m/Y'): string {
+  const date = dateString instanceof Date ? dateString : new Date(dateString);
   const year = date.getFullYear();
   const month = ('0' + (date.getMonth() + 1)).slice(-2);
   const day = ('0' + date.getDate()).slice(-2);

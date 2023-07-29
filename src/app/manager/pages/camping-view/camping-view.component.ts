@@ -65,7 +65,7 @@ export class CampingViewComponent {
   }
 
   async handleDeleteBooking(booking: string) {
-    const confirmed = await this.dialogService.openConfirm(this.translate.instant('campsite.confirmDeleteBooking'));
+    const confirmed = this.dialogService.open('confirmDanger', this.translate.instant('campsite.confirmDeleteBooking'));
     if (confirmed) {
       const ref = this.dialogService.openLoading();
       try {

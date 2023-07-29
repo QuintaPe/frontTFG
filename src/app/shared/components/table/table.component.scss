@@ -34,6 +34,15 @@
   }
 }
 
+.empty-svg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  img {
+    max-height: 400px;
+  }
+}
+
 ::ng-deep .mdc-list-item--selected .mdc-list-item__primary-text, .mdc-list-item--activated .mdc-list-item__primary-text {
   color: $primary !important;
   font-weight: 700;

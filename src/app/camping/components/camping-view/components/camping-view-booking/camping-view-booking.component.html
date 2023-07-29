@@ -1,23 +1,15 @@
 <section class="camping-booking">
-  <h2 class="text-center">{{ "camping.lodgings" | translate }}</h2>
+  <h2 class="text-center">{{ "campsite.lodgings" | translate }}</h2>
   <div class="row m-0 mb-2">
-    <div class="col-12 col-md-5 mb-2">
-      <app-input-text
-        [preText]="'campsite.entryDate' | translate"
-        [(value)]="entryDate"
-        type="date"
-      />
-    </div>
-    <div class="col-12 col-md-5 mb-2">
-      <app-input-text
-        [preText]="'campsite.exitDate' | translate"
-        [(value)]="exitDate"
-        type="date"
+    <div class="col-12 col-md-10">
+      <app-input-date-range
+        [value]="{ start: this.entryDate, end: this.exitDate}"
+        (valueChange)="handleDateChange($event)"
       />
     </div>
     <div class="col-12 col-md-2">
       <app-button
-        class="w-100"
+        class="w-100 h-100"
         [text]="'campsite.search' | translate"
         (onClick)="refreshTable()"
       ></app-button>
@@ -32,9 +24,12 @@
   />
 
   <div *ngIf="!isEmptyObject(lodgingsToBook)" class="camping-booking--selected">
-    <h5 class="fw-b">Seleccionados</h5>
+    <div class="d-flex">
+      <h5 class="fw-b mt-0">{{ 'common.selected' | translate }}</h5>
+      <div class="fs-sm ms-2">{{"(" + formatDate(entryDate) + " - " + formatDate(exitDate) + ")"}}</div>
+    </div>
     <ul>
-      <li *ngFor="let item of lodgingsToBook | keyvalue">
+      <li *ngFor="let item of lodgingsToBook | keyvalue" class="mb-1">
         <span>
           <span>- {{ lodgings[item.key].name }}</span>
           <span> ({{ item.value }} * {{ lodgings[item.key].feePerNight }}€ * {{ selectedDays }} noches)</span>
@@ -44,8 +39,8 @@
         </span>
       </li>
     </ul>
-    <div class="fw-b text-end my-1">{{ 'common.total' | translate }} {{ getTotalFee() }}</div>
     <div class="buttons">
+      <div class="fw-b text-end my-1">{{ 'common.total' | translate }} {{ getTotalFee() }}</div>
       <app-button
         color="secondary"
         [text]="'campsite.book' | translate"

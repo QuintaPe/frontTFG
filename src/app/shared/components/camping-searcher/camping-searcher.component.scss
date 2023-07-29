@@ -1,3 +1,6 @@
+@import "_breakpoints";
+@import "_colors";
+
 .camping-searcher {
   display: flex;
   flex-wrap: wrap;
@@ -30,5 +33,35 @@
     border-left: 0 !important;
     border-bottom-right-radius: 5px !important;
     height: 100%;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .camping-searcher {
+    .camping-searcher--dates {
+      width: 100%;
+      .input-container {
+        border-bottom-left-radius: 0 !important;
+        border-bottom: 0 !important;
+      }
+    }
+    .camping-searcher--people {
+      width: 100%;
+      flex: 0 0 auto;
+      .input-container {
+        border-left: 2px solid $primary !important;
+        border-bottom-left-radius: 0 !important;
+
+      }
+    }
+    .camping-searcher--searchBtn {
+      width: 100%;
+      button {
+        flex: 0 0 auto;
+        width: 100%;
+        border-top: 0 !important;
+        border-bottom-left-radius: 5px !important;
+      }
+    }
   }
 }

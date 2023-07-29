@@ -1,30 +1,15 @@
-<app-panel
-  [fullHeight]="true"
-  class="d-flex align-items-center position-relative"
->
-  <div class="row h-100 justify-content-center align-items-center">
-    <div class="col-12 col-md-7">
+<app-panel [fullHeight]="true" class="auth-page">
+    <div class="auth-form">
       <app-signup-user *ngIf="isUserSignup" />
       <app-signup-manager *ngIf="isManagerSignup" />
       <app-login-form *ngIf="isLogin" />
     </div>
 
-    <div
-      class="col-12 col-md-5 d-flex justify-content-start align-items-center"
-    >
+    <div class="app-logo">
       <img
-        src="../../../assets/png/ScoutCamp-logo.png"
-        class="img-fluid login-img"
+        src="assets/svg/logo-no-text.svg"
+        class="login-img"
         alt="ScoutCamp-logo"
       />
     </div>
-  </div>
-  <div
-    class="alert alert-danger fade show"
-    role="alert"
-    *ngIf="this.authService.getError()"
-  >
-    <strong [translate]="'auth.errors.' + authService.getError().name" [translateParams]="{ field: authService.getError().field }"></strong>
-    <mat-icon (click)="this.authService.setError(null)">X</mat-icon>
-  </div>
 </app-panel>

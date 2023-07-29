@@ -19,8 +19,8 @@ export class CampingsFavoritesComponent {
   @Input() lat: string = '';
   @Input() lng: string = '';
   @Input() type: string = '';
-  @Input() startDate: string = '';
-  @Input() endDate: string = '';
+  @Input() entryDate: string = '';
+  @Input() exitDate: string = '';
   @Input() capacity: string = '';
 
   location = ''

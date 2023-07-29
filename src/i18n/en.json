@@ -1,42 +1,112 @@
 {
   "user": {
-    "lastName": "Last name",
-    "birthDate": "Birth date",
+    "firstname": "First Name",
+    "lastname": "Last Name",
+    "birthDate": "Birth Date",
     "phone": "Phone",
     "lang": "Language",
-    "modifyProfile": "Modify profile data"
+    "profile": "Profile",
+    "modifyProfile": "Modify Profile Data",
+    "myBookings": "My bookings",
+    "myCampings": "My campsites",
+    "role": "Role",
+    "roles": {
+      "user": "User",
+      "manager": "Manager",
+      "admin": "Admin"
+    }
   },
-  "camping": {
-    "createCamping": "Create camping",
+  "campsite": {
+    "campsite": "Campsite",
+    "campsites": "Campsites",
+    "favorites": "Favorites",
+    "availableCampsitesList": "Available Campsites List",
+    "createCampsite": "Create Campsite",
+    "showingCampsitesNear": "Showing Campsites near",
+    "deleteQuestion": "Are you sure you want to delete this campsite?",
+    "lodging": "Lodging",
+    "lodgings": "Lodgings",
+    "addLodging": "Add Lodging",
+    "editLodging": "Edit Lodging",
+    "book": "Book",
+    "booking": "Booking",
+    "bookings": "Bookings",
+    "bungalow": "Bungalow",
+    "campingArea": "Camping Area",
     "amenities": "Amenities",
     "rules": "Rules",
-    "nearestLocations": "Nearest locations",
+    "nearestLocations": "Nearest Locations",
     "country": "Country",
     "city": "City",
+    "locality": "Locality",
     "street": "Street",
-    "zip": "Zip"
+    "number": "Number",
+    "postalCode": "Postal Code",
+    "info": "Information",
+    "location": "Location",
+    "images": "Images",
+    "addNameDescription": "Enter a name and description for your campsite",
+    "addImages": "Add at least 3 images of your campsite",
+    "addLocation": "Click on the map to mark your campsite's location",
+    "feePerNight": "Price per Night",
+    "size": "Size",
+    "capacity": "Capacity",
+    "search": "Search",
+    "units": "Units",
+    "confirmDeleteBooking": "Are you sure you want to delete this booking?",
+    "entryDate": "Entry Date",
+    "exitDate": "Exit Date",
+    "totalNights": "Total Nights",
+    "bookingData": "Booking Data",
+    "managerData": "Manager Data",
+    "reviews": "Reviews",
+    "morePhotos": "More Photos"
   },
-  "login": {
-    "login": "Login",
-    "signup": "Sign up",
-    "userName" : "User name",
+  "auth": {
+    "login": "Log In",
+    "signup": "Sign Up",
+    "email": "Email",
     "password": "Password",
-    "confirmPassword": "Confirm password"
+    "confirmPassword": "Confirm Password"
+  },
+  "input": {
+    "placeholderFileZone": "Drag files here or click in the marked zone",
+    "enterYourAvatar": "Enter your avatar"
+  },
+  "errors": {
+    "required": "The {{ field }} field cannot be empty",
+    "pattern": "The {{ field }} field is not valid",
+    "invalid_email": "Incorrect email or password",
+    "location_not_found": "Location not found"
   },
   "langs": {
     "es": "Spanish",
     "en": "English"
   },
   "common": {
+    "title": "Welcome to ScoutCamp!",
     "name": "Name",
     "description": "Description",
     "email": "Email",
+    "image": "Image",
+    "type": "Type",
     "send": "Send",
-    "update": "Update",
     "next": "Next",
     "back": "Back",
+    "other": "Other",
     "create": "Create",
+    "add": "Add",
     "edit": "Edit",
-    "delete": "Delete"
+    "update": "Update",
+    "delete": "Delete",
+    "accept": "Accept",
+    "cancel": "Cancel",
+    "creationDate": "Creation Date",
+    "total": "Total",
+    "bookings": "Bookings",
+    "users": "Users",
+    "at": "at",
+    "empty": "No items found",
+    "selected": "Selected"
   }
 }

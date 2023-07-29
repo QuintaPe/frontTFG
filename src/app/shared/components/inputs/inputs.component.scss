@@ -2,6 +2,10 @@
 @import "_variables";
 @import "_breakpoints";
 
+:host {
+  width: 100%;
+}
+
 .input-container {
   position: relative;
   width: 100%;

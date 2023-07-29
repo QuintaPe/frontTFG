@@ -1,5 +1,13 @@
 <app-nav-bar />
 
-<div style="margin-top: 60px">
-    <router-outlet />
+<div class="app-container">
+  <router-outlet></router-outlet>
+  <ng-container *ngIf="errorService.getError(); let error">
+    <div class="alert" [ngClass]="['alert-danger']" role="alert">
+      <strong>{{
+        "errors." + error.name | translate : { field: error.field }
+      }}</strong>
+      <mat-icon (click)="errorService.clearError()">X</mat-icon>
+    </div>
+  </ng-container>
 </div>

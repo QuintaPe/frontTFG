@@ -16,7 +16,7 @@
     </div>
   </ng-container>
 
-  <div *ngIf="mode === 'row'">
+  <div *ngIf="mode === 'row' && rows().total">
     <table class="table mb-0" (wheel)="scrollHorizontally($event)">
       <thead>
         <tr>
@@ -47,14 +47,11 @@
                     />
                   </ng-container>
                   <div *ngSwitchCase="'html'" [innerHTML]="renderField(row, column)"></div>
-                  <app-avatar *ngSwitchCase="'avatar'" type="camping" [size]="45" [src]="renderField(row, column)" />
+                  <app-avatar *ngSwitchCase="'avatar'" [type]="column.avatar" [size]="45" [src]="renderField(row, column)" />
                   <span *ngSwitchDefault>{{ renderField(row, column) }}</span>
                 </ng-container>
               </div>
             </td>
-          </tr>
-          <tr *ngIf="rows().total === 0">
-            <td [attr.colspan]="columns.length">No data available in table</td>
           </tr>
         </ng-container>
         <ng-template #skeletonContainer>
@@ -74,7 +71,12 @@
   </div>
 </div>
 
-<mat-paginator *ngIf="showPagination"
+<div *ngIf="!rows().total" class="empty-svg">
+  <img src="assets/svg/empty_campsite.svg" />
+  <div>{{'common.empty' | translate }}</div>
+</div>
+
+<mat-paginator *ngIf="rows().total && showPagination"
   [length]="rows().total"
   [pageIndex]="actualPage"
   [pageSize]="pageSize"

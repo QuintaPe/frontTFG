@@ -1,51 +1,32 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { TranslateService } from '@ngx-translate/core';
 import { Router } from '@angular/router';
 import { User } from '@models/user';
 import { fetch } from '@utils/api';
-
-interface AuthError {
-  name: string,
-  statusCode?: string
-  field?: string,
-}
+import { ErrorService } from '@app/core/services/errors.service';
 
 @Injectable({
   providedIn: "root",
 })
 export class AuthService {
   public user: User | null = null;
-  private error: AuthError | null = null;
   public loading: boolean = true;
   timeoutRef: any;
 
-  constructor(
-    private jwtHelper: JwtHelperService,
-    public translate: TranslateService,
-    public router: Router,
-  ) {}
-
-  public setError(error: AuthError | null) {
-    clearTimeout(this.timeoutRef);
-    this.error = error;
-    this.timeoutRef = setTimeout(() => {
-      this.error = null;
-    }, 5000);
-  }
-
-  public getError() {
-    return this.error;
-  }
+  private jwtHelper = inject(JwtHelperService);
+  public translate = inject(TranslateService);
+  public router = inject(Router);
+  public errorService = inject(ErrorService);
 
   //Registrarse
-  async signup(user: Object): Promise<any> {
+  async signup(user: User): Promise<any> {
     try {
-      const response = await fetch('POST', 'signup', { ...user });
-      this.router.navigate(['']);
-
+      await fetch('POST', 'signup', { ...user });
+      await this.login(user.email, user.password);
+      this.router.navigate([''])
     } catch (error: any) {
-      this.setError(error)
+      this.errorService.setError(error)
       throw error;
     }
   }
@@ -60,8 +41,7 @@ export class AuthService {
       this.translate.use(response.user.lang);
       this.router.navigate(['']);
     } catch (error: any) {
-      console.log(error);
-      this.setError(error)
+      this.errorService.setError(error)
       throw error;
     }
   }

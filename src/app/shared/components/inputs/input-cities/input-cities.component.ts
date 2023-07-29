@@ -49,7 +49,7 @@ export class InputCitiesComponent implements OnInit {
   emitEvent() {
     this.valueChange.emit(this.value || '');
     this.cityChange.emit({
-      location: '',
+      location: this.value || '',
       lat: null,
       lng: null,
       type: null,

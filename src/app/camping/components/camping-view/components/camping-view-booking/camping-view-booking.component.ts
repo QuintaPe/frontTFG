@@ -1,4 +1,4 @@
-import { Input, Component, inject, ChangeDetectorRef } from '@angular/core';
+import { Input, Component, inject, ChangeDetectorRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { BookingService } from '@app/camping/services/booking.service';
 import { CampingService } from '@app/camping/services/camping.service';
@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import {
   convertArrayToObject,
   daysBetweenDates,
+  formatDate,
   formatNumber,
   isEmptyObject,
 } from '@utils/functions';
@@ -17,12 +18,15 @@ import {
   templateUrl: './camping-view-booking.component.html',
   styleUrls: ['./camping-view-booking.component.scss'],
 })
-export class CampingViewBookingComponent {
+export class CampingViewBookingComponent implements OnInit {
   @Input() camping: string = '';
+  @Input() entryDate: Date | null = null;
+  @Input() exitDate: Date | null = null;
+
   lodgings: { [key: string]: any } = {};
 
-  entryDate?: Date;
-  exitDate?: Date;
+  auxEntryDate?: Date;
+  auxExitDate?: Date;
   tableFlagRefresh = 0;
   showOnlyAvailables: boolean = false;
 
@@ -34,6 +38,12 @@ export class CampingViewBookingComponent {
   private campingService = inject(CampingService);
   private bookingService = inject(BookingService);
   isEmptyObject = isEmptyObject;
+  formatDate = formatDate;
+
+  ngOnInit(): void {
+    this.auxEntryDate = this.entryDate;
+    this.auxExitDate = this.exitDate;
+  }
 
   lodgingsColumns: any = [
     {
@@ -75,6 +85,11 @@ export class CampingViewBookingComponent {
     this.cd.detectChanges();
   };
 
+  handleDateChange(dates: any) {
+    this.auxEntryDate = dates.start;
+    this.auxExitDate = dates.end;
+  }
+
   getAvailableLodgings = async (
     page: number,
     size: number,
@@ -82,7 +97,10 @@ export class CampingViewBookingComponent {
     filters: any,
     sort: string
   ) => {
-    if (this.entryDate && this.exitDate) {
+    console.log(this.auxExitDate, this.auxExitDate, this.entryDate, this.exitDate)
+    if (this.auxExitDate && this.auxExitDate) {
+      this.entryDate = this.auxEntryDate;
+      this.exitDate = this.auxExitDate;
       this.showOnlyAvailables = true;
       const auxLodgings = await this.campingService.getAvailableLodgings(
         this.camping, this.entryDate, this.exitDate, {

@@ -1,0 +1,36 @@
+.app-container {
+  margin-top: 60px;
+  position: relative;
+  overflow: hidden;
+  .alert {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+    animation: slideInOut 5s;
+    .mat-icon {
+      font-size: 15px;
+      font-weight: bold;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  }
+}
+
+@keyframes slideInOut {
+  0% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  10% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  90% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+}

@@ -7,20 +7,12 @@ import { DialogComponent } from './dialog.component';
 export class DialogService {
   dialog = inject(MatDialog);
 
-  async openConfirm(text: string): Promise<boolean> {
+  async open(type: string, text: string): Promise<boolean> {
     const dialogRef = this.dialog.open(DialogComponent, {
-      data: { text, type: 'confirm' },
+      data: { text, type },
     });
 
-    return await firstValueFrom(dialogRef.afterClosed());
-  }
-
-  async openConfirmDanger(text: string): Promise<boolean> {
-    const dialogRef = this.dialog.open(DialogComponent, {
-      data: { text, type: 'confirmDanger' },
-    });
-
-    return await firstValueFrom(dialogRef.afterClosed());
+    return firstValueFrom(dialogRef.afterClosed());
   }
 
   openLoading(): MatDialogRef<DialogComponent, any> {

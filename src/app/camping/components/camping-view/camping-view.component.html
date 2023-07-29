@@ -15,7 +15,7 @@
         <p class="camping-header--description">{{ camping?.description }}</p>
         <app-button
           [text]="'campsite.book' | translate"
-          (onClick)="scrollToElement(booking)"
+          (onClick)="scrollToBooking()"
         />
       </div>
     </section>
@@ -52,7 +52,11 @@
       [name]="camping?.name"
       [coords]="camping?.location?.coords"
     />
-    <app-camping-view-booking [camping]="camping?._id || ''" />
+    <app-camping-view-booking
+      [camping]="camping?._id || ''"
+      [entryDate]="entryDate"
+      [exitDate]="exitDate"
+    />
 
     <section
       class="u-align-center u-clearfix u-container-align-center u-section-5"
@@ -228,7 +232,7 @@
                 <div
                   class="u-container-layout u-valign-middle u-container-layout-2"
                 >
-                  <div class="u-form u-form-1" #booking>
+                  <div class="u-form u-form-1" >
                     <form
                       action="https://forms.nicepagesrv.com/v2/form/process"
                       class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form"

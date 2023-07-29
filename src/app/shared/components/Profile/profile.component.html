@@ -1,6 +1,6 @@
 <div class="d-flex justify-content-center">
   <app-input-avatar
-    preText="Introduzca su avatar"
+    [preText]="'input.enterYourAvatar' | translate"
     [isRequired]="true"
     [isPublic]="true"
     [(value)]="this.user.attributes.avatar"

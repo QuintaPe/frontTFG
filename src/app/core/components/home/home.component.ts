@@ -21,8 +21,8 @@ export class HomeComponent {
       `lat=${v.lat || ''}`,
       `lng=${v.lng || ''}`,
       `type=${v.type || ''}`,
-      `startDate=${v.startDate || ''}`,
-      `endDate=${v.endDate || ''}`,
+      `entryDate=${v.entryDate || ''}`,
+      `exitDate=${v.exitDate || ''}`,
       `capacity=${v.capacity || ''}`,
     ].filter((elem) => !elem.endsWith("="));
 

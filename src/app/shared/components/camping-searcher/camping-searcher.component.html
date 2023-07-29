@@ -9,7 +9,7 @@
   />
   <div class="camping-searcher--dates">
     <app-input-date-range
-      [value]="{ start: this.startDate, end: this.endDate}"
+      [value]="{ start: this.entryDate, end: this.exitDate}"
       (valueChange)="handleDateChange($event)"
     />
   </div>
@@ -17,7 +17,7 @@
     type="number"
     icon="person_outline"
     class="camping-searcher--people"
-    placeholder="Capacity"
+    [placeholder]="'campsite.capacity' | translate"
     [(value)]="this.capacity"
     [loading]="loading"
   />

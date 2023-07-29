@@ -28,6 +28,7 @@ export class AdminUsersComponent {
     {
       field: 'attributes',
       type: 'avatar',
+      avatar: 'user',
       width: '45',
       preRender: (v: any) => v.avatar?._id,
     },
@@ -67,16 +68,18 @@ export class AdminUsersComponent {
   ];
 
   handleDeleteUser = async (id: string) => {
-    const ref = this.dialogService.openLoading();
+    const confirmed = await this.dialogService.open('confirmDanger', 'Estas seguro?');
+    if (confirmed) {
+      const ref = this.dialogService.openLoading();
       try {
         await this.userService.deleteUser(id);
         ref.close();
         this.tableFlagRefresh += 1;
       } catch (err) {
         ref.close();
+        this.dialogService.open('danger', 'Error');
       }
-
-      return
+    }
   }
 
 

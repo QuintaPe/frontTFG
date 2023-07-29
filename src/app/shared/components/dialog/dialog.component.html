@@ -1,18 +1,50 @@
 <div class="dialog">
   <div class="dialog-content">
-    <ng-container *ngIf="data.type === 'confirm'">
+    <ng-container *ngIf="data.type !== 'loading'">
       <h4 class="fw-b">{{ data.text }}</h4>
 
       <div class="buttons mt-3">
-        <app-button
-          color="danger"
-          [text]="'common.cancel' | translate"
-          (onClick)="close(false)"
-        />
-        <app-button
-          [text]="'common.accept' | translate"
-          (onClick)="close(true)"
-        />
+        <ng-container *ngIf="data.type === 'confirm'">
+          <app-button
+            color="danger"
+            [text]="'common.cancel' | translate"
+            (onClick)="close(false)"
+          />
+          <app-button
+            color="success"
+            [text]="'common.confirm' | translate"
+            (onClick)="close(false)"
+          />
+        </ng-container>
+
+        <ng-container *ngIf="data.type === 'confirmDanger'">
+          <app-button
+            color="secondary"
+            [text]="'common.cancel' | translate"
+            (onClick)="close(false)"
+          />
+          <app-button
+            color="danger"
+            [text]="'common.confirm' | translate"
+            (onClick)="close(false)"
+          />
+        </ng-container>
+
+        <ng-container *ngIf="data.type === 'success'">
+          <app-button
+            color="success"
+            [text]="'common.accept' | translate"
+            (onClick)="close(false)"
+          />
+        </ng-container>
+
+        <ng-container *ngIf="data.type === 'danger'">
+          <app-button
+            color="danger"
+            [text]="'common.accept' | translate"
+            (onClick)="close(false)"
+          />
+        </ng-container>
       </div>
     </ng-container>
 

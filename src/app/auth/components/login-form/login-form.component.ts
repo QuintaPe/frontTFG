@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AuthService } from '@auth/services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
+import { ErrorService } from '@app/core/services/errors.service';
 
 @Component({
   selector: 'app-login-form',
@@ -29,13 +30,17 @@ import { TranslateService } from '@ngx-translate/core';
     ]),
   ],
 })
-export class LoginFormComponent {
+export class LoginFormComponent implements OnInit {
   public loginForm: UntypedFormGroup;
   protected loading = false;
 
-  constructor(public authService: AuthService, private translate: TranslateService) {
+  private translate = inject(TranslateService);
+  protected authService = inject(AuthService);
+  protected errorService = inject(ErrorService);
+
+  ngOnInit(): void {
     this.loginForm = new UntypedFormGroup({
-      email: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/)]),
+      email: new UntypedFormControl('', [Validators.required, Validators.pattern(/^[\w-\.+]+@([\w-]+\.)+[\w-]{2,4}$/)]),
       password: new UntypedFormControl('', [Validators.required]),
     });
   }
@@ -43,8 +48,9 @@ export class LoginFormComponent {
   //Login
   public login = async () => {
     Object.values(this.loginForm.controls).forEach(control => {
+      control.setErrors(null);
+      control.updateValueAndValidity();
       control.markAsTouched();
-      console.log(control);
     });
 
     var user = this.loginForm.value;
@@ -62,7 +68,7 @@ export class LoginFormComponent {
       for (const name in controls) {
         if (controls[name].invalid) {
           const err = { field: name, error: Object.keys(controls[name].errors)[0]};
-          this.authService.setError({ name: err.error, field: this.translate.instant('auth.' + err.field) });
+          this.errorService.setError({ name: err.error, field: this.translate.instant('auth.' + err.field) });
         }
       }
     }

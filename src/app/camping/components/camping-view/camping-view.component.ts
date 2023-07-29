@@ -17,6 +17,9 @@ import environment from 'src/environments/environment';
 })
 export class CampingViewComponent implements OnInit {
   @Input() id: string = ''
+  @Input() entryDate: Date;
+  @Input() exitDate: Date;
+
   camping: Camping | null = null;
   loading: boolean = true;
 
@@ -31,10 +34,11 @@ export class CampingViewComponent implements OnInit {
     return image ? environment.api.FILES_BASE_URL + image._id : null;
   };
 
-  scrollToElement(element: any): void {
-    element.scrollIntoView({
+  scrollToBooking(): void {
+    const campingViewBookingElement = document.querySelector('app-camping-view-booking');
+    campingViewBookingElement.scrollIntoView({
       behavior: 'smooth',
-      block: 'start',
+      block: 'center',
       inline: 'nearest',
     });
   }
