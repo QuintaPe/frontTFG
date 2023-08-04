@@ -1,9 +1,12 @@
 <div class="camping-row" [routerLink]="_id" [queryParams]="{entryDate, exitDate}" *ngIf="!loading">
   <div *ngIf="image" class="camping-row--img">
-    <mat-icon
-      class="favorite-icon"
-      [ngStyle]="{ 'color': relation?.favorite ? 'red' : 'white' }"
-      (click)="toggleFavorite($event)">favorite</mat-icon>
+    <div *ngIf="!canEdit" (click)="toggleFavorite($event)">
+      <app-svg-icon
+        class="favorite-icon"
+        [ngClass]="{liked: relation?.favorite, loading: loadingFavorite}"
+        [path]="'assets/svg/heart.svg'"
+      />
+    </div>
     <img [src]="image" />
   </div>
   <div class="camping-row--data">
@@ -15,15 +18,19 @@
           <span>{{ location?.locality }}</span>
           <span *ngIf="distance"> - {{ 'common.at' | translate }} {{ (+distance).toFixed(2) }} km</span>
         </div>
-        <div class="camping-row--capacity">
+        <div *ngIf="totalCapacity" class="camping-row--capacity">
           <mat-icon>person</mat-icon>
           <span *ngIf="availableCapacity">{{ availableCapacity }} /</span>
           <span>{{ totalCapacity }}</span>
         </div>
       </div>
-      <div *ngIf="ratings.amount" class="camping-row--ratings">
+      <div *ngIf="ratings?.amount" class="camping-row--ratings">
         <div class="text-center fs-lg fw-b">{{ ratings.averageRatings }} / 5</div>
         <div class="fs-xs fc-secondary">{{ ratings.amount }} {{ 'campsite.reviews' | translate }}</div>
+      </div>
+      <div *ngIf="canEdit" class="camping-row--actions">
+        <mat-icon (click)="handleEditCamping($event)">edit</mat-icon>
+        <mat-icon (click)="handleDeleteCamping($event)">delete</mat-icon>
       </div>
     </div>
     <div class="camping-row--description">{{ description }}</div>

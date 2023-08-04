@@ -1,11 +1,10 @@
 import { Component, Input, inject, TemplateRef, ViewChild } from '@angular/core';
-import { Camping } from '@models/camping';
 import { TranslateService } from '@ngx-translate/core';
-import { CampingLodging } from '@app/core/models/campingLodging';
 import { MatDialog } from '@angular/material/dialog';
 import { PopupComponent } from '@shared/components/popup/popup.component';
-import { cloneObject } from '@utils/functions';
 import { CampingUnit } from '@app/core/models/campingUnit';
+import { FormArray, FormBuilder, FormControl, Validators } from '@angular/forms';
+import { ErrorService } from '@app/core/services/errors.service';
 
 @Component({
   selector: 'app-create-camping-lodgings',
@@ -14,8 +13,9 @@ import { CampingUnit } from '@app/core/models/campingUnit';
 })
 
 export class CreateCampingLodgingsComponent {
-  @Input() camping !: Camping;
-  actualLodging!: CampingLodging
+  @Input() camping: string = '';
+  @Input() formArray !: FormArray;
+  actualLodging!: any;
   page = 0;
   tableRefreshFlag = 0;
 
@@ -24,6 +24,8 @@ export class CreateCampingLodgingsComponent {
 
   protected translate = inject(TranslateService);
   protected dialog = inject(MatDialog);
+  private formBuilder = inject(FormBuilder);
+  protected errorService = inject(ErrorService);
 
   columns = [
     {
@@ -58,9 +60,19 @@ export class CreateCampingLodgingsComponent {
   ];
 
   openLodgingModal(id:string | null = null) {
-    const lodging = id ? this.camping.lodgings.find(lodging => lodging._id === id) : null;
     this.page = 0;
-    this.actualLodging = lodging ? cloneObject(lodging) : new CampingLodging();
+    const lodging = id ? this.formArray.controls.find((lod) => lod.get('_id').value === id) : null;
+    this.actualLodging = lodging || this.formBuilder.group({
+      _id: [''],
+      camping: [this.camping],
+      type: ['', Validators.required],
+      name: ['', Validators.required],
+      feePerNight: ['', Validators.required],
+      size: ['', Validators.required],
+      capacity: ['', Validators.required],
+      units: [[], Validators.required],
+    });
+
     this.dialog.open(PopupComponent, {
       data: {
         headerText: this.translate.instant('campsite.addLodging'),
@@ -70,30 +82,67 @@ export class CreateCampingLodgingsComponent {
     });
   }
 
-  addCampingLodging() {
-    const lodgingIndex = this.camping.lodgings.findIndex(lodging => lodging._id === this.actualLodging._id);
-    if (lodgingIndex > -1) {
-      this.camping.lodgings[lodgingIndex] = this.actualLodging;
-    } else {
-      this.actualLodging._id = `new.${Math.random()}`;
-      this.camping.lodgings.push(this.actualLodging);
+  checkPageErrors() {
+    const fields = Object.keys(this.actualLodging.controls)
+    const pageFields = this.page === 0 ? fields.filter(f => f !== 'units') : ['units']
+    const invalidControlName = pageFields.find(control => this.actualLodging.controls[control].invalid);
+    this.actualLodging.markAllAsTouched();
+    console.log(this.actualLodging);
+    if (invalidControlName) {
+      const invalidControl = this.actualLodging.controls[invalidControlName];
+      const firstError = Object.keys(invalidControl.errors)[0];
+      this.errorService.setError({ name: firstError, field: this.translate.instant('campsite.' + invalidControlName) });
+      return false;
     }
-    this.dialog.closeAll();
+
+
+    return true;
+  }
+
+  nextPage() {
+    if(this.checkPageErrors()) {
+      this.page = 1;
+    }
+  }
+
+  addCampingLodging() {
+    if(this.checkPageErrors()) {
+      const lodgingIndex = this.formArray.controls.findIndex((control) => control.value._id === this.actualLodging.get('_id').value);
+      if (lodgingIndex > -1) {
+        this.formArray.at(lodgingIndex).setValue(this.actualLodging.value);
+      } else {
+        this.actualLodging.get('_id').setValue(`new.${Math.random()}`)
+        this.formArray.push(this.actualLodging);
+      }
+      this.dialog.closeAll();
+    }
   }
 
   deleteCampingLodging() {
-    this.camping.lodgings = this.camping.lodgings.filter(lodging => lodging._id !== this.actualLodging._id);
+    const lodging = this.formArray.controls.findIndex((control) => control.value._id === this.actualLodging.get('_id').value);
+    this.formArray.removeAt(lodging);
     this.dialog.closeAll();
   }
 
   handleAddUnit() {
-    this.actualLodging.units.push(new CampingUnit({ name: `Unidad ${this.actualLodging.units.length + 1 }`}));
+    const unitsFormControl = this.actualLodging.get('units') as FormControl;
+    const unitsArray = unitsFormControl.value as CampingUnit[];
+    const newUnitName = `Unidad ${unitsArray.length + 1}`;
+
+    unitsArray.push(new CampingUnit({ name: newUnitName }));
+    unitsFormControl.setValue(unitsArray);
   }
 
   handleRemoveUnit(id: string) {
-    this.actualLodging.units = this.actualLodging.units.filter(unit => unit._id !== id);
-    this.tableRefreshFlag += 1;
+    const unitsFormControl = this.actualLodging.get('units') as FormControl;
+    const unitsArray = unitsFormControl.value as CampingUnit[];
+    const indexToRemove = unitsArray.findIndex(unit => unit._id === id);
+
+    if (indexToRemove !== -1) {
+      unitsArray.splice(indexToRemove, 1);
+    }
+    unitsFormControl.setValue(unitsArray);
   }
 
-  handleGetUnits = () => ({ items: this.actualLodging.units, total: this.actualLodging.units.length });
+  handleGetUnits = () => ({ items: this.actualLodging.get('units').value, total: this.actualLodging.get('units').value.length });
 }

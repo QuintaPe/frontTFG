@@ -1,91 +1,103 @@
-<div *ngIf="!this.page" @enterState>
-  <form class="register-form" [formGroup]="attributesForm" (ngSubmit)="next()" autocomplete="off">
-    <p class="text-center h1 fw-bold ">Crea una cuenta manager</p>
+<form (ngSubmit)="this.page ? finish() : next()">
+  <h1 class="text-center mb-5">{{'auth.createManagerAccount' | translate}}</h1>
 
+  <div *ngIf="!this.page" @enterState
+    [formGroup]="attributesForm"
+    class="register-form"
+  >
     <!-- Name -->
     <app-input-text
       [preText]="'common.name' | translate"
-      placeholder='Introduzca su nombre'
-      icon="person"
+      [placeholder]="'auth.enterYourName' | translate"
       [control]="attributesForm.controls['firstname']"
+      icon="person"
+      class="mb-5"
     />
 
     <!-- LastName -->
     <app-input-text
       [preText]="'user.lastname' | translate"
-      placeholder='Introduzca sus apellidos'
-      icon="person_outline"
+      [placeholder]="'auth.enterYourLastname' | translate"
       [control]="attributesForm.controls['lastname']"
+      icon="person_outline"
+      class="mb-5"
     />
 
     <!-- Birth Date -->
     <app-input-text
-      [preText]="'user.birthDate' | translate"
       type="date"
-      icon="date_range"
+      [preText]="'user.birthDate' | translate"
       [control]="attributesForm.controls['birthDate']"
-      />
+      icon="date_range"
+      class="mb-5"
+    />
 
     <!-- Phone Number -->
     <app-input-text
-      [preText]="'user.phone' | translate"
-      placeholder='Introduzca su numero teléfono'
-      icon="phone"
-      [control]="attributesForm.controls['phone']"
       type="number"
-      />
+      [preText]="'user.phone' | translate"
+      [placeholder]="'auth.enterYourPhone' | translate"
+      [control]="attributesForm.controls['phone']"
+      icon="phone"
+      class="mb-5"
+    />
+  </div>
 
-    <!-- Next Button -->
-    <div class="d-flex flex-column justify-content-center align-items-center">
-      <p>¿Ya tienes una cuenta? <a href="/login">Inicia Sesión</a></p>
-      <app-button type="submit" text="Siguiente" iconRight="arrow_forward" />
-    </div>
-  </form>
-</div>
-
-<div *ngIf="this.page" @enterState>
-  <form class="register-form" [formGroup]="authForm" (ngSubmit)="finish()">
-    <p class="text-center h1 fw-bold ">Crea una cuenta</p>
-
+  <div *ngIf="this.page" @enterState class="register-form" [formGroup]="authForm">
     <!-- Email -->
     <app-input-text
       [preText]="'common.email' | translate"
-      placeholder='Introduzca su email'
-      icon="email"
+      [placeholder]="'auth.enterYourEmail' | translate"
       [control]="authForm.controls['email']"
+      icon="email"
+      class="mb-5"
     />
 
     <!-- Password -->
     <app-input-text
+      ype="password"
       [preText]="'auth.password' | translate"
-      placeholder='Introduzca su contraseña'
-      icon="lock"
+      [placeholder]="'auth.enterYourPassword' | translate"
       [control]="authForm.controls['password']"
-      type="password"
+      icon="lock"
+      class="mb-5"
     />
-
 
     <!-- Confirm Password -->
     <app-input-text
-      [preText]="'auth.confirmPassword' | translate"
-      placeholder='Repita la contraseña'
-      icon="key"
-      [control]="authForm.controls['confirmPassword']"
       type="password"
+      [preText]="'auth.confirmPassword' | translate"
+      [placeholder]="'auth.confirmYourPassword' | translate"
+      [control]="authForm.controls['confirmPassword']"
+      icon="key"
+      class="mb-2"
     />
     <!-- Terms of Services -->
-    <div class="form-check d-flex justify-content-center">
-        <input class="form-check-input me-2" type="checkbox" id="Terms"/>
-        <label class="form-check-label" for="Terms">
-            Acepto los <a href="#!">Terminos de servicio</a>
-        </label>
+    <div class="form-check d-flex justify-content-center mb-5">
+      <input class="form-check-input me-2" type="checkbox" id="Terms" />
+      <label class="form-check-label" for="Terms">
+        {{'auth.acceptThe' | translate}} <a href="#!">{{'auth.termsAndConditions' | translate}}</a>
+      </label>
     </div>
+  </div>
 
-    <!-- Register button -->
-    <div class="d-flex justify-content-center  align-items-center">
-        <app-button text="Atras" class='me-3' color='secondary' icon="arrow_back" (onClick)="this.page=false" />
-        <app-button type="submit" text="Registrarse" iconRight="person_add" [loading]="loading" />
+  <div>
+    <p class="text-center">{{'auth.alreadyHaveAccountQuestion' | translate}} <a routerLink="'auth/login'">{{'auth.login' | translate}}</a></p>
+    <div class="d-flex justify-content-center align-items-center">
+      <app-button
+        *ngIf="this.page"
+        [text]="'common.back' | translate"
+        class="me-3"
+        color="secondary"
+        icon="arrow_back"
+        (onClick)="this.page = false"
+      />
+      <app-button
+        type="submit"
+        [text]="this.page ? ('auth.signup' | translate) : ('common.next' | translate)"
+        [iconRight]="this.page ? 'person_add' : 'arrow_forward'"
+        [loading]="loading"
+      />
     </div>
-
-  </form>
-</div>
+  </div>
+</form>

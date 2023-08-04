@@ -4,46 +4,46 @@
       <h6 class="fw-b mb-4">{{ "campsite.addNameDescription" | translate }}</h6>
       <app-input-text
         [preText]="'common.name' | translate"
-        [(value)]="this.camping.name"
+        [control]="firstPageForm?.controls?.['name']"
         [loading]="loading"
         class="mb-4"
       />
       <app-input-text-area
         [preText]="'common.description' | translate"
-        [(value)]="this.camping.description"
+        [control]="firstPageForm?.controls?.['description']"
         [loading]="loading"
         class="mb-5"
       />
       <h6 class="fw-b mb-3">{{ "campsite.addImages" | translate }}</h6>
       <app-input-file-zone
         [preText]="'campsite.addLodging' | translate"
-        [(value)]="camping.images"
+        [control]="firstPageForm?.controls?.['images']"
         [isMultiple]="true"
         [isRequired]="true"
         [isLoading]="loading"
       />
     </div>
 
-    <app-create-camping-location *ngSwitchCase="1" [camping]="camping" />
+    <app-create-camping-location *ngSwitchCase="1" [formGroup]="secondPageForm" />
 
-    <app-create-camping-lodgings *ngSwitchCase="2" [camping]="camping" />
+    <app-create-camping-lodgings *ngSwitchCase="2" [camping]="id" [formArray]="thirdPageForm" />
 
     <div *ngSwitchCase="3">
       <app-input-text-area
         [preText]="'campsite.amenities' | translate"
-        [(value)]="this.camping.amenities"
+        [control]="fourthPageForm?.controls?.['amenities']"
         [loading]="loading"
         class="mb-4"
       />
       <app-input-text-area
         [preText]="'campsite.rules' | translate"
-        [(value)]="this.camping.rules"
+        [control]="fourthPageForm?.controls?.['rules']"
         [loading]="loading"
         class="mb-4"
       />
       <app-input-text-area
         [preText]="'campsite.nearestLocations' | translate"
-        [(value)]="this.camping.nearestLocations"
+        [control]="fourthPageForm?.controls?.['nearestLocations']"
         [loading]="loading"
         class="mb-4"
       />

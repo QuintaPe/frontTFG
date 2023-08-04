@@ -8,7 +8,7 @@
 
   <div class="row m-0">
     <div
-      *ngFor="let lodging of this.camping.lodgings"
+      *ngFor="let lodging of formArray.value"
       class="camping-lodging col-12 col-sm-6"
       (click)="openLodgingModal(lodging._id)"
     >
@@ -23,7 +23,7 @@
         <div class="col-12 col-md-4 mb-4">
           <app-input-select
             [preText]="'common.type' | translate"
-            [(value)]="this.actualLodging.type"
+            [control]="actualLodging?.controls?.['type']"
             [options]="[
               { id: 'bungalow', name: 'campsite.bungalow' | translate },
               { id: 'campsite', name: 'campsite.campingArea' | translate },
@@ -34,7 +34,7 @@
         <div class="col-12 col-md-6 mb-4">
           <app-input-text
             [preText]="'common.name' | translate"
-            [(value)]="this.actualLodging.name"
+            [control]="actualLodging?.controls?.['name']"
           />
         </div>
       </div>
@@ -43,20 +43,20 @@
         <div class="col-12 col-md-4 mb-4">
           <app-input-text
             [preText]="'campsite.feePerNight' | translate"
-            [(value)]="this.actualLodging.feePerNight"
+            [control]="actualLodging?.controls?.['feePerNight']"
           />
         </div>
         <div class="col-12 col-md-4 mb-4">
           <app-input-text
             [preText]="'campsite.size' | translate"
-            [(value)]="this.actualLodging.size"
+            [control]="actualLodging?.controls?.['size']"
           />
         </div>
         <div class="col-12 col-md-4 mb-4">
           <app-input-text
             type="number"
             [preText]="'campsite.capacity' | translate"
-            [(value)]="this.actualLodging.capacity"
+            [control]="actualLodging?.controls?.['capacity']"
           />
         </div>
       </div>
@@ -66,7 +66,7 @@
         <app-input-text
           type="number"
           [preText]="'campsite.number' | translate"
-          [value]="this.actualLodging.units.length"
+          [(value)]="actualLodging?.controls?.['units'].value.length"
           [isDisabled]="true"
         />
         <app-button
@@ -81,7 +81,7 @@
 
     <div class="buttons mt-4">
       <app-button
-        *ngIf="actualLodging._id"
+        *ngIf="this.actualLodging.get('_id').value"
         [text]="'common.delete' | translate"
         color="danger"
         (onClick)="deleteCampingLodging()"
@@ -95,11 +95,11 @@
       <app-button
         *ngIf="page == 0"
         [text]="'common.next' | translate"
-        (onClick)="page = 1"
+        (onClick)="nextPage()"
       />
       <app-button
         *ngIf="page == 1"
-        [text]="actualLodging._id ? ('campsite.editLodging' | translate) : ('campsite.addLodging' | translate)"
+        [text]="this.actualLodging.get('_id').value ? ('campsite.editLodging' | translate) : ('campsite.addLodging' | translate)"
         (onClick)="addCampingLodging()"
       />
     </div>

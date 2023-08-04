@@ -1,4 +1,4 @@
-<div class="input_filezone" ngClass="'disabled' : isDisabled">
+<div class="input_filezone" [ngClass]="{ disabled: isDisabled, invalid: control?.touched && !control?.valid}">
   <div class="pre_text"></div>
   <label
     htmlFor="file-upload"
@@ -7,65 +7,44 @@
     fileDragDrop
     (filesChangeEmiter)="changeValue($event, true)"
   >
-    <ng-container *ngIf="file">
-      {{ file.name }}
-    </ng-container>
-    <span *ngIf="!file">{{ "input.placeholderFileZone" | translate }}</span>
+    <ng-container *ngIf="file; else filePlaceholder">{{ file.name }}</ng-container>
+    <ng-template #filePlaceholder>{{ "input.placeholderFileZone" | translate }}</ng-template>
     <input
       id="file-upload"
       type="file"
-      [disabled]="isDisabled"
       (change)="changeValue($event)"
-      [disabled]="isLoading"
+      [disabled]="!control && (isDisabled || isLoading)"
     />
   </label>
 
-  <div
-    class="row w-100 m-0 mt-4"
-    cdkDropList
-    (cdkDropListDropped)="onDropped($event)"
-  >
-    <div
-      *ngFor="let file of value; let i = index"
-      class="col-12 col-sm-6 col-lg-4 col-xl-3"
-      cdkDrag
-    >
-      <div class="output-image">
-        <div class="pre_text">
-          {{ ("common.image" | translate) + " " + (i + 1) }}
+  <div class="row w-100 m-0 mt-4" cdkDropList (cdkDropListDropped)="onDropped($event)">
+    <ng-container *ngFor="let file of filesToShow">
+      <div class="col-12 col-sm-6 col-lg-4 col-xl-3" cdkDrag>
+        <div class="output-image">
+          <div class="pre_text">{{ "common.image" | translate }} {{ getDisplayIndex(file) }}</div>
+          <label class="file-upload" [style.height.px]="200" [style.width.%]="100">
+            <mat-icon
+              *ngIf="file"
+              class="close-icon"
+              (click)="$event.preventDefault(); removeValue(file._id)"
+            >
+              close
+            </mat-icon>
+            <img [src]="FILES_BASE_URL + file._id" [alt]="file.name" *ngIf="file" />
+            <mat-icon [style.fontSize.px]="170" class="default-img" *ngIf="!file">
+              person_outline
+            </mat-icon>
+          </label>
         </div>
-        <label
-          class="file-upload"
-          [style.height.px]="200"
-          [style.width.%]="100"
-        >
-          <mat-icon
-            *ngIf="file"
-            class="close-icon"
-            (click)="$event.preventDefault(); removeValue(file._id)"
-          >close</mat-icon>
-          <img [src]="FILES_BASE_URL + file._id" [alt]="file.name" />
-          <mat-icon [style.fontSize.px]="170" class="default-img" *ngIf="!file">person_outline</mat-icon>
-        </label>
       </div>
-    </div>
+    </ng-container>
 
-    <div
-      class="col-12 col-sm-6 col-lg-4 col-xl-3"
-      *ngFor="let _ of [].constructor(isLoading ? 3 : uploading); let i = index"
-      cdkDrag
-    >
+    <div class="col-12 col-sm-6 col-lg-4 col-xl-3" *ngFor="let _ of loadingPlaceholders; let i = index" cdkDrag>
       <div class="output-image">
-        <div class="pre_text">
-          {{ ("common.image" | translate) + " " + (value.length + i + 1) }}
-        </div>
-        <label
-          class="file-upload"
-          [style.height.px]="200"
-          [style.width.%]="100"
-        >
+        <div class="pre_text">{{ "common.image" | translate }} {{ loadingImagesStartIndex + i + 1 }}</div>
+        <label class="file-upload" [style.height.px]="200" [style.width.%]="100">
           <div class="flex-fill h-100">
-            <app-skeleton height="100%" [width]="100" />
+            <app-skeleton height="100%" [width]="100"></app-skeleton>
           </div>
         </label>
       </div>

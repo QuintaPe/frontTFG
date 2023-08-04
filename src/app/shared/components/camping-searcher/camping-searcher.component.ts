@@ -105,7 +105,6 @@ export class CampingSearcherComponent implements OnInit {
     };
 
     if (Object.keys(emitObject).some((att: string) => !emitObject[att])) {
-      console.log(emitObject);
       this.errorService.setError({
         name: 'required',
         field: this.translate.instant(`campsite.${Object.keys(emitObject).find((att: string) => !emitObject[att])}`)

@@ -20,7 +20,7 @@ interface Option {
     standalone: true,
     imports: [NgIf, NgFor, PortalModule, SkeletonComponent, MatIconModule]
 })
-export class InputSelectComponent implements OnChanges {
+export class InputSelectComponent {
   @Input() class: string = '';
   @Input() icon: string = '';
   @Input() preText: string = '';
@@ -36,7 +36,10 @@ export class InputSelectComponent implements OnChanges {
   @Output() valueChange = new EventEmitter<string>();
   protected showOptions: Boolean = false;
 
-  selectedOption: Option | undefined;
+  get selectedOption(): Option | undefined {
+    this.selectedIndex = this.options.findIndex((option: Option) => option.id === (this.control?.value || this.value));
+    return this.options[this.selectedIndex]
+  }
   selectedIndex= 0;
 
   @ViewChild('select') public select!: ElementRef;
@@ -44,12 +47,6 @@ export class InputSelectComponent implements OnChanges {
   private overlayRef!: OverlayRef;
 
   constructor(private overlay: Overlay) {}
-  ngOnChanges(changes: SimpleChanges) {
-    if (changes['options']) {
-      this.selectedIndex = this.options.findIndex((option: Option) => option.id === this.value);
-      this.selectedOption = this.options[this.selectedIndex];
-    }
-  }
 
   @HostListener('window:resize')
   onResize() {
@@ -70,18 +67,16 @@ export class InputSelectComponent implements OnChanges {
     }
   }
 
-  get selectedOptionName() {
-    const option = this.options.find((option) => option.id === this.value);
-    return option ? option.name : 'undefined';
-  }
-
   public selectOption(option: Option, index: number | null = null) {
     if(index || index === 0) {
       this.selectedIndex = index;
       this.hide();
     }
-    if (this.value !== option.id) {
-      this.selectedOption = option;
+
+    if (this.control && this.control?.value !== option.id) {
+      this.control.setValue(option.id);
+
+    } else if (this.value !== option.id) {
       this.valueChange.emit(option.id);
     }
   }

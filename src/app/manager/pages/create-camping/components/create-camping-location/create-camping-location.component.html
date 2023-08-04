@@ -8,8 +8,8 @@
   [center]="center"
 >
   <map-marker
-    *ngIf="this.camping?.location?.coords?.coordinates"
-    [position]="getLatLang()"
+    *ngIf="this.formGroup.get('coords').value.coordinates.length"
+    [position]="latLang"
     [options]="{ draggable: false }"
   />
 </google-map>
@@ -18,14 +18,14 @@
   <div class="col-12 col-sm-9 mb-4">
     <app-input-text
       [preText]="'campsite.street' | translate"
-      [(value)]="this.camping.location.street"
+      [control]="formGroup?.controls?.['street']"
       [isDisabled]="true"
     />
   </div>
   <div class="col-12 col-sm-3 mb-4">
     <app-input-text
       [preText]="'campsite.number' | translate"
-      [(value)]="this.camping.location.streetNumber"
+      [control]="formGroup?.controls?.['streetNumber']"
     />
   </div>
 </div>
@@ -33,14 +33,14 @@
   <div class="col-12 col-sm-6 mb-4">
     <app-input-text
       [preText]="'campsite.locality' | translate"
-      [(value)]="this.camping.location.locality"
+      [control]="formGroup?.controls?.['locality']"
       [isDisabled]="true"
     />
   </div>
   <div class="col-12 col-sm-6 mb-4">
     <app-input-text
       [preText]="'campsite.postalCode' | translate"
-      [(value)]="this.camping.location.postalCode"
+      [control]="formGroup?.controls?.['postalCode']"
     />
   </div>
 </div>
@@ -48,14 +48,14 @@
   <div class="col-12 col-sm-6 mb-4">
     <app-input-text
       [preText]="'campsite.country' | translate"
-      [(value)]="this.camping.location.country"
+      [control]="formGroup?.controls?.['country']"
       [isDisabled]="true"
     />
   </div>
   <div class="col-12 col-sm-6 mb-4">
     <app-input-text
       [preText]="'campsite.city' | translate"
-      [(value)]="this.camping.location.city"
+      [control]="formGroup?.controls?.['city']"
       [isDisabled]="true"
     />
   </div>

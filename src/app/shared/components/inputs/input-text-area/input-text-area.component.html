@@ -1,14 +1,27 @@
 <div
-  class="input-container
-  {{ value ? 'filled' : '' }}
-  {{ isDisabled ? 'disabled' : '' }}
-  {{ class }}"
+  class="input-container {{ class }}"
+  [ngClass]="{
+    invalid: !control?.valid && control?.touched,
+    filled: control?.value || value,
+    disabled: isDisabled,
+  }"
 >
-  <div *ngIf="this.icon" class="icon">
-    <mat-icon>{{ this.icon }}</mat-icon>
+  <div *ngIf="icon" class="icon">
+    <mat-icon>{{ icon }}</mat-icon>
   </div>
 
   <textarea
+    *ngIf="control"
+    [id]="preText"
+    class="input"
+    [style.min-height.px]="minHeight"
+    [placeholder]="placeholder"
+    [formControl]="control"
+    autocomplete="off"
+  ></textarea>
+
+  <textarea
+    *ngIf="!control"
     [id]="preText"
     class="input"
     [style.min-height.px]="minHeight"
@@ -19,13 +32,11 @@
     autocomplete="off"
   ></textarea>
 
-  <label class="label {{ icon ? 'icon-label' : '' }} " [for]="preText">
+  <label class="label" [for]="preText" [ngClass]="{ 'icon-label': icon }">
     {{ preText }}
     <span *ngIf="isRequired" class="is_required">*</span>
   </label>
 
-  <app-skeleton *ngIf="loading"
-    class="input-loader"
-    height="100%"
-  />
+  <app-skeleton *ngIf="loading" class="input-loader" height="100%">
+  </app-skeleton>
 </div>

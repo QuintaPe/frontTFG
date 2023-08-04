@@ -1,6 +1,6 @@
-import { AfterViewInit, Component, ElementRef, Input, ViewChild, OnDestroy } from '@angular/core';
-import { Camping } from '@models/camping';
+import { AfterViewInit, Component, ElementRef, Input, ViewChild, OnDestroy, inject, ChangeDetectorRef } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
+import {  FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-create-camping-location',
@@ -9,7 +9,7 @@ import { GoogleMap } from '@angular/google-maps';
 })
 
 export class CreateCampingLocationComponent implements AfterViewInit, OnDestroy {
-  @Input() camping !: Camping;
+  @Input() formGroup!: FormGroup;
   @ViewChild('mapSearchField') searchField !: ElementRef;
   @ViewChild(GoogleMap) map !: GoogleMap;
 
@@ -17,12 +17,17 @@ export class CreateCampingLocationComponent implements AfterViewInit, OnDestroy 
 
   geocoder = new google.maps.Geocoder;
   center: google.maps.LatLngLiteral = { lat: 40.416775, lng: -3.703339 };
+  latLang: google.maps.LatLng;
+
+  private cdr = inject(ChangeDetectorRef);
 
   ngAfterViewInit(): void {
-    if (this.camping.location.coords.coordinates[0]) {
+    const coordinates = this.formGroup.get('coords').value.coordinates;
+    if (coordinates.length) {
+      this.latLang = new google.maps.LatLng(coordinates[0], coordinates[1]);
       this.center = {
-        lat: this.camping.location.coords.coordinates[0],
-        lng: this.camping.location.coords.coordinates[1],
+        lat: coordinates[0],
+        lng: coordinates[1],
       };
     } else {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -63,6 +68,14 @@ export class CreateCampingLocationComponent implements AfterViewInit, OnDestroy 
     this.map.googleMap?.addListener('click', (event: any) => {
       this.addMarker(event.latLng);
     });
+
+    this.formGroup.get('coords').valueChanges.subscribe((coords) => {
+      if (coords.coordinates) {
+        this.latLang = new google.maps.LatLng(coords.coordinates[0], coords.coordinates[1]);
+        this.cdr.detectChanges();
+      }
+    });
+    this.cdr.detectChanges();
   }
 
   ngOnDestroy() {
@@ -75,7 +88,7 @@ export class CreateCampingLocationComponent implements AfterViewInit, OnDestroy 
       if (results && status === google.maps.GeocoderStatus.OK) {
         if (results[1]) {
           this.fillCampingLocation(results);
-          this.camping.location.coords.coordinates = [latLng.lat(), latLng.lng()];
+          this.formGroup?.controls?.['coords'].setValue({ type: 'Point', coordinates: [latLng.lat(), latLng.lng()]});
         } else {
           window.alert('No hay resultados');
         }
@@ -84,38 +97,35 @@ export class CreateCampingLocationComponent implements AfterViewInit, OnDestroy 
   }
 
   fillCampingLocation(results: any) {
-    Object.keys(this.camping.location).forEach(key => {
-      if (key !== 'coords') {
-        this.camping.location[key] = '';
+    const locationKeys = Object.keys(this.formGroup.controls);
+    locationKeys.forEach(key => {
+      if (key !== 'coordinates') {
+        this.formGroup.get(key)?.setValue('');
       }
     });
+
     results.forEach((result: any) => {
       result.address_components.forEach((address: any) => {
-        if (!this.camping.location.country && address.types.includes('country')) {
-          this.camping.location.country = address.long_name;
-        } else if (!this.camping.location.community && address.types.includes('administrative_area_level_1')) {
-          this.camping.location.community = address.long_name;
-        } else if (!this.camping.location.city && address.types.includes('administrative_area_level_2')) {
-          this.camping.location.city = address.long_name;
-        } else if (!this.camping.location.locality && address.types.includes('locality')) {
-          this.camping.location.locality = address.long_name;
-        } else if (!this.camping.location.street && address.types.includes('route')) {
-          this.camping.location.street = address.short_name;
-        } else if (!this.camping.location.streetNumber && address.types.includes('street_number')) {
-          this.camping.location.streetNumber = address.short_name;
-        } else if (!this.camping.location.postalCode && address.types.includes('postal_code')) {
-          this.camping.location.postalCode = address.short_name;
+        if (!this.formGroup.get('country')?.value && address.types.includes('country')) {
+          this.formGroup.get('country')?.setValue(address.long_name);
+        } else if (!this.formGroup.get('community')?.value && address.types.includes('administrative_area_level_1')) {
+          this.formGroup.get('community')?.setValue(address.long_name);
+        } else if (!this.formGroup.get('city')?.value && address.types.includes('administrative_area_level_2')) {
+          this.formGroup.get('city')?.setValue(address.long_name);
+        } else if (!this.formGroup.get('locality')?.value && address.types.includes('locality')) {
+          this.formGroup.get('locality')?.setValue(address.long_name);
+        } else if (!this.formGroup.get('street')?.value && address.types.includes('route')) {
+          this.formGroup.get('street')?.setValue(address.short_name);
+        } else if (!this.formGroup.get('streetNumber')?.value && address.types.includes('street_number')) {
+          this.formGroup.get('streetNumber')?.setValue(address.short_name);
+        } else if (!this.formGroup.get('postalCode')?.value && address.types.includes('postal_code')) {
+          this.formGroup.get('postalCode')?.setValue(address.short_name);
         }
-      })
+      });
 
-      if (Object.keys(this.camping.location).every(key => this.camping.location[key])) {
+      if (locationKeys.every(key => this.formGroup.get(key)?.value)) {
         return;
       }
-    })
-  }
-
-  getLatLang() {
-    const [lat, lng] = this.camping.location.coords.coordinates
-    return new google.maps.LatLng(+lat, +lng);
+    });
   }
 }

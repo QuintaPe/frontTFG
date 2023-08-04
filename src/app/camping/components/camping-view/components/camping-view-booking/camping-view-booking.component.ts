@@ -97,7 +97,6 @@ export class CampingViewBookingComponent implements OnInit {
     filters: any,
     sort: string
   ) => {
-    console.log(this.auxExitDate, this.auxExitDate, this.entryDate, this.exitDate)
     if (this.auxExitDate && this.auxExitDate) {
       this.entryDate = this.auxEntryDate;
       this.exitDate = this.auxExitDate;

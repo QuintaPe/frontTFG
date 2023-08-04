@@ -2,14 +2,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { SkeletonComponent } from '../../skeleton/skeleton.component';
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 
 @Component({
     selector: 'app-input-text-area',
     templateUrl: './input-text-area.component.html',
     styleUrls: ['./input-text-area.component.scss'],
     standalone: true,
-    imports: [NgIf, SkeletonComponent, MatIconModule, ReactiveFormsModule, FormsModule]
+    imports: [NgIf, NgClass, SkeletonComponent, MatIconModule, ReactiveFormsModule, FormsModule]
 })
 
 export class InputTextAreaComponent {
@@ -21,6 +21,7 @@ export class InputTextAreaComponent {
   @Input() isRequired:boolean = false;
   @Input() isDisabled:boolean = false;
   @Input() value: string = '';
+  @Input() control: any = null;
   @Input() name: string = '';
   @Input() error: string = '';
   @Input() loading:boolean = false;

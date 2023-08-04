@@ -12,6 +12,10 @@
   gap: 10px;
 }
 
+.cursor-pointer {
+  cursor: pointer;
+}
+
 @media (max-width: $breakpoint-sm) {
   .buttons {
     flex-direction: column-reverse;

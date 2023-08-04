@@ -14,6 +14,7 @@ interface Bathroom {
 
 interface ICampingLodgingOptions {
     _id?: string;
+    camping?: string;
     type?: string;
     name?: string;
     size?: string;
@@ -28,6 +29,7 @@ interface ICampingLodgingOptions {
 
 export class CampingLodging {
     _id: string = '';
+    camping: string = '';
     type: string = '';
     name: string = '';
     size: string = '';
@@ -48,6 +50,7 @@ export class CampingLodging {
     units: CampingUnit[] = [new CampingUnit()];
 
     constructor(options: ICampingLodgingOptions = {}) {
+        this.camping = options.camping || this.camping;
         this._id = options._id || this._id;
         this.type = options.type || this.type;
         this.name = options.name || this.name;

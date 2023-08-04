@@ -71,9 +71,6 @@ export class Camping {
   };
   available: boolean = true;
   images: any[] = [];
-  ratings: Ratings[] = [];
-  maximumOccupancy: number = 0;
-  fees: number = 0;
   checkInTime: CheckTime = { from: '00:00', to: '01:00'};
   checkOutTime: CheckTime = { from: '00:00', to: '01:00'};
   cancellationPolicy: string = '';
@@ -90,10 +87,7 @@ export class Camping {
     this.available = options.available || this.available;
     this.images = options.images || this.images;
     this.amenities = options.amenities || this.amenities;
-    this.ratings = options.ratings || this.ratings;
-    this.maximumOccupancy = options.maximumOccupancy || this.maximumOccupancy;
     this.rules = options.rules || this.rules;
-    this.fees = options.fees || this.fees;
     this.nearestLocations = options.nearestLocations || this.nearestLocations;
     this.checkInTime = options.checkInTime || this.checkInTime;
     this.checkOutTime = options.checkOutTime || this.checkOutTime;

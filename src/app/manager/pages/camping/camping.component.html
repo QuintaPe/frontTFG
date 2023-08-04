@@ -11,6 +11,7 @@
     mode="component"
     [rowComponent]="campingRowType"
     [componentInputs]="componentInputs"
+    [externalInputs]="{ canEdit: true }"
     [fetch]="getCampings"
     [pageSize]="5"
   />

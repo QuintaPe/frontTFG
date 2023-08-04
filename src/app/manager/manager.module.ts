@@ -24,7 +24,6 @@ import { CreateCampingComponent } from './pages/create-camping/create-camping.co
 import { CreateCampingLocationComponent } from './pages/create-camping/components/create-camping-location/create-camping-location.component';
 import { CreateCampingLodgingsComponent } from './pages/create-camping/components/create-camping-lodgings/create-camping-lodgings.component';
 import { CampingViewComponent } from './pages/camping-view/camping-view.component';
-import { CampingRowComponent } from './pages/camping/components/camping-row/camping-row.component';
 import { DialogService } from '@app/shared/components/dialog/dialog.service';
 import { ProfileComponent } from '@app/shared/components/Profile/profile.component';
 
@@ -36,7 +35,6 @@ import { ProfileComponent } from '@app/shared/components/Profile/profile.compone
     CreateCampingComponent,
     CreateCampingLocationComponent,
     CreateCampingLodgingsComponent,
-    CampingRowComponent,
     CampingViewComponent,
   ],
   imports: [

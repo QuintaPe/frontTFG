@@ -2,10 +2,12 @@
 
 .auth-page {
   display: flex;
+  gap: 30px;
   .auth-form {
     width: 65%;
     height: 100%;
-    margin: auto 0;
+    margin: auto;
+    max-width: 600px;
   }
   .app-logo {
     width: 35%;
@@ -13,8 +15,9 @@
     align-items: center;
     justify-content: center;
     .login-img {
-      padding-left: 30px;
+      padding: 0 20px;
       height: 100%;
+      max-height: 500px;
     }
   }
 }
@@ -29,17 +32,9 @@
       width: 100%;
       position: relative;
       .login-img {
-        padding: 50px 30px 0;
+        padding: 30px 30px 0;
         height: 100%;
       }
-    }
-  }
-}
-
-@media (min-width: $breakpoint-lg) {
-  .auth-page {
-    .auth-form {
-      padding: 35px 70px;
     }
   }
 }

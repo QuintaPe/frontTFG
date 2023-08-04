@@ -4,8 +4,9 @@
     <div *ngIf="breadcrumb" class="panel-breadcrumb">
       <div
         *ngFor="let path of breadcrumb; let last = last"
-        (click)="router.navigateByUrl(path.route)"
+        (click)="path.route ? router.navigateByUrl(path.route) : null"
         class="d-flex align-items-center"
+        [ngClass]="{'cursor-pointer': path.route}"
       >
         <h3 class="panel-title">{{ path.name }}</h3>
         <mat-icon *ngIf="!last" class="mx-1">keyboard_arrow_right</mat-icon>

@@ -22,7 +22,16 @@
         position: absolute;
         top: 3px;
         right: 3px;
-        color: white;
+        background-color: white;
+        width: 25px;
+        height: 25px;
+        &.liked {
+          background-color: red;
+        }
+        &.loading {
+          background-color: lightgray;
+          animation: heartbeat 1s ease infinite;
+        }
       }
 
     img {
@@ -60,6 +69,14 @@
         border-radius: $borderRadiusLight;
         background-color: $primary-50;
       }
+      .camping-row--actions {
+        mat-icon {
+          color: $svgColor;
+          &:hover {
+            color: $textColor;
+          }
+        }
+      }
     }
 
     .camping-row--description {
@@ -71,4 +88,13 @@
     }
   }
 
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
 }

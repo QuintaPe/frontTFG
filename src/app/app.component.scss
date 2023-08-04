@@ -3,10 +3,11 @@
   position: relative;
   overflow: hidden;
   .alert {
-    position: absolute;
-    top: 50px;
+    position: fixed;
+    top: 100px;
     right: 50px;
     animation: slideInOut 5s;
+    z-index: 1001;
     .mat-icon {
       font-size: 15px;
       font-weight: bold;

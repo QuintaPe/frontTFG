@@ -52,6 +52,10 @@
       background-color: $primary-15 !important;
       cursor: default !important;
     }
+
+    &.invalid .custom-file-upload {
+      border: 2px dashed red;
+    }
   }
 
   .output-image {
