@@ -4,6 +4,7 @@ import { Injectable } from '@angular/core';
 interface CustomError {
   name: string,
   statusCode?: string
+  message?: string,
   field?: string,
 }
 

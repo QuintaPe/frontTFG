@@ -1,4 +1,4 @@
-import { Component, inject, ViewChild, TemplateRef } from '@angular/core';
+import { Component, inject, ViewChild, TemplateRef, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { User } from '@app/core/models/user';
 import { DialogService } from '@app/shared/components/dialog/dialog.service';
@@ -9,12 +9,13 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-admin-users',
   templateUrl: './admin-users.component.html',
-  styleUrls: ['./admin-users.component.scss']
+  styleUrls: ['./admin-users.component.scss'],
 })
 
-export class AdminUsersComponent {
+export class AdminUsersComponent implements OnInit {
   tableFlagRefresh = 0;
   editUser!: User;
+  columns: any;
 
   private userService = inject(UserService);
   private translate = inject(TranslateService);
@@ -24,51 +25,60 @@ export class AdminUsersComponent {
 
   @ViewChild('editUserTemplate') editUserTemplate!: TemplateRef<any>;
 
-  columns = [
-    {
-      field: 'attributes',
-      type: 'avatar',
-      avatar: 'user',
-      width: '45',
-      preRender: (v: any) => v.avatar?._id,
-    },
-    {
-      field: 'attributes',
-      name: 'Nombre',
-      type: 'html',
-      preRender: (v: any, row: any) => `
-        <div>${v.firstname} ${v.lastname}</div>
-        <div class='fs-sm fc-secondary'>${row.email}</div>
-      `,
-    },
-    {
-      field: 'role',
-      name: this.translate.instant('user.role'),
-      type: 'html',
-      width: '100',
-      preRender: (v: string) => this.translate.instant(`user.roles.${v}`),
-    },
-    {
-      field: 'id',
-      type: 'menu',
-      width: '40',
-      buttons: [
-        {
-          icon: 'pencil',
-          text: this.translate.instant('common.edit'),
-          onClick: (id: string, row: any) => this.openEditPopup(row),
-        },
-        {
-          icon: 'trash',
-          text: this.translate.instant('common.delete'),
-          onClick: (id: string) => this.handleDeleteUser(id),
-        }
-    ],
-    },
-  ];
+  setColumns = () => {
+    this.columns = [
+      {
+        field: 'attributes',
+        type: 'avatar',
+        avatar: 'user',
+        width: '45',
+        preRender: (v: any) => v.avatar?._id,
+      },
+      {
+        field: 'attributes',
+        name: 'Nombre',
+        type: 'html',
+        preRender: (v: any, row: any) => `
+          <div>${v.firstname} ${v.lastname}</div>
+          <div class='fs-sm fc-secondary'>${row.email}</div>
+        `,
+      },
+      {
+        field: 'role',
+        name: this.translate.instant('user.role'),
+        type: 'html',
+        width: '100',
+        preRender: (v: string) => this.translate.instant(`user.roles.${v}`),
+      },
+      {
+        field: 'id',
+        type: 'menu',
+        width: '40',
+        buttons: [
+          {
+            icon: 'pencil',
+            text: this.translate.instant('common.edit'),
+            onClick: (id: string, row: any) => this.openEditPopup(row),
+          },
+          {
+            icon: 'trash',
+            text: this.translate.instant('common.delete'),
+            onClick: (id: string) => this.handleDeleteUser(id),
+          },
+        ],
+      },
+    ];
+  };
+
+  ngOnInit(): void {
+    this.setColumns();
+    this.translate.onLangChange.subscribe(() => this.setColumns());
+  }
 
   handleDeleteUser = async (id: string) => {
-    const confirmed = await this.dialogService.open('confirmDanger', 'Estas seguro?');
+    const confirmed = await this.dialogService.open(
+      'confirmDanger', 'Estas seguro?'
+    );
     if (confirmed) {
       const ref = this.dialogService.openLoading();
       try {
@@ -80,19 +90,18 @@ export class AdminUsersComponent {
         this.dialogService.open('danger', 'Error');
       }
     }
-  }
+  };
 
-
-  getUsers = (page:any, size:any, search:any, filters:any, sort:any) => {
-    return this.userService.getUsers({ page, size, search, filters, sort })
-  }
+  getUsers = (page: any, size: any, search: any, filters: any, sort: any) => {
+    return this.userService.getUsers({ page, size, search, filters, sort });
+  };
 
   openEditPopup(user: User) {
     this.editUser = user;
     this.dialogRef = this.dialog.open(PopupComponent, {
       data: {
         headerText: this.translate.instant('campsite.addLodging'),
-        template: this.editUserTemplate
+        template: this.editUserTemplate,
       },
       width: '80vw',
     });
@@ -102,5 +111,4 @@ export class AdminUsersComponent {
     this.dialogRef.close();
     this.tableFlagRefresh += 1;
   }
-
 }

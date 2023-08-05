@@ -8,6 +8,8 @@ import {
   SimpleChanges,
   OnChanges,
   signal,
+  inject,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -17,7 +19,7 @@ import { InputSelectComponent } from '../inputs/input-select/input-select.compon
 import { SkeletonComponent } from '../skeleton/skeleton.component';
 import { DynamicIoModule } from 'ng-dynamic-component';
 import { AvatarComponent } from '../Avatar/avatar.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-table',
@@ -56,6 +58,9 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   loading: boolean = true;
   showFilters: boolean = false;
   rows = signal({ items: [], total: this.pageSize });
+
+  private translate = inject(TranslateService);
+  private cdr = inject(ChangeDetectorRef);
 
   fetchPage = async () => {
     if (this.fetch) {

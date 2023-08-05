@@ -63,18 +63,19 @@ export class SignupUserComponent implements OnInit{
       ]),
       password: new UntypedFormControl('', [Validators.required]),
       confirmPassword: new UntypedFormControl('', [Validators.required]),
+      acceptTerms: new UntypedFormControl(false, [(control) => control.value ? null : { requiredTerms: true }]),
     });
   }
 
   public signup = async () => {
-    const { email, password } = this.authForm.value;
+    const { email, password, confirmPassword } = this.authForm.value;
     const user = new User(
       '', email, password, "user", 'es', this.attributesForm.value
     );
 
     this.loading = true;
     try {
-      await this.authService.signup(user);
+      await this.authService.signup(user, confirmPassword);
     } catch {
       Object.values(this.authForm.controls).forEach(control => {
         control.setErrors({ serverError: true });

@@ -29,6 +29,9 @@ export class CampingViewBookingComponent implements OnInit {
   auxExitDate?: Date;
   tableFlagRefresh = 0;
   showOnlyAvailables: boolean = false;
+  lodgingsColumns: any;
+  availableColumns: any;
+
 
   lodgingsToBook: { [key: string]: number } = {};
 
@@ -40,45 +43,49 @@ export class CampingViewBookingComponent implements OnInit {
   isEmptyObject = isEmptyObject;
   formatDate = formatDate;
 
+  setColumns = () => {
+    this.lodgingsColumns = [
+      {
+        field: 'name',
+        name: this.translate.instant('campsite.lodging'),
+        sort: 'asc',
+        sortable: true,
+      },
+      {
+        field: 'capacity',
+        name: this.translate.instant('campsite.capacity'),
+        sort: 'asc',
+        sortable: true,
+        preRender: (cap: string) => cap,
+      },
+    ];
+
+    this.availableColumns = [
+      ...this.lodgingsColumns,
+      {
+        name: '',
+        type: 'component',
+        component: InputSelectComponent,
+        componentInputs: (row: any) => ({
+          value: this.lodgingsToBook[row.id],
+          options: Array.from({ length: row.availables }, (_, i) => ({
+            id: i + 1,
+            name: i + 1,
+          })),
+        }),
+        componentOutputs: (row: any) => ({
+          valueChange: (v: any) => (this.lodgingsToBook[row.id] = v),
+        }),
+      },
+    ];
+  };
+
   ngOnInit(): void {
     this.auxEntryDate = this.entryDate;
     this.auxExitDate = this.exitDate;
+    this.setColumns();
+    this.translate.onLangChange.subscribe(() => this.setColumns());
   }
-
-  lodgingsColumns: any = [
-    {
-      field: 'name',
-      name: this.translate.instant('campsite.lodging'),
-      sort: 'asc',
-      sortable: true,
-    },
-    {
-      field: 'capacity',
-      name: this.translate.instant('campsite.capacity'),
-      sort: 'asc',
-      sortable: true,
-      preRender: (cap: string) => cap,
-    },
-  ];
-
-  availableColumns = [
-    ...this.lodgingsColumns,
-    {
-      name: '',
-      type: 'component',
-      component: InputSelectComponent,
-      componentInputs: (row: any) => ({
-        value: this.lodgingsToBook[row.id],
-        options: Array.from({ length: row.availables }, (_, i) => ({
-          id: i + 1,
-          name: i + 1,
-        })),
-      }),
-      componentOutputs: (row: any) => ({
-        valueChange: (v: any) => (this.lodgingsToBook[row.id] = v),
-      }),
-    },
-  ];
 
   refreshTable = () => {
     this.tableFlagRefresh += 1;

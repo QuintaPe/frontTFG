@@ -20,9 +20,9 @@ export class AuthService {
   public errorService = inject(ErrorService);
 
   //Registrarse
-  async signup(user: User): Promise<any> {
+  async signup(user: User, confirmPassword: string): Promise<any> {
     try {
-      await fetch('POST', 'signup', { ...user });
+      await fetch('POST', 'signup', { ...user, confirmPassword });
       await this.login(user.email, user.password);
       this.router.navigate([''])
     } catch (error: any) {

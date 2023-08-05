@@ -18,6 +18,7 @@ export class CreateCampingLodgingsComponent {
   actualLodging!: any;
   page = 0;
   tableRefreshFlag = 0;
+  columns: any = [];
 
   @ViewChild('popupTemplate')
   popupTemplate!: TemplateRef<any>;
@@ -27,37 +28,44 @@ export class CreateCampingLodgingsComponent {
   private formBuilder = inject(FormBuilder);
   protected errorService = inject(ErrorService);
 
-  columns = [
-    {
-      field: 'name',
-      name: 'Nombre',
-      sort: 'asc',
-      sortable: true,
-    },
-    {
-      field: 'notes',
-      name: 'Notas',
-      sort: 'asc',
-      sortable: true,
-    },
-    {
-      type: 'menu',
-      width: 40,
-      buttons: [{
-        icon: 'person',
-        text: 'Add',
-        onClick: () => console.log('a'),
-      },{
-        icon: 'person_add',
-        text: 'Edit',
-        onClick: () => console.log('b'),
-      },{
-        icon: 'person_outline',
-        text: 'Delete',
-        onClick: (id:string) => this.handleRemoveUnit(id),
-      }],
-    }
-  ];
+  setColumns = () => {
+    this.columns = [
+      {
+        field: 'name',
+        name: 'Nombre',
+        sort: 'asc',
+        sortable: true,
+      },
+      {
+        field: 'notes',
+        name: 'Notas',
+        sort: 'asc',
+        sortable: true,
+      },
+      {
+        type: 'menu',
+        width: 40,
+        buttons: [{
+          icon: 'person',
+          text: 'Add',
+          onClick: () => console.log('a'),
+        },{
+          icon: 'person_add',
+          text: 'Edit',
+          onClick: () => console.log('b'),
+        },{
+          icon: 'person_outline',
+          text: 'Delete',
+          onClick: (id:string) => this.handleRemoveUnit(id),
+        }],
+      }
+    ];
+  }
+
+  ngOnInit(): void {
+    this.setColumns();
+    this.translate.onLangChange.subscribe(() => this.setColumns());
+  }
 
   openLodgingModal(id:string | null = null) {
     this.page = 0;

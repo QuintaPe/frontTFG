@@ -93,10 +93,13 @@
   },
   "errors": {
     "required": "El campo {{ field }} no puede estar vacío",
+    "requiredTerms": "Debes aceptar los términos y condiciones",
     "pattern": "El campo {{ field }} no es valido",
     "minlength": "El campo {{ field }} no tiene la longitud mínima",
     "invalid_email": "Email o contraseña incorrecta",
-    "location_not_found": "No se ha encontrado la localización"
+    "email_already_exists": "El email ya existe",
+    "location_not_found": "No se ha encontrado la localización",
+    "password_mismatch": "Las contraseñas no coinciden"
   },
   "langs": {
     "es": "Español",

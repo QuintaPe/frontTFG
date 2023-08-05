@@ -64,18 +64,19 @@ export class SignupManagerComponent implements OnInit{
       ]),
       password: new UntypedFormControl('', [Validators.required]),
       confirmPassword: new UntypedFormControl('', [Validators.required]),
+      acceptTerms: new UntypedFormControl(false, [(control) => control.value ? null : { requiredTerms: true }]),
     });
   }
 
   public signup = async () => {
-    const { email, password } = this.authForm.value;
+    const { email, password, confirmPassword } = this.authForm.value;
     const manager = new User(
       '', email, password, "manager", 'es', this.attributesForm.value
     );
 
     this.loading = true;
     try {
-      await this.authService.signup(manager);
+      await this.authService.signup(manager, confirmPassword);
     } catch {
       Object.values(this.authForm.controls).forEach(control => {
         control.setErrors({ serverError: true });
@@ -114,7 +115,6 @@ export class SignupManagerComponent implements OnInit{
       await this.signup();
     } else {
       const controls = this.authForm.controls;
-      this.errorService.setError(null);
       for (const name in controls) {
         if (controls[name].invalid) {
           const err = { field: name, error: Object.keys(controls[name].errors)[0]};

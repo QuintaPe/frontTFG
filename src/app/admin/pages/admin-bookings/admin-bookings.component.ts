@@ -15,7 +15,7 @@ export class AdminBookingsComponent implements OnInit {
   userService = inject(UserService);
   authService = inject(AuthService);
 
-  ngOnInit(): void {
+  setColumns = () => {
     this.columns = [
       {
         field: 'name',
@@ -31,6 +31,11 @@ export class AdminBookingsComponent implements OnInit {
         preRender: (cap: string) => cap,
       },
     ];
+  }
+
+  ngOnInit(): void {
+    this.setColumns();
+    this.translate.onLangChange.subscribe(() => this.setColumns());
   }
 
   getUserBookings = async (
