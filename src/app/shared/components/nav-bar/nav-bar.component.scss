@@ -1,4 +1,5 @@
 @import "_variables";
+@import "_breakpoints";
 
 .nav-bar {
   display: flex;
@@ -64,6 +65,15 @@
       &:hover .dropdown-content {
         display: block;
       }
+    }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .nav-bar {
+    padding: 20px;
+    &.isRole {
+      padding-left: 70px;
     }
   }
 }

@@ -14,6 +14,8 @@ export class LanguageSelectorComponent implements OnInit {
   showOptions = false;
   lang: string = ''
   langs: string[] = [];
+  timeoutRef: any;
+
   protected translate = inject(TranslateService);
 
   ngOnInit(): void {
@@ -28,13 +30,22 @@ export class LanguageSelectorComponent implements OnInit {
   }
 
   toggleLanguageOptions() {
-    this.showOptions = !this.showOptions;
+    clearTimeout(this.timeoutRef);
+    if (this.showOptions) {
+      this.showOptions = false;
+    } else {
+      this.showOptions = true;
+      this.timeoutRef = setTimeout(() => {
+        this.showOptions = false;
+      }, 5000);
+    }
   }
 
   changeLanguage(lang: string) {
     this.translate.use(lang);
     this.lang = lang;
     this.showOptions = false;
+    clearTimeout(this.timeoutRef);
   }
 
 }

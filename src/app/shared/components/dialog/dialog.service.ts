@@ -11,8 +11,7 @@ export class DialogService {
     const dialogRef = this.dialog.open(DialogComponent, {
       data: { text, type },
     });
-
-    return firstValueFrom(dialogRef.afterClosed());
+    return firstValueFrom(dialogRef.afterClosed()) ;
   }
 
   openLoading(): MatDialogRef<DialogComponent, any> {

@@ -132,6 +132,7 @@
     "users": "Benutzer",
     "at": "um",
     "empty": "Keine Elemente gefunden",
-    "selected": "Ausgewählt"
+    "selected": "Ausgewählt",
+    "unsavedChanges": "Sie haben ungespeicherte Änderungen. Sind Sie sicher, dass Sie die Seite verlassen möchten?"
   }
 }

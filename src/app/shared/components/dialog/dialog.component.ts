@@ -18,10 +18,11 @@ export class DialogComponent {
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any,
-  ) {}
-
-  onConfirm = () => true;
-  onReject = () => false;
+  ) {
+    dialogRef.backdropClick().subscribe(() => {
+      dialogRef.close(false);
+    })
+  }
 
   close(res?: boolean) {
     this.dialogRef.close(res);

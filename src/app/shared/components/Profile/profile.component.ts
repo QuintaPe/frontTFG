@@ -34,11 +34,12 @@ export class ProfileComponent {
   protected authService = inject(AuthService);
 
   async ngOnInit(): Promise<void> {
-    this.langs = this.getLangs();
+    this.getLangs();
+    this.translate.onLangChange.subscribe(() => this.getLangs());
   }
 
   getLangs = () => {
-    return this.translate.getLangs().map(lang => {
+    this.langs =  this.translate.getLangs().map(lang => {
       return { id: lang, name: this.translate.instant(`langs.${lang}`) };
     })
   }

@@ -18,21 +18,21 @@
   .camping-row--img {
     flex:  0 0 180px;
     position: relative;
-      .favorite-icon {
-        position: absolute;
-        top: 3px;
-        right: 3px;
-        background-color: white;
-        width: 25px;
-        height: 25px;
-        &.liked {
-          background-color: red;
-        }
-        &.loading {
-          background-color: lightgray;
-          animation: heartbeat 1s ease infinite;
-        }
+    .favorite-icon {
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      background-color: white;
+      width: 25px;
+      height: 25px;
+      &.liked {
+        background-color: red;
       }
+      &.loading {
+        background-color: lightgray;
+        animation: heartbeat 1s ease infinite;
+      }
+    }
 
     img {
       border-radius: 1px;
@@ -98,3 +98,17 @@
     transform: scale(1.1);
   }
 }
+
+
+@media (max-width: $breakpoint-md) {
+  .camping-row {
+    flex-direction: column;
+    .camping-row--img {
+      flex: auto;
+      img {
+        width: 100%;
+      }
+    }
+  }
+}
+

@@ -23,6 +23,7 @@ export class CreateCampingComponent implements OnInit {
   protected page = 0;
   protected loading = false;
   protected breadcrumb: any = [];
+  protected haveChanges = false;
 
   private campingService = inject(CampingService);
   private router = inject(Router);
@@ -88,6 +89,12 @@ export class CreateCampingComponent implements OnInit {
         rules: [camping.rules, Validators.required],
         nearestLocations: [camping.nearestLocations, Validators.required],
       });
+
+      this.firstPageForm.valueChanges.subscribe(() => { this.haveChanges = true });
+      this.secondPageForm.valueChanges.subscribe(() => { this.haveChanges = true });
+      this.thirdPageForm.valueChanges.subscribe(() => { this.haveChanges = true });
+      this.fourthPageForm.valueChanges.subscribe(() => { this.haveChanges = true });
+
     })();
   }
 
@@ -97,7 +104,6 @@ export class CreateCampingComponent implements OnInit {
     if (form && !form.valid) {
       const invalidControlName = Object.keys(form.controls).find(control => form.controls[control].invalid);
       form.markAllAsTouched();
-      console.log(form);
       if (invalidControlName) {
         const invalidControl = form.controls[invalidControlName];
         const firstError = Object.keys(invalidControl.errors)[0];
@@ -136,6 +142,7 @@ export class CreateCampingComponent implements OnInit {
           } else {
             await this.campingService.postCamping(camping);
           }
+          this.haveChanges = false;
           this.router.navigateByUrl(MANAGER_ROUTES.CAMPINGS.url);
         } catch (err) {
           this.loading = false

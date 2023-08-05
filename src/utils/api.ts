@@ -51,12 +51,13 @@ export async function fetch(method:string, url:string, params: any= {}, isFormDa
   return axios(CONFIG)
     .then(response => response.data)
     .catch((axiosError) => {
-      const error = axiosError.response.data
-      if (error.name === 'TokenExpiredError') {
-        localStorage.removeItem('token');
-        console.log(error);
-        // authService.logout();
+      if (axiosError.code === 'ERR_BAD_REQUEST') {
+        const error = axiosError.response.data;
+        if (error.name === 'TokenExpiredError') {
+          localStorage.removeItem('token');
+        }
+        throw error;
       }
-      throw error;
+      throw axiosError;
     });
 }

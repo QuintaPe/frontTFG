@@ -95,7 +95,6 @@ export class CreateCampingLodgingsComponent {
     const pageFields = this.page === 0 ? fields.filter(f => f !== 'units') : ['units']
     const invalidControlName = pageFields.find(control => this.actualLodging.controls[control].invalid);
     this.actualLodging.markAllAsTouched();
-    console.log(this.actualLodging);
     if (invalidControlName) {
       const invalidControl = this.actualLodging.controls[invalidControlName];
       const firstError = Object.keys(invalidControl.errors)[0];

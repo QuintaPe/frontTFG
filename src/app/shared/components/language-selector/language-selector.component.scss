@@ -1,31 +1,57 @@
-@import '_colors.scss';
+@import '_breakpoints';
 
 .language-selector {
   margin-right: 15px;
   position: relative;
   height: 100%;
+
   img {
-    height: 100% !important;
+    height: 100%;
     width: 25px;
-    height: 25px;
     cursor: pointer;
   }
 }
 
 .language-options {
+  display: flex !important;
+  align-items: center;
   position: absolute;
   top: 0;
   right: 100%;
-  display: flex !important;
-  align-items: center;
+  width: 0;
+  height: 50px;
   padding: 10px;
   transition: width 0.3s ease;
-  width: 0px;
+
   &.show {
     width: 100px;
   }
+
   .language-option {
     margin: 5px;
     width: 35px;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .language-options {
+    top: 45px;
+    right: 0px;
+    flex-direction: column;
+    width: 25px;
+    height: 0;
+    padding: 0;
+    overflow: hidden;
+    transition: height 0.3s ease;
+
+    &.show {
+      width: 25px;
+      height: 120px;
+    }
+
+    .language-option {
+      margin: 5px;
+      width: 100% !important;
+    }
   }
 }

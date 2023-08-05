@@ -1,7 +1,6 @@
 import {
   Component, Input, Output,
-  ElementRef, EventEmitter, ViewChild,
-  HostListener, SimpleChanges, OnChanges
+  ElementRef, EventEmitter, ViewChild, HostListener
 } from '@angular/core';
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
@@ -37,8 +36,8 @@ export class InputSelectComponent {
   protected showOptions: Boolean = false;
 
   get selectedOption(): Option | undefined {
-    this.selectedIndex = this.options.findIndex((option: Option) => option.id === (this.control?.value || this.value));
-    return this.options[this.selectedIndex]
+    this.selectedIndex = this.options?.findIndex((option: Option) => option.id === (this.control?.value || this.value));
+    return this.selectedIndex >= 0 ? this.options[this.selectedIndex] : null
   }
   selectedIndex= 0;
 

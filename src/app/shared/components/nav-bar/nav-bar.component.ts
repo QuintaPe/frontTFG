@@ -1,12 +1,14 @@
-import { NgIf } from '@angular/common';
+import { NgClass, NgIf } from '@angular/common';
 import { Component, inject } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router, RouterLink } from '@angular/router';
 import { AvatarComponent } from '@shared/components/Avatar/avatar.component';
 import { ButtonComponent } from '@shared/components/button/button.component';
 import { AuthService } from '@auth/services/auth.service';
 import { AUTH_ROUTES } from '@app/core/routes';
 import { TranslateModule } from '@ngx-translate/core';
 import { LanguageSelectorComponent } from '../language-selector/language-selector.component';
+import { ROLES } from '@utils/constants';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-nav-bar',
@@ -18,6 +20,7 @@ import { LanguageSelectorComponent } from '../language-selector/language-selecto
     AvatarComponent,
     RouterLink,
     NgIf,
+    NgClass,
     TranslateModule,
     LanguageSelectorComponent,
   ],
@@ -28,6 +31,16 @@ export class NavBarComponent {
 
   protected router = inject(Router);
   protected authService = inject(AuthService);
+  protected isRole = false;
+
+  ngOnInit(): void {
+    this.router.events.pipe(
+      filter((event: any) => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      const firstParam = event.urlAfterRedirects.split('/')?.[1] || '';
+      this.isRole = ROLES.includes(firstParam);
+    });
+  }
 
   logout = () => {
     this.authService.logout();

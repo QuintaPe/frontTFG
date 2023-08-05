@@ -132,6 +132,7 @@
     "users": "Users",
     "at": "at",
     "empty": "No items found",
-    "selected": "Selected"
+    "selected": "Selected",
+    "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?"
   }
 }

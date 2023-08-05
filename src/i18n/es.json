@@ -132,6 +132,7 @@
     "users": "Usuarios",
     "at": "a",
     "empty": "No se han encontrado elementos",
-    "selected": "Seleccionados"
+    "selected": "Seleccionados",
+    "unsavedChanges": "Tienes cambios sin guardar. ¿Estas seguro de que quieres salir?"
   }
 }
