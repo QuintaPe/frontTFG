@@ -39,8 +39,65 @@
   height: 18px;
 }
 
-.camping-lodging {
-  @include box;
-  padding: 25px;
-  min-height: 200px
+.camping-lodgings {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  .camping-lodging {
+    width: calc(100% / 3 - 7px);
+    border: 1px solid $primary-50;
+    border-radius: $borderRadiusLight;
+    padding: 15px;
+    min-height: 150px;
+    cursor: pointer;
+    .camping-lodging--type {
+      display: flex;
+      align-items: center;
+    }
+    .camping-lodging--info {
+      margin-top: 15px;
+      div {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        margin-bottom: 5px;
+        span {
+          font-size: 14px;
+          color: #686868;
+        }
+      }
+    }
+
+    mat-icon {
+      font-size: 16px;
+      margin-right: 8px;
+    }
+    &:hover {
+      background-color: $primary-15;
+    }
+  }
+}
+
+.units-table {
+  ::ng-deep .input-container {
+    border: none;
+    border-radius: $borderRadiusLight;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .camping-lodgings{
+    .camping-lodging {
+      width: calc(100% / 2 - 5px);
+    }
+  }
+}
+
+@media (max-width: $breakpoint-sm) {
+  .camping-lodgings{
+    .camping-lodging {
+      width: 100%;
+    }
+  }
 }

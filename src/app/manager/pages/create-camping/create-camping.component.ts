@@ -40,13 +40,14 @@ export class CreateCampingComponent implements OnInit {
   private updateBreadcrumb() {
     this.breadcrumb = [
       { name: this.translate.instant('campsite.campsites'), route: MANAGER_ROUTES.CAMPINGS.url },
-      { name: this.translate.instant('campsite.createCampsite') },
+      { name: this.translate.instant(this.id ? 'campsite.updateCampsite' : 'campsite.createCampsite') },
       { name: this.translate.instant(`campsite.${this.pages[this.page]}`) },
     ];
   }
 
   ngOnInit(): void {
     this.updateBreadcrumb();
+    this.translate.onLangChange.subscribe(() => this.updateBreadcrumb());
     (async () => {
       let camping = new Camping();
       if (this.id) {
@@ -81,7 +82,21 @@ export class CreateCampingComponent implements OnInit {
         feePerNight: [lod.feePerNight, Validators.required],
         size: [lod.size, Validators.required],
         capacity: [lod.capacity, Validators.required],
-        units: [lod.units, Validators.required],
+        beds: this.formBuilder.group({
+          single: [lod.beds.single, Validators.required],
+          double: [lod.beds.double, Validators.required],
+          bunk: [lod.beds.bunk, Validators.required],
+        }),
+        bathroom: this.formBuilder.group({
+          toilets: [lod.bathroom.toilets, Validators.required],
+          showers: [lod.bathroom.showers, Validators.required],
+          private: [lod.bathroom.private, Validators.required],
+        }),
+        units: [lod.units.map(unit => this.formBuilder.group({
+          name: [unit.name],
+          notes: [unit.notes],
+          disabled: [unit.disabled],
+        })), Validators.required],
       })) : [])
 
       this.fourthPageForm = this.formBuilder.group({
@@ -126,13 +141,15 @@ export class CreateCampingComponent implements OnInit {
     if (this.checkPageErrors()) {
       if (this.page > 2) {
         this.loading = true;
-
         const camping = new Camping({
           _id: this.id,
           ...this.firstPageForm.value,
           ...this.fourthPageForm.value,
           location: this.secondPageForm.value,
-          lodgings: this.thirdPageForm.value.map((l: any) => new CampingLodging(l)),
+          lodgings: this.thirdPageForm.getRawValue().map((l: any) => {
+            const units = l.units.map((unit: any) => unit.getRawValue());
+            return {...new CampingLodging(l), units}
+          }),
           owner: this.owner,
         });
 

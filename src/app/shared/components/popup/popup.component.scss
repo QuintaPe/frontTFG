@@ -1,9 +1,10 @@
 @import '_colors.scss';
 @import '_variables.scss';
 @import '_breakpoints.scss';
-
+@import "_mixins";
 
   .popup-container{
+    overflow: hidden;
     .popup-head{
       display: flex;
       align-items: center;
@@ -21,6 +22,10 @@
     }
     .popup-content{
       padding: $spacing;
+      max-height: calc(100vh - 100px);
+      overflow: scroll;
+      overflow-y: auto;
+      @include simpleScrollbar;
     }
   }
 

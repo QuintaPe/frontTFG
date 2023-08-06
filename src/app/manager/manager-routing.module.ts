@@ -26,7 +26,7 @@ const routes: Routes = [
       { path: EDIT_CAMPING.path, component: CreateCampingComponent, canDeactivate: [canExit] },
       { path: VIEW_CAMPING.path, component: CampingViewComponent },
       { path: PROFILE.path, component: EditAccountComponent },
-      { path: '**', redirectTo: PROFILE.path },
+      { path: '**', redirectTo: CAMPINGS.path },
     ],
   }
 ];

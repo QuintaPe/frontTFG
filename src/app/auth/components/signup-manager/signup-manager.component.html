@@ -17,7 +17,7 @@
     <!-- LastName -->
     <app-input-text
       [preText]="'user.lastname' | translate"
-      [placeholder]="'auth.enterYourLastname' | translate"
+      [placeholder]="'auth.enterYourLastName' | translate"
       [control]="attributesForm.controls['lastname']"
       icon="person_outline"
       class="mb-5"
@@ -55,7 +55,7 @@
 
     <!-- Password -->
     <app-input-text
-      ype="password"
+      type="password"
       [preText]="'auth.password' | translate"
       [placeholder]="'auth.enterYourPassword' | translate"
       [control]="authForm.controls['password']"
@@ -76,7 +76,7 @@
     <div class="d-flex justify-content-center mb-5">
       <label>
         <input class="me-2" type="checkbox" formControlName="acceptTerms" />
-        {{'auth.acceptThe' | translate}} <a href="#!">{{'auth.termsAndConditions' | translate}}</a>
+        {{'auth.acceptThe' | translate}} <a routerLink="/terms">{{'auth.termsAndConditions' | translate}}</a>
       </label>
     </div>
   </div>

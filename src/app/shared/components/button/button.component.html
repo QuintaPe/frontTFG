@@ -7,7 +7,16 @@
   <span *ngIf="this.icon" class='d-flex align-items-center icon-left'>
     <mat-icon>{{ icon }}</mat-icon>
   </span>
-  <span>{{text}}</span>
+    <span>{{text}}</span>
+    <input *ngIf="number"
+      tabindex="-1"
+      class="input-button"
+      type="number"
+      placeholder="0"
+      [(ngModel)]="inputNumber"
+      autocomplete="off"
+      (click)="handleInputFocus($event)"
+    />
   <span *ngIf="this.iconRight" class='d-flex align-items-center icon-right'>
     <mat-icon> {{ iconRight }}</mat-icon>
   </span>

@@ -4,13 +4,18 @@ import { AuthService } from '@app/auth/services/auth.service';
 import { DialogService } from '@app/shared/components/dialog/dialog.service';
 import { TranslateService } from '@ngx-translate/core';
 
-export const allowedRole = (role: string): boolean => {
+export const allowedRole = (role: string | string[]): boolean => {
   const authService = inject(AuthService);
   const router = inject(Router);
-  if (role  !== authService.user.role) {
-    router.navigate([authService.user.role]);
+  if (typeof role === 'string') {
+    role = [role];
   }
-  return role  === authService.user.role;
+  const auxRole = authService?.user?.role || 'guest';
+  if (!role.includes(auxRole)) {
+    router.navigate([auxRole === 'guest' ? '' : auxRole]);
+    return false
+  }
+  return true;
 }
 
 export const canExit = async (component:any): Promise<Boolean> => {

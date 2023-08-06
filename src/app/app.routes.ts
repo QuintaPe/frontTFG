@@ -6,7 +6,11 @@ export const APP_ROUTES: Routes = [
     path: '',
     loadComponent: () => import('./core/components/home/home.component').then((m) => m.HomeComponent),
     pathMatch: 'full',
-    canActivate: [() => allowedRole('user')]
+    canActivate: [() => allowedRole(['user', 'guest'])]
+  },
+  {
+    path: 'terms',
+    loadComponent: () => import('./core/components/terms/terms.component').then((m) => m.TermsComponent),
   },
   {
     path: 'auth',

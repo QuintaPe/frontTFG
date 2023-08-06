@@ -54,7 +54,6 @@ export class ProfileComponent {
             this.translate.use(this.user.lang);
           }
           this.loading = false;
-          this.langs = this.getLangs();
           this.userEdited.emit();
         })
         .catch((err) => {

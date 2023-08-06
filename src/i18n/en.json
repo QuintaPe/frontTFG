@@ -51,7 +51,7 @@
     "addImages": "Add at least 3 images of your campsite",
     "addLocation": "Click on the map to mark your campsite's location",
     "feePerNight": "Price per Night",
-    "size": "Size",
+    "size": "Size (m²)",
     "capacity": "Capacity",
     "search": "Search",
     "units": "Units",
@@ -62,7 +62,16 @@
     "bookingData": "Booking Data",
     "managerData": "Manager Data",
     "reviews": "Reviews",
-    "morePhotos": "More Photos"
+    "morePhotos": "More Photos",
+    "beds": "Beds",
+    "single": "Single",
+    "double": "Double",
+    "bunk": "Bunk Beds",
+    "baths": "Baths",
+    "toilets": "Toilets",
+    "showers": "Showers",
+    "private": "Private",
+    "other": "Other"
   },
   "auth": {
     "login": "Log In",
@@ -133,6 +142,8 @@
     "at": "at",
     "empty": "No items found",
     "selected": "Selected",
-    "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?"
+    "unsavedChanges": "You have unsaved changes. Are you sure you want to leave?",
+    "yes": "Yes",
+    "no": "No"
   }
 }

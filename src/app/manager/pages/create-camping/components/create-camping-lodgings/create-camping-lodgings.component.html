@@ -6,24 +6,47 @@
     />
   </div>
 
-  <div class="row m-0">
+  <div class="camping-lodgings">
     <div
       *ngFor="let lodging of formArray.value"
-      class="camping-lodging col-12 col-sm-6"
+      class="camping-lodging"
       (click)="openLodgingModal(lodging._id)"
     >
       <h4 class="fw-b">{{ lodging.name }}</h4>
-      <span class="fs-sm">{{ lodging.type }}</span>
+      <div class="camping-lodging--info">
+        <div>
+          <mat-icon>nature</mat-icon>
+          <span>{{ 'campsite.' + lodging.type | translate }}</span>
+        </div>
+        <div>
+          <mat-icon>attach_money</mat-icon>
+          <span>{{ 'campsite.feePerNight' | translate }}: {{ lodging.feePerNight | currency }}</span>
+        </div>
+        <div>
+          <mat-icon>aspect_ratio</mat-icon>
+          <span>{{ 'campsite.size' | translate }}: {{ lodging.size }} m²</span>
+        </div>
+        <div>
+          <mat-icon>group</mat-icon>
+          <span>{{ 'campsite.capacity' | translate }}: {{ lodging.capacity }}</span>
+        </div>
+        <div>
+          <mat-icon>hotel</mat-icon>
+          <span>{{ 'campsite.units' | translate }}: {{ lodging.units.length }}</span>
+        </div>
+      </div>
     </div>
   </div>
+
 
   <ng-template #popupTemplate>
     <ng-container *ngIf="page == 0">
       <div class="row">
         <div class="col-12 col-md-4 mb-4">
           <app-input-select
+            icon="nature"
             [preText]="'common.type' | translate"
-            [control]="actualLodging?.controls?.['type']"
+            [control]="actualLodging?.controls.type"
             [options]="[
               { id: 'bungalow', name: 'campsite.bungalow' | translate },
               { id: 'campsite', name: 'campsite.campingArea' | translate },
@@ -31,10 +54,10 @@
             ]"
           />
         </div>
-        <div class="col-12 col-md-6 mb-4">
+        <div class="col-12 col-md-8 mb-4">
           <app-input-text
             [preText]="'common.name' | translate"
-            [control]="actualLodging?.controls?.['name']"
+            [control]="actualLodging?.controls.name"
           />
         </div>
       </div>
@@ -42,41 +65,105 @@
       <div class="row">
         <div class="col-12 col-md-4 mb-4">
           <app-input-text
+            icon="attach_money"
             [preText]="'campsite.feePerNight' | translate"
-            [control]="actualLodging?.controls?.['feePerNight']"
+            [control]="actualLodging?.controls.feePerNight"
           />
         </div>
         <div class="col-12 col-md-4 mb-4">
           <app-input-text
+            icon="aspect_ratio"
             [preText]="'campsite.size' | translate"
-            [control]="actualLodging?.controls?.['size']"
+            [control]="actualLodging?.controls.size"
           />
         </div>
         <div class="col-12 col-md-4 mb-4">
           <app-input-text
             type="number"
+            icon="group"
             [preText]="'campsite.capacity' | translate"
-            [control]="actualLodging?.controls?.['capacity']"
+            [control]="actualLodging?.controls.capacity"
+          />
+        </div>
+      </div>
+      <hr/>
+      <div class="fw-b mb-2">{{ 'campsite.beds' | translate }}</div>
+      <div class="row">
+        <div class="col-12 col-md-4 mb-4">
+          <app-input-text
+            icon="single_bed"
+            type="number"
+            [preText]="'campsite.single' | translate"
+            [control]="actualLodging?.controls.beds.controls.single"
+          />
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+          <app-input-text
+            icon="king_bed"
+            type="number"
+            [preText]="'campsite.double' | translate"
+            [control]="actualLodging?.controls.beds.controls.double"
+          />
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+          <app-input-text
+            type="number"
+            [preText]="'campsite.bunk' | translate"
+            [control]="actualLodging?.controls.beds.controls.bunk"
+          />
+        </div>
+      </div>
+      <hr/>
+      <div class="fw-b mb-2">{{ 'campsite.baths' | translate }}</div>
+      <div class="row">
+        <div class="col-12 col-md-4 mb-4">
+          <app-input-text
+            icon="wc"
+            type="number"
+            [preText]="'campsite.toilets' | translate"
+            [control]="actualLodging?.controls?.bathroom.controls.toilets"
+          />
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+          <app-input-text
+            icon="showers"
+            type="number"
+            [preText]="'campsite.showers' | translate"
+            [control]="actualLodging?.controls.bathroom.controls.showers"
+          />
+        </div>
+        <div class="col-12 col-md-4 mb-4">
+          <app-input-select
+            type="number"
+            [preText]="'campsite.private' | translate"
+            [control]="actualLodging?.controls.bathroom.controls.private"
+            [options]="[
+              { id: true, name: 'common.yes' | translate },
+              { id: false, name: 'common.no' | translate },
+            ]"
           />
         </div>
       </div>
     </ng-container>
+
     <ng-container *ngIf="page == 1">
       <div class="d-flex justify-content-between align-items-center">
-        <app-input-text
-          type="number"
-          [preText]="'campsite.number' | translate"
-          [(value)]="actualLodging?.controls?.['units'].value.length"
-          [isDisabled]="true"
-        />
+        <div>
+          <span class="fw-b">{{ 'common.total' | translate }}: </span>
+          <span>{{ actualLodging?.controls.units.value.length }}</span>
+        </div>
+
         <app-button
           [text]="'common.add' | translate"
-          (onClick)="handleAddUnit()"
+          (onClick)="handleAddUnit($event)"
           color="secondary"
           icon="add"
+          [number]="1"
         />
       </div>
-      <app-table [columns]="columns" [fetch]="handleGetUnits" [forceFetch]="tableRefreshFlag" [showPagination]="false"/>
+      <div class="units-table">
+        <app-table [columns]="columns" [fetch]="handleGetUnits" [forceFetch]="tableRefreshFlag" [showPagination]="false"/>
+      </div>
     </ng-container>
 
     <div class="buttons mt-4">

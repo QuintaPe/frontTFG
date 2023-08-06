@@ -51,7 +51,7 @@
     "addImages": "Ajoutez au moins 3 images de votre campement",
     "addLocation": "Cliquez sur la carte pour marquer l'emplacement de votre campement",
     "feePerNight": "Prix par nuit",
-    "size": "Taille",
+    "size": "Taille (m²)",
     "capacity": "Capacité",
     "search": "Rechercher",
     "units": "Unités",
@@ -62,7 +62,16 @@
     "bookingData": "Données de réservation",
     "managerData": "Données du gestionnaire",
     "reviews": "Avis",
-    "morePhotos": "Plus de photos"
+    "morePhotos": "Plus de photos",
+    "beds": "Lits",
+    "single": "Simple",
+    "double": "Double",
+    "bunk": "Lits superposés",
+    "baths": "Salles de bain",
+    "toilets": "Toilettes",
+    "showers": "Douches",
+    "private": "Privés",
+    "other": "Autre"
   },
   "auth": {
     "login": "Se connecter",
@@ -133,6 +142,8 @@
     "at": "à",
     "empty": "Aucun élément trouvé",
     "selected": "Sélectionnés",
-    "unsavedChanges": "Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter?"
+    "unsavedChanges": "Vous avez des modifications non enregistrées. Êtes-vous sûr de vouloir quitter?",
+    "yes": "Oui",
+    "no": "Non"
   }
 }

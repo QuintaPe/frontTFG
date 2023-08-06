@@ -19,7 +19,9 @@ export class PopupComponent {
       headerText: string;
       template: TemplateRef<any>;
     }
-  ) {}
+  ) {
+    dialogRef.disableClose = true;
+  }
 
   close(res: boolean) {
     this.dialogRef.close(res);

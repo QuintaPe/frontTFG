@@ -9,7 +9,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { SkeletonComponent } from '../../skeleton/skeleton.component';
 
 interface Option {
-  id: string; name: string;
+  id: string | Boolean; name: string;
 };
 
 @Component({
@@ -31,12 +31,13 @@ export class InputSelectComponent {
   @Input() name: string = '';
   @Input() error: string = '';
   @Input() control: any = null;
-  @Input() options: Array<{ id: string; name: string }> = [];
-  @Output() valueChange = new EventEmitter<string>();
+  @Input() options: Array<Option> = [];
+  @Output() valueChange = new EventEmitter<any>();
   protected showOptions: Boolean = false;
 
   get selectedOption(): Option | undefined {
-    this.selectedIndex = this.options?.findIndex((option: Option) => option.id === (this.control?.value || this.value));
+    const auxValue = this.control?.value || this.control?.value === false ? this.control?.value : this.value
+    this.selectedIndex = this.options?.findIndex((option: Option) => option.id === auxValue);
     return this.selectedIndex >= 0 ? this.options[this.selectedIndex] : null
   }
   selectedIndex= 0;

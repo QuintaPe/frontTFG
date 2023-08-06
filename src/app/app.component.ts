@@ -43,7 +43,8 @@ export class AppComponent implements OnInit {
 
   getMessageError(error: any) {
     const errName = 'errors.' + error.name;
-    const translatedString = this.translate.instant(errName, { field: error.field });
-    return errName !== translatedString ? translatedString : error.message;
+    const translatedString = this.translate.instant(errName, { field: error?.field?.toLowerCase() });
+    const formattedString = translatedString.charAt(0).toUpperCase() + translatedString.substr(1)
+    return errName !== translatedString ? formattedString : error.message;
   }
 }

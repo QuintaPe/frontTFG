@@ -22,6 +22,7 @@
     "favorites": "Favoritos",
     "availableCampsitesList": "Lista de campamentos disponibles",
     "createCampsite": "Crear campamento",
+    "updateCampsite": "Actualizar campamento",
     "showingCampsitesNear": "Mostrando campamentos cercanos a",
     "deleteQuestion": "¿Esta seguro que desea eliminar este campamento?",
     "lodging": "Alojamiento",
@@ -51,9 +52,10 @@
     "addImages": "Añade al menos 3 imágenes de su campamento",
     "addLocation": "Haga clic en el mapa para marcar la ubicación de su campamento",
     "feePerNight": "Precio por noche",
-    "size": "Tamaño",
+    "size": "Tamaño (m²)",
     "capacity": "Capacidad",
     "search": "Buscar",
+    "unit": "Unidad",
     "units": "Unidades",
     "confirmDeleteBooking": "¿Esta seguro que desea elimina esta reserva?",
     "entryDate": "Fecha de entrada",
@@ -62,7 +64,16 @@
     "bookingData": "Datos de la reserva",
     "managerData": "Datos del manager",
     "reviews": "Valoraciones",
-    "morePhotos": "Más fotos"
+    "morePhotos": "Más fotos",
+    "beds": "Camas",
+    "single": "Individuales",
+    "double": "Dobles",
+    "bunk": "Literas",
+    "baths": "Baños",
+    "toilets": "Inodoros",
+    "showers": "Duchas",
+    "private": "Privados",
+    "other": "Otro"
   },
   "auth": {
     "login": "Inicia sesión",
@@ -133,6 +144,8 @@
     "at": "a",
     "empty": "No se han encontrado elementos",
     "selected": "Seleccionados",
-    "unsavedChanges": "Tienes cambios sin guardar. ¿Estas seguro de que quieres salir?"
+    "unsavedChanges": "Tienes cambios sin guardar. ¿Estas seguro de que quieres salir?",
+    "yes": "Si",
+    "no": "No"
   }
 }

@@ -51,7 +51,7 @@
     "addImages": "Fügen Sie mindestens 3 Bilder Ihres Campingplatzes hinzu",
     "addLocation": "Klicken Sie auf die Karte, um den Standort Ihres Campingplatzes zu markieren",
     "feePerNight": "Preis pro Nacht",
-    "size": "Größe",
+    "size": "Größe (m²)",
     "capacity": "Kapazität",
     "search": "Suche",
     "units": "Einheiten",
@@ -62,7 +62,16 @@
     "bookingData": "Buchungsdaten",
     "managerData": "Managerdaten",
     "reviews": "Bewertungen",
-    "morePhotos": "Mehr Fotos"
+    "morePhotos": "Mehr Fotos",
+    "beds": "Betten",
+    "single": "Einzelbett",
+    "double": "Doppelbett",
+    "bunk": "Etagenbetten",
+    "baths": "Badezimmer",
+    "toilets": "Toiletten",
+    "showers": "Duschen",
+    "private": "Privat",
+    "other": "Andere"
   },
   "auth": {
     "login": "Anmelden",
@@ -133,6 +142,8 @@
     "at": "um",
     "empty": "Keine Elemente gefunden",
     "selected": "Ausgewählt",
-    "unsavedChanges": "Sie haben ungespeicherte Änderungen. Sind Sie sicher, dass Sie die Seite verlassen möchten?"
+    "unsavedChanges": "Sie haben ungespeicherte Änderungen. Sind Sie sicher, dass Sie die Seite verlassen möchten?",
+    "yes": "Ja",
+    "no": "Nein"
   }
 }
