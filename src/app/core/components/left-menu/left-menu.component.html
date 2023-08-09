@@ -8,11 +8,12 @@
         <li *ngFor="let route of routes">
           <a
             class="nav-item"
+            [ngClass]="{active: route.active}"
             [routerLink]="['/', authService.user.role, route.path]"
             (click)="closeMenu()"
           >
-            <div class="left-menu-icon">
-              <mat-icon>{{ route.icon }}</mat-icon>
+            <div class="left-menu-icon" >
+              <span class="material-icons-outlined">{{ route.icon }}</span>
             </div>
             <p>{{ route.name }}</p>
           </a>

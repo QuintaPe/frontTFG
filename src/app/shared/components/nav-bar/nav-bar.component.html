@@ -1,11 +1,11 @@
 <!-- Navbar -->
-<nav class="nav-bar" [ngClass]="{'isRole': isRole}">
+<nav class="nav-bar" [ngClass]="{ isRole: isRole }">
   <div class="left-buttons">
-      <img
-        src="assets/svg/logo-text.svg"
-        alt="ScoutCamp-logo"
-        (click)="router.navigateByUrl('/')"
-      />
+    <img
+      src="assets/svg/logo-text.svg"
+      alt="ScoutCamp-logo"
+      (click)="router.navigateByUrl('/')"
+    />
   </div>
   <div class="right-buttons">
     <app-language-selector />
@@ -24,7 +24,7 @@
     <div class="profile-dropdown" *ngIf="authService.user">
       <button class="profile-button">
         <app-avatar
-          type="user"
+          [title]="authService.user.attributes.firstname"
           [size]="50"
           [src]="authService.user.attributes.avatar?._id"
         />
@@ -33,17 +33,32 @@
         <a
           *ngIf="authService.user.role === 'manager'"
           [routerLink]="[authService.user.role, 'campings']"
-        >{{'user.myCampings' | translate }}</a>
+        >
+          <span class="material-icons-outlined">forest</span>
+          {{ "user.myCampings" | translate }}
+        </a>
         <a
           *ngIf="authService.user.role === 'user'"
           [routerLink]="[authService.user.role, 'bookings']"
-        >{{'user.myBookings' | translate }}</a>
+        >
+          <span class="material-icons-outlined">sticky_note_2</span>
+          {{ "user.myBookings" | translate }}
+        </a>
         <a
           *ngIf="authService.user.role === 'user'"
           [routerLink]="[authService.user.role, 'favorites']"
-        >{{'campsite.favorites' | translate }}</a>
-        <a [routerLink]="[authService.user.role, 'profile']">{{'user.profile' | translate }}</a>
-        <a (click)="logout()">{{'auth.logout' | translate }}</a>
+        >
+          <span class="material-icons-outlined">favorite_border</span>
+          {{ "campsite.favorites" | translate }}
+        </a>
+        <a [routerLink]="[authService.user.role, 'profile']">
+          <span class="material-icons-outlined">person</span>
+          {{ "user.profile" | translate }}
+        </a>
+        <a [routerLink]="['auth', 'logout']">
+          <mat-icon>logout</mat-icon>
+          {{ "auth.logout" | translate }}
+        </a>
       </div>
     </div>
   </div>

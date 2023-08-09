@@ -82,156 +82,29 @@
             flex: 0 1;
             min-width: 75px;
             text-align: center;
-            mat-icon {
-              color: $primary;
-              width: 100%;
-              height: 100%;
+            color: $svgColor;
+            span {
               font-size: 35px;
+              font-weight: lighter;
             }
           }
-
-          .nav-item-submenu-icon{
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background-color: $primary;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            i {
-              color: #fff;
-              transform: rotate(180deg);
+          &.active, &:hover {
+            span, p {
+              color: $primary-icon;
             }
-          }
-        }
-        ul.left-menu-nav-subitems{
-          display: none;
-          padding-left: 61px;
-          width: 100%;
-          i {
-            color: $primary;
-          }
-          li.active{
-            p{
-              color: var(--primary-color);
+            p {
               font-weight: 600;
             }
           }
         }
       }
-      & > li:hover,
-      & > li.active {
-        a.nav-item {
-          p {
-            color: var(--primary-color);
-            font-weight: 600;
-          }
-          .left-menu-icon {
-            i {
-              color: var(--primary-color) !important;
-            }
-          }
-          .nav-item-submenu-icon{
-            background-color: var(--primary-color) !important;
-            i{
-              transform: rotate(0deg);
-            }
-          }
-        }
-        ul.left-menu-nav-subitems{
-          display: block;
-        }
-      }
-      & > li:hover {
-        a.nav-item {
-          .left-menu-icon {
-            background-color: var(--primary-light-color) !important;
-            border-radius: 50%;
-          }
-        }
-      }
-      .startups-select {
-        display: none;
-        margin: 20px 20px 0 20px;
-        .input-select-wrapper {
-          margin: 0;
-        }
-      }
     }
     &:not(.show){
       width: 75px;
-      .left-menu-nav-items {
-        & > li{
-          a.nav-item {
-            p{
-              display: none;
-            }
-          }
-          .nav-item-submenu-icon,
-          .left-menu-nav-subitems{
-            display: none !important;
-          }
-        }
-      }
+        p { display: none; }
       &:hover{
         width: 250px;
-        li{
-          a.nav-item {
-            p{
-              display: block !important;
-            }
-          }
-          .nav-item-submenu-icon{
-            display: flex !important;
-          }
-          &.active,
-          &:hover{
-            .left-menu-nav-subitems{
-              display: block !important;
-            }
-          }
-        }
-      }
-    }
-  }
-
-  @media (min-width: $breakpoint-md) and (max-width: $breakpoint-lg){
-    body:not(.touchscreen){
-      .left-menu {
-        width: 0px;
-        overflow-x: hidden;
-        &.show {
-          width: 75px;
-        }
-        .left-menu-nav-items {
-          & > li{
-            a.nav-item {
-              p{
-                display: none;
-              }
-            }
-            .nav-item-submenu-icon,
-            .left-menu-nav-subitems{
-              display: none;
-            }
-          }
-        }
-        &:hover{
-          width: 200px;
-          li{
-            a.nav-item {
-              p{
-                display: block !important;
-              }
-            }
-            .nav-item-submenu-icon{
-              display: flex;
-            }
-            .left-menu-nav-subitems{
-              display: block;
-            }
-          }
-        }
+        p { display: block !important; }
       }
     }
   }
@@ -239,10 +112,7 @@
   @media (max-width: $breakpoint-md) {
     .windows-wrapper  {
       .content-wrapper {
-          padding-left: 0;
-          &.close-menu {
-              padding-left: 0px;
-          }
+          padding-left: 0px !important;
       }
     }
     .left-menu {

@@ -2,7 +2,7 @@
   <div *ngFor="let review of reviewsArray" class="review">
     <div class="review-user">
       <app-avatar
-        type="user"
+        [title]="review?.user?.attributes?.firstname + ' ' + review?.user?.attributes?.lastname"
         [size]="40"
         [src]="review?.user?.attributes?.avatar?._id"
         [loading]="review?.loading"
@@ -10,11 +10,7 @@
       <div class="d-flex flex-column ms-3">
         <ng-container *ngIf="!review?.loading; else loadingTem">
           <div>
-            {{
-              review?.user?.attributes?.firstname +
-                " " +
-                review?.user?.attributes?.lastname
-            }}
+            {{ review?.user?.attributes?.firstname + " " + review?.user?.attributes?.lastname }}
           </div>
           <app-input-stars
             [value]="review?.review?.rating"

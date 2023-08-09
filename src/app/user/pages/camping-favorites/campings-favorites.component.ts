@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { CampingService } from '@app/camping/services/camping.service';
 import { Camping } from '@models/camping';
-import { CampingRowComponent } from '../campings-list/components/camping-row/camping-row.component';
+import { CampingRowComponent } from '../../../camping/components/camping-row/camping-row.component';
 
 @Component({
   selector: 'app-campings-favorites',

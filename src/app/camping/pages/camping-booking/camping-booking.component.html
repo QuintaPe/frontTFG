@@ -1,6 +1,6 @@
 <div class="camping-booking-view">
   <div class="camping-info">
-    <app-avatar type="camping" [size]="100" [src]="camping?.images[0]?._id" [loading]="loading" />
+    <app-avatar [title]="camping.name" [size]="100" [src]="camping?.images[0]?._id" [loading]="loading" />
     <div class="ms-4" *ngIf="!loading">
       <h4 class="fw-b">{{ camping.name }}</h4>
       <div>

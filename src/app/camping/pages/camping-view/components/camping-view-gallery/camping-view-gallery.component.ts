@@ -50,7 +50,5 @@ export class CampingViewGalleyComponent implements OnInit {
       },
       width: '80vw',
     });
-    this.galleryRef.set(2);
-
   }
 }

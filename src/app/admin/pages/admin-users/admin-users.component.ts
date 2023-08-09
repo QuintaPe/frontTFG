@@ -30,8 +30,8 @@ export class AdminUsersComponent implements OnInit {
       {
         field: 'attributes',
         type: 'avatar',
-        avatar: 'user',
-        width: '45',
+        width: '44',
+        fieldName: (row: any) => row.attributes.firstname,
         preRender: (v: any) => v.avatar?._id,
       },
       {
@@ -87,7 +87,7 @@ export class AdminUsersComponent implements OnInit {
         this.tableFlagRefresh += 1;
       } catch (err) {
         ref.close();
-        this.dialogService.open('danger', 'Error');
+        await this.dialogService.open('danger', 'Error');
       }
     }
   };

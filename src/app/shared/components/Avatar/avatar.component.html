@@ -1,17 +1,18 @@
 <div
-  [title]='this.title'
-  [style]="{ 'min-width': size + 'px', 'width': size + 'px', 'height': size + 'px' }"
+  [title]="this.title"
+  [style.min-width.px]="size"
+  [style.width.px]="size"
+  [style.height.px]="size"
+  [style.font-size.px]="size"
+  [ngClass]="{ default: !src && !loading }"
   [class]="'avatar ' + this.class"
-  [ngClass]="{'default': !src && !loading}"
 >
   <ng-container *ngIf="!loading">
-    <ng-container *ngIf="!src">
-      <ng-container *ngIf="type === 'user'">
-        <mat-icon>person_outline</mat-icon>
-      </ng-container>
-    </ng-container>
+    <div *ngIf="!src" class="letter-img">
+      {{ title | truncate : 1 : "" | uppercase }}
+    </div>
 
     <img *ngIf="src" [src]="FILES_BASE_URL + src" alt="avatar" />
   </ng-container>
-  <app-skeleton height="100%" [width]="100" *ngIf="loading"/>
+  <app-skeleton height="100%" [width]="100" *ngIf="loading" />
 </div>

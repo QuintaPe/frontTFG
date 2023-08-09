@@ -9,6 +9,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { LanguageSelectorComponent } from '../language-selector/language-selector.component';
 import { ROLES } from '@utils/constants';
 import { filter } from 'rxjs/operators';
+import { MatIcon, MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-nav-bar',
@@ -23,6 +24,7 @@ import { filter } from 'rxjs/operators';
     NgClass,
     TranslateModule,
     LanguageSelectorComponent,
+    MatIconModule,
   ],
 })
 export class NavBarComponent {

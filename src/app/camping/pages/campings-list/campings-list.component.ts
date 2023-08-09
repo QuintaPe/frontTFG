@@ -10,7 +10,7 @@ import {
 import { CampingService } from '@app/camping/services/camping.service';
 import { CAMPINGS_ROUTES } from '@app/core/routes';
 import { Camping } from '@models/camping';
-import { CampingRowComponent } from './components/camping-row/camping-row.component';
+import { CampingRowComponent } from '../../components/camping-row/camping-row.component';
 
 @Component({
   selector: 'app-campings-list',

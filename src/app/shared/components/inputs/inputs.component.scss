@@ -72,7 +72,7 @@
       }
     }
     &:focus {
-      color: $text-color;
+      color: $textColor;
       &::placeholder {
         opacity: 1;
       }
@@ -106,7 +106,7 @@
       }
     }
     .input {
-      color: $text-color;
+      color: $textColor;
     }
   }
 

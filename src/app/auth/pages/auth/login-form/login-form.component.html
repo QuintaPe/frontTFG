@@ -1,0 +1,36 @@
+<form
+  class="login-form"
+  [formGroup]="loginForm"
+  (ngSubmit)="login()"
+  @enterState
+>
+  <p class="text-center h1 fw-bold mb-5">
+    {{ "auth.login" | translate }}
+  </p>
+
+  <!-- User Name -->
+  <app-input-text
+    class="mb-5"
+    [preText]="'common.email' | translate"
+    placeholder='Introduzca su nombre de usuario'
+    icon="person"
+    [control]="loginForm.controls['email']"
+  />
+
+  <!-- Contraseña -->
+  <app-input-text
+    class="mb-5"
+    type='password'
+    [preText]="'auth.password' | translate"
+    placeholder='Introduzca su contraseña'
+    icon="lock"
+    [control]="loginForm.controls['password']"
+  />
+
+  <!-- Botón de inicio de sesión -->
+  <div class="d-flex flex-column justify-content-center  align-items-center">
+    <p>{{ "auth.stillNotRegistered" | translate }} <a routerLink="/auth/signup">{{ "auth.signupFree" | translate }}</a></p>
+    <p>{{ "auth.addYouCampsiteQuestion" | translate }} <a routerLink="/auth/manager/signup">{{ "auth.signupAsManager" | translate }}</a></p>
+    <app-button [text]="'auth.login' | translate" icon="person_add" type="submit" [loading]="loading" />
+  </div>
+</form>

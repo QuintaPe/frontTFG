@@ -6,7 +6,6 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CampingService } from '@app/camping/services/camping.service';
-import { TruncatePipe } from '@app/shared/pipes/truncate.pipe';
 import { Camping } from '@models/camping';
 import environment from 'src/environments/environment';
 

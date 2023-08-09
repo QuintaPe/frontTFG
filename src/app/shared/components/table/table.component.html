@@ -1,6 +1,6 @@
 <div class="table-responsive">
   <ng-container *ngIf="mode === 'component'">
-    <div *ngIf="!loading">
+    <div *ngIf="rows().total && !loading">
       <ng-template *ngFor="let row of rows().items; let i = index"
         [ngComponentOutlet]="rowComponent"
         [ndcDynamicInputs]="rowInputs(row)"
@@ -14,9 +14,13 @@
         [ndcDynamicInputs]="{ _id: i, loading: true }"
       />
     </div>
+    <div *ngIf="!rows().total" class="empty-svg">
+      <img src="assets/svg/empty_campsite.svg" />
+      <div>{{'common.empty' | translate }}</div>
+    </div>
   </ng-container>
 
-  <div *ngIf="mode === 'row' && rows().total">
+  <div *ngIf="mode === 'row'">
     <table class="table mb-0">
       <thead>
         <tr>
@@ -47,7 +51,7 @@
                     />
                   </ng-container>
                   <div *ngSwitchCase="'html'" [innerHTML]="renderField(row, column)"></div>
-                  <app-avatar *ngSwitchCase="'avatar'" [type]="column.avatar" [size]="45" [src]="renderField(row, column)" />
+                  <app-avatar *ngSwitchCase="'avatar'" [title]="renderAvatar(row, column)" [size]="45" [src]="renderField(row, column)" />
                   <span *ngSwitchDefault>{{ renderField(row, column) }}</span>
                 </ng-container>
               </div>
@@ -67,13 +71,18 @@
           </tr>
         </ng-template>
       </tbody>
+      <tfoot *ngIf="!rows().total">
+        <tr>
+          <td [attr.colspan]="columns.length">
+            <div class="empty-svg">
+              <img src="assets/svg/empty_campsite.svg" />
+              <div>{{ 'common.empty' | translate }}</div>
+            </div>
+          </td>
+        </tr>
+      </tfoot>
     </table>
   </div>
-</div>
-
-<div *ngIf="!rows().total" class="empty-svg">
-  <img src="assets/svg/empty_campsite.svg" />
-  <div>{{'common.empty' | translate }}</div>
 </div>
 
 <mat-paginator *ngIf="loading || (rows().total && showPagination)"

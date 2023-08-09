@@ -121,6 +121,12 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
       : row[columnField];
   };
 
+  renderAvatar = (row: any, column: any) => {
+    return typeof column.fieldName === 'function'
+      ? column.fieldName(row)
+      : row[column.fieldName];
+  };
+
   rowInputs(row: any) {
     const auxInputs: {[key: string]: any} = {}
     this.componentInputs.forEach(input => {

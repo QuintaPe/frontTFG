@@ -1,14 +1,16 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { RouterLink, RouterOutlet } from '@angular/router';
-import { NgFor } from '@angular/common';
+import { NavigationEnd, Router, RouterLink, RouterOutlet } from '@angular/router';
+import { NgClass, NgFor } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { AuthService } from '@app/auth/services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
+import { filter } from 'rxjs';
 
 interface Route {
   name: string,
   icon: string,
   path: string,
+  active: boolean,
 }
 
 @Component({
@@ -16,7 +18,7 @@ interface Route {
     templateUrl: './left-menu.component.html',
     styleUrls: ['./left-menu.component.scss'],
     standalone: true,
-    imports: [MatIconModule, NgFor, RouterLink, RouterOutlet]
+    imports: [MatIconModule, NgFor, NgClass, RouterLink, RouterOutlet]
 })
 
 export class LeftMenuComponent implements OnInit {
@@ -25,31 +27,41 @@ export class LeftMenuComponent implements OnInit {
 
   authService = inject(AuthService);
   translate = inject(TranslateService);
+  router = inject(Router);
 
   ngOnInit(): void {
     this.routes = this.getRoutes(this.authService.user.role);
+    this.router.events.pipe(
+      filter((event: any) => event instanceof NavigationEnd)
+    ).subscribe(() => {
+      this.routes = this.getRoutes(this.authService.user.role);
+    });
   }
 
   getRoutes = (role: string) => {
+    let routes;
     switch (role) {
       case 'admin':
-        return [
-          { icon: 'work', name: this.translate.instant('campsite.campsites'), path: 'campings' },
-          { icon: 'local_offer', name: this.translate.instant('common.bookings'), path: 'bookings' },
+        routes = [
+          { icon: 'forest', name: this.translate.instant('campsite.campsites'), path: 'campings' },
+          { icon: 'sticky_note_2', name: this.translate.instant('common.bookings'), path: 'bookings' },
           { icon: 'person', name: this.translate.instant('common.users'), path: 'users' }
         ];
+        break;
       case 'manager':
-        return [
-          { icon: 'work', name: this.translate.instant('user.myCampings'), path: 'campings' },
+        routes = [
+          { icon: 'forest', name: this.translate.instant('user.myCampings'), path: 'campings' },
           { icon: 'person', name: this.translate.instant('user.profile'), path: 'profile' },
         ];
-    default:
-      return [
-        { icon: 'local_offer', name: this.translate.instant('user.myBookings'), path: 'bookings' },
-        { icon: 'favorite', name: this.translate.instant('campsite.favorites'), path: 'favorites' },
-        { icon: 'person', name: this.translate.instant('user.profile'), path: 'profile' }
-      ];
+        break;
+      default:
+        routes = [
+          { icon: 'sticky_note_2', name: this.translate.instant('user.myBookings'), path: 'bookings' },
+          { icon: 'favorite_border', name: this.translate.instant('campsite.favorites'), path: 'favorites' },
+          { icon: 'person', name: this.translate.instant('user.profile'), path: 'profile' }
+        ];
     }
+    return routes.map(route => ({...route, active: this.router.url.startsWith(`/${role}/${route.path}`)}))
   }
 
   toggleMenu() {
