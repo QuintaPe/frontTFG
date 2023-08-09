@@ -1,0 +1,39 @@
+@import '_colors.scss';
+@import '_variables.scss';
+@import '_breakpoints.scss';
+
+.reviews {
+  display: flex;
+  margin-bottom: 10px;
+  gap: 5px;
+  flex-wrap: wrap;
+  .review {
+    width: calc(50% - 5px);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border: 1px solid $borderGrey;
+    border-radius: $borderRadiusLight;
+    padding: 20px;
+    .review-user {
+      display: flex;
+      align-items: center;
+    }
+    .review-description {
+      height: 70px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+}
+
+@media (max-width: $breakpoint-md) {
+  .reviews {
+    .review {
+      width: 100%;
+    }
+  }
+}

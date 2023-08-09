@@ -45,7 +45,7 @@ export class CampingViewGalleyComponent implements OnInit {
   openGalleryPopup() {
     this.dialog.open(PopupComponent, {
       data: {
-        headerText: this.translate.instant('campsite.addLodging'),
+        headerText: this.translate.instant('campsite.gallery'),
         template: this.galleryTemplate
       },
       width: '80vw',

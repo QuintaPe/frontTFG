@@ -1,0 +1,14 @@
+<div class="rating">
+  <div
+    style="display: inline-block"
+    *ngFor="let starred of stars; let i = index"
+    (click)="!disabled ? valueChange.emit(i + 1) : null"
+  >
+    <ng-container *ngIf="value > i; else noStar">
+      <mat-icon class="filled" [ngStyle]="{ 'font-size': size + 'px' }">star</mat-icon>
+    </ng-container>
+    <ng-template #noStar>
+      <mat-icon class="empty" [ngStyle]="{ 'font-size': size + 'px' }">star_outline</mat-icon>
+    </ng-template>
+  </div>
+</div>

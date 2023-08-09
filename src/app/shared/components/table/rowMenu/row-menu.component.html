@@ -1,12 +1,16 @@
 <div #menuBtn>
-  <mat-icon (click)="showDropdown()" style="cursor: pointer">more_vert</mat-icon>
+  <mat-icon (click)="showDropdown($event)" style="cursor: pointer">more_vert</mat-icon>
   <ng-template cdk-portal #overlayTemplate="cdkPortal">
     <div class="row-menu">
-      <div *ngFor="let button of buttons; let i = index"
-        class="row-menu-item"
-        (click)="handleClick(button)"
-      >
-        {{ button.text }}
+      <div *ngFor="let button of buttons; let i = index">
+        <div
+          class="row-menu-item"
+          (click)="handleClick(button)"
+          *ngIf="!isButtonHidden(button)"
+        >
+          <mat-icon>{{ button.icon }}</mat-icon>
+          {{ getButtonText(button) }}
+        </div>
       </div>
     </div>
   </ng-template>

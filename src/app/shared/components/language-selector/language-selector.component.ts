@@ -1,5 +1,5 @@
 import { Component, OnInit, inject } from '@angular/core';
-import { NgClass, NgFor } from '@angular/common';
+import { NgClass, NgIf, NgFor } from '@angular/common';
 import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -7,7 +7,7 @@ import { LangChangeEvent, TranslateService } from '@ngx-translate/core';
     templateUrl: './language-selector.component.html',
     styleUrls: ['./language-selector.component.scss'],
     standalone: true,
-    imports: [NgClass, NgFor]
+    imports: [NgClass, NgIf, NgFor]
 })
 
 export class LanguageSelectorComponent implements OnInit {

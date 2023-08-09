@@ -15,8 +15,8 @@
 
 export interface Button {
     icon?: string,
-    text?: string,
+    text?: Function | string,
     onClick?: Function,
     disabled?: boolean,
-    hidden?: boolean,
+    hidden?: Function | boolean,
 }

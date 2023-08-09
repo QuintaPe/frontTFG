@@ -1,11 +1,14 @@
 @import "_colors.scss";
+@import "_variables.scss";
+@import "_mixins.scss";
 
 .camping-view {
   padding: 0 !important;
+  position: relative;
   .camping-header {
     text-align: center;
-    min-height: calc(100vh - 80px);
-    margin: auto;
+    height: calc(100vh - 85px);
+    margin-bottom: 45px;
     color: white;
     display: flex;
     align-items: center;
@@ -17,7 +20,9 @@
         color: #ffffff;
       }
       .camping-header--description {
-        margin: 40px;
+        margin-top: 40px;
+        max-height: calc(100vh - 450px);
+        overflow: hidden;
       }
       .camping-header--booking {
         color: #ffffff;
@@ -29,26 +34,65 @@
   }
 
   .camping-index {
-    position: relative;
-    top: -60px;
+    position: absolute;
+    top: calc(100vh - 140px);
     display: flex;
-    justify-content: space-evenly;
-    gap: 30px;
+    justify-content: space-around;
+    width: 100%;
     .camping-index-item {
-      min-height: 155px;
+      width: calc(100% / 4 - 20px);
       background-color: $primary;
-      padding: 15px;
-      width: 100%;
+      padding: 10px;
+      border-radius: $borderRadiusLight;
+      cursor: pointer;
       .camping-index-name {
-        text-align: center;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         color: white;
-        font-size: 25px;
-        margin-bottom: 15px;
+        font-size: 22px;
+        mat-icon {
+          font-size: 22px;
+          margin-right: 10px;
+        }
       }
-      mat-icon {
-        text-align: center;
-        color: white;
-        font-size: 60px;
+    }
+  }
+}
+
+.camping-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 20px;
+  padding: 25px;
+  .card {
+    border-radius: $borderRadiusLight;
+    box-shadow: $boxShadowLight;
+    padding: 20px;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    .card-content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 10px;
+
+      p {
+        color: #666;
+        font-size: 14px;
+      }
+
+      span {
+        font-size: 14px;
+        text-align: right;
+        transition: text-decoration 0.3s;
+        cursor: pointer;
+        &:hover {
+          text-decoration: underline;
+        }
       }
     }
   }

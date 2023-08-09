@@ -124,14 +124,10 @@
 }
 
 .input-options {
-  position: relative;
-  top:-8px;
   width: 100%;
   background: white;
-  border-bottom-right-radius: 5px;
-  border-bottom-left-radius: 5px;
+  border-radius: 5px;
   border: 2px solid $primary;
-  border-top: 2px dashed $primary;
   z-index: 1;
   .input-options-option {
     border: 2px solid transparent;

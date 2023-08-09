@@ -1,8 +1,8 @@
 <div class="language-selector">
-  <img [src]="'assets/svg/' + lang + '.svg'" [alt]="lang" (click)="toggleLanguageOptions()">
+  <img *ngIf="lang" [src]="'assets/svg/' + lang + '.svg'" [alt]="lang" (click)="toggleLanguageOptions()">
   <div class="language-options" [ngClass]="{ 'show': showOptions }">
     <div *ngFor="let auxLang of filteredLangs; let i = index" class="language-option" (click)="changeLanguage(auxLang)">
-      <img [src]="'assets/svg/' + auxLang + '.svg'" [alt]="auxLang">
+      <img *ngIf="auxLang" [src]="'assets/svg/' + auxLang + '.svg'" [alt]="auxLang">
     </div>
 
   </div>

@@ -1,0 +1,23 @@
+<section class="camping-reviews">
+  <h2 class="text-center mb-3">{{ "campsite.reviews" | translate }}</h2>
+  <app-review-row
+    [reviews]="reviews.items"
+    [loading]="loading"
+    [loadingItems]="2"
+  />
+  <div class="d-flex justify-content-center">
+    <app-button
+      [text]="'campsite.moreReviews' | translate"
+      (onClick)="openReviewsPopup()"
+    />
+  </div>
+</section>
+
+<ng-template #reviewsTemplate>
+  <app-review-row
+    [reviews]="reviewsPopup"
+    [loading]="loadingPopup"
+    [loadingItems]="RELATIONS_SIZE"
+  />
+  <div *ngIf="(page + 1) * RELATIONS_SIZE < reviews.total" (click)="fetchRelations()">{{ 'common.viewMore' | translate }}</div>
+</ng-template>

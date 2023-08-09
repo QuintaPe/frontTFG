@@ -1,15 +1,28 @@
+import { CommonModule } from '@angular/common';
 import { Input, Component, OnInit, Output, EventEmitter, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { MatIconModule } from '@angular/material/icon';
+import { Router, RouterModule } from '@angular/router';
 import { CampingService } from '@app/camping/services/camping.service';
 import { MANAGER_ROUTES } from '@app/core/routes';
 import { DialogService } from '@app/shared/components/dialog/dialog.service';
-import { TranslateService } from '@ngx-translate/core';
+import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.component';
+import { SvgIconComponent } from '@app/shared/components/svg-icon/svg-icon.component';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import environment from 'src/environments/environment';
 
 @Component({
   selector: 'app-camping-row',
   templateUrl: './camping-row.component.html',
-  styleUrls: ['./camping-row.component.scss']
+  styleUrls: ['./camping-row.component.scss'],
+  standalone: true,
+  imports: [
+    RouterModule,
+    CommonModule,
+    SvgIconComponent,
+    MatIconModule,
+    TranslateModule,
+    SkeletonComponent,
+  ]
 })
 export class CampingRowComponent implements OnInit{
   @Input() _id = '';

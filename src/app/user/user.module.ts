@@ -15,6 +15,11 @@ import { ButtonComponent } from '@shared/components/button/button.component';
 import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
 import { TableComponent } from '@app/shared/components/table/table.component';
 import { ProfileComponent } from '@app/shared/components/Profile/profile.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { CampingRowComponent } from '@app/camping/components/campings-list/components/camping-row/camping-row.component';
+import { DialogService } from '@app/shared/components/dialog/dialog.service';
+import { InputStarsComponent } from '@app/shared/components/inputs/input-stars/input-stars.component';
+import { InputTextAreaComponent } from '@app/shared/components/inputs/input-text-area/input-text-area.component';
 
 
 @NgModule({
@@ -29,6 +34,7 @@ import { ProfileComponent } from '@app/shared/components/Profile/profile.compone
     TranslateModule,
     OverlayModule,
     MatIconModule,
+    MatDialogModule,
 
     CommonModule,
     PanelComponent,
@@ -38,6 +44,10 @@ import { ProfileComponent } from '@app/shared/components/Profile/profile.compone
     ButtonComponent,
     TableComponent,
     ProfileComponent,
+    CampingRowComponent,
+    InputStarsComponent,
+    InputTextAreaComponent
   ],
+  providers: [DialogService],
 })
 export class UserModule { }

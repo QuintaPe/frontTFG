@@ -1,0 +1,38 @@
+<div class="reviews">
+  <div *ngFor="let review of reviewsArray" class="review">
+    <div class="review-user">
+      <app-avatar
+        type="user"
+        [size]="40"
+        [src]="review?.user?.attributes?.avatar?._id"
+        [loading]="review?.loading"
+      />
+      <div class="d-flex flex-column ms-3">
+        <ng-container *ngIf="!review?.loading; else loadingTem">
+          <div>
+            {{
+              review?.user?.attributes?.firstname +
+                " " +
+                review?.user?.attributes?.lastname
+            }}
+          </div>
+          <app-input-stars
+            [value]="review?.review?.rating"
+            [disabled]="true"
+            [size]="15"
+          />
+        </ng-container>
+        <ng-template #loadingTem>
+          <app-skeleton [width]="80" />
+          <app-skeleton [width]="40" />
+        </ng-template>
+      </div>
+    </div>
+    <div *ngIf="!review?.loading" class="review-description">
+      {{ review?.review?.review }}
+    </div>
+    <app-skeleton *ngIf="review?.loading" [width]="100" />
+    <app-skeleton *ngIf="review?.loading" [width]="100" />
+    <app-skeleton *ngIf="review?.loading" [width]="50" />
+  </div>
+</div>

@@ -30,6 +30,10 @@ import { CampingRowComponent } from './components/campings-list/components/campi
 import { CampingsFavoritesComponent } from './components/camping-favorites/campings-favorites.component';
 import { InputDateRangeComponent } from '@app/shared/components/inputs/input-date-range/input-date-range.component';
 import { SvgIconComponent } from '@app/shared/components/svg-icon/svg-icon.component';
+import { CampingViewReviewsComponent } from './components/camping-view/components/camping-view-reviews/camping-view-review.component';
+import { InputStarsComponent } from '@app/shared/components/inputs/input-stars/input-stars.component';
+import { ReviewRowComponent } from './components/camping-view/components/camping-view-reviews/component/review-row/review-row.component';
+import { TruncatePipe } from '@app/shared/pipes/truncate.pipe';
 
 @NgModule({
   declarations: [
@@ -37,11 +41,14 @@ import { SvgIconComponent } from '@app/shared/components/svg-icon/svg-icon.compo
     CampingViewGalleyComponent,
     CampingViewLocationComponent,
     CampingViewBookingComponent,
-    CampingRowComponent,
+    CampingViewReviewsComponent,
+    ReviewRowComponent,
 
     CampingBookingComponent,
     CampingsListComponent,
     CampingsFavoritesComponent,
+
+    TruncatePipe,
   ],
   imports: [
     CampingRoutingModule,
@@ -56,6 +63,7 @@ import { SvgIconComponent } from '@app/shared/components/svg-icon/svg-icon.compo
     GalleryModule,
     NgOptimizedImage,
 
+
     LoaderComponent,
     ButtonComponent,
     InputTextComponent,
@@ -66,6 +74,8 @@ import { SvgIconComponent } from '@app/shared/components/svg-icon/svg-icon.compo
     CampingSearcherComponent,
     InputDateRangeComponent,
     SvgIconComponent,
+    CampingRowComponent,
+    InputStarsComponent,
   ],
   providers: [
     DialogService,

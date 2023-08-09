@@ -50,8 +50,8 @@ export class CampingService {
   }
 
   async createCampingRelation(id: string, data: any) {
-    const { favorite = null, rating = null } = data
-    return fetch('POST', `campings/${id}/relation`, { favorite, rating });
+    const { favorite = null, review = null } = data
+    return fetch('POST', `campings/${id}/relation`, { favorite, review });
   }
 
   async createCampingBooking(id: string, bookingData: Object) {
@@ -72,5 +72,9 @@ export class CampingService {
     return fetch('GET', `campings/${id}/lodgings/availables`, {
       entryDate, exitDate, opts,
     });
+  }
+
+  async getCampingReviews(id: string, opts: any) {
+    return fetch('GET', `campings/${id}/reviews`, { opts });
   }
 }

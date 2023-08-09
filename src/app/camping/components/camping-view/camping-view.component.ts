@@ -6,6 +6,7 @@ import {
   ViewEncapsulation,
 } from '@angular/core';
 import { CampingService } from '@app/camping/services/camping.service';
+import { TruncatePipe } from '@app/shared/pipes/truncate.pipe';
 import { Camping } from '@models/camping';
 import environment from 'src/environments/environment';
 
@@ -34,12 +35,17 @@ export class CampingViewComponent implements OnInit {
     return image ? environment.api.FILES_BASE_URL + image._id : null;
   };
 
-  scrollToBooking(): void {
-    const campingViewBookingElement = document.querySelector('app-camping-view-booking');
+  scrollTo(elem: string): void {
+    const campingViewBookingElement = document.querySelector('.camping-' + elem);
     campingViewBookingElement.scrollIntoView({
       behavior: 'smooth',
       block: 'center',
       inline: 'nearest',
     });
+  }
+
+  public expanded: string;
+  toggleCard(card: string): void {
+    this.expanded = this.expanded !== card ? card : null;
   }
 }

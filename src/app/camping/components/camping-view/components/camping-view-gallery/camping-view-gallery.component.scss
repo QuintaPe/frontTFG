@@ -1,12 +1,15 @@
 @import '_colors.scss';
+@import '_variables.scss';
 
 .camping-gallery {
-  margin-bottom: 70px;
+  margin-bottom: 20px;
+  padding: 25px;
   img {
     position: relative !important;
     background-color: $primary-15;
     height: 225px;
     width: 100%;
     object-fit: cover;
+    border-radius: $borderRadiusLight;
   }
 }

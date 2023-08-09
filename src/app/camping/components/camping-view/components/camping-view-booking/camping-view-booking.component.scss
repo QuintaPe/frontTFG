@@ -1,7 +1,8 @@
 @import '_colors.scss';
 
 .camping-booking {
-  padding: 0 30px;
+  padding: 25px;
+  margin-bottom: 20px;
   .camping-booking--selected {
     background-color: $primary-15;
     padding: 20px;

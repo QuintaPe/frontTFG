@@ -6,7 +6,7 @@
       class="camping-header"
       [style.background-size]="'cover'"
       [style.background-image]="'
-      linear-gradient(0deg, rgba(0,0,0,0.5), rgba(0,0,0,0.5)), \
+      linear-gradient(0deg, rgba(0,0,0,0.6), rgba(0,0,0,0.6)), \
       url(' + getImageUrl(camping?.images?.[0]) + ') \
     '"
     >
@@ -15,34 +15,34 @@
         <p class="camping-header--description">{{ camping?.description }}</p>
         <app-button
           [text]="'campsite.book' | translate"
-          (onClick)="scrollToBooking()"
+          (onClick)="scrollTo('booking')"
         />
       </div>
     </section>
 
     <section class="camping-index">
       <div class="camping-index-item">
-        <div class="camping-index-name">Galeria</div>
-        <div class="d-flex justify-content-center">
+        <div class="camping-index-name" (click)="scrollTo('gallery')">
           <mat-icon>photo</mat-icon>
+          {{ 'campsite.gallery' | translate }}
         </div>
       </div>
-      <div class="camping-index-item">
-        <div class="camping-index-name">Ubicacion</div>
-        <div class="d-flex justify-content-center">
+      <div class="camping-index-item" (click)="scrollTo('location')">
+        <div class="camping-index-name">
           <mat-icon>location_on</mat-icon>
+          {{ 'campsite.location' | translate }}
         </div>
       </div>
-      <div class="camping-index-item">
-        <div class="camping-index-name">Ubicacion</div>
-        <div class="d-flex justify-content-center">
+      <div class="camping-index-item" (click)="scrollTo('info')">
+        <div class="camping-index-name">
           <mat-icon>info</mat-icon>
+          {{ 'campsite.info' | translate }}
         </div>
       </div>
-      <div class="camping-index-item">
-        <div class="camping-index-name">Ubicacion</div>
-        <div class="d-flex justify-content-center">
-          <mat-icon>mail_outline</mat-icon>
+      <div class="camping-index-item" (click)="scrollTo('reviews')">
+        <div class="camping-index-name">
+          <mat-icon>star</mat-icon>
+          {{ 'campsite.reviews' | translate }}
         </div>
       </div>
     </section>
@@ -50,294 +50,46 @@
     <app-camping-view-gallery [images]="camping?.images || []" />
     <app-camping-view-location
       [name]="camping?.name"
-      [coords]="camping?.location?.coords"
+      [location]="camping?.location"
     />
+
+    <div class="camping-info">
+      <div class="card" [ngClass]="{ 'expanded': expanded === 'rules' }" (click)="toggleCard('rules')">
+        <div class="card-content">
+          <h4 class="fw-b">{{ 'campsite.rules' | translate }}</h4>
+          <p [ngClass]="{ 'expanded': expanded === 'rules' }">
+            {{  expanded !== 'rules' ? (camping.rules | truncate:250) : camping.rules}}
+          </p>
+          <span>{{ expanded !== 'rules' ? ('common.viewMore' | translate) : ('common.viewLess' | translate)}}</span>
+        </div>
+      </div>
+      <div class="card" [ngClass]="{ 'expanded': expanded === 'amenities' }" (click)="toggleCard('amenities')">
+        <div class="card-content">
+          <h4 class="fw-b">{{ 'campsite.amenities' | translate }}</h4>
+          <p [ngClass]="{ 'expanded': expanded === 'amenities' }">
+            {{  expanded !== 'amenities' ? (camping.amenities | truncate:250) : camping.amenities}}
+          </p>
+          <span>{{ expanded !== 'amenities' ? ('common.viewMore' | translate) : ('common.viewLess' | translate)}}</span>
+        </div>
+      </div>
+      <div class="card" [ngClass]="{ 'expanded': expanded === 'nearestLocations' }" (click)="toggleCard('nearestLocations')">
+        <div class="card-content">
+          <h4 class="fw-b">{{ 'campsite.nearestLocations' | translate }}</h4>
+          <p [ngClass]="{ 'expanded': expanded === 'nearestLocations' }">
+            {{  expanded !== 'nearestLocations' ? (camping.nearestLocations | truncate:250) : camping.nearestLocations}}
+          </p>
+          <span>{{ expanded !== 'nearestLocations' ? ('common.viewMore' | translate) : ('common.viewLess' | translate)}}</span>
+        </div>
+      </div>
+    </div>
+
+    <app-camping-view-review [camping]="camping?._id" />
+
     <app-camping-view-booking
       [camping]="camping?._id || ''"
       [entryDate]="entryDate"
       [exitDate]="exitDate"
     />
 
-    <section
-      class="u-align-center u-clearfix u-container-align-center u-section-5"
-      id="sec-d633"
-    >
-      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <h2 class="u-align-center u-text u-text-default u-text-1">
-          Where to go now
-        </h2>
-        <div class="u-expanded-width u-list u-list-1">
-          <div class="u-repeater u-repeater-1">
-            <div
-              class="u-align-center u-container-align-center u-container-style u-list-item u-repeater-item"
-            >
-              <div
-                class="u-container-layout u-similar-container u-container-layout-1"
-              >
-                <img
-                  alt=""
-                  class="u-expanded-width u-image u-image-default u-image-1"
-                  data-image-width="700"
-                  data-image-height="652"
-                  src="images/young-rural-travellers-picnic3.jpg"
-                />
-                <div
-                  class="u-align-center u-container-align-center u-container-style u-group u-palette-2-base u-group-1"
-                >
-                  <div
-                    class="u-container-layout u-valign-middle u-container-layout-2"
-                  >
-                    <h4 class="u-align-center u-text u-text-default u-text-2">
-                      Hidden gems
-                    </h4>
-                    <p class="u-align-center u-text u-text-3">
-                      Sites on the rise
-                    </p>
-                  </div>
-                </div>
-                <p class="u-align-center u-text u-text-4">
-                  Sample text. Click to select the text box. Click again or
-                  double click to start editing the text.
-                </p>
-                <a
-                  href="https://nicepage.site"
-                  class="u-align-center u-border-1 u-border-active-palette-2-base u-border-black u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-none u-radius-0 u-text-body-color u-text-hover-palette-2-base u-top-left-radius-0 u-top-right-radius-0 u-btn-1"
-                  >learn more</a
-                >
-              </div>
-            </div>
-            <div
-              class="u-align-center u-container-align-center-sm u-container-align-center-xl u-container-align-center-xs u-container-style u-list-item u-repeater-item"
-            >
-              <div
-                class="u-container-layout u-similar-container u-container-layout-3"
-              >
-                <img
-                  alt=""
-                  class="u-expanded-width u-image u-image-default u-image-2"
-                  data-image-width="700"
-                  data-image-height="652"
-                  src="images/689.jpg"
-                />
-                <div
-                  class="u-align-center u-container-align-center u-container-style u-group u-palette-2-base u-group-2"
-                >
-                  <div
-                    class="u-container-layout u-valign-middle u-container-layout-4"
-                  >
-                    <h4 class="u-align-center u-text u-text-default u-text-5">
-                      Cottage stays
-                    </h4>
-                    <p class="u-align-center u-text u-text-6">Our top picks</p>
-                  </div>
-                </div>
-                <p class="u-align-center u-text u-text-7">
-                  Sample text. Click to select the text box. Click again or
-                  double click to start editing the text.
-                </p>
-                <a
-                  href="https://nicepage.com/k/loans-website-templates"
-                  class="u-align-center u-border-1 u-border-active-palette-2-base u-border-black u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-none u-radius-0 u-text-body-color u-text-hover-palette-2-base u-top-left-radius-0 u-top-right-radius-0 u-btn-2"
-                  >learn more</a
-                >
-              </div>
-            </div>
-            <div
-              class="u-align-center u-container-align-center u-container-style u-list-item u-repeater-item"
-            >
-              <div
-                class="u-container-layout u-similar-container u-container-layout-5"
-              >
-                <img
-                  alt=""
-                  class="u-expanded-width u-image u-image-default u-image-3"
-                  data-image-width="700"
-                  data-image-height="652"
-                  src="images/young-rural-travellers-picnic3t.jpg"
-                />
-                <div
-                  class="u-align-center u-container-align-center u-container-style u-group u-palette-2-base u-group-3"
-                >
-                  <div
-                    class="u-container-layout u-valign-middle u-container-layout-6"
-                  >
-                    <h4 class="u-align-center u-text u-text-default u-text-8">
-                      Glamping
-                    </h4>
-                    <p class="u-align-center u-text u-text-9">
-                      Exercitation ullamco
-                    </p>
-                  </div>
-                </div>
-                <p class="u-align-center u-text u-text-10">
-                  Sample text. Click to select the text box. Click again or
-                  double click to start editing the text.
-                </p>
-                <a
-                  href="https://nicepage.site"
-                  class="u-align-center u-border-1 u-border-active-palette-2-base u-border-black u-border-hover-palette-2-base u-border-no-left u-border-no-right u-border-no-top u-bottom-left-radius-0 u-bottom-right-radius-0 u-btn u-button-style u-none u-radius-0 u-text-body-color u-text-hover-palette-2-base u-top-left-radius-0 u-top-right-radius-0 u-btn-3"
-                  >learn more</a
-                >
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-    <section
-      class="u-clearfix u-image u-shading u-section-6"
-      id="sec-018f"
-      data-image-width="1620"
-      data-image-height="1080"
-    >
-      <div class="u-clearfix u-sheet u-valign-middle u-sheet-1">
-        <div
-          class="u-clearfix u-expanded-width u-gutter-0 u-layout-wrap u-layout-wrap-1"
-        >
-          <div class="u-layout">
-            <div class="u-layout-row">
-              <div
-                class="u-container-style u-layout-cell u-left-cell u-size-30 u-layout-cell-1"
-              >
-                <div
-                  class="u-container-layout u-valign-middle u-container-layout-1"
-                >
-                  <h2 class="u-text u-text-1">Contact Us</h2>
-                  <p class="u-text u-text-body-alt-color u-text-2">
-                    Ut enim ad minim veniam, quis nostrud exercitation ullamco
-                    laboris nisi ut aliquip ex ea commodo consequat. Duis aute
-                    irure dolor in reprehenderit in voluptate velit esse cillum
-                    dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-                    cupidatat non proident, sunt in culpa qui officia deserunt
-                    mollit anim id est laborum.
-                  </p>
-                  <p class="u-align-left u-text u-text-3">
-                    Images from
-                    <a
-                      href="https://www.freepik.com/photos/man-with-dog"
-                      class="u-border-1 u-border-no-left u-border-no-right u-border-no-top u-border-white u-btn u-button-link u-button-style u-none u-text-body-alt-color u-btn-1"
-                      >Freepik</a
-                    >
-                  </p>
-                  <a
-                    href="https://nicepage.com/joomla-templates"
-                    class="u-active-white u-border-2 u-border-active-white u-border-hover-white u-border-white u-btn u-btn-round u-button-style u-hover-white u-none u-radius-50 u-text-active-black u-text-hover-black u-btn-2"
-                    >Contact Us</a
-                  >
-                </div>
-              </div>
-              <div
-                class="u-container-style u-layout-cell u-right-cell u-size-30 u-layout-cell-2"
-              >
-                <div
-                  class="u-container-layout u-valign-middle u-container-layout-2"
-                >
-                  <div class="u-form u-form-1" >
-                    <form
-                      action="https://forms.nicepagesrv.com/v2/form/process"
-                      class="u-clearfix u-form-spacing-30 u-form-vertical u-inner-form"
-                      style="padding: 10px"
-                      source="email"
-                      name="form"
-                    >
-                      <div
-                        class="u-form-email u-form-group u-form-partition-factor-2"
-                      >
-                        <label
-                          for="email-319a"
-                          class="u-label u-text-body-alt-color u-label-1"
-                          >Email</label
-                        >
-                        <input
-                          type="email"
-                          placeholder="Enter a valid email address"
-                          id="email-319a"
-                          name="email"
-                          class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle"
-                          required=""
-                        />
-                      </div>
-                      <div
-                        class="u-form-group u-form-name u-form-partition-factor-2"
-                      >
-                        <label
-                          for="name-319a"
-                          class="u-label u-text-body-alt-color u-label-2"
-                          >Name</label
-                        >
-                        <input
-                          type="text"
-                          placeholder="Enter your Name"
-                          id="name-319a"
-                          name="name"
-                          class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle"
-                          required=""
-                        />
-                      </div>
-                      <div class="u-form-address u-form-group u-form-group-3">
-                        <label
-                          for="address-452f"
-                          class="u-label u-text-body-alt-color u-label-3"
-                          >Address</label
-                        >
-                        <input
-                          type="text"
-                          placeholder="Enter your address"
-                          id="address-452f"
-                          name="address"
-                          class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle"
-                          required=""
-                        />
-                      </div>
-                      <div class="u-form-group u-form-message">
-                        <label
-                          for="message-319a"
-                          class="u-label u-text-body-alt-color u-label-4"
-                          >Message</label
-                        >
-                        <textarea
-                          placeholder="Enter your message"
-                          rows="4"
-                          cols="50"
-                          id="message-319a"
-                          name="message"
-                          class="u-border-2 u-border-no-left u-border-no-right u-border-no-top u-border-white u-input u-input-rectangle"
-                          required=""
-                        ></textarea>
-                      </div>
-                      <div class="u-align-left u-form-group u-form-submit">
-                        <a
-                          href="#"
-                          class="u-active-white u-border-none u-btn u-btn-round u-btn-submit u-button-style u-hover-white u-palette-2-base u-radius-50 u-btn-3"
-                          >Submit</a
-                        >
-                        <input
-                          type="submit"
-                          value="submit"
-                          class="u-form-control-hidden"
-                        />
-                      </div>
-                      <div class="u-form-send-message u-form-send-success">
-                        Thank you! Your message has been sent.
-                      </div>
-                      <div class="u-form-send-error u-form-send-message">
-                        Unable to send your message. Please fix errors then try
-                        again.
-                      </div>
-                      <input type="hidden" value="" name="recaptchaResponse" />
-                      <input
-                        type="hidden"
-                        name="formServices"
-                        value="bf09b21171dd238c30fcc56f8b2e544a"
-                      />
-                    </form>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
   </ng-container>
 </app-panel>

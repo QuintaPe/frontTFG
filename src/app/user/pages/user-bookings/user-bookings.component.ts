@@ -1,7 +1,12 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, ViewChild, TemplateRef } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '@app/auth/services/auth.service';
+import { CampingService } from '@app/camping/services/camping.service';
+import { Camping } from '@app/core/models/camping';
+import { PopupComponent } from '@app/shared/components/popup/popup.component';
 import { UserService } from '@app/user/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
+import { daysBetweenDates, formatDate, formatNumber } from '@utils/functions';
 
 @Component({
   selector: 'app-user-bookings',
@@ -10,25 +15,71 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class UserBookingsComponent implements OnInit {
-  columns:any = []
-  translate = inject(TranslateService);
-  userService = inject(UserService);
-  authService = inject(AuthService);
+  protected columns:any = []
+  protected translate = inject(TranslateService);
+  protected userService = inject(UserService);
+  protected authService = inject(AuthService);
+  protected dialog = inject(MatDialog);
+  protected campingService = inject(CampingService);
+
+  protected actualBooking: any = null;
+  protected formatDate = formatDate;
+  protected daysBetweenDates = daysBetweenDates;
+
+  protected rating = 0;
+  protected review = '';
+  protected popupRef: any;
+  protected loading = false;
+
+  @ViewChild('popupInfoTemplate') popupInfoTemplate!: TemplateRef<any>;
+  @ViewChild('popupRatingTemplate') popupRatingTemplate!: TemplateRef<any>;
 
   setColumns = () => {
     this.columns = [
       {
-        field: 'name',
+        field: 'camping',
         name: this.translate.instant('campsite.lodging'),
         sort: 'asc',
         sortable: true,
+        preRender: (camping: Camping) => camping.name,
       },
       {
-        field: 'capacity',
-        name: this.translate.instant('campsite.capacity'),
+        field: 'entryDate',
+        name: this.translate.instant('campsite.entryDate'),
         sort: 'asc',
         sortable: true,
-        preRender: (cap: string) => cap,
+        preRender: (entryDate: Date) => formatDate(entryDate),
+      },
+      {
+        field: 'exitDate',
+        name: this.translate.instant('campsite.exitDate'),
+        sort: 'asc',
+        sortable: true,
+        preRender: (exitDate: Date) => formatDate(exitDate),
+      },
+      {
+        field: 'totalCost',
+        name: this.translate.instant('campsite.price'),
+        sort: 'asc',
+        sortable: true,
+        preRender: (price: number) => formatNumber(price, { currency: '€' }),
+      },
+      {
+        type: 'menu',
+        width: 40,
+        buttons: [
+          {
+            icon: 'remove_red_eye',
+            text: this.translate.instant('common.view'),
+            onClick: this.showBookInfo,
+          },
+          {
+            icon: 'star',
+            text: (row: any) => this.translate.instant(row?.relation?.review ? 'campsite.yourReview' : 'campsite.addReview'),
+            onClick: this.ratingCamping,
+            hidden: (row: any) => !row.relation?.review && daysBetweenDates(row.entryDate, row.exitDate) > 7
+          },
+        ],
       },
     ];
   }
@@ -50,4 +101,38 @@ export class UserBookingsComponent implements OnInit {
     })
 
   };
+
+  showBookInfo = (id: string, row: any) => {
+    this.actualBooking = row;
+    this.dialog.open(PopupComponent, {
+      data: {
+        headerText: this.translate.instant('campsite.viewBooking'),
+        template: this.popupInfoTemplate,
+      },
+      width: '80vw',
+    });
+  }
+
+  ratingCamping = (id: string, row: any) => {
+    this.actualBooking = row;
+    this.rating = row.relation?.review?.rating || 1;
+    this.review = row.relation?.review?.review || '';
+    this.popupRef = this.dialog.open(PopupComponent, {
+      data: {
+        headerText: this.translate.instant(row?.relation?.review ? 'campsite.yourReview' : 'campsite.addReview'),
+        template: this.popupRatingTemplate,
+      },
+      width: '80vw',
+    });
+  }
+
+  async sendReview() {
+    this.loading = true;
+    await this.campingService.createCampingRelation(this.actualBooking.camping._id, {
+      review: { rating: this.rating, review: this.review }
+    });
+    this.loading = false;
+    this.popupRef.close();
+  }
 }
+

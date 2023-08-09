@@ -22,17 +22,17 @@
     <h4 class="fw-b">{{ "campsite.bookingData" | translate }}</h4>
     <div class="row booking-info--dates">
       <div class="col-12 col-md-4">
-        <div>{{ "campsite.entryDate" | translate }}</div>
+        <div class="mb-1">{{ "campsite.entryDate" | translate }}</div>
         <h6 *ngIf="!loading" class="fw-b">{{ formatDate(bookingData.entryDate) }}</h6>
         <app-skeleton *ngIf="loading" width="90px" class="mx-auto mt-1"/>
       </div>
       <div class="col-12 col-md-4">
-        <div>{{ "campsite.exitDate" | translate }}</div>
+        <div class="mb-1">{{ "campsite.exitDate" | translate }}</div>
         <h6 *ngIf="!loading" class="fw-b">{{ formatDate(bookingData.exitDate) }}</h6>
         <app-skeleton *ngIf="loading" width="90px" class="mx-auto mt-1" />
       </div>
       <div class="col-12 col-md-4">
-        <div>{{ "campsite.totalNights" | translate }}</div>
+        <div class="mb-1">{{ "campsite.totalNights" | translate }}</div>
         <h6 *ngIf="!loading" class="fw-b">{{ daysBetweenDates(bookingData.exitDate, bookingData.entryDate) }}</h6>
         <app-skeleton *ngIf="loading" width="30px" class="mx-auto mt-1" />
       </div>
@@ -41,15 +41,15 @@
 
   <div class="user-info">
     <h4 class="fw-b">{{ "campsite.managerData" | translate }}</h4>
-    <div class="row mt-4">
-      <div class="col-12 col-md-8">
+    <div class="row">
+      <div class="col-12 col-md-8 mt-4">
         <app-input-text
           [preText]="'common.email' | translate"
           [(value)]="this.manager.email"
           [loading]="loading"
         />
       </div>
-      <div class="col-12 col-md-4">
+      <div class="col-12 col-md-4 mt-4">
         <app-input-text
           type="number"
           [preText]="'user.phone' | translate"
@@ -58,15 +58,15 @@
         />
       </div>
     </div>
-    <div class="row mt-4">
-      <div class="col-12 col-md-4">
+    <div class="row">
+      <div class="col-12 col-md-4 mt-4">
         <app-input-text
           [preText]="'common.name' | translate"
           [(value)]="this.manager.firstname"
           [loading]="loading"
         />
       </div>
-      <div class="col-12 col-md-8">
+      <div class="col-12 col-md-8 mt-4">
         <app-input-text
           [preText]="'user.lastname' | translate"
           [(value)]="this.manager.lastname"

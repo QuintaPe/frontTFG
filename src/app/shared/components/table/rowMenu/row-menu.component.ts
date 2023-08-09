@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef, Input, inject, ChangeDetectorRef, Out
 import { Overlay, OverlayConfig, OverlayRef } from '@angular/cdk/overlay';
 import { CdkPortal, PortalModule } from '@angular/cdk/portal';
 import { Button } from '../table.interface';
-import { NgFor } from '@angular/common';
+import { NgFor, NgIf } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
@@ -10,7 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
     templateUrl: './row-menu.component.html',
     styleUrls: ['./row-menu.component.scss'],
     standalone: true,
-    imports: [MatIconModule, PortalModule, NgFor]
+    imports: [MatIconModule, PortalModule, NgFor, NgIf]
 })
 export class RowMenuComponent {
   @Input() buttons?: Button[] = [];
@@ -31,7 +31,8 @@ export class RowMenuComponent {
     this.hide();
   }
 
-  public showDropdown(): void {
+  public showDropdown(e: Event): void {
+    e.stopPropagation();
     this.overlayRef = this.overlay.create(this.getOverlayConfig());
     this.overlayRef.attach(this.contentTemplate);
     this.overlayRef.backdropClick().subscribe(() => this.hide());
@@ -70,6 +71,14 @@ export class RowMenuComponent {
       hasBackdrop: true,
       backdropClass: 'cdk-overlay-transparent-backdrop',
     });
+  }
+
+  getButtonText(button: any) {
+    return typeof button.text === 'function' ? button.text(this.row): button.text
+  }
+
+  isButtonHidden(button: any) {
+    return typeof button.hidden === 'function' ? button.hidden(this.row) : button?.hidden
   }
 
 }

@@ -1,6 +1,8 @@
 import {
   Component,
   Input,
+  Output,
+  EventEmitter,
   AfterViewInit,
   OnInit,
   Type,
@@ -8,8 +10,6 @@ import {
   SimpleChanges,
   OnChanges,
   signal,
-  inject,
-  ChangeDetectorRef,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
@@ -19,7 +19,7 @@ import { InputSelectComponent } from '../inputs/input-select/input-select.compon
 import { SkeletonComponent } from '../skeleton/skeleton.component';
 import { DynamicIoModule } from 'ng-dynamic-component';
 import { AvatarComponent } from '../Avatar/avatar.component';
-import { LangChangeEvent, TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-table',
@@ -47,6 +47,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() externalInputs: any = {};
   @Input() forceFetch: number = 0;
   @Input() showPagination: boolean = true;
+  @Output() onClickRow = new EventEmitter<any>();
 
   @ViewChild(MatPaginator)
   paginator!: MatPaginator;
@@ -58,9 +59,6 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   loading: boolean = true;
   showFilters: boolean = false;
   rows = signal({ items: [], total: this.pageSize });
-
-  private translate = inject(TranslateService);
-  private cdr = inject(ChangeDetectorRef);
 
   fetchPage = async () => {
     if (this.fetch) {
@@ -132,13 +130,5 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
       auxInputs[key] = this.externalInputs[key];
     })
     return auxInputs;
-  }
-
-  scrollHorizontally(event: WheelEvent) {
-    const container = event.currentTarget as HTMLElement;
-    const delta = event.deltaY;
-    const scrollAmount = 30;
-    container.scrollLeft += (delta > 0 ? scrollAmount : -scrollAmount);
-    event.preventDefault();
   }
 }

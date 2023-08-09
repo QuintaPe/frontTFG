@@ -1,11 +1,23 @@
 @import '_colors.scss';
+@import '_variables.scss';
 
 .camping-location {
   padding: 25px;
-  background-color: $primary;
-  color: white;
+  margin-bottom: 20px;
   .map-container {
-    width: 100%;
+    border-radius: $borderRadiusLight;
+    overflow: hidden;
+    margin-top: 10px;
+    border: 2px solid $primary;
   }
-  margin-bottom: 70px;
+  .camping-location--street {
+    display: flex;
+    align-items: center;
+    color: $text-color;
+    mat-icon {
+      font-size: 18px;
+      color: $text-color;
+      margin-right: 8px;
+    }
+  }
 }

@@ -1,4 +1,4 @@
-<div class="table-responsive" (wheel)="scrollHorizontally($event)">
+<div class="table-responsive">
   <ng-container *ngIf="mode === 'component'">
     <div *ngIf="!loading">
       <ng-template *ngFor="let row of rows().items; let i = index"
@@ -17,7 +17,7 @@
   </ng-container>
 
   <div *ngIf="mode === 'row' && rows().total">
-    <table class="table mb-0" (wheel)="scrollHorizontally($event)">
+    <table class="table mb-0">
       <thead>
         <tr>
           <th
@@ -31,7 +31,7 @@
       </thead>
       <tbody table body>
         <ng-container *ngIf="!loading; else skeletonContainer">
-          <tr *ngFor="let row of rows().items; let i = index">
+          <tr *ngFor="let row of rows().items; let i = index" (click)="onClickRow.emit(row)" [ngClass]="{'cursor-pointer': onClickRow.observed}">
             <td *ngFor="let column of columns">
               <div class="d-flex align-items-center">
                 <ng-container [ngSwitch]="column.type">
@@ -76,7 +76,7 @@
   <div>{{'common.empty' | translate }}</div>
 </div>
 
-<mat-paginator *ngIf="rows().total && showPagination"
+<mat-paginator *ngIf="loading || (rows().total && showPagination)"
   [length]="rows().total"
   [pageIndex]="actualPage"
   [pageSize]="pageSize"
