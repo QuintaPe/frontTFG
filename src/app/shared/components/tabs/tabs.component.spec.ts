@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CampingViewComponent } from './camping-view.component';
+import { TabsComponent } from './tabs.component';
 
-describe('CampingViewComponent', () => {
-  let component: CampingViewComponent;
-  let fixture: ComponentFixture<CampingViewComponent>;
+describe('TabsComponent', () => {
+  let component: TabsComponent;
+  let fixture: ComponentFixture<TabsComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CampingViewComponent ]
+      declarations: [ TabsComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CampingViewComponent);
+    fixture = TestBed.createComponent(TabsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,0 +1,5 @@
+<app-panel [title]="'campsite.bookings' | translate">
+  <!-- <app-tabs [tabs]="tabs" (onTabChange)="setActiveTab($event)"/> -->
+  <app-camping-management-table *ngIf="actualTab === 0" [id]="id" />
+  <app-camping-management-calendar *ngIf="actualTab === 1" [id]="id" />
+</app-panel>

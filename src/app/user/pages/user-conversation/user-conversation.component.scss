@@ -1,0 +1,27 @@
+@import "_colors";
+@import "_variables";
+@import "_breakpoints";
+
+
+.conversation-row {
+  gap: 20px;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid $primary-50;
+  border-radius: $borderRadiusLight;
+  overflow: hidden;
+  cursor: pointer;
+  .conversation-row--header {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    app-skeleton:not(:first-child) {
+      flex: auto;
+    }
+  }
+  .conversation-row--message {
+
+  }
+}

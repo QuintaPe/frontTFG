@@ -14,6 +14,10 @@ export const ADMIN_ROUTES = {
   BOOKINGS: { path: 'bookings', url: 'admin/bookings'},
   USERS: { path: 'users', url: 'admin/users'},
   PROFILE: { path: 'profile', url: 'admin/profile' },
+  CONVERSATIONS: { path: 'conversations', url: 'admin/conversations'},
+  CONVERSATION: { path: 'conversations/:id', url: 'admin/conversations/:id'},
+
+  setConversation: (id: string) => `admin/conversation/${id}`,
 }
 
 export const CAMPINGS_ROUTES = {
@@ -36,5 +40,9 @@ export const USER_ROUTES = {
   PROFILE: { path: 'profile', url: 'user/profile' },
   BOOKINGS: { path: 'bookings', url: 'user/bookings' },
   FAVORITE_CAMPINGS: { path: 'favorites', url: 'user/favorites'},
+  CONVERSATIONS: { path: 'conversations', url: 'user/conversations'},
+  CONVERSATION: { path: 'conversations/:id', url: 'user/conversations/:id'},
+
+  setConversation: (id: string) => `user/conversation/${id}`,
 }
 

@@ -8,7 +8,7 @@
           (click)="handleClick(button)"
           *ngIf="!isButtonHidden(button)"
         >
-          <mat-icon>{{ button.icon }}</mat-icon>
+          <span class="material-icons-outlined">{{ button.icon }}</span>
           {{ getButtonText(button) }}
         </div>
       </div>

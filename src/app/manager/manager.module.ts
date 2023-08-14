@@ -20,6 +20,8 @@ import { FormatDatePipe } from '@shared/pipes/format-date.pipe';
 import { InputTextAreaComponent } from '@shared/components/inputs/input-text-area/input-text-area.component';
 import { InputFileZoneComponent } from '@shared/components/inputs/input-file-zone/input-file-zone.component';
 import { SkeletonComponent } from '@shared/components/skeleton/skeleton.component';
+import { TabsComponent } from '@shared/components/tabs/tabs.component';
+import { AvatarComponent } from '@shared/components/Avatar/avatar.component';
 
 // Components
 import { EditAccountComponent } from './pages/edit-account/edit-account.component';
@@ -27,10 +29,13 @@ import { MyCampingsComponent } from './pages/camping/my-campings.component';
 import { CreateCampingComponent } from './pages/create-camping/create-camping.component';
 import { CreateCampingLocationComponent } from './pages/create-camping/components/create-camping-location/create-camping-location.component';
 import { CreateCampingLodgingsComponent } from './pages/create-camping/components/create-camping-lodgings/create-camping-lodgings.component';
-import { CampingViewComponent } from './pages/camping-view/camping-view.component';
+import { CampingManagementComponent } from './pages/camping-management/camping-management.component';
+import { CampingManagementTableComponent } from './pages/camping-management/components/camping-management-table/camping-management-table.component';
+import { CampingManagementCalendarComponent } from './pages/camping-management/components/camping-management-calendar/camping-management-calendar.component';
 
 // Routing module
 import { ManagerRoutingModule } from './manager-routing.module';
+import { PopupService } from '@app/shared/components/popup/popup.service';
 
 @NgModule({
   declarations: [
@@ -39,7 +44,10 @@ import { ManagerRoutingModule } from './manager-routing.module';
     CreateCampingComponent,
     CreateCampingLocationComponent,
     CreateCampingLodgingsComponent,
-    CampingViewComponent,
+
+    CampingManagementComponent,
+    CampingManagementTableComponent,
+    CampingManagementCalendarComponent,
   ],
   imports: [
     ManagerRoutingModule,
@@ -63,7 +71,9 @@ import { ManagerRoutingModule } from './manager-routing.module';
     InputAvatarComponent,
     OverlayModule,
     ProfileComponent,
+    TabsComponent,
+    AvatarComponent,
   ],
-  providers: [DialogService]
+  providers: [DialogService, PopupService]
 })
 export class ManagerModule { }

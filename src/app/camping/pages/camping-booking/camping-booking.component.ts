@@ -64,7 +64,8 @@ export class CampingBookingComponent implements OnInit {
       await this.campingService.createCampingBooking(this.camping._id, {
         ...this.bookingData,
         manager: this.manager,
-        paymentMethod: "VISA"
+        paymentMethod: "VISA",
+        status: "pending",
       });
       await this.dialogService.open('success', this.translate.instant('campsite.bookedSuccessfully'));
       this.router.navigateByUrl(USER_ROUTES.BOOKINGS.url)

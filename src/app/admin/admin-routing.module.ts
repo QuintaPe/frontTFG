@@ -5,12 +5,16 @@ import { AdminBookingsComponent } from './pages/admin-bookings/admin-bookings.co
 import { AdminUsersComponent } from './pages/admin-users/admin-users.component';
 import { AdminProfileComponent } from './pages/admin-profile/admin-profile.component';
 import { ADMIN_ROUTES } from '@app/core/routes';
+import { AdminConversationsComponent } from './pages/admin-conversations/admin-conversations.component';
+import { UserConversationComponent } from '@app/user/pages/user-conversation/user-conversation.component';
 
 const {
   CAMPINGS,
   BOOKINGS,
   USERS,
   PROFILE,
+  CONVERSATIONS,
+  CONVERSATION,
 } = ADMIN_ROUTES;
 
 
@@ -23,6 +27,8 @@ const routes: Routes = [
       { path: BOOKINGS.path, component: AdminBookingsComponent },
       { path: USERS.path, component: AdminUsersComponent },
       { path: PROFILE.path, component: AdminProfileComponent },
+      { path: CONVERSATIONS.path, component: AdminConversationsComponent },
+      { path: CONVERSATION.path, component: UserConversationComponent },
       { path: '**', redirectTo: PROFILE.path },
     ],
   }

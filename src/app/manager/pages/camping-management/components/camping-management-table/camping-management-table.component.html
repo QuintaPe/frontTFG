@@ -1,23 +1,21 @@
-<app-panel [title]="'user.myBookings' | translate">
-  <app-table
-    [columns]="columns"
-    [fetch]="getUserBookings"
-    [pageSize]="0"
-    [showPagination]="false"
-    [forceFetch]="tableFlagRefresh"
-    (onClickRow)="showBookInfo(null, $event)"
-  />
-</app-panel>
+
+<app-table
+  [columns]="columns"
+  [fetch]="fetchCampingBookings"
+  [forceFetch]="tableFlagRefresh"
+  (onClickRow)="showBookInfo(null, $event)"
+/>
 
 <ng-template #popupInfoTemplate>
-  <app-camping-row
-    [_id]="actualBooking.camping._id"
-    [name]="actualBooking.camping.name"
-    [description]="actualBooking.camping.description"
-    [location]="actualBooking.camping.location"
-    [images]="actualBooking.camping.images"
-    [relation]="actualBooking.relation"
-  />
+  <div class="d-flex align-items-center mb-3">
+    <app-avatar
+      [title]="getFullName(actualBooking?.user?.attributes)"
+      [src]="actualBooking?.user?.attributes?.avatar?._id"
+      [size]="40"
+      class="me-2"
+    />
+    <div class="fw-b">{{ getFullName(actualBooking?.user?.attributes) }}</div>
+  </div>
 
   <div class="booking-info">
     <h4 class="fw-b">{{ "campsite.bookingData" | translate }}</h4>
@@ -72,25 +70,5 @@
         />
       </div>
     </div>
-  </div>
-</ng-template>
-
-<ng-template #popupRatingTemplate>
-  <div class="mb-1">{{ "campsite.rating" | translate }}</div>
-  <app-input-stars [(value)]="rating" [disabled]="actualBooking?.relation?.review"
-  />
-  <hr>
-  <app-input-text-area
-    [preText]="'campsite.review' | translate"
-    [placeholder]="'campsite.review' | translate"
-    [(value)]="review"
-    [isDisabled]="actualBooking.relation?.review"
-  />
-  <div *ngIf="!actualBooking.relation?.review" class="buttons mt-3">
-    <app-button
-    [text]="'common.send' | translate"
-    [loading]="loading"
-    (onClick)="sendReview()"
-    />
   </div>
 </ng-template>

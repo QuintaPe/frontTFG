@@ -58,42 +58,42 @@
       }
     }
   }
-}
+  .camping-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    padding: 25px;
+    .card {
+      border-radius: $borderRadiusLight;
+      box-shadow: $boxShadowLight;
+      padding: 20px;
+      width: 100%;
+      text-align: center;
+      cursor: pointer;
+      .card-content {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
 
-.camping-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 20px;
-  padding: 25px;
-  .card {
-    border-radius: $borderRadiusLight;
-    box-shadow: $boxShadowLight;
-    padding: 20px;
-    width: 100%;
-    text-align: center;
-    cursor: pointer;
-    .card-content {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      gap: 10px;
+        p {
+          color: #666;
+          font-size: 14px;
+        }
 
-      p {
-        color: #666;
-        font-size: 14px;
-      }
-
-      span {
-        font-size: 14px;
-        text-align: right;
-        transition: text-decoration 0.3s;
-        cursor: pointer;
-        &:hover {
-          text-decoration: underline;
+        span {
+          font-size: 14px;
+          text-align: right;
+          transition: text-decoration 0.3s;
+          cursor: pointer;
+          &:hover {
+            text-decoration: underline;
+          }
         }
       }
     }
   }
 }
+

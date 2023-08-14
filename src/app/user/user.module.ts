@@ -26,12 +26,19 @@ import { UserBookingsComponent } from './pages/user-bookings/user-bookings.compo
 
 // Routing module
 import { UserRoutingModule } from './user-routing.module';
+import { UserConversationsComponent } from './pages/user-conversations/user-conversations.component';
+import { ConversationRowComponent } from './pages/user-conversations/conversation-row/conversation-row.component';
+import { UserConversationComponent } from './pages/user-conversation/user-conversation.component';
+import { AvatarComponent } from '@app/shared/components/Avatar/avatar.component';
+import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.component';
 
 @NgModule({
   declarations: [
     EditAccountComponent,
     UserBookingsComponent,
     CampingsFavoritesComponent,
+    UserConversationsComponent,
+    UserConversationComponent,
   ],
   imports: [
     UserRoutingModule,
@@ -52,7 +59,10 @@ import { UserRoutingModule } from './user-routing.module';
     ProfileComponent,
     CampingRowComponent,
     InputStarsComponent,
-    InputTextAreaComponent
+    InputTextAreaComponent,
+    ConversationRowComponent,
+    AvatarComponent,
+    SkeletonComponent,
   ],
   providers: [DialogService],
 })

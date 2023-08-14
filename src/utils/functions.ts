@@ -80,3 +80,6 @@ export function formatNumber(x: number | string, opts: any = {}) {
   return formatNumber + (opts.currency || '');
 }
 
+export function getFullName(user: any) {
+  return `${user?.firstname || ''} ${user?.lastname || ''}`;
+}

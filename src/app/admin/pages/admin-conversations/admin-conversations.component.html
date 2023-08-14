@@ -1,0 +1,10 @@
+<app-panel class="create-camping" [title]="'user.internalMail' | translate">
+  <app-table
+    mode="component"
+    [rowComponent]="messageRowType"
+    [componentInputs]="componentInputs"
+    [externalInputs]="externalInputs"
+    [fetch]="getConversations"
+    [pageSize]="10"
+  />
+</app-panel>

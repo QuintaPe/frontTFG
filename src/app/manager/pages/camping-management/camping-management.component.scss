@@ -1,0 +1,21 @@
+@import "_mixins";
+@import "_variables.scss";
+
+.booking-info,
+.user-info {
+  @include box;
+  padding: 30px;
+  margin-bottom: 30px;
+}
+
+
+.camping-info {
+  display: flex;
+  align-items: center;
+}
+
+.booking-info {
+  .booking-info--dates {
+    text-align: center;
+  }
+}

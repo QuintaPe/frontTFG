@@ -1,0 +1,8 @@
+<ul class="nav nav-tabs">
+  <li class="nav-item"  *ngFor="let tab of tabs; let i = index" (click)="setTab(i)">
+    <a class="nav-link " [ngClass]="activatedTab == i ? 'active': ''" >
+      {{ tab }}
+    </a>
+  </li>
+</ul>
+

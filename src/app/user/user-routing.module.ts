@@ -3,12 +3,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { EditAccountComponent } from './pages/edit-account/edit-account.component';
 import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
 import { CampingsFavoritesComponent } from './pages/camping-favorites/campings-favorites.component';
+import { UserConversationsComponent } from './pages/user-conversations/user-conversations.component';
 import { USER_ROUTES } from '@app/core/routes';
+import { UserConversationComponent } from './pages/user-conversation/user-conversation.component';
 
 const {
   PROFILE,
   BOOKINGS,
   FAVORITE_CAMPINGS,
+  CONVERSATIONS,
+  CONVERSATION,
 } = USER_ROUTES;
 
 const routes: Routes = [
@@ -19,6 +23,8 @@ const routes: Routes = [
       { path: PROFILE.path, component: EditAccountComponent },
       { path: BOOKINGS.path, component: UserBookingsComponent },
       { path: FAVORITE_CAMPINGS.path, component: CampingsFavoritesComponent },
+      { path: CONVERSATIONS.path, component: UserConversationsComponent },
+      { path: CONVERSATION.path, component: UserConversationComponent },
       { path: '**', redirectTo: '/' },
     ],
   },

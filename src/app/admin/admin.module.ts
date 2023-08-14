@@ -29,6 +29,7 @@ import { AdminProfileComponent } from './pages/admin-profile/admin-profile.compo
 
 // Routing module
 import { AdminRoutingModule } from './admin-routing.module';
+import { AdminConversationsComponent } from './pages/admin-conversations/admin-conversations.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { AdminRoutingModule } from './admin-routing.module';
     AdminBookingsComponent,
     AdminUsersComponent,
     AdminProfileComponent,
+    AdminConversationsComponent,
   ],
   imports: [
     AdminRoutingModule,

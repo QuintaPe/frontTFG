@@ -9,11 +9,12 @@
     "modifyProfile": "Modificar datos del perfil",
     "myBookings": "Mis reservas",
     "myCampings": "Mis campamentos",
+    "internalMail": "Correo interno",
     "role": "Rol",
     "roles" :{
       "user": "Usuario",
       "manager": "Manager",
-      "admin": "Admin"
+      "admin": "Administrador"
     }
   },
   "campsite": {
@@ -58,6 +59,8 @@
     "unit": "Unidad",
     "units": "Unidades",
     "confirmDeleteBooking": "¿Esta seguro que desea elimina esta reserva?",
+    "confirmCancelBooking": "¿Esta seguro que desea cancelar esta reserva?",
+    "cancelBooking": "Cancelar reserva",
     "entryDate": "Fecha de entrada",
     "exitDate": "Fecha de salida",
     "totalNights": "Numero de noches",
@@ -65,6 +68,7 @@
     "managerData": "Datos del manager",
     "reviews": "Valoraciones",
     "review": "Valoración",
+    "moreReviews": "Mas Valoraciones",
     "addReview": "Añadir valoración",
     "yourReview": "Tu valoración",
     "gallery": "Galería",
@@ -82,7 +86,13 @@
     "price": "Precio",
     "viewBooking": "Ver reserva",
     "reviewCamping": "Valorar el campamento",
-    "rating": "Puntuación"
+    "rating": "Puntuación",
+    "status": "Estado",
+    "pending": "Pendiente",
+    "accepted": "Aceptada",
+    "rejected": "Rechazada",
+    "cancelled": "Cancelada",
+    "sendMessage": "Enviar mensaje"
   },
   "auth": {
     "login": "Inicia sesión",
@@ -158,6 +168,8 @@
     "selected": "Seleccionados",
     "unsavedChanges": "Tienes cambios sin guardar. ¿Estas seguro de que quieres salir?",
     "yes": "Si",
-    "no": "No"
+    "no": "No",
+    "table": "Tabla",
+    "calendar": "Calendario"
   }
 }

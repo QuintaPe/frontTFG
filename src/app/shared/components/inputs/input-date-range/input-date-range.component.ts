@@ -8,7 +8,7 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import { AuthService } from '@app/auth/services/auth.service';
 import { DateAdapter, MAT_DATE_FORMATS } from '@angular/material/core';
-import * as moment from 'moment';
+import moment from 'moment';
 import 'moment/locale/es';
 import { CommonModule } from '@angular/common';
 

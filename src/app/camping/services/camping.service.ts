@@ -68,6 +68,10 @@ export class CampingService {
     return fetch('DELETE', `campings/${id}/bookings/${booking}`)
   }
 
+  async changeBookingStatus(id: string, booking: string, status: string) {
+    return fetch('PUT', `campings/${id}/bookings/${booking}/status/${status}`)
+  }
+
   async getAvailableLodgings(id: string, entryDate: Date, exitDate: Date, opts: Object) {
     return fetch('GET', `campings/${id}/lodgings/availables`, {
       entryDate, exitDate, opts,

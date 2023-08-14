@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { AuthService } from '@app/auth/services/auth.service';
 import { CampingService } from '@app/camping/services/camping.service';
 import { Camping } from '@app/core/models/camping';
+import { DialogService } from '@app/shared/components/dialog/dialog.service';
 import { PopupComponent } from '@app/shared/components/popup/popup.component';
 import { UserService } from '@app/user/services/user.service';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,6 +21,7 @@ export class UserBookingsComponent implements OnInit {
   protected userService = inject(UserService);
   protected authService = inject(AuthService);
   protected dialog = inject(MatDialog);
+  private dialogService = inject(DialogService);
   protected campingService = inject(CampingService);
 
   protected actualBooking: any = null;
@@ -30,6 +32,7 @@ export class UserBookingsComponent implements OnInit {
   protected review = '';
   protected popupRef: any;
   protected loading = false;
+  protected tableFlagRefresh: number = 0;
 
   @ViewChild('popupInfoTemplate') popupInfoTemplate!: TemplateRef<any>;
   @ViewChild('popupRatingTemplate') popupRatingTemplate!: TemplateRef<any>;
@@ -65,6 +68,13 @@ export class UserBookingsComponent implements OnInit {
         preRender: (price: number) => formatNumber(price, { currency: '€' }),
       },
       {
+        field: 'status',
+        name: this.translate.instant('campsite.status'),
+        sort: 'asc',
+        sortable: true,
+        preRender: (status: string) => this.translate.instant('campsite.' + status),
+      },
+      {
         type: 'menu',
         width: 40,
         buttons: [
@@ -74,7 +84,13 @@ export class UserBookingsComponent implements OnInit {
             onClick: this.showBookInfo,
           },
           {
-            icon: 'star',
+            icon: 'cancel',
+            text: this.translate.instant('campsite.cancelBooking'),
+            onClick: this.cancelBooking,
+            hidden: (row: any) => row.status === 'cancelled'
+          },
+          {
+            icon: 'star_outline',
             text: (row: any) => this.translate.instant(row?.relation?.review ? 'campsite.yourReview' : 'campsite.addReview'),
             onClick: this.ratingCamping,
             hidden: (row: any) => !row.relation?.review && daysBetweenDates(row.entryDate, row.exitDate) > 7
@@ -111,6 +127,20 @@ export class UserBookingsComponent implements OnInit {
       },
       width: '80vw',
     });
+  }
+
+  cancelBooking = async (id: string, row: any) => {
+    const confirmed = await this.dialogService.open('confirmDanger', this.translate.instant('campsite.confirmCancelBooking'));
+    if (confirmed) {
+      const ref = this.dialogService.openLoading();
+      try {
+        await this.campingService.changeBookingStatus(row.camping._id, id, 'cancelled');
+        ref.close();
+        this.tableFlagRefresh += 1;
+      } catch (err) {
+        ref.close();
+      }
+    }
   }
 
   ratingCamping = (id: string, row: any) => {
