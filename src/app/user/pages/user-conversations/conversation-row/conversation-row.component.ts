@@ -18,7 +18,7 @@ import { getFullName } from '@utils/functions';
 export class ConversationRowComponent implements OnInit {
   @Input() _id = '';
   @Input() participants:any[] = [];
-  @Input() modelId:any[] = [];
+  @Input() modelId:string = '';
   @Input() lastMessage:any;
   @Input() lastMessageSeen:any;
   @Input() loading = false;
@@ -32,6 +32,7 @@ export class ConversationRowComponent implements OnInit {
     const aux = this.participants.find(par => par.id !== this.modelId);
     this.type = aux?.type;
     this.receiver = aux?.id;
+    console.log(this.modelId)
   }
 
   get receiverName() {
@@ -46,6 +47,15 @@ export class ConversationRowComponent implements OnInit {
       return this.receiver ? this. receiver.attributes?.avatar?._id : null
     }
     return this.receiver?.images?.[0]?._id
+  }
+
+  get haveUnread() {
+    if (this.lastMessage) {
+      const lastSeenDate = this.lastMessageSeen[this.modelId || 'admin'];
+      console.log(typeof this.lastMessage.createdAt, new Date(lastSeenDate) < new Date(this.lastMessage.createdAt))
+      return !lastSeenDate || new Date(lastSeenDate) < new Date(this.lastMessage.createdAt);
+    }
+    return false;
   }
 }
 

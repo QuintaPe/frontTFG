@@ -11,6 +11,7 @@
   border-radius: $borderRadiusLight;
   overflow: hidden;
   cursor: pointer;
+  position: relative;
   .conversation-row--header {
     display: flex;
     gap: 20px;
@@ -23,5 +24,14 @@
   }
   .conversation-row--message {
 
+  }
+  .unread-circle {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: $primary;
+    border-radius: 50%;
+    top: 5px;
+    right: 5px;
   }
 }

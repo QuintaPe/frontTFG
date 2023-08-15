@@ -10,6 +10,7 @@
   <div class="conversation-row--message">
     {{ lastMessage?.message }}
   </div>
+  <div *ngIf="haveUnread" class="unread-circle"></div>
 </div>
 
 <div class="conversation-row" *ngIf="loading">

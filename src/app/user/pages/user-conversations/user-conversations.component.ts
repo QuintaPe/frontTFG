@@ -18,7 +18,7 @@ export class UserConversationsComponent {
   private router = inject(Router);
 
   protected messageRowType: Type<any> = ConversationRowComponent
-  protected componentInputs = ['_id', 'participants'];
+  protected componentInputs = ['_id', 'participants', 'lastMessage', 'lastMessageSeen'];
   protected externalInputs = { modelId: this.authService.user._id};
 
   startChatWithAdmin = async () => {
