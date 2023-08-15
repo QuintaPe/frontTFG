@@ -20,7 +20,7 @@ import { InputTextAreaComponent } from '@shared/components/inputs/input-text-are
 import { CampingRowComponent } from '@app/camping/components/camping-row/camping-row.component';
 
 // Components
-import { EditAccountComponent } from './pages/edit-account/edit-account.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { CampingsFavoritesComponent } from './pages/camping-favorites/campings-favorites.component';
 import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
 
@@ -34,7 +34,7 @@ import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.comp
 
 @NgModule({
   declarations: [
-    EditAccountComponent,
+    UserProfileComponent,
     UserBookingsComponent,
     CampingsFavoritesComponent,
     UserConversationsComponent,

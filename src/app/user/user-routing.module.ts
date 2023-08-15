@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EditAccountComponent } from './pages/edit-account/edit-account.component';
+import { UserProfileComponent } from './pages/user-profile/user-profile.component';
 import { UserBookingsComponent } from './pages/user-bookings/user-bookings.component';
 import { CampingsFavoritesComponent } from './pages/camping-favorites/campings-favorites.component';
 import { UserConversationsComponent } from './pages/user-conversations/user-conversations.component';
@@ -20,7 +20,7 @@ const routes: Routes = [
     path: '',
     loadComponent: () => import('../core/components/left-menu/left-menu.component').then((m) => m.LeftMenuComponent),
     children: [
-      { path: PROFILE.path, component: EditAccountComponent },
+      { path: PROFILE.path, component: UserProfileComponent },
       { path: BOOKINGS.path, component: UserBookingsComponent },
       { path: FAVORITE_CAMPINGS.path, component: CampingsFavoritesComponent },
       { path: CONVERSATIONS.path, component: UserConversationsComponent },

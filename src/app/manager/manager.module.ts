@@ -36,6 +36,7 @@ import { CampingManagementCalendarComponent } from './pages/camping-management/c
 // Routing module
 import { ManagerRoutingModule } from './manager-routing.module';
 import { PopupService } from '@app/shared/components/popup/popup.service';
+import { ManagerConversationsComponent } from './pages/manager-conversations/manager-conversations.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { PopupService } from '@app/shared/components/popup/popup.service';
     CampingManagementComponent,
     CampingManagementTableComponent,
     CampingManagementCalendarComponent,
+    ManagerConversationsComponent,
   ],
   imports: [
     ManagerRoutingModule,

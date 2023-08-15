@@ -1,0 +1,18 @@
+<app-panel class="create-camping" [title]="'user.internalMail' | translate">
+  <div class="buttons mb-4">
+    <app-button
+      icon="add"
+      [text]="'campsite.createCampsite' | translate"
+      (onClick)="startChatWithAdmin()"
+      color="secondary"
+    />
+  </div>
+  <app-table
+    mode="component"
+    [rowComponent]="messageRowType"
+    [componentInputs]="componentInputs"
+    [externalInputs]="externalInputs"
+    [fetch]="getConversations"
+    [pageSize]="5"
+  />
+</app-panel>

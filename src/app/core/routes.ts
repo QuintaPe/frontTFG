@@ -1,12 +1,25 @@
+export const USER_ROUTES = {
+  PROFILE: { path: 'profile', url: 'user/profile' },
+  BOOKINGS: { path: 'bookings', url: 'user/bookings' },
+  FAVORITE_CAMPINGS: { path: 'favorites', url: 'user/favorites'},
+  CONVERSATIONS: { path: 'conversations', url: 'user/conversations'},
+  CONVERSATION: { path: 'conversations/:id', url: 'user/conversations/:id'},
+
+  setConversation: (id: string) => `user/conversation/${id}`,
+}
+
 export const MANAGER_ROUTES = {
   CAMPINGS: { path: 'campings', url: 'manager/campings'},
   NEW_CAMPING: { path: 'campings/new', url: 'manager/campings/new'},
   VIEW_CAMPING: { path: 'campings/:id', url: 'manager/campings/:id'},
   EDIT_CAMPING: { path: 'campings/:id/edit', url: 'manager/campings/:id/edit'},
   PROFILE: { path: 'profile', url: 'manager/profile' },
+  CONVERSATIONS: { path: 'conversations', url: 'manager/conversations'},
+  CONVERSATION: { path: 'conversations/:id', url: 'manager/conversations/:id'},
 
   setViewCamping: (id: string) => `manager/campings/${id}`,
   setEditCamping: (id: string) => `manager/campings/${id}/edit`,
+  setConversation: (id: string) => `manager/conversation/${id}`,
 }
 
 export const ADMIN_ROUTES = {
@@ -35,14 +48,3 @@ export const AUTH_ROUTES = {
   SIGNUP_MANAGER: { path: 'manager/signup', url: 'auth/manager/signup' },
   LOGOUT: { path: 'logout', url: 'auth/logout' },
 }
-
-export const USER_ROUTES = {
-  PROFILE: { path: 'profile', url: 'user/profile' },
-  BOOKINGS: { path: 'bookings', url: 'user/bookings' },
-  FAVORITE_CAMPINGS: { path: 'favorites', url: 'user/favorites'},
-  CONVERSATIONS: { path: 'conversations', url: 'user/conversations'},
-  CONVERSATION: { path: 'conversations/:id', url: 'user/conversations/:id'},
-
-  setConversation: (id: string) => `user/conversation/${id}`,
-}
-

@@ -14,6 +14,7 @@ export class UserConversationComponent implements OnInit {
   protected messages:any = Array(10).fill({ sender: null, loading: true });
   protected message = '';
   protected loading = true;
+  protected sending = false;
 
   private conversationService = inject(ConversationService);
   protected getFullName = getFullName;
@@ -27,8 +28,11 @@ export class UserConversationComponent implements OnInit {
   }
 
   async sendMessage() {
+    this.sending = true;
     const auxMessage = await this.conversationService.sendMessage(this.id, this.message);
     this.messages.unshift(auxMessage);
+    this.message = '';
+    this.sending = false;
   }
 }
 

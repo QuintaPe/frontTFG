@@ -3,15 +3,30 @@
     [preText]="'campsite.sendMessage' | translate"
     [placeholder]="'campsite.sendMessage' | translate"
     [(value)]="message"
-    [loading]="loading"
+    [loading]="loading || sending"
   />
   <div class="buttons mt-1">
     <app-button
       [text]="'common.send' | translate"
       (onClick)="sendMessage()"
-      [loading]="loading"
+      [loading]="loading || sending"
     />
   </div>
+
+  <div class="conversation-row mt-3" *ngIf="sending">
+    <div class="conversation-row--header">
+      <app-skeleton width="40px" height="40px" />
+      <div class="d-flex flex-column">
+        <app-skeleton width="50%" />
+        <app-skeleton class="mt-1" width="140px" height="12px" />
+      </div>
+    </div>
+    <div class="conversation-row--message">
+      <app-skeleton class="mb-1" width="100%" />
+      <app-skeleton class="mb-1" width="70%" />
+    </div>
+  </div>
+
   <div *ngFor="let prevMessage of messages" class="mt-3">
     <div class="conversation-row" *ngIf="!loading">
       <div class="conversation-row--header">
