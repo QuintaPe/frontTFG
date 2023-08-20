@@ -19,6 +19,7 @@ export class ConversationRowComponent implements OnInit {
   @Input() _id = '';
   @Input() participants:any[] = [];
   @Input() modelId:string = '';
+  @Input() subject:any;
   @Input() lastMessage:any;
   @Input() lastMessageSeen:any;
   @Input() loading = false;

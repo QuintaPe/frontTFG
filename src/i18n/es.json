@@ -92,7 +92,8 @@
     "accepted": "Aceptada",
     "rejected": "Rechazada",
     "cancelled": "Cancelada",
-    "sendMessage": "Enviar mensaje"
+    "sendMessage": "Enviar mensaje",
+    "campingManagement": "Gestión del campamento"
   },
   "auth": {
     "login": "Inicia sesión",
@@ -120,6 +121,11 @@
   "input": {
     "placeholderFileZone": "Arrastre los archivos o haga click en la zona marcada",
     "enterYourAvatar": "Introduce tu avatar"
+  },
+  "internalMail": {
+    "chatWithAdmin": "Chat con un administrador",
+    "subject": "Asunto",
+    "message": "Mensaje"
   },
   "errors": {
     "required": "El campo {{ field }} no puede estar vacío",

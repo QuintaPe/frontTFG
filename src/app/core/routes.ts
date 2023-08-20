@@ -5,7 +5,7 @@ export const USER_ROUTES = {
   CONVERSATIONS: { path: 'conversations', url: 'user/conversations'},
   CONVERSATION: { path: 'conversations/:id', url: 'user/conversations/:id'},
 
-  setConversation: (id: string) => `user/conversation/${id}`,
+  setConversation: (id: string) => `user/conversations/${id}`,
 }
 
 export const MANAGER_ROUTES = {
@@ -19,7 +19,7 @@ export const MANAGER_ROUTES = {
 
   setViewCamping: (id: string) => `manager/campings/${id}`,
   setEditCamping: (id: string) => `manager/campings/${id}/edit`,
-  setConversation: (id: string) => `manager/conversation/${id}`,
+  setConversation: (id: string) => `manager/conversations/${id}`,
 }
 
 export const ADMIN_ROUTES = {
@@ -30,7 +30,7 @@ export const ADMIN_ROUTES = {
   CONVERSATIONS: { path: 'conversations', url: 'admin/conversations'},
   CONVERSATION: { path: 'conversations/:id', url: 'admin/conversations/:id'},
 
-  setConversation: (id: string) => `admin/conversation/${id}`,
+  setConversation: (id: string) => `admin/conversations/${id}`,
 }
 
 export const CAMPINGS_ROUTES = {

@@ -9,6 +9,11 @@
   </div>
   <div class="right-buttons">
     <app-language-selector />
+    <span *ngIf="authService.user" class="material-icons-outlined mail-icon"
+    [routerLink]="[authService.user.role, 'conversations']"
+    >
+    mail
+    </span>
     <div class="d-flex align-items-center" *ngIf="!authService.user">
       <app-button
         text="Iniciar Sesión"

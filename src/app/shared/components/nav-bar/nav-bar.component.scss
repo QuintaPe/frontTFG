@@ -24,6 +24,17 @@
 
   .right-buttons {
     display: flex;
+    align-items: center;
+    .mail-icon {
+      color: $primary-icon;
+      margin-right: 15px;
+      cursor: pointer;
+      padding: 5px;
+      &:hover {
+        background-color: $primary-15;
+        border-radius: 50%;
+      }
+    }
     .profile-dropdown {
       position: relative;
 

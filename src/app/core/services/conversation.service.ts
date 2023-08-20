@@ -6,7 +6,8 @@ import { fetch } from "@utils/api";
 })
 
 export class ConversationService {
-  getConversations(type: string, id: string, opts: any) {
+  getConversations(type: string, id: string, status: string, opts: any) {
+    opts.filters.status = status
     return fetch('GET', 'conversations', { type, id, opts })
   }
 
@@ -18,8 +19,8 @@ export class ConversationService {
     return fetch('GET', `conversations/${id}`)
   }
 
-  sendMessage(id: string, message: string) {
-    return fetch('POST', `conversations/${id}`, { message })
+  sendMessage(id: string, subject: string, message: string) {
+    return fetch('POST', `conversations/${id}`, { subject, message })
   }
 
 }

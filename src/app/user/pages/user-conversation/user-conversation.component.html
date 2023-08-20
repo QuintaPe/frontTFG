@@ -1,7 +1,15 @@
 <app-panel class="conversation" [title]="'user.internalMail' | translate">
+  <app-input-text
+    class="mb-3"
+    [preText]="'internalMail.subject' | translate"
+    [placeholder]="'internalMail.subject' | translate"
+    [(value)]="subject"
+    [loading]="loading || sending"
+    [isDisabled]="disabledSubject"
+  />
   <app-input-text-area
-    [preText]="'campsite.sendMessage' | translate"
-    [placeholder]="'campsite.sendMessage' | translate"
+    [preText]="'internalMail.message' | translate"
+    [placeholder]="'internalMail.message' | translate"
     [(value)]="message"
     [loading]="loading || sending"
   />

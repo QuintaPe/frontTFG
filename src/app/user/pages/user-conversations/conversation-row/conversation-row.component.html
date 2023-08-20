@@ -2,10 +2,13 @@
   <div class="conversation-row--header">
     <app-avatar
       [title]="receiverName"
-      [size]="40"
+      [size]="45"
       [src]="receiverAvatar"
     />
-    {{ receiverName }}
+    <div>
+      <div class="fw-b">{{ subject }}</div>
+      <div class="fs-sm fc-secondary">{{ receiverName }}</div>
+    </div>
   </div>
   <div class="conversation-row--message">
     {{ lastMessage?.message }}

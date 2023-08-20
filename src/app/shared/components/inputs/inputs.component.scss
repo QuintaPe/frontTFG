@@ -111,9 +111,7 @@
   }
 
   &.disabled {
-    input, .icon {
-      background-color: #EFEAD8CC;
-    }
+    background-color: #EFEAD8CC !important;
   }
 
   &:not(.pretext) {

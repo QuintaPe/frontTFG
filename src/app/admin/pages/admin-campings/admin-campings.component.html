@@ -1,6 +1,7 @@
 <app-panel class="create-camping" [title]="'campsite.campsites' | translate">
   <app-table
     [fetch]="getCampings"
-    [pageSize]="5"
+    [columns]="columns"
+    [pageSize]="10"
   />
 </app-panel>

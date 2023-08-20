@@ -1,6 +1,9 @@
 import { Component, inject, ViewChild, TemplateRef, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { User } from '@app/core/models/user';
+import { ADMIN_ROUTES } from '@app/core/routes';
+import { ConversationService } from '@app/core/services/conversation.service';
 import { DialogService } from '@app/shared/components/dialog/dialog.service';
 import { PopupComponent } from '@app/shared/components/popup/popup.component';
 import { UserService } from '@app/user/services/user.service';
@@ -18,10 +21,12 @@ export class AdminUsersComponent implements OnInit {
   columns: any;
 
   private userService = inject(UserService);
+  private conversationService = inject(ConversationService);
   private translate = inject(TranslateService);
   private dialogService = inject(DialogService);
   protected dialog = inject(MatDialog);
   public dialogRef: MatDialogRef<PopupComponent>;
+  private router = inject(Router);
 
   @ViewChild('editUserTemplate') editUserTemplate!: TemplateRef<any>;
 
@@ -56,14 +61,19 @@ export class AdminUsersComponent implements OnInit {
         width: '40',
         buttons: [
           {
-            icon: 'pencil',
+            icon: 'edit',
             text: this.translate.instant('common.edit'),
             onClick: (id: string, row: any) => this.openEditPopup(row),
           },
           {
-            icon: 'trash',
+            icon: 'delete_outline',
             text: this.translate.instant('common.delete'),
             onClick: (id: string) => this.handleDeleteUser(id),
+          },
+          {
+            icon: 'chat_bubble',
+            text: this.translate.instant('internalMail.chat'),
+            onClick: (id: string) => this.openChat(id),
           },
         ],
       },
@@ -110,5 +120,18 @@ export class AdminUsersComponent implements OnInit {
   onUserEdited() {
     this.dialogRef.close();
     this.tableFlagRefresh += 1;
+  }
+
+  openChat = async (id: string) => {
+    const ref = this.dialogService.openLoading();
+
+    try {
+      const conversation = await this.conversationService.createConversation('User', id);
+      this.router.navigateByUrl(ADMIN_ROUTES.setConversation(conversation._id));
+    } catch (err) {
+      await this.dialogService.open('danger', 'Error');
+    }
+
+    ref.close();
   }
 }

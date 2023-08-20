@@ -12,11 +12,11 @@ export class AdminConversationsComponent {
   private conversationService = inject(ConversationService);
 
   protected messageRowType: Type<any> = ConversationRowComponent
-  protected componentInputs = ['_id', 'participants', 'lastMessage', 'lastMessageSeen'];
+  protected componentInputs = ['_id', 'participants', 'subject', 'lastMessage', 'lastMessageSeen'];
   protected externalInputs:any = { modelId: null };
 
   getConversations = async (page:any, size:any, search:any, filters:any, sort:any) => {
-    return await this.conversationService.getConversations('User', null, {
+    return await this.conversationService.getConversations('User', null, 'opened',{
       page, size, search, filters, sort,
     })
   }
