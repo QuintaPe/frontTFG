@@ -59,6 +59,8 @@
     "units": "Units",
     "confirmDeleteBooking": "Are you sure you want to delete this booking?",
     "confirmCancelBooking": "Are you sure you want to cancel this booking?",
+    "acceptBooking": "Accept Booking",
+    "rejectBooking": "Reject Booking",
     "cancelBooking": "Cancel Booking",
     "entryDate": "Entry Date",
     "exitDate": "Exit Date",

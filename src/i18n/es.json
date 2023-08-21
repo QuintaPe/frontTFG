@@ -59,6 +59,8 @@
     "units": "Unidades",
     "confirmDeleteBooking": "¿Esta seguro que desea elimina esta reserva?",
     "confirmCancelBooking": "¿Esta seguro que desea cancelar esta reserva?",
+    "acceptBooking": "Aceptar reserva",
+    "rejectBooking": "Rechazar reserva",
     "cancelBooking": "Cancelar reserva",
     "entryDate": "Fecha de entrada",
     "exitDate": "Fecha de salida",
