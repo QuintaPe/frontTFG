@@ -11,8 +11,8 @@ export class ConversationService {
     return fetch('GET', 'conversations', { type, id, opts })
   }
 
-  createConversation(type: string, id: string = null) {
-    return fetch('POST', 'conversations', { type, id })
+  createConversation(type: string, id: string = null, camping:string = null) {
+    return fetch('POST', 'conversations', { type, id, camping })
   }
 
   getConversation(id:string) {

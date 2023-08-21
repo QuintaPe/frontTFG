@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, inject } from '@angular/core';
 import { ConversationService } from '@app/core/services/conversation.service';
+import { TranslateService } from '@ngx-translate/core';
 import { formatDate, getFullName } from '@utils/functions';
 
 @Component({
@@ -14,22 +15,39 @@ export class UserConversationComponent implements OnInit {
   protected messages:any = Array(10).fill({ sender: null, loading: true });
   protected subject = '';
   protected message = '';
+  protected receiver: any;
   protected loading = true;
   protected sending = false;
   protected disabledSubject = false
+  protected breadcrumb: any;
 
+  private translate = inject(TranslateService);
   private conversationService = inject(ConversationService);
   protected getFullName = getFullName;
   protected formatDate = formatDate;
 
+  private setBreadcrumb(receiverName: string) {
+    this.breadcrumb = [
+      { name: this.translate.instant('internalMail.internalMail') },
+      { name: receiverName },
+    ];
+  }
+
   async ngOnInit() {
+   this.setBreadcrumb('')
    const { messages, conversation } = await this.conversationService.getConversation(this.id);
    this.conversation = conversation;
    this.messages = messages;
    this.subject = conversation.subject;
-   console.log(conversation);
+   this.receiver = conversation.participants.find((p: any) => p?.id?._id !== conversation?.participant?._id).id;
    this.loading = false;
    this.disabledSubject = conversation?.status !== 'pending';
+   const receiverName = this.receiver
+    ? this.receiver.name || getFullName(this.receiver.attributes)
+    : this.translate.instant('user.roles.admin');
+   this.setBreadcrumb(receiverName)
+   this.translate.onLangChange.subscribe(() => this.setBreadcrumb(receiverName));
+
   }
 
   async sendMessage() {

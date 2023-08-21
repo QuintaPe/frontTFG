@@ -5,6 +5,9 @@ import { CampingService } from '@app/camping/services/camping.service';
 import { DialogService } from '@app/shared/components/dialog/dialog.service';
 import { PopupService } from '@app/shared/components/popup/popup.service';
 import { User } from '@app/core/models/user';
+import { ConversationService } from '@app/core/services/conversation.service';
+import { Router } from '@angular/router';
+import { MANAGER_ROUTES } from '@app/core/routes';
 
 @Component({
   selector: 'app-camping-management-table',
@@ -19,6 +22,8 @@ export class CampingManagementTableComponent implements OnInit {
   private translate = inject(TranslateService);
   private dialogService = inject(DialogService);
   private popupService = inject(PopupService);
+  private conversationService = inject(ConversationService);
+  private router = inject(Router);
 
   protected actualBooking: any = null;
   protected columns:any;
@@ -100,6 +105,11 @@ export class CampingManagementTableComponent implements OnInit {
             onClick: (id: string) => this.changeBookingStatus(id, 'cancelled'),
             hidden: (row: any) => row.status !== 'accepted',
           },
+          {
+            icon: 'chat_bubble_outline',
+            text: this.translate.instant('internalMail.internalMail'),
+            onClick: (_:any, row:any) => this.openChat(row),
+          },
         ],
       },
     ];
@@ -147,5 +157,18 @@ export class CampingManagementTableComponent implements OnInit {
         ref.close();
       }
     }
+  }
+
+  openChat = async (row: any) => {
+    const ref = this.dialogService.openLoading();
+
+    try {
+      const conversation = await this.conversationService.createConversation('User', row.user.id, this.id);
+      this.router.navigateByUrl(MANAGER_ROUTES.setConversation(conversation._id));
+    } catch (err) {
+      await this.dialogService.open('danger', 'Error');
+    }
+
+    ref.close();
   }
 }

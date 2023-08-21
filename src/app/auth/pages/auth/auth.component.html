@@ -3,6 +3,8 @@
       <app-signup-user *ngIf="isUserSignup" />
       <app-signup-manager *ngIf="isManagerSignup" />
       <app-login-form *ngIf="isLogin" />
+      <app-forgot-password-form *ngIf="isForgotPassword" />
+      <app-recovery-password-form *ngIf="isRecoveryPassword" [token]="token" />
     </div>
 
     <div class="app-logo">

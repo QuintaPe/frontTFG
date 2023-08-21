@@ -47,14 +47,14 @@ export class LeftMenuComponent implements OnInit {
           { icon: 'sticky_note_2', name: this.translate.instant('common.bookings'), path: 'bookings' },
           { icon: 'group', name: this.translate.instant('common.users'), path: 'users' },
           { icon: 'person', name: this.translate.instant('user.profile'), path: 'profile' },
-          { icon: 'mail', name: this.translate.instant('user.internalMail'), path: 'conversations' },
+          { icon: 'mail', name: this.translate.instant('internalMail.internalMail'), path: 'conversations' },
         ];
         break;
       case 'manager':
         routes = [
           { icon: 'forest', name: this.translate.instant('user.myCampings'), path: 'campings' },
           { icon: 'person', name: this.translate.instant('user.profile'), path: 'profile' },
-          { icon: 'mail', name: this.translate.instant('user.internalMail'), path: 'conversations' },
+          { icon: 'mail', name: this.translate.instant('internalMail.internalMail'), path: 'conversations' },
         ];
         break;
       default:
@@ -62,7 +62,7 @@ export class LeftMenuComponent implements OnInit {
           { icon: 'sticky_note_2', name: this.translate.instant('user.myBookings'), path: 'bookings' },
           { icon: 'favorite_border', name: this.translate.instant('campsite.favorites'), path: 'favorites' },
           { icon: 'person', name: this.translate.instant('user.profile'), path: 'profile' },
-          { icon: 'mail', name: this.translate.instant('user.internalMail'), path: 'conversations' },
+          { icon: 'mail', name: this.translate.instant('internalMail.internalMail'), path: 'conversations' },
         ];
     }
     return routes.map(route => ({...route, active: this.router.url.startsWith(`/${role}/${route.path}`)}))

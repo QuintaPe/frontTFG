@@ -1,6 +1,7 @@
 import { NgIf } from '@angular/common';
 import { Component, Input, OnInit, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { AuthService } from '@app/auth/services/auth.service';
 import { AvatarComponent } from '@app/shared/components/Avatar/avatar.component';
 import { SkeletonComponent } from '@app/shared/components/skeleton/skeleton.component';
 import { TranslateService } from '@ngx-translate/core';
@@ -28,12 +29,12 @@ export class ConversationRowComponent implements OnInit {
   protected receiver: any;
   protected getFullName = getFullName;
   protected translateService = inject(TranslateService)
+  protected authService = inject(AuthService);
 
   ngOnInit() {
-    const aux = this.participants.find(par => par.id !== this.modelId);
+    const aux = this.participants.find(par => par.id?.id !== this.modelId);
     this.type = aux?.type;
     this.receiver = aux?.id;
-    console.log(this.modelId)
   }
 
   get receiverName() {
@@ -53,7 +54,6 @@ export class ConversationRowComponent implements OnInit {
   get haveUnread() {
     if (this.lastMessage) {
       const lastSeenDate = this.lastMessageSeen[this.modelId || 'admin'];
-      console.log(typeof this.lastMessage.createdAt, new Date(lastSeenDate) < new Date(this.lastMessage.createdAt))
       return !lastSeenDate || new Date(lastSeenDate) < new Date(this.lastMessage.createdAt);
     }
     return false;

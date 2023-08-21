@@ -30,6 +30,8 @@ import { AdminProfileComponent } from './pages/admin-profile/admin-profile.compo
 // Routing module
 import { AdminRoutingModule } from './admin-routing.module';
 import { AdminConversationsComponent } from './pages/admin-conversations/admin-conversations.component';
+import { CampingRowComponent } from '@app/camping/components/camping-row/camping-row.component';
+import { AvatarComponent } from '@app/shared/components/Avatar/avatar.component';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,9 @@ import { AdminConversationsComponent } from './pages/admin-conversations/admin-c
     SkeletonComponent,
     InputAvatarComponent,
     OverlayModule,
-    ProfileComponent
+    ProfileComponent,
+    CampingRowComponent,
+    AvatarComponent,
   ],
   providers: [DialogService]
 })

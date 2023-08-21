@@ -9,7 +9,6 @@
     "modifyProfile": "Modificar datos del perfil",
     "myBookings": "Mis reservas",
     "myCampings": "Mis campamentos",
-    "internalMail": "Correo interno",
     "role": "Rol",
     "roles" :{
       "user": "Usuario",
@@ -116,16 +115,23 @@
     "stillNotRegistered": "¿Aun no estas registrado?",
     "signupFree": "Regístrate gratis!",
     "signupAsManager": "Regístrate como manager",
-    "addYouCampsiteQuestion": "¿Quieres añadir tu campamento?"
+    "addYouCampsiteQuestion": "¿Quieres añadir tu campamento?",
+    "forgotYourPassword": "¿Has oldivado tu contraseña?",
+    "recoveryPassword": "Recuperar contraseña",
+    "recoveryPasswordMessage": "Recibiras instrucciones para recuperar la contraseña en tu correo",
+    "recoveryPasswordSended": "Se han enviado las instrucciones para recuperar la contraseña a su correo",
+    "recoveryPasswordSuccessfully": "Su contraseña se ha cambiado correctamente"
   },
   "input": {
     "placeholderFileZone": "Arrastre los archivos o haga click en la zona marcada",
     "enterYourAvatar": "Introduce tu avatar"
   },
   "internalMail": {
+    "internalMail": "Correo interno",
     "chatWithAdmin": "Chat con un administrador",
     "subject": "Asunto",
-    "message": "Mensaje"
+    "message": "Mensaje",
+    "campingConversationsInfo": "Las conversaciones con los usuarios se encuentran dentro de cada camping"
   },
   "errors": {
     "required": "El campo {{ field }} no puede estar vacío",
@@ -133,6 +139,7 @@
     "pattern": "El campo {{ field }} no es valido",
     "minlength": "El campo {{ field }} no tiene la longitud mínima",
     "invalid_email": "Email o contraseña incorrecta",
+    "email_not_found": "Email no encontrado",
     "email_already_exists": "El email ya existe",
     "location_not_found": "No se ha encontrado la localización",
     "password_mismatch": "Las contraseñas no coinciden"

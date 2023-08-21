@@ -53,7 +53,7 @@ export class CreateCampingLodgingsComponent {
       width: 40,
       buttons: [
         {
-          icon: 'person_outline',
+          icon: 'delete',
           text: this.translate.instant('common.delete'),
           onClick: (id: string) => this.handleRemoveUnit(id),
         },
@@ -159,7 +159,6 @@ export class CreateCampingLodgingsComponent {
   }
 
   handleAddUnit(number: number) {
-    console.log(this.actualLodging.get('units'));
     const unitsFormControl = this.actualLodging.get('units') as FormControl;
     const unitsArray = unitsFormControl.value;
     for (let i = 0; i < number; i++) {
@@ -188,6 +187,5 @@ export class CreateCampingLodgingsComponent {
   handleGetUnits = () => ({
     items: this.actualLodging.get('units').getRawValue(),
     total: this.actualLodging.get('units').value.length,
-    a: console.log(this.actualLodging.get('units').getRawValue())
   });
 }

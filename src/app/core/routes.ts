@@ -46,5 +46,9 @@ export const AUTH_ROUTES = {
   LOGIN: { path: 'login', url: 'auth/login' },
   SIGNUP: { path: 'signup', url: 'auth/signup' },
   SIGNUP_MANAGER: { path: 'manager/signup', url: 'auth/manager/signup' },
+  FORGOT_PASSWORD: { path: 'recovery-password', url: 'auth/recovery-password' },
+  RECOVERY_PASSWORD: { path: 'recovery-password/:token', url: 'auth/recovery-password/:token' },
   LOGOUT: { path: 'logout', url: 'auth/logout' },
+
+  setRecoveryPassword: (token: string) => `auth/recovery-password/${token}`,
 }

@@ -71,9 +71,10 @@ export class AdminUsersComponent implements OnInit {
             onClick: (id: string) => this.handleDeleteUser(id),
           },
           {
-            icon: 'chat_bubble',
-            text: this.translate.instant('internalMail.chat'),
+            icon: 'chat_bubble_outline',
+            text: this.translate.instant('internalMail.internalMail'),
             onClick: (id: string) => this.openChat(id),
+            hidden: (row: any) => row.role === 'admin'
           },
         ],
       },

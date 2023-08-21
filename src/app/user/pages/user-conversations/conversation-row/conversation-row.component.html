@@ -1,4 +1,4 @@
-<div class="conversation-row" *ngIf="!loading" [routerLink]="_id">
+<div class="conversation-row" *ngIf="!loading" [routerLink]="['/', this.authService.user.role, 'conversations', _id]">
   <div class="conversation-row--header">
     <app-avatar
       [title]="receiverName"

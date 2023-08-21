@@ -6,3 +6,79 @@
     [showPagination]="false"
   />
 </app-panel>
+
+<ng-template #popupInfoTemplate>
+  <div class="d-flex align-items-center mb-3">
+    <app-avatar
+      [title]="getFullName(actualBooking?.user?.attributes)"
+      [src]="actualBooking?.user?.attributes?.avatar?._id"
+      [size]="40"
+      class="me-2"
+    />
+    <div class="fw-b">{{ getFullName(actualBooking?.user?.attributes) }}</div>
+  </div>
+
+  <app-camping-row
+    [_id]="actualBooking.camping._id"
+    [name]="actualBooking.camping.name"
+    [description]="actualBooking.camping.description"
+    [location]="actualBooking.camping.location"
+    [images]="actualBooking.camping.images"
+    [relation]="actualBooking.relation"
+  />
+
+  <div class="booking-info">
+    <h4 class="fw-b">{{ "campsite.bookingData" | translate }}</h4>
+    <div class="row booking-info--dates">
+      <div class="col-12 col-md-4">
+        <div class="mb-1">{{ "campsite.entryDate" | translate }}</div>
+        <h6 class="fw-b">{{ formatDate(actualBooking.entryDate) }}</h6>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mb-1">{{ "campsite.exitDate" | translate }}</div>
+        <h6 class="fw-b">{{ formatDate(actualBooking.exitDate) }}</h6>
+      </div>
+      <div class="col-12 col-md-4">
+        <div class="mb-1">{{ "campsite.totalNights" | translate }}</div>
+        <h6 class="fw-b">{{ daysBetweenDates(actualBooking.exitDate, actualBooking.entryDate) }}</h6>
+      </div>
+    </div>
+  </div>
+
+  <div class="user-info">
+    <h4 class="fw-b">{{ "campsite.managerData" | translate }}</h4>
+    <div class="row">
+      <div class="col-12 col-md-8 mt-4">
+        <app-input-text
+          [preText]="'common.email' | translate"
+          [(value)]="actualBooking.manager.email"
+          [isDisabled]="true"
+        />
+      </div>
+      <div class="col-12 col-md-4 mt-4">
+        <app-input-text
+          type="number"
+          [preText]="'user.phone' | translate"
+          [(value)]="actualBooking.manager.phone"
+          [isDisabled]="true"
+        />
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-4 mt-4">
+        <app-input-text
+          [preText]="'common.name' | translate"
+          [(value)]="actualBooking.manager.firstname"
+          [isDisabled]="true"
+        />
+      </div>
+      <div class="col-12 col-md-8 mt-4">
+        <app-input-text
+          [preText]="'user.lastname' | translate"
+          [(value)]="actualBooking.manager.lastname"
+          [isDisabled]="true"
+        />
+      </div>
+    </div>
+  </div>
+</ng-template>

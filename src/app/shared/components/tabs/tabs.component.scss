@@ -1,0 +1,22 @@
+
+@import '_colors.scss';
+@import '_variables.scss';
+@import "_mixins";
+
+.tabs {
+  display: flex;
+  justify-content: flex-end;
+  border-bottom: 1px solid $primary;
+  .tab-item {
+    margin-left: 10px;
+    padding: 10px;
+    border-radius: $borderRadiusLight $borderRadiusLight 0 0;
+    border: 1px solid $primary-icon;
+    border-bottom: none;
+    color: $textColorLight;
+    &.active {
+      background-color: $primary !important;
+      color: white !important;
+    }
+  }
+}

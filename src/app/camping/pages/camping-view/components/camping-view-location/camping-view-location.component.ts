@@ -19,7 +19,6 @@ export class CampingViewLocationComponent {
   protected city: string;
 
   async ngOnInit(): Promise<void> {
-    console.log(this.location);
     const { street, streetNumber, city, community, coords, country, locality, postalCode } = this.location;
     const coord = {
       lat: coords?.coordinates[0] || 0,

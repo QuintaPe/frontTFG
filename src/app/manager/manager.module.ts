@@ -38,6 +38,7 @@ import { ManagerRoutingModule } from './manager-routing.module';
 import { PopupService } from '@app/shared/components/popup/popup.service';
 import { ManagerConversationsComponent } from './pages/manager-conversations/manager-conversations.component';
 import { CampingConversationsComponent } from './pages/camping-conversations/camping-conversations.component.';
+import { AlertComponent } from '@app/shared/components/Alert/alert.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +78,7 @@ import { CampingConversationsComponent } from './pages/camping-conversations/cam
     ProfileComponent,
     TabsComponent,
     AvatarComponent,
+    AlertComponent,
   ],
   providers: [DialogService, PopupService]
 })

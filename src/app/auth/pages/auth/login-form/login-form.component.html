@@ -12,7 +12,7 @@
   <app-input-text
     class="mb-5"
     [preText]="'common.email' | translate"
-    placeholder='Introduzca su nombre de usuario'
+    [placeholder]="'auth.enterYourEmail' | translate"
     icon="person"
     [control]="loginForm.controls['email']"
   />
@@ -22,7 +22,7 @@
     class="mb-5"
     type='password'
     [preText]="'auth.password' | translate"
-    placeholder='Introduzca su contraseña'
+    [placeholder]="'auth.enterYourPassword' | translate"
     icon="lock"
     [control]="loginForm.controls['password']"
   />
@@ -31,6 +31,7 @@
   <div class="d-flex flex-column justify-content-center  align-items-center">
     <p>{{ "auth.stillNotRegistered" | translate }} <a routerLink="/auth/signup">{{ "auth.signupFree" | translate }}</a></p>
     <p>{{ "auth.addYouCampsiteQuestion" | translate }} <a routerLink="/auth/manager/signup">{{ "auth.signupAsManager" | translate }}</a></p>
+    <p>{{ "auth.forgotYourPassword" | translate }} <a routerLink="/auth/recovery-password">{{ "auth.recoveryPassword" | translate }}</a></p>
     <app-button [text]="'auth.login' | translate" icon="person_add" type="submit" [loading]="loading" />
   </div>
 </form>

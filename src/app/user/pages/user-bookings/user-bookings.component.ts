@@ -1,8 +1,11 @@
 import { Component, OnInit, inject, ViewChild, TemplateRef } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import { AuthService } from '@app/auth/services/auth.service';
 import { CampingService } from '@app/camping/services/camping.service';
 import { Camping } from '@app/core/models/camping';
+import { USER_ROUTES } from '@app/core/routes';
+import { ConversationService } from '@app/core/services/conversation.service';
 import { DialogService } from '@app/shared/components/dialog/dialog.service';
 import { PopupComponent } from '@app/shared/components/popup/popup.component';
 import { UserService } from '@app/user/services/user.service';
@@ -23,6 +26,8 @@ export class UserBookingsComponent implements OnInit {
   protected dialog = inject(MatDialog);
   private dialogService = inject(DialogService);
   protected campingService = inject(CampingService);
+  private conversationService = inject(ConversationService);
+  private router = inject(Router);
 
   protected actualBooking: any = null;
   protected formatDate = formatDate;
@@ -95,6 +100,11 @@ export class UserBookingsComponent implements OnInit {
             onClick: this.ratingCamping,
             hidden: (row: any) => !row.relation?.review && daysBetweenDates(row.entryDate, row.exitDate) > 7
           },
+          {
+            icon: 'chat_bubble_outline',
+            text: this.translate.instant('internalMail.internalMail'),
+            onClick: (_:any, row:any) => this.openChat(row),
+          },
         ],
       },
     ];
@@ -163,6 +173,19 @@ export class UserBookingsComponent implements OnInit {
     });
     this.loading = false;
     this.popupRef.close();
+  }
+
+  openChat = async (row: any) => {
+    const ref = this.dialogService.openLoading();
+
+    try {
+      const conversation = await this.conversationService.createConversation('Camping', row.camping._id);
+      this.router.navigateByUrl(USER_ROUTES.setConversation(conversation._id));
+    } catch (err) {
+      await this.dialogService.open('danger', 'Error');
+    }
+
+    ref.close();
   }
 }
 

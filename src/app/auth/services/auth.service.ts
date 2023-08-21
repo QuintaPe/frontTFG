@@ -46,6 +46,25 @@ export class AuthService {
     }
   }
 
+  //Iniciar Sesión
+  async forgotPassword(email: string): Promise<any> {
+    try {
+      await fetch('POST', 'recovery-password', { email });
+    } catch (error: any) {
+      this.errorService.setError(error)
+      throw error;
+    }
+  }
+
+  async recoveryPassword(token: string, newPassword: string, confirmPassword: string): Promise<any> {
+    try {
+      await fetch('POST', `recovery-password/${token}`, { newPassword, confirmPassword });
+    } catch (error: any) {
+      this.errorService.setError(error)
+      throw error;
+    }
+  }
+
   //Cerrar Sesión
   logout(): void {
     this.user = null;

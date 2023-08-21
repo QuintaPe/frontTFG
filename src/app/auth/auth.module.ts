@@ -13,10 +13,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { SignupUserComponent } from './pages/auth/signup-user/signup-user.component';
 import { SignupManagerComponent } from './pages/auth/signup-manager/signup-manager.component';
 import { LoginFormComponent } from './pages/auth/login-form/login-form.component';
+import { ForgotPasswordFormComponent } from './pages/auth/forgot-password-form/forgot-password-form.component';
+import { RecoveryPasswordFormComponent } from './pages/auth/recovery-password-form/recovery-password-form.component';
 import { AuthComponent } from './pages/auth/auth.component';
 
 // Routing module
 import { AuthRoutingModule } from './auth-routing.module';
+import { DialogService } from '@app/shared/components/dialog/dialog.service';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -24,6 +28,8 @@ import { AuthRoutingModule } from './auth-routing.module';
     SignupUserComponent,
     SignupManagerComponent,
 		LoginFormComponent,
+    ForgotPasswordFormComponent,
+    RecoveryPasswordFormComponent,
   ],
   imports: [
     AuthRoutingModule,
@@ -32,11 +38,13 @@ import { AuthRoutingModule } from './auth-routing.module';
     FormsModule,
     TranslateModule,
     MatIconModule,
+    MatDialogModule,
 
     PanelComponent,
     InputTextComponent,
     ButtonComponent,
   ],
+  providers: [DialogService]
 })
 export class AuthModule { }
 

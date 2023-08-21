@@ -28,20 +28,13 @@ export class AdminCampingsComponent {
         name: this.translate.instant('common.name'),
       },
       {
-        field: 'role',
-        name: this.translate.instant('user.role'),
-        type: 'html',
-        width: '100',
-        preRender: (v: string) => this.translate.instant(`user.roles.${v}`),
-      },
-      {
         field: 'id',
         type: 'menu',
         width: '40',
         buttons: [
           {
-            icon: 'chat_bubble',
-            text: this.translate.instant('internalMail.chat'),
+            icon: 'chat_bubble_outline',
+            text: this.translate.instant('internalMail.internalMail'),
             onClick: (id: string) => this.openChat(id),
           },
         ],

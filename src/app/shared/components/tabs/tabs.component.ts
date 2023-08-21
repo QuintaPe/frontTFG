@@ -4,7 +4,7 @@ import { Component, Input ,Output, EventEmitter } from '@angular/core';
 @Component({
   selector: 'app-tabs',
   templateUrl: './tabs.component.html',
-  styleUrls: ['./tabs.component.css'],
+  styleUrls: ['./tabs.component.scss'],
   standalone: true,
   imports: [CommonModule]
 })
