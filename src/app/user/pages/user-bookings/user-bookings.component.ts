@@ -98,7 +98,7 @@ export class UserBookingsComponent implements OnInit {
             icon: 'star_outline',
             text: (row: any) => this.translate.instant(row?.relation?.review ? 'campsite.yourReview' : 'campsite.addReview'),
             onClick: this.ratingCamping,
-            hidden: (row: any) => !row.relation?.review && daysBetweenDates(row.entryDate, row.exitDate) > 7
+            hidden: (row: any) => row.status !== 'accepted' || (!row.relation?.review && daysBetweenDates(row.exitDate, new Date()) > 7)
           },
           {
             icon: 'chat_bubble_outline',

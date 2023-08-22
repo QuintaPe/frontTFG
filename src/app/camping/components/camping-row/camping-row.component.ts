@@ -82,4 +82,15 @@ export class CampingRowComponent implements OnInit{
     event.stopPropagation();
     this.router.navigateByUrl(MANAGER_ROUTES.setEditCamping(this._id));
   }
+
+  getQueryParams(): any[] {
+    let queryParams: any = {};
+    if (this.entryDate) {
+      queryParams.entryDate = this.entryDate;
+    }
+    if (this.exitDate) {
+      queryParams.exitDate = this.exitDate;
+    }
+    return queryParams;
+  }
 }

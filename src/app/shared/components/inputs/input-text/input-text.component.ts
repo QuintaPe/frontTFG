@@ -1,15 +1,15 @@
-import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges, HostListener } from '@angular/core';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
 import { SkeletonComponent } from '../../skeleton/skeleton.component';
-import { NgIf } from '@angular/common';
+import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-input-text',
     templateUrl: './input-text.component.html',
     styleUrls: ['../inputs.component.scss'],
     standalone: true,
-    imports: [NgIf, SkeletonComponent, MatIconModule, ReactiveFormsModule, FormsModule]
+    imports: [CommonModule, SkeletonComponent, MatIconModule, ReactiveFormsModule, FormsModule]
 })
 
 export class InputTextComponent implements OnChanges {
@@ -28,7 +28,9 @@ export class InputTextComponent implements OnChanges {
   @Output() valueChange = new EventEmitter<any>();
 
 
-  constructor() {}
+  onInputWheel() {
+    this.value = this.value;
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (this.type === "date" && changes['value'] && this.value) {
@@ -38,5 +40,16 @@ export class InputTextComponent implements OnChanges {
 
   emitEvent() {
     this.valueChange.emit(this.value || '');
+  }
+
+  preventNonNumericalInput(e: any) {
+    if (this.type === 'number') {
+      var charCode = (typeof e.which == "undefined") ? e.keyCode : e.which;
+      var charStr = String.fromCharCode(charCode);
+
+      if (!charStr.match(/^[-+]?\d*(,\d*)?$/)) {
+        e.preventDefault();
+      }
+    }
   }
 }

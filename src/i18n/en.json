@@ -58,6 +58,8 @@
     "unit": "Unit",
     "units": "Units",
     "confirmDeleteBooking": "Are you sure you want to delete this booking?",
+    "confirmAcceptBooking": "Are you sure you want to accept this booking?",
+    "confirmRejectBooking": "Are you sure you want to reject this booking?",
     "confirmCancelBooking": "Are you sure you want to cancel this booking?",
     "acceptBooking": "Accept Booking",
     "rejectBooking": "Reject Booking",
@@ -70,6 +72,7 @@
     "reviews": "Reviews",
     "review": "Review",
     "moreReviews": "More Reviews",
+    "noReviewsYet": "No hay valoraciones todavía",
     "addReview": "Add Review",
     "yourReview": "Your Review",
     "gallery": "Gallery",
@@ -185,6 +188,7 @@
     "yes": "Yes",
     "no": "No",
     "table": "Table",
-    "calendar": "Calendar"
+    "calendar": "Calendar",
+    "showPerPage": "Show per page"
   }
 }

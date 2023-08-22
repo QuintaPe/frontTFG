@@ -81,15 +81,15 @@ export class CreateCampingComponent implements OnInit {
         name: [lod.name, Validators.required],
         feePerNight: [lod.feePerNight, Validators.required],
         size: [lod.size, Validators.required],
-        capacity: [lod.capacity, Validators.required],
+        capacity: [lod.capacity, [Validators.required, Validators.pattern('^[0-9]*$')]],
         beds: this.formBuilder.group({
-          single: [lod.beds.single, Validators.required],
-          double: [lod.beds.double, Validators.required],
-          bunk: [lod.beds.bunk, Validators.required],
+          single: [lod.beds.single, [Validators.required, Validators.pattern('^[0-9]*$')]],
+          double: [lod.beds.double, [Validators.required, Validators.pattern('^[0-9]*$')]],
+          bunk: [lod.beds.bunk, [Validators.required, Validators.pattern('^[0-9]*$')]],
         }),
         bathroom: this.formBuilder.group({
-          toilets: [lod.bathroom.toilets, Validators.required],
-          showers: [lod.bathroom.showers, Validators.required],
+          toilets: [lod.bathroom.toilets, [Validators.required, Validators.pattern('^[0-9]*$')]],
+          showers: [lod.bathroom.showers, [Validators.required, Validators.pattern('^[0-9]*$')]],
           private: [lod.bathroom.private, Validators.required],
         }),
         units: [lod.units.map(unit => this.formBuilder.group({

@@ -1,11 +1,15 @@
 <section class="camping-reviews">
-  <h2 class="text-center mb-3">{{ "campsite.reviews" | translate }}</h2>
+  <h2 class="text-center mb-1">{{ "campsite.reviews" | translate }}</h2>
   <app-review-row
     [reviews]="reviews.items"
     [loading]="loading"
     [loadingItems]="2"
   />
-  <div class="d-flex justify-content-center">
+  <div *ngIf="!reviews.total" class="text-center">
+    {{ 'campsite.noReviewsYet' | translate}}
+  </div>
+
+  <div *ngIf="reviews.total > 1" class="d-flex justify-content-center">
     <app-button
       [text]="'campsite.moreReviews' | translate"
       (onClick)="openReviewsPopup()"

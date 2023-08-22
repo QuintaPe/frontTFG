@@ -1,4 +1,4 @@
-<div class="camping-row" [routerLink]="_id" [queryParams]="{entryDate, exitDate}" *ngIf="!loading">
+<div class="camping-row" [routerLink]="[canEdit ? '/manager' : '/', 'campings', _id]" [queryParams]="getQueryParams()" *ngIf="!loading">
   <div *ngIf="image" class="camping-row--img">
     <div *ngIf="!canEdit" (click)="toggleFavorite($event)">
       <app-svg-icon

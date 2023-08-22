@@ -58,6 +58,8 @@
     "unit": "Unidad",
     "units": "Unidades",
     "confirmDeleteBooking": "¿Esta seguro que desea elimina esta reserva?",
+    "confirmAcceptBooking": "¿Esta seguro que desea aceptar esta reserva?",
+    "confirmRejectBooking": "¿Esta seguro que desea rechazar esta reserva?",
     "confirmCancelBooking": "¿Esta seguro que desea cancelar esta reserva?",
     "acceptBooking": "Aceptar reserva",
     "rejectBooking": "Rechazar reserva",
@@ -70,6 +72,7 @@
     "reviews": "Valoraciones",
     "review": "Valoración",
     "moreReviews": "Mas Valoraciones",
+    "noReviewsYet": "No hay valoraciones todavía",
     "addReview": "Añadir valoración",
     "yourReview": "Tu valoración",
     "gallery": "Galería",
@@ -185,6 +188,7 @@
     "yes": "Si",
     "no": "No",
     "table": "Tabla",
-    "calendar": "Calendario"
+    "calendar": "Calendario",
+    "showPerPage": "Mostrar por pagina"
   }
 }

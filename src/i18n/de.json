@@ -58,6 +58,8 @@
     "unit": "Einheit",
     "units": "Einheiten",
     "confirmDeleteBooking": "Sind Sie sicher, dass Sie diese Buchung löschen möchten?",
+    "confirmAcceptBooking": "Sind Sie sicher, dass Sie diese Buchung akzeptieren möchten?",
+    "confirmRejectBooking": "Sind Sie sicher, dass Sie diese Buchung ablehnen möchten?",
     "confirmCancelBooking": "Sind Sie sicher, dass Sie diese Buchung stornieren möchten?",
     "acceptBooking": "Buchung akzeptieren",
     "rejectBooking": "Buchung ablehnen",
@@ -70,6 +72,7 @@
     "reviews": "Bewertungen",
     "review": "Bewertung",
     "moreReviews": "Mehr Bewertungen",
+    "noReviewsYet": "Noch keine Bewertungen",
     "addReview": "Bewertung hinzufügen",
     "yourReview": "Ihre Bewertung",
     "gallery": "Galerie",
@@ -185,6 +188,7 @@
     "yes": "Ja",
     "no": "Nein",
     "table": "Tabelle",
-    "calendar": "Kalender"
+    "calendar": "Kalender",
+    "showPerPage": "Pro seite anzeigen"
   }
 }

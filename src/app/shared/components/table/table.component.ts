@@ -10,16 +10,17 @@ import {
   SimpleChanges,
   OnChanges,
   signal,
+  inject,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginator, MatPaginatorIntl, MatPaginatorModule } from '@angular/material/paginator';
 import { tap } from 'rxjs';
 import { RowMenuComponent } from './rowMenu/row-menu.component';
 import { InputSelectComponent } from '../inputs/input-select/input-select.component';
 import { SkeletonComponent } from '../skeleton/skeleton.component';
 import { DynamicIoModule } from 'ng-dynamic-component';
 import { AvatarComponent } from '../Avatar/avatar.component';
-import { TranslateModule } from '@ngx-translate/core';
+import { TranslateModule, TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-table',
@@ -60,6 +61,10 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
   showFilters: boolean = false;
   rows = signal({ items: [], total: this.pageSize });
 
+  private matPaginatorIntl = inject(MatPaginatorIntl);
+  private translate = inject(TranslateService);
+
+
   fetchPage = async () => {
     if (this.fetch) {
       this.loading = true;
@@ -82,6 +87,7 @@ export class TableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit(): void {
     this.fetchPage();
+    this.matPaginatorIntl.itemsPerPageLabel = this.translate.instant('common.showPerPage');
   }
 
   ngAfterViewInit(): void {

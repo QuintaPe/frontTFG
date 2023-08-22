@@ -91,13 +91,13 @@ export class CampingManagementTableComponent implements OnInit {
             icon: 'check_circle',
             text: this.translate.instant('campsite.acceptBooking'),
             onClick: (id: string) => this.changeBookingStatus(id, 'accepted'),
-            hidden: (row: any) => ['accepted', 'rejected'].includes(row.status),
+            hidden: (row: any) => row.status !== 'pending',
           },
           {
             icon: 'cancel',
             text: this.translate.instant('campsite.rejectBooking'),
             onClick: (id: string) => this.changeBookingStatus(id, 'rejected'),
-            hidden: (row: any) => ['accepted', 'rejected'].includes(row.status),
+            hidden: (row: any) => row.status !== 'pending',
           },
           {
             icon: 'cancel',
@@ -146,7 +146,24 @@ export class CampingManagementTableComponent implements OnInit {
   }
 
   changeBookingStatus = async (id: string, status: string) => {
-    const confirmed = await this.dialogService.open('confirmDanger', this.translate.instant('campsite.confirmCancelBooking'));
+    let type = '';
+    let message = '';
+
+    switch (status) {
+      case 'accepted':
+        type = 'confirm',
+        message = 'campsite.confirmAcceptBooking'
+        break;
+      case 'rejected':
+        type = 'confirmDanger',
+        message = 'campsite.confirmRejectBooking'
+        break;
+      case 'cancelled':
+        type = 'confirmDanger',
+        message = 'campsite.confirmCancelBooking'
+        break;
+    }
+    const confirmed = await this.dialogService.open(type, this.translate.instant(message));
     if (confirmed) {
       const ref = this.dialogService.openLoading();
       try {
@@ -154,6 +171,7 @@ export class CampingManagementTableComponent implements OnInit {
         ref.close();
         this.tableFlagRefresh += 1;
       } catch (err) {
+        await this.dialogService.open('danger', 'Error');
         ref.close();
       }
     }

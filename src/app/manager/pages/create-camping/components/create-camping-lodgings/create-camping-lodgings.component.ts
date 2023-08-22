@@ -72,16 +72,16 @@ export class CreateCampingLodgingsComponent {
       type: ['', Validators.required],
       name: ['', Validators.required],
       feePerNight: ['', Validators.required],
-      size: ['', Validators.required],
-      capacity: ['', Validators.required],
+      size: ['', Validators.required,],
+      capacity: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       beds: this.formBuilder.group({
-        single: ['', Validators.required],
-        double: ['', Validators.required],
-        bunk: ['', Validators.required],
+        single: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+        double: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+        bunk: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       }),
       bathroom: this.formBuilder.group({
-        toilets: ['', Validators.required],
-        showers: ['', Validators.required],
+        toilets: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+        showers: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
         private: ['', Validators.required],
       }),
       units: [[

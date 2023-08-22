@@ -1,6 +1,7 @@
 @import "_colors";
 @import "_variables";
 @import "_breakpoints";
+@import "_mixins";
 
 :host {
   width: 100%;
@@ -117,6 +118,7 @@
   &:not(.pretext) {
     .input::placeholder {
       opacity: 1 !important;
+      color: $textColorLight !important;
     };
   }
 }
@@ -127,6 +129,9 @@
   border-radius: 5px;
   border: 2px solid $primary;
   z-index: 1;
+  overflow: scroll;
+  max-height: 300px;
+  @include simpleScrollbar;
   .input-options-option {
     border: 2px solid transparent;
     margin: 5px;

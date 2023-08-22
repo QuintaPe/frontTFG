@@ -18,6 +18,8 @@
       [formControl]="this.control"
       [readonly]="this.isDisabled"
       autocomplete="off"
+      (wheel)="onInputWheel()"
+      (keypress)="preventNonNumericalInput($event)"
     />
 
     <input *ngIf="!this.control"
@@ -29,6 +31,8 @@
       [(ngModel)]="value"
       (ngModelChange)="this.emitEvent()"
       autocomplete="off"
+      (wheel)="onInputWheel()"
+      (keypress)="preventNonNumericalInput($event)"
     />
   </ng-container>
 
