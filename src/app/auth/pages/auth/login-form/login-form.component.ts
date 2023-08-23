@@ -1,9 +1,10 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, Input } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { AuthService } from '@auth/services/auth.service';
 import { TranslateService } from '@ngx-translate/core';
 import { ErrorService } from '@app/core/services/errors.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login-form',
@@ -31,12 +32,15 @@ import { ErrorService } from '@app/core/services/errors.service';
   ],
 })
 export class LoginFormComponent implements OnInit {
+  @Input() redirectTo = '';
+
   public loginForm: UntypedFormGroup;
   protected loading = false;
 
   private translate = inject(TranslateService);
   protected authService = inject(AuthService);
   protected errorService = inject(ErrorService);
+  protected router = inject(Router);
 
   ngOnInit(): void {
     this.loginForm = new UntypedFormGroup({
@@ -58,6 +62,7 @@ export class LoginFormComponent implements OnInit {
       this.loading = true;
       try {
         await this.authService.login(user.email, user.password);
+        this.router.navigateByUrl(this.redirectTo);
       } catch {
         this.loginForm.get('email').setErrors({ serverError: true });
         this.loginForm.get('password').setErrors({ serverError: true });

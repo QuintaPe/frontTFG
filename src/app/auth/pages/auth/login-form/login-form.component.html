@@ -29,7 +29,7 @@
 
   <!-- Botón de inicio de sesión -->
   <div class="d-flex flex-column justify-content-center  align-items-center">
-    <p>{{ "auth.stillNotRegistered" | translate }} <a routerLink="/auth/signup">{{ "auth.signupFree" | translate }}</a></p>
+    <p>{{ "auth.stillNotRegistered" | translate }} <a routerLink="/auth/signup" [queryParams]="redirectTo ? { redirectTo } : {}">{{ "auth.signupFree" | translate }}</a></p>
     <p>{{ "auth.addYouCampsiteQuestion" | translate }} <a routerLink="/auth/manager/signup">{{ "auth.signupAsManager" | translate }}</a></p>
     <p>{{ "auth.forgotYourPassword" | translate }} <a routerLink="/auth/recovery-password">{{ "auth.recoveryPassword" | translate }}</a></p>
     <app-button [text]="'auth.login' | translate" icon="person_add" type="submit" [loading]="loading" />

@@ -1,10 +1,11 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, OnInit, inject, Input } from '@angular/core';
 import { UntypedFormControl, UntypedFormGroup, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { trigger, style, transition, animate, state } from '@angular/animations';
 import { AuthService } from '@auth/services/auth.service';
 import { User } from '@models/user';
 import { ErrorService } from '@app/core/services/errors.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-signup-user',
@@ -32,6 +33,8 @@ import { ErrorService } from '@app/core/services/errors.service';
   ],
 })
 export class SignupUserComponent implements OnInit{
+  @Input() redirectTo = '';
+
   protected loading = false;
   page!: boolean;
   attributesForm!: UntypedFormGroup;
@@ -42,6 +45,7 @@ export class SignupUserComponent implements OnInit{
   protected authService = inject(AuthService);
   protected errorService = inject(ErrorService);
   private translate = inject(TranslateService);
+  private router = inject(Router);
 
   ngOnInit(): void {
     this.page = false;

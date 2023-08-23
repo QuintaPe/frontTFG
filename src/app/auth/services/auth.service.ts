@@ -39,7 +39,6 @@ export class AuthService {
       localStorage.setItem('lang', response.user.lang);
       this.user = response.user;
       this.translate.use(response.user.lang);
-      this.router.navigate(['']);
     } catch (error: any) {
       this.errorService.setError(error)
       throw error;

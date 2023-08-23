@@ -58,7 +58,7 @@ export class RecoveryPasswordFormComponent implements OnInit {
       control.updateValueAndValidity();
       control.markAsTouched();
     });
-    console.log(this.token)
+
     const { password, confirmPassword } = this.recoveryForm.value;
     if (this.recoveryForm.valid) {
       this.loading = true;

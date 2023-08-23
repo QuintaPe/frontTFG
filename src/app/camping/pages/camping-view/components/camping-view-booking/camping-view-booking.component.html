@@ -43,7 +43,7 @@
       <div class="fw-b text-end my-1">{{ 'common.total' | translate }} {{ getTotalFee() }}</div>
       <app-button
         color="secondary"
-        [text]="'campsite.book' | translate"
+        [text]="authService.user ? ('campsite.book' | translate) : ('auth.login' | translate)"
         (onClick)="redirectBookingForm()"
       />
     </div>

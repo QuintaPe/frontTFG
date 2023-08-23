@@ -1,8 +1,9 @@
 import { Input, Component, inject, ChangeDetectorRef, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '@app/auth/services/auth.service';
 import { BookingService } from '@app/camping/services/booking.service';
 import { CampingService } from '@app/camping/services/camping.service';
-import { CAMPINGS_ROUTES } from '@app/core/routes';
+import { AUTH_ROUTES, CAMPINGS_ROUTES } from '@app/core/routes';
 import { InputSelectComponent } from '@app/shared/components/inputs/input-select/input-select.component';
 import { TranslateService } from '@ngx-translate/core';
 import {
@@ -40,6 +41,7 @@ export class CampingViewBookingComponent implements OnInit {
   private router = inject(Router);
   private campingService = inject(CampingService);
   private bookingService = inject(BookingService);
+  protected authService = inject(AuthService);
   isEmptyObject = isEmptyObject;
   formatDate = formatDate;
 
@@ -154,6 +156,10 @@ export class CampingViewBookingComponent implements OnInit {
       exitDate: this.exitDate,
     });
 
-    this.router.navigateByUrl(CAMPINGS_ROUTES.setBookCamping(this.camping));
+    if (this.authService.user) {
+      this.router.navigateByUrl(CAMPINGS_ROUTES.setBookCamping(this.camping));
+    } else {
+      this.router.navigateByUrl(AUTH_ROUTES.LOGIN.url + `?redirectTo=${CAMPINGS_ROUTES.setBookCamping(this.camping)}`);
+    }
   }
 }

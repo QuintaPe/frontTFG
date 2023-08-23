@@ -1,8 +1,8 @@
 <app-panel [fullHeight]="true" class="auth-page">
     <div class="auth-form">
-      <app-signup-user *ngIf="isUserSignup" />
+      <app-login-form *ngIf="isLogin" [redirectTo]="redirectTo" />
+      <app-signup-user *ngIf="isUserSignup" [redirectTo]="redirectTo" />
       <app-signup-manager *ngIf="isManagerSignup" />
-      <app-login-form *ngIf="isLogin" />
       <app-forgot-password-form *ngIf="isForgotPassword" />
       <app-recovery-password-form *ngIf="isRecoveryPassword" [token]="token" />
     </div>

@@ -11,19 +11,20 @@ import { AUTH_ROUTES } from '@app/core/routes';
 })
 export class AuthComponent {
   @Input() token = '';
+  @Input() redirectTo = '';
   protected router = inject(Router);
   protected errorService = inject(ErrorService);
 
   get isLogin() {
-    return this.router.url === `/${AUTH_ROUTES.LOGIN.url}`;
+    return this.router.url.startsWith(`/${AUTH_ROUTES.LOGIN.url}`);
   }
 
   get isUserSignup() {
-    return this.router.url === `/${AUTH_ROUTES.SIGNUP.url}`;
+    return this.router.url.startsWith(`/${AUTH_ROUTES.SIGNUP.url}`);
   }
 
   get isManagerSignup() {
-    return this.router.url === `/${AUTH_ROUTES.SIGNUP_MANAGER.url}`;
+    return this.router.url.startsWith(`/${AUTH_ROUTES.SIGNUP_MANAGER.url}`);
   }
 
   get isForgotPassword() {

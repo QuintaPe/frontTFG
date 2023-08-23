@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 
 // Shared
 import { PanelComponent } from '@shared/components/panel/panel.component';
 import { InputTextComponent } from '@shared/components/inputs/input-text/input-text.component';
 import { ButtonComponent } from '@shared/components/button/button.component';
-import { MatIconModule } from '@angular/material/icon';
+import { DialogService } from '@app/shared/components/dialog/dialog.service';
 
 // Components
 import { SignupUserComponent } from './pages/auth/signup-user/signup-user.component';
@@ -19,8 +21,6 @@ import { AuthComponent } from './pages/auth/auth.component';
 
 // Routing module
 import { AuthRoutingModule } from './auth-routing.module';
-import { DialogService } from '@app/shared/components/dialog/dialog.service';
-import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
