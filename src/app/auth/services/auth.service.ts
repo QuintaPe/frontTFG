@@ -24,7 +24,6 @@ export class AuthService {
     try {
       await fetch('POST', 'signup', { ...user, confirmPassword });
       await this.login(user.email, user.password);
-      this.router.navigate([''])
     } catch (error: any) {
       this.errorService.setError(error)
       throw error;
