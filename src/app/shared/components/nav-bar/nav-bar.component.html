@@ -16,12 +16,12 @@
     </span>
     <div class="d-flex align-items-center" *ngIf="!authService.user">
       <app-button
-        text="Iniciar Sesión"
+        [text]="'auth.login' | translate"
         color="secondary"
         (onClick)="router.navigateByUrl(LOGIN_URL)"
       />
       <app-button
-        text="Regístrate Gratis!"
+        [text]="'auth.signup' | translate"
         (onClick)="router.navigateByUrl(SIGNUP_URL)"
         class="ms-2"
       />

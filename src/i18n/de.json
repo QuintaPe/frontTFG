@@ -8,7 +8,7 @@
     "profile": "Profil",
     "modifyProfile": "Profilinformationen ändern",
     "myBookings": "Meine Buchungen",
-    "myCampings": "Meine Campingplätze",
+    "myCampings": "Campingplätze",
     "role": "Rolle",
     "roles": {
       "user": "Benutzer",
@@ -68,7 +68,7 @@
     "exitDate": "Austrittsdatum",
     "totalNights": "Anzahl der Nächte",
     "bookingData": "Buchungsdaten",
-    "managerData": "Managerdaten",
+    "leaderData": "Kontaktinformationen des Pfadfindergruppenleiters",
     "reviews": "Bewertungen",
     "review": "Bewertung",
     "moreReviews": "Mehr Bewertungen",
@@ -157,6 +157,7 @@
   },
   "common": {
     "title": "Willkommen bei ScoutCamp!",
+    "slogan": "Erkunde Abenteuer, Reserviere Erinnerungen: Dein Pfadfinderlager Portal",
     "name": "Name",
     "description": "Beschreibung",
     "email": "E-Mail",

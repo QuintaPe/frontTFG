@@ -68,7 +68,7 @@
     "exitDate": "Exit Date",
     "totalNights": "Number of Nights",
     "bookingData": "Booking Data",
-    "managerData": "Manager Data",
+    "leaderData": "Contact Information for the Scout Group Leader",
     "reviews": "Reviews",
     "review": "Review",
     "moreReviews": "More Reviews",
@@ -157,6 +157,7 @@
   },
   "common": {
     "title": "Welcome to ScoutCamp!",
+    "slogan": "Explore Adventures, Reserve Memories: Your Scout Camp Portal",
     "name": "Name",
     "description": "Description",
     "email": "Email",

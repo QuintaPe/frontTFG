@@ -10,7 +10,7 @@
     (onSearch)="updateSearchParams($event)"
   />
 
-  <h5 class="mt-4 mb-2">{{ 'campsite.showingCampsitesNear' | translate}} {{ location }}</h5>
+  <h5 class="mb-2">{{ 'campsite.showingCampsitesNear' | translate}} {{ location }}</h5>
   <app-table
     mode="component"
     [rowComponent]="campingRowType"

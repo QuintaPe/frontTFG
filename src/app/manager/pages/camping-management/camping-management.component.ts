@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, inject } from '@angular/core';
+import { MANAGER_ROUTES } from '@app/core/routes';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -14,30 +15,25 @@ export class CampingManagementComponent implements OnInit {
   protected breadcrumb: any[];
   protected actualTab: number = 0;
 
-  setActiveTab(index:number){
-    this.actualTab = index;
-  }
-
-  setTabs():void {
+  private setTabs() {
     this.tabs = [
       this.translate.instant('campsite.bookings'),
       this.translate.instant('internalMail.internalMail'),
-    ]
-  }
+    ];
 
-  private setBreadcrumb() {
     this.breadcrumb = [
-      { name: this.translate.instant('campsite.campsites') },
+      { name: this.translate.instant('campsite.campsites'), route: MANAGER_ROUTES.CAMPINGS.url },
       { name: this.tabs[this.actualTab] },
     ];
   }
 
+  setActiveTab(index:number){
+    this.actualTab = index;
+    this.setTabs();
+  }
+
   ngOnInit(): void {
     this.setTabs();
-    this.setBreadcrumb();
-    this.translate.onLangChange.subscribe(() => {
-      this.setTabs();
-      this.setBreadcrumb();
-    });
+    this.translate.onLangChange.subscribe(() => this.setTabs());
   }
 }

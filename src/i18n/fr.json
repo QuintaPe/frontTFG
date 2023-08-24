@@ -68,7 +68,7 @@
     "exitDate": "Date de sortie",
     "totalNights": "Nombre de nuits",
     "bookingData": "Données de réservation",
-    "managerData": "Données du gestionnaire",
+    "leaderData": "Coordonnées du Responsable du Groupe Scout",
     "reviews": "Avis",
     "review": "Avis",
     "moreReviews": "Plus d'avis",
@@ -157,6 +157,7 @@
   },
   "common": {
     "title": "Bienvenue sur ScoutCamp !",
+    "slogan": "Explorez les Aventures, Réservez des Souvenirs : Votre Portail de Camps Scouts",
     "name": "Nom",
     "description": "Description",
     "email": "E-mail",

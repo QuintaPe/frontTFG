@@ -1,8 +1,8 @@
 <app-panel class="home" [fullHeight]="true">
-  <h1>{{'common.title' | translate }}</h1>
-  <h3>Busca el mejor campamento scout al mejor precio</h3>
+  <h1>{{ 'common.title' | translate }}</h1>
+  <h5>{{ 'common.slogan' | translate }}</h5>
   <app-camping-searcher (onSearch)="navigateCampingList($event)" />
-  <div class="img-container">
+  <div class="img-container mt-3">
     <img
       src="assets/png/camping-lens.png"
       class="img-fluid"

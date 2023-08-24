@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, inject } from '@angular/core';
+import { AuthService } from '@app/auth/services/auth.service';
 import { ConversationService } from '@app/core/services/conversation.service';
 import { TranslateService } from '@ngx-translate/core';
 import { formatDate, getFullName } from '@utils/functions';
@@ -23,12 +24,13 @@ export class UserConversationComponent implements OnInit {
 
   private translate = inject(TranslateService);
   private conversationService = inject(ConversationService);
+  private authService = inject(AuthService);
   protected getFullName = getFullName;
   protected formatDate = formatDate;
 
   private setBreadcrumb(receiverName: string) {
     this.breadcrumb = [
-      { name: this.translate.instant('internalMail.internalMail') },
+      { name: this.translate.instant('internalMail.internalMail'), route: `${this.authService.user.role}/conversations` },
       { name: receiverName },
     ];
   }

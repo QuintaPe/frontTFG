@@ -30,17 +30,18 @@ export class LeftMenuComponent implements OnInit {
   router = inject(Router);
 
   ngOnInit(): void {
-    this.routes = this.getRoutes(this.authService.user.role);
+    this.getRoutes();
     this.router.events.pipe(
       filter((event: any) => event instanceof NavigationEnd)
     ).subscribe(() => {
-      this.routes = this.getRoutes(this.authService.user.role);
+      this.getRoutes();
     });
+    this.translate.onLangChange.subscribe(this.getRoutes);
   }
 
-  getRoutes = (role: string) => {
+  getRoutes = () => {
     let routes;
-    switch (role) {
+    switch (this.authService.user.role) {
       case 'admin':
         routes = [
           { icon: 'forest', name: this.translate.instant('campsite.campsites'), path: 'campings' },
@@ -65,7 +66,10 @@ export class LeftMenuComponent implements OnInit {
           { icon: 'mail', name: this.translate.instant('internalMail.internalMail'), path: 'conversations' },
         ];
     }
-    return routes.map(route => ({...route, active: this.router.url.startsWith(`/${role}/${route.path}`)}))
+    this.routes = routes.map(route => ({
+      ...route,
+      active: this.router.url.startsWith(`/${this.authService.user.role}/${route.path}`)
+    }))
   }
 
   toggleMenu() {
