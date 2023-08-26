@@ -92,13 +92,13 @@ export class UserBookingsComponent implements OnInit {
             icon: 'cancel',
             text: this.translate.instant('campsite.cancelBooking'),
             onClick: this.cancelBooking,
-            hidden: (row: any) => row.status === 'cancelled'
+            hidden: (row: any) => row.status === 'cancelled' || daysBetweenDates(new Date(), row.entryDate) > 0
           },
           {
             icon: 'star_outline',
             text: (row: any) => this.translate.instant(row?.relation?.review ? 'campsite.yourReview' : 'campsite.addReview'),
             onClick: this.ratingCamping,
-            hidden: (row: any) => row.status !== 'accepted' || (!row.relation?.review && daysBetweenDates(row.exitDate, new Date()) > 7)
+            hidden: (row: any) => row.status !== 'accepted' || (!row.relation?.review && (daysBetweenDates(new Date(), row.exitDate) > 7 || daysBetweenDates(new Date(), row.exitDate) < 0) )
           },
           {
             icon: 'chat_bubble_outline',
@@ -123,7 +123,7 @@ export class UserBookingsComponent implements OnInit {
     sort: string
   ) => {
     return this.userService.getUserBooking(this.authService.user._id, {
-      page, size, search, filters, sort,
+      page, size, search, filters, sort: sort || '-entryDate',
     })
 
   };

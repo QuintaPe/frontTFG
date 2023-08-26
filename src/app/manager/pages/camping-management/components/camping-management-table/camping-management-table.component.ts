@@ -103,7 +103,7 @@ export class CampingManagementTableComponent implements OnInit {
             icon: 'cancel',
             text: this.translate.instant('campsite.cancelBooking'),
             onClick: (id: string) => this.changeBookingStatus(id, 'cancelled'),
-            hidden: (row: any) => row.status !== 'accepted',
+            hidden: (row: any) => row.status !== 'accepted' || daysBetweenDates(new Date(), row.entryDate) > 0,
           },
           {
             icon: 'chat_bubble_outline',
@@ -122,7 +122,7 @@ export class CampingManagementTableComponent implements OnInit {
   }
 
   fetchCampingBookings = async (page: number, size: number, search: string, filters: any, sort: string) => {
-    return this.campingService.getCampingBookings(this.id, page, size, search, filters, sort)
+    return this.campingService.getCampingBookings(this.id, page, size, search, filters, sort || '-entryDate')
   }
 
   async handleDeleteBooking(booking: string) {

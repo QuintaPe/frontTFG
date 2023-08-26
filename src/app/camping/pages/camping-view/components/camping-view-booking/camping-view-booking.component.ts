@@ -70,13 +70,19 @@ export class CampingViewBookingComponent implements OnInit {
         component: InputSelectComponent,
         componentInputs: (row: any) => ({
           value: this.lodgingsToBook[row.id],
-          options: Array.from({ length: row.availables }, (_, i) => ({
-            id: i + 1,
-            name: i + 1,
+          options: Array.from({ length: row.availables + 1 }, (_, i) => ({
+            id: i,
+            name: i || '-',
           })),
         }),
         componentOutputs: (row: any) => ({
-          valueChange: (v: any) => (this.lodgingsToBook[row.id] = v),
+          valueChange: (v: any) => {
+            if (v) {
+              this.lodgingsToBook[row.id] = v
+            } else {
+              delete this.lodgingsToBook[row.id];
+            }
+          },
         }),
       },
     ];
