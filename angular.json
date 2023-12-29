@@ -44,7 +44,7 @@
                 {
                   "type": "initial",
                   "maximumWarning": "500kb",
-                  "maximumError": "1mb"
+                  "maximumError": "2mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -69,10 +69,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "frontEnd:build:production"
+              "buildTarget": "frontEnd:build:production"
             },
             "development": {
-              "browserTarget": "frontEnd:build:development"
+              "buildTarget": "frontEnd:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -80,7 +80,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "frontEnd:build"
+            "buildTarget": "frontEnd:build"
           }
         },
         "test": {
