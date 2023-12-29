@@ -45,9 +45,6 @@ export async function fetch(method:string, url:string, params: any= {}, isFormDa
 
   CONFIG.url = URL;
 
-  // Esperar 2 segundos antes de resolver la promesa
-  await new Promise((resolve) => setTimeout(resolve, 2000));
-
   return axios(CONFIG)
     .then(response => response.data)
     .catch((axiosError) => {
