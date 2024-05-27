@@ -36,11 +36,6 @@ export class AppComponent implements OnInit {
       this.authService.user?.lang || this.translate.getBrowserLang() || 'es'
     );
     this.translate.addLangs(this.langs);
-
-    // Load map script
-    let node = document.createElement('script');
-    node.src = `https://maps.googleapis.com/maps/api/js?key=${environment.PLACES_API}&libraries=places`
-    document.getElementsByTagName('head')[0].appendChild(node);
   }
 
   changeLang = (lang: string) => {
